@@ -1,0 +1,24 @@
+{
+  "name": "cms",
+  "description": "Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), plus analysis specifications.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cms-ml/marketplace",
+  "repository": "https://github.com/cms-ml/marketplace",
+  "license": "MIT",
+  "keywords": [
+    "CMS",
+    "HEP",
+    "CMSSW",
+    "scram",
+    "cmsRun",
+    "EDAnalyzer",
+    "MiniAOD",
+    "CMS Open Data",
+    "awkward",
+    "uproot",
+    "NanoAOD",
+    "vector",
+    "hist",
+    "mplhep"
+  ]
+}

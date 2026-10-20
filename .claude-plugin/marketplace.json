@@ -1,0 +1,50 @@
+{
+  "name": "cms-marketplace",
+  "owner": {
+    "name": "cms-ml",
+    "url": "https://github.com/cms-ml"
+  },
+  "metadata": {
+    "description": "Claude Code plugins for CMS physics analysis: CMSSW, grid tools, FNAL LPC, ML in CMS, and the Scikit-HEP stack.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "cms",
+      "description": "Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), plus analysis specifications.",
+      "version": "0.1.0",
+      "source": "./plugins/cms",
+      "keywords": [
+        "CMS",
+        "HEP",
+        "CMSSW",
+        "scram",
+        "cmsRun",
+        "EDAnalyzer",
+        "MiniAOD",
+        "CMS Open Data",
+        "awkward",
+        "uproot",
+        "NanoAOD",
+        "vector",
+        "hist",
+        "mplhep"
+      ]
+    },
+    {
+      "name": "hep-python-tools",
+      "description": "Experiment-neutral Python developer tooling for HEP work, with cmslpc notes: PEP 723 standalone scripts run by uv, and Typer command-line tools wired into pyproject.toml.",
+      "version": "0.1.0",
+      "source": "./plugins/hep-python-tools",
+      "keywords": [
+        "Python",
+        "uv",
+        "PEP 723",
+        "Typer",
+        "CLI",
+        "Hatch",
+        "pyproject"
+      ]
+    }
+  ]
+}

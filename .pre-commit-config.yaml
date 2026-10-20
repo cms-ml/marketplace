@@ -1,0 +1,32 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-json
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.5.3
+    hooks:
+      - id: prettier
+        types_or: [markdown, json, yaml]
+        args: [--prose-wrap=preserve]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        args: ["-L", "hist,gaus,te,nd,iff,ans,fo"]
+
+  - repo: local
+    hooks:
+      - id: marketplace-check
+        name: marketplace check (skills, agents, manifests, README)
+        entry: python3 scripts/marketplace.py check
+        language: system
+        pass_filenames: false
+        always_run: true

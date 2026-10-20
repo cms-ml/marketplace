@@ -1,0 +1,9 @@
+{
+  "name": "hep-python-tools",
+  "description": "Experiment-neutral Python developer tooling for HEP work, with cmslpc notes: PEP 723 standalone scripts run by uv, and Typer command-line tools wired into pyproject.toml.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cms-ml/marketplace",
+  "repository": "https://github.com/cms-ml/marketplace",
+  "license": "MIT",
+  "keywords": ["Python", "uv", "PEP 723", "Typer", "CLI", "Hatch", "pyproject"]
+}

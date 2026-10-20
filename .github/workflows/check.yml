@@ -1,0 +1,28 @@
+name: Check
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Validate skills, agents, manifests and generated files
+        run: python scripts/marketplace.py check
+      - name: pre-commit
+        uses: pre-commit/action@v3.0.1
