@@ -82,7 +82,7 @@ Custom IDs: motivation + SFs must be presented to EGM for approval, **≥ 1 mont
 | 2024 | `Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15` | `electron.json.gz` | `electronSS_EtDependent.json.gz` (NanoAODv15) |
 | 2025 | `Run3-25Prompt-Summer24-NanoAODv15` | `electron.json.gz` | same (NanoAODv15) |
 | 2026 | > TODO: not available | > TODO: not available | same (NanoAODv15) |
-| 2022/2023 on NanoAODv15 | – | – | not yet available (⌛) |
+| 2022/2023 on NanoAODv15 | – | – | not yet available |
 
 Trigger (HLT) SF JSON: only for 2022 Prompt FG in the old twiki (`Electron-HLT-SF`, see below). For re-reco 2022 and later eras: > TODO: not available.
 

@@ -106,7 +106,7 @@ These are **signal-efficiency SFs only**. Derive background mistag corrections i
 ### Calibration sources
 | Target | Calibration |
 | --- | --- |
-| Top, W | JMAR ParticleNetSFs framework (semileptonic tt̄, pass/fail fit in soft-drop mass) |
+| Top, W | JMAR ParticleNetSFs framework (semileptonic ttbar, pass/fail fit in soft-drop mass) |
 | Z→bb, Z→cc (MD) | BTV boosted proxy-jet calibrations; Z→qq: W jets as proxy; or a boosted-Z fit in Z+jets (MD or mass-correlated) |
 | H→bb, H→cc | BTV boosted-object calibration recommendations |
 | Multi-prong (H→WW, …) without direct calibration | LPR (§6) |
@@ -161,7 +161,7 @@ Cluster PUPPI candidates with Rmin = 0.1, Rmax = 1.5, ρ = 600 GeV, μ = 30 GeV,
 SF coverage: pT > 200 GeV, |η| < 2.5. Efficiency is stable above about 500 GeV.
 
 ### Applying top-tagging SFs (τ32, HOTVR)
-- Apply one SF per tagged jet, only in MC with generated top quarks (tt̄, single top, signal with tops). They don't correct mistags in top-less samples.
+- Apply one SF per tagged jet, only in MC with generated top quarks (ttbar, single top, signal with tops). They don't correct mistags in top-less samples.
 - Merge category per jet: **fully merged** = all 3 top-decay quarks within ΔR < 0.8 (HOTVR: ΔR < R_eff = min[1.5, max(0.1, 600 GeV / uncorrected pT)]), **semi-merged** = any 2, else **not merged**.
 - With N tagged jets, multiply the N SFs.
 - Treat the 3 merge categories as uncorrelated.

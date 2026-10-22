@@ -55,7 +55,7 @@ Order: **JEC (data + MC) → JER smearing (MC only) → variations**.
    If AK8 JECs are unavailable, apply AK4 JECs of the same campaign to AK8.
 2. **JER (MC only; data c_JER = 1; data files are not used)** — hybrid method, evaluated on JEC-corrected jets:
    - Gen match if ΔR(reco, gen) < R_cone/2 (R_cone = 0.4 for AK4) **and** |pT_JEC − pT_gen| < 3 σ_JER pT_JEC.
-   - Matched: c = 1 + (s_JER − 1)(pT_JEC − pT_gen)/pT_JEC. Unmatched (`GenPt = -1`): c = 1 + N(0, σ_JER)·√max(s_JER² − 1, 0).
+   - Matched: c = 1 + (s_JER − 1)(pT_JEC − pT_gen)/pT_JEC. Unmatched (`GenPt = -1`): c = 1 + N(0, σ_JER)·sqrt(max(s_JER² − 1, 0)).
    - N(0,σ) from hashPRNG (entropy: `JetPt`, `JetEta`, `Rho`, `EventID`) → deterministic; no TRandom3. Non-finite/non-positive c → 1; negative c truncated to 0; smeared pT min cut 0.01 (2026-09-18 fix).
    - Scale **both pT and mass** (full four-momentum): p_JER = c_JER × p_JEC.
 3. **Rare Run3 L2Relative issue**: if corrected pT is anomalously high (> 10 TeV, mostly HF), reject jets with `Jet_rawFactor > 0.9` (affected samples only; see `jets.md` §4).
