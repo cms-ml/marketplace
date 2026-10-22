@@ -19,7 +19,7 @@ Refer strictly to the relevant reference files based on the specific physics obj
 - **Electrons**: `references/electrons.md`
 - **AK4 Jets**: `references/jets.md` (NanoAOD branches, jet ID, PU jet ID, jet veto maps, pitfalls)
 - **Jet energy corrections**: `references/jets-jerc.md` (JEC/JER tags and correctionlib keys per era, JER smearing, JES/JER systematics and correlations)
-- **AK8 Fat Jets**: `references/fat-jets.md` (Substructure, boosted tags)
+- **AK8 Fat Jets**: `references/fat-jets.md` (FatJet branches, AK8 jet ID, soft-drop/regressed mass, GloParT-3/ParticleNet discriminants per NanoAOD version, top/W tagging SFs, Lund jet-plane reweighting)
 - **B-tagging**: `references/b-tagging.md`
 - **MET**: `references/met.md` (Transverse momentum, MET noise/event filters)
 - **Luminosity**: `references/lumi.md` (Integrated luminosity, golden JSON, lumi uncertainties)

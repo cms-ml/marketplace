@@ -1,8 +1,9 @@
 # AK4 jets — CMS JME recommendations (NanoAOD)
 
-Source: CMS JME/JERC recommendations (JEC, JER, jet veto maps, uncertainties, PU jet ID), cms-analysis-corrections JME pages, JERC meeting 12 Nov 2024 slides (retrieved 24 Sep 2026) | Campaigns: Run2 UL 2016preVFP/2016postVFP/2017/2018 (NanoAODv9 and NanoAODv15); Run3 2022/2022EE/2023/2023BPix/2024/2025/2026
+Source: CMS JME/JERC recommendations (JEC, JER, jet veto maps, uncertainties, PU jet ID), cms-analysis-corrections JME pages, JERC meeting 12 Nov 2024 slides (retrieved 24 Sep 2026); Run2 UL Jet ID TWiki https://twiki.cern.ch/twiki/bin/view/CMS/JetID13TeVUL (retrieved 22 Oct 2026) | Campaigns: Run2 UL 2016preVFP/2016postVFP/2017/2018 (NanoAODv9 and NanoAODv15); Run3 2022/2022EE/2023/2023BPix/2024/2025/2026
 
 **JEC, JER, their tags/keys and JES/JER systematics → `references/jets-jerc.md`.**
+**AK8 / boosted jets (FatJet mass, taggers, top/W SFs, LPR) → `references/fat-jets.md`.**
 
 ## 0. Collections
 | Dataset | `Jet` (AK4) | `FatJet` (AK8) |
@@ -43,8 +44,65 @@ Branch source: NanoAODv15, 2024 MC (`RunIII2024Summer24NanoAODv15`). Older versi
 | --- | --- | --- |
 | Run3 (all eras), NanoAODv12/v15 | `Jet_jetId` is **not** in NanoAODv15 → evaluate `jetid.json.gz` (per-campaign, see `jets-jerc.md` §1) or apply the legacy Run 3 Jet ID TWiki cuts by hand | `AK4PUPPI_Tight`, `AK4PUPPI_TightLeptonVeto` (also `AK4CHS_*`, `AK8*_*` keys) |
 | Run3 2024 Scouting | `Run3-24Scouting-Summer24-ScoutingNanoAODv15/latest/jetid.json.gz` | `ScoutingPFJet_Tight`, `ScoutingPFJet_TightLeptonVeto`, `ScoutingPFJetRecluster_Tight`, `ScoutingPFJetRecluster_TightLeptonVeto` |
-| Run2 UL (v9 / v15) | not provided in the source (Run2 veto-map selection only says "tight jet ID") | > TODO: not available |
+| Run2 UL NanoAODv9 (AK4 CHS) | `Jet_jetId` bitmap — test the bit (see below) | Tight (`& 2`), TightLepVeto (`& 4`) |
+| Run2 UL NanoAODv15 (AK4 Puppi) | no `Jet_jetId`; JSON payload "being prepared" → apply the AK4 PUPPI cuts by hand (see below) | Tight, TightLepVeto |
 
+#### Run2 UL Jet ID (source: TWiki `JetID13TeVUL`, 106X UL, retrieved 22 Oct 2026)
+- Recommended WP: **TightLepVeto** for all analyses. Use plain Tight only if the analysis does its own jet–lepton cleaning and wants to avoid biases.
+- No data/MC scale factors: apply the same cuts to MC. Efficiency > 98–99% in all η regions.
+- AK8 jets: apply the AK4 ID of the matching type (CHS or PUPPI).
+- Cuts are valid for all eras: 2016B–H (preVFP/APV and postVFP use the same cuts), 2017B–F, 2018A–D.
+- Energy fractions are relative to **raw** jet energy, so the ID is independent of JEC/JER. NanoAOD `*EF` branches already are raw fractions.
+- Plot the ID input variables, not just the boolean, to catch leftover noise in your phase space.
+
+**NanoAODv9** (`Jet` = AK4 CHS): `Jet_jetId` is 2 for Tight but not TightLepVeto, 6 for both. Test the bit:
+
+| WP | Test |
+| --- | --- |
+| Tight | `(Jet_jetId & 2) != 0` |
+| TightLepVeto | `(Jet_jetId & 4) != 0` |
+
+**NanoAODv15** (`Jet` = AK4 Puppi): AK4 PUPPI cuts (TWiki NanoAODv15 pseudocode). `mult` = `Jet_chMultiplicity + Jet_neMultiplicity`.
+
+| \|η\| region | 2016 (preVFP + postVFP) Tight | 2017 / 2018 Tight |
+| --- | --- | --- |
+| central (2016: ≤ 2.4; 2017/18: ≤ 2.6) | `neHEF<0.9 && neEmEF<0.9 && mult>1 && chHEF>0 && chMultiplicity>0` | same |
+| (2.4 or 2.6) < \|η\| ≤ 2.7 | `neHEF<0.98 && neEmEF<0.99` | `neHEF<0.9 && neEmEF<0.99` |
+| 2.7 < \|η\| ≤ 3.0 | `neMultiplicity>=1` | `neHEF<0.9999` |
+| \|η\| > 3.0 | `neMultiplicity>2 && neEmEF<0.9` | same |
+| **TightLepVeto** = Tight `&& muEF<0.8 && chEmEF<0.8` for | \|η\| ≤ 2.4 | \|η\| ≤ 2.7 |
+
+```python
+# Transcribed from the TWiki NanoAODv15 pseudocode; not run on a v15 file yet.
+import numpy as np
+def run2_ul_puppi_jetid(J, year, lepveto=True):   # year in {"2016", "2017", "2018"}
+    a = np.abs(J.eta)
+    c = 2.4 if year == "2016" else 2.6
+    mult = J.chMultiplicity + J.neMultiplicity
+    central = (J.neHEF < 0.9) & (J.neEmEF < 0.9) & (mult > 1) & (J.chHEF > 0) & (J.chMultiplicity > 0)
+    inter = (J.neHEF < (0.98 if year == "2016" else 0.9)) & (J.neEmEF < 0.99)
+    hecut = (J.neMultiplicity >= 1) if year == "2016" else (J.neHEF < 0.9999)
+    fwd = (J.neMultiplicity > 2) & (J.neEmEF < 0.9)
+    tight = np.where(a <= c, central, np.where(a <= 2.7, inter, np.where(a <= 3.0, hecut, fwd)))
+    if not lepveto:
+        return tight
+    lv = (J.muEF < 0.8) & (J.chEmEF < 0.8)
+    return tight & (lv | (a > (2.4 if year == "2016" else 2.7)))
+```
+
+AK4 CHS cuts (for MiniAOD/CHS users; NanoAODv9 users should use `Jet_jetId`). Variables: NHF=`neHEF`, NEMF=`neEmEF`, CHF=`chHEF`, MUF=`muEF`, CEMF=`chEmEF`, CHM=`chMultiplicity`, NumConst=CHM+`neMultiplicity`, NumNeutral=`neMultiplicity`.
+
+| \|η\| region | 2016 CHS Tight | 2017 / 2018 CHS Tight |
+| --- | --- | --- |
+| central (2016: ≤ 2.4; 2017/18: ≤ 2.6) | `NHF<0.9 && NEMF<0.9 && NumConst>1 && CHF>0 && CHM>0` | same |
+| (2.4 or 2.6) < \|η\| ≤ 2.7 | `NHF<0.9 && NEMF<0.99` | `NHF<0.9 && NEMF<0.99 && CHM>0` |
+| 2.7 < \|η\| ≤ 3.0 | `NEMF>0 && NEMF<0.99 && NHF<0.9 && NumNeutral>1` | `NEMF>0.01 && NEMF<0.99 && NumNeutral>1` |
+| \|η\| > 3.0 | `NEMF<0.9 && NHF>0.2 && NumNeutral>10` | same |
+| **TightLepVeto** = Tight `&& MUF<0.8 && CEMF<0.8` for | \|η\| ≤ 2.4 | \|η\| ≤ 2.7 |
+
+In CMSSW (MiniAOD): `PatJetIDValueMapProducer` with `filterParams = cms.PSet(version = cms.string('RUN2ULCHS'), quality = cms.string('TIGHT'))` (`PFJetIDSelectionFunctor`). UL MiniAODv2 PUPPI jets use Puppi-weighted float multiplicities: `userFloat("patPuppiJetSpecificProducer:puppiMultiplicity")` and `…:neutralPuppiMultiplicity`.
+
+#### Run3
 `jetid.json.gz` description: "Jet Identification Criteria for Run3 Rereco2022CDE from https://twiki.cern.ch/twiki/bin/view/CMS/JetID13p6TeV?rev=18" (same payload in 2024; 2026 copied from 2025).
 Inputs (by name): `eta`, `chHEF`, `neHEF`, `chEmEF`, `neEmEF`, `muEF`, `chMultiplicity`, `neMultiplicity`, `multiplicity` (= ch + ne). Output: `jet id` (real). Numeric cut values: > TODO: not available (in the JSON/TWiki only).
 
@@ -108,7 +166,7 @@ Inputs: `type` (string, use **`jetvetomap`**), `eta`, `phi`. Output `vetomaps`: 
 
 - 2016: apply `h2hot_mc` **in addition** (MC hot zone absent in data). Beamspot effects largest for non-APV MadGraph HT samples.
 - 2018: with HEM-reprocessed 2018CD + standard 2018AB, omitting `hem1516` may be considered; `hbp2m1` must still be applied.
-- Nominal loose jet selection: pT > > TODO (lost in source); tight jet ID; PU jet ID for CHS jets (pT < 50 GeV); `chEmEF + neEmEF < 0.9`; no overlap with a PF muon (ΔR: > TODO).
+- Nominal loose jet selection: pT > > TODO (lost in source); tight jet ID (§2, Run2 UL); PU jet ID for CHS jets (pT < 50 GeV); `chEmEF + neEmEF < 0.9`; no overlap with a PF muon (ΔR: > TODO).
 - Large acceptance loss → restricted use (e.g. leading jet only); jet-insensitive measurements may use the basic `h2hot_ul1X` map or no veto. Validate and document.
 - Maps labelled `mc`/`hw` are for expert studies (except UL16 `h2hot_mc`). Ref: CMS AN-2022/066.
 
@@ -124,7 +182,8 @@ event_ok = ~ak.any(ak.unflatten(v, ak.num(sel)) != 0, axis=1)   # Run3: drop the
 **Always** (Run2 and Run3): same map in data and MC; make jet η–φ maps before/after the veto, check other distributions, document in the AN.
 
 ## 4. Pitfalls / do NOT use
-- `Jet_jetId` / `Jet_puId` on NanoAODv15 — don't exist. Run3 PU jet ID: no WPs/SFs yet; **never** use Run 2 CHS WPs on Puppi jets.
+- `Jet_jetId` / `Jet_puId` on NanoAODv15 — don't exist. `Jet_jetId == 6` / `>= 2` comparisons on v9 — test bits (`& 2`, `& 4`).
+- Run2 UL v15 (Puppi): don't apply the CHS cuts; 2016 and 2017/18 differ (central boundary 2.4 vs 2.6, lep-veto range, 2.4/2.6–3.0 cuts). Run3 PU jet ID: no WPs/SFs yet; **never** use Run 2 CHS WPs on Puppi jets.
 - Full-bitmap comparisons (`Jet_puId == 7`) and UL2017/18 bit tests on UL2016 (bits swapped).
 - PU jet ID on jets with pT ≥ 50 GeV, or on non-JEC-corrected jets.
 - Run3: veto maps are mandatory and act on events; Run2: they act on jets. Don't mix up.
