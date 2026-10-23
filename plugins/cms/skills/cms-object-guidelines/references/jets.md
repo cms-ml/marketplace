@@ -36,7 +36,7 @@ Branch source: NanoAODv15, 2024 MC (`RunIII2024Summer24NanoAODv15`). Older versi
 
 - Raw pT = `Jet_pt * (1 - Jet_rawFactor)` (input for re-applying JEC).
 - Full PNet regression: raw pT x `PNetRegPtRawCorr` x `PNetRegPtRawCorrNeutrino`. `*Res` = (q84 - q16)/2.
-- b-tagging WPs/SFs: not covered by this skill yet (see the BTV POG pages).
+- b-tagging WPs/SFs -> `references/b-tagging.md`.
 
 ## 2. IDs
 ### Jet ID (noise / badly reconstructed jets)

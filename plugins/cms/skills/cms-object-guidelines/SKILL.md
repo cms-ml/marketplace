@@ -27,7 +27,8 @@ Refer strictly to the relevant reference file for the object or task:
 - **MET**: [references/met.md](references/met.md) (Run2 PF / Run3 PUPPI Type-1 MET, noise-filter flags per era, Type-1/XY/recoil corrections, MET uncertainties, DeepMET, MET significance)
 - **Luminosity**: [references/lumi.md](references/lumi.md) (integrated luminosity, golden JSON, lumi uncertainties)
 - **Pileup**: [references/pileup.md](references/pileup.md) (placeholder: the file is empty. Say that pileup-reweighting guidance isn't available yet; don't invent it)
-- **B-tagging, photons, taus**: no reference yet. Say so instead of guessing WPs or SFs, and point to the BTV, EGM and TAU POG pages.
+- **B-tagging**: [references/b-tagging.md](references/b-tagging.md) (AK4 b/c/q-g taggers and branches, WP cuts per era, fixedWP and shape SF application, MC efficiencies, uncertainties and correlations, Run2 subjet and AK8 X->bb/cc WPs)
+- **Photons, taus**: no reference yet. Say so instead of guessing WPs or SFs, and point to the EGM and TAU POG pages.
 
 ## Gotchas
 
@@ -41,6 +42,7 @@ Refer strictly to the relevant reference file for the object or task:
 - **High-pT muons**: with the HighPt ID use `Muon_pt * Muon_tunepRelPt`. `Muon_mvaTTH`/`Electron_mvaTTH` are `promptMVA` from NanoAOD v14 on.
 - **Electron veto**: `cutBased >= 1` is Veto-or-better. To veto electrons, require none with `cutBased >= 1`.
 - **Lumi nuisances**: in Run 2, include every nuisance whose name contains the year. In Run 3, the brilcalc normtag differs by year.
+- **b-tagging SFs need your own MC tagging efficiencies** (per flavour, pT, eta, derived before any b-tag cut), and apply to every jet whose tag status you use, including 0-tag regions.
 - **Before evaluating a correctionlib payload**, list `cset.keys()` and each correction's `inputs`: names differ between eras.
 
 ## Docs
@@ -49,6 +51,7 @@ Refer strictly to the relevant reference file for the object or task:
 - EGamma POG Run 3 ID: https://egammapog.docs.cern.ch/Run3/Run3_ID/
 - JME/JMAR recommendations (jets, boosted objects, MET): https://cms-jme-jmar.docs.cern.ch/ (MET: https://cms-jme-jmar.docs.cern.ch/recommendations/met/)
 - Run 2 UL Jet ID: https://twiki.cern.ch/twiki/bin/view/CMS/JetID13TeVUL
+- BTV POG wiki (b/c/q-g tagging): https://btv-wiki.docs.cern.ch/
 - Central correctionlib payloads: https://cms-analysis-corrections.docs.cern.ch/
 - Luminosity: https://twiki.cern.ch/twiki/bin/view/CMS/LumiRecommendationsRun2, https://twiki.cern.ch/twiki/bin/view/CMS/LumiRecommendationsRun3, https://twiki.cern.ch/twiki/bin/view/CMS/PdmVRun3Analysis
 - NanoAOD content (autoDoc): https://cms-xpog.docs.cern.ch/autoDoc/

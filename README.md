@@ -100,7 +100,6 @@ Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM m
 | `cms-object-guidelines` | The user asks to select, define, or document CMS analysis objects (muons, electrons…                |
 | `cmssw`                 | Release areas, architectures and containers, EDM modules, cmsRun configs, EDM file tools            |
 | `hist`                  | Histograms with hist + mplhep for CMS (weights, normalisation, UHI, CMS-style plots)                |
-| `nanoaod-branches`      | NanoAOD v12/v15 branch names, types and descriptions, plus v12→v15 changes                          |
 | `vector-awkward`        | Four-vector kinematics on NanoAOD with vector + Awkward (masses, deltaR, mT, boosts)                |
 
 ---
