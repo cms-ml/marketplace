@@ -17,11 +17,11 @@ CREDITS.md                          # attribution for third-party teaching mater
 ```
 
 Plugins: `cms` (core: CMSSW, data tools, and the Scikit-HEP stack with CMS
-examples, e.g. `awkward-array`) exists. Planned: `af-fnal-lpc` (cmslpc EOS +
-condor), `cms-ml` (weaver training, ONNX/TF/SONIC inference in CMSSW), and
-`hep-python-tools` (exists: `standalone-script`, `cli-creator`) only for
-experiment-neutral dev tooling (packaging, CLIs, testing). Physics/data libraries with CMS examples go in `cms`, as ATLAS does
-with its `atlas` plugin. Only create a plugin directory once
+examples, e.g. `awkward-array`), `af-fnal-lpc` (LPC facility: `lpc-condor`)
+and `hep-python-tools` (experiment-neutral dev tooling: `standalone-script`,
+`cli-creator`) exist. Planned: `cms-ml` (weaver training, ONNX/TF/SONIC
+inference in CMSSW). Physics/data libraries with CMS examples go in `cms`, as
+ATLAS does with its `atlas` plugin. Only create a plugin directory once
 it has at least one skill, since `check` rejects empty plugins.
 
 ## Workflow
@@ -30,6 +30,15 @@ it has at least one skill, since `check` rejects empty plugins.
 python3 scripts/marketplace.py check          # validate everything (also run by CI + pre-commit)
 python3 scripts/marketplace.py sync           # regenerate marketplace.json + README block
 python3 scripts/marketplace.py bump cms 0.2.0 # bump a plugin; `bump marketplace X` for metadata.version
+```
+
+CI also runs pre-commit (prettier, end-of-file, codespell) on **all** files.
+On cmslpc, pre-commit's downloaded node.js fails (`libatomic.so.1` missing), so
+run prettier with the LCG view's node before pushing:
+
+```bash
+(set +u; source /cvmfs/sft.cern.ch/lcg/views/LCG_109/x86_64-el9-gcc15-opt/setup.sh
+ git ls-files '*.md' '*.json' '*.yaml' '*.yml' | xargs npx --yes prettier@3.5.3 --prose-wrap=preserve --write)
 ```
 
 Never hand-edit the `plugins` array of `marketplace.json` or the README
@@ -64,7 +73,7 @@ Patterns → Gotchas → Reference Files → Docs.
   release. Versions in examples are "tested with" versions only (see the
   `cmssw` skill's "Choose the release" section).
 - Prefer facts the user can re-derive (e.g. `dasgoclient -query="release
-  dataset=..."`, `/cvmfs/cms.cern.ch/releases.map`, the release notes at
+dataset=..."`, `/cvmfs/cms.cern.ch/releases.map`, the release notes at
   <https://cmssdt.cern.ch/SDT/ReleaseNotes/>) over hard-coded tables. When a
   table is unavoidable, date it.
 - CMS units are **GeV** (MiniAOD, NanoAOD). Note it where kinematics appear.
