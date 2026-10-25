@@ -35,12 +35,12 @@ Use Typer for the command line, even for a single command, so options and
 
 ## Key Concepts
 
-| Piece                                 | Meaning                                                        |
-| ------------------------------------- | -------------------------------------------------------------- |
-| `# /// script` … `# ///`              | PEP 723 block: `requires-python`, `dependencies` (TOML in comments) |
-| `#!/usr/bin/env -S uv run --script`   | First line; makes `./script.py` work (needs coreutils ≥ 8.30)  |
-| `uv run --script script.py`           | Explicit form; works everywhere uv runs                         |
-| uv cache / managed Pythons            | Where environments and downloaded interpreters live (see Gotchas) |
+| Piece                               | Meaning                                                             |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `# /// script` … `# ///`            | PEP 723 block: `requires-python`, `dependencies` (TOML in comments) |
+| `#!/usr/bin/env -S uv run --script` | First line; makes `./script.py` work (needs coreutils ≥ 8.30)       |
+| `uv run --script script.py`         | Explicit form; works everywhere uv runs                             |
+| uv cache / managed Pythons          | Where environments and downloaded interpreters live (see Gotchas)   |
 
 ## Canonical Patterns
 

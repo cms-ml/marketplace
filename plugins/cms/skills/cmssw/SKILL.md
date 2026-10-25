@@ -38,18 +38,18 @@ dedicated skills when they exist instead of driving them through `cmsRun`.
 
 ## Key Concepts
 
-| Term                     | Meaning                                                                                                   |
-| ------------------------ | --------------------------------------------------------------------------------------------------------- |
-| Release                  | `CMSSW_<major>_<minor>_<patch>`, e.g. `CMSSW_15_0_21`; installed read-only under `/cvmfs/cms.cern.ch/`    |
-| `SCRAM_ARCH`             | `<os>_<cpu>_<compiler>`, e.g. `el9_amd64_gcc12`; a release exists only for specific archs                 |
-| Developer area           | `CMSSW_X_Y_Z/` made by `cmsrel`; your code lives in `src/<Subsystem>/<Package>/`                          |
-| `$CMSSW_BASE`            | Your developer area; `$CMSSW_RELEASE_BASE` is the CVMFS release it overlays                               |
-| `cmsenv`                 | Shell function: `eval $(scramv1 runtime -sh)`; sets PATH, PYTHONPATH, LD_LIBRARY_PATH for the area        |
-| Process / Path           | A config builds one `cms.Process`; `cms.Path` lists modules to run in order                               |
-| Module types             | `EDAnalyzer` (read-only), `EDProducer` (adds products), `EDFilter` (can stop a Path), `Source`, `Service` |
-| Product label            | `module:instance:process`, e.g. `slimmedMuons::PAT`; referenced via `cms.InputTag`                        |
-| `_cfg.py`/`_cfi.py`/`_cff.py` | Top-level config / one module's defaults / a reusable config fragment                                |
-| Data tiers               | RAW → RECO → AOD → MiniAOD → NanoAOD (flat ntuple, usually read without CMSSW)                            |
+| Term                          | Meaning                                                                                                   |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Release                       | `CMSSW_<major>_<minor>_<patch>`, e.g. `CMSSW_15_0_21`; installed read-only under `/cvmfs/cms.cern.ch/`    |
+| `SCRAM_ARCH`                  | `<os>_<cpu>_<compiler>`, e.g. `el9_amd64_gcc12`; a release exists only for specific archs                 |
+| Developer area                | `CMSSW_X_Y_Z/` made by `cmsrel`; your code lives in `src/<Subsystem>/<Package>/`                          |
+| `$CMSSW_BASE`                 | Your developer area; `$CMSSW_RELEASE_BASE` is the CVMFS release it overlays                               |
+| `cmsenv`                      | Shell function: `eval $(scramv1 runtime -sh)`; sets PATH, PYTHONPATH, LD_LIBRARY_PATH for the area        |
+| Process / Path                | A config builds one `cms.Process`; `cms.Path` lists modules to run in order                               |
+| Module types                  | `EDAnalyzer` (read-only), `EDProducer` (adds products), `EDFilter` (can stop a Path), `Source`, `Service` |
+| Product label                 | `module:instance:process`, e.g. `slimmedMuons::PAT`; referenced via `cms.InputTag`                        |
+| `_cfg.py`/`_cfi.py`/`_cff.py` | Top-level config / one module's defaults / a reusable config fragment                                     |
+| Data tiers                    | RAW → RECO → AOD → MiniAOD → NanoAOD (flat ntuple, usually read without CMSSW)                            |
 
 Energies and momenta in CMS data formats are in **GeV**.
 

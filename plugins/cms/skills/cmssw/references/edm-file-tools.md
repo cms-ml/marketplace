@@ -17,14 +17,14 @@ Data MiniAOD file on `CMSSW_15_0_21`.
 
 ## Which tool
 
-| Question                                         | Command                                       |
-| ------------------------------------------------ | --------------------------------------------- |
-| What collections / labels are in the file?       | `edmDumpEventContent <file>`                  |
-| How many events, lumis, runs; file size?         | `edmFileUtil <file>`                          |
-| List every (run, lumi, event)                    | `edmFileUtil -e <file>`                       |
-| Which branches take the space?                   | `edmEventSize -v <file>`                      |
-| Which CMSSW releases / configs produced it?      | `edmProvDump <file>`                          |
-| Fully expanded config of _my_ job                | `edmConfigDump my_cfg.py`                     |
+| Question                                    | Command                      |
+| ------------------------------------------- | ---------------------------- |
+| What collections / labels are in the file?  | `edmDumpEventContent <file>` |
+| How many events, lumis, runs; file size?    | `edmFileUtil <file>`         |
+| List every (run, lumi, event)               | `edmFileUtil -e <file>`      |
+| Which branches take the space?              | `edmEventSize -v <file>`     |
+| Which CMSSW releases / configs produced it? | `edmProvDump <file>`         |
+| Fully expanded config of _my_ job           | `edmConfigDump my_cfg.py`    |
 
 ## edmDumpEventContent
 
