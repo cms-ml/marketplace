@@ -1,0 +1,28 @@
+# LPC condor submit file (template). Submit from an EL9 cmslpc node, NOT from /eos.
+# jobs.txt lines are "<index> <url1,url2,...>" (make_filelist.py writes them).
+universe              = vanilla
+executable            = job.sh
+transfer_input_files  = payload.py
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+# Defaults; override on the command line: condor_submit JOBS=jobs_one.txt OUTDIR=root://... job.jdl
+# (Use if/endif, not $(OUTDIR:default): that form silently fails when the default contains '-'.)
+if !defined JOBS
+  JOBS = jobs.txt
+endif
+if !defined OUTDIR
+  OUTDIR = root://cmseos.fnal.gov//store/user/YOUR_USERNAME/YOUR_OUTPUT_AREA
+endif
+arguments = "$(jobid) $(inputs) $(OUTDIR)"
+environment = "ENV_MODE=lcg OUT_EXT=root"
+
+output = logs/job_$(Cluster)_$(jobid).out
+error  = logs/job_$(Cluster)_$(jobid).err
+log    = logs/cluster_$(Cluster).log
+
+request_memory = 2000
+# request_cpus = 1
+# +DesiredOS = "SL7"       # only for releases that need CentOS 7
+
+queue jobid,inputs from $(JOBS)
