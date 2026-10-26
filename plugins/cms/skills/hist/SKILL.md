@@ -34,15 +34,15 @@ weights → normalise MC → slice/project → plot with the CMS label → save.
 
 ## Key Concepts
 
-| Piece                               | Use                                                                             |
-| ----------------------------------- | ------------------------------------------------------------------------------- |
-| `Hist.new.Reg(n, lo, hi, name=, label=)` | Uniform bins                                                              |
-| `.Var([edges], name=)`              | Variable bins (e.g. pT tails)                                                   |
-| `.Integer(lo, hi)`                  | Counts such as `nJet`, `PV_npvsGood`                                            |
-| `.StrCat([...], growth=True)`       | Regions, processes, systematics                                                 |
-| `.Int64()` / `.Weight()`            | Exactly one storage. `Weight` keeps Σw and Σw² for correct errors               |
-| Flow bins                           | Under/overflow are kept. `h.values(flow=True)`, `h[hist.overflow]`              |
-| UHI                                 | `h[5j]` = bin containing 5, `h[0.3j:]`, `h[::2j]` rebin, `h[:, sum]` project     |
+| Piece                                    | Use                                                                          |
+| ---------------------------------------- | ---------------------------------------------------------------------------- |
+| `Hist.new.Reg(n, lo, hi, name=, label=)` | Uniform bins                                                                 |
+| `.Var([edges], name=)`                   | Variable bins (e.g. pT tails)                                                |
+| `.Integer(lo, hi)`                       | Counts such as `nJet`, `PV_npvsGood`                                         |
+| `.StrCat([...], growth=True)`            | Regions, processes, systematics                                              |
+| `.Int64()` / `.Weight()`                 | Exactly one storage. `Weight` keeps Σw and Σw² for correct errors            |
+| Flow bins                                | Under/overflow are kept. `h.values(flow=True)`, `h[hist.overflow]`           |
+| UHI                                      | `h[5j]` = bin containing 5, `h[0.3j:]`, `h[::2j]` rebin, `h[:, sum]` project |
 
 ## Canonical Patterns
 

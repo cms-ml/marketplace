@@ -172,14 +172,14 @@ file close, which deletes the histogram it owns.
 
 ## 6. Adapting it
 
-| Want to…                    | Change                                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------------------ |
-| Read another collection     | Add an `EDGetTokenT<...>`, its `#include`, the `<use>` in BuildFile, and a `desc.add<>()`  |
-| Apply a trigger requirement | Put an `HLTHighLevel` EDFilter before the analyzer in the `cms.Path`                       |
-| Write a TTree, not hists    | `fs->make<TTree>(...)`, branches bound to member variables, `Fill()` once per event        |
-| Add new products            | Use `mkedprod` (EDProducer); `iEvent.emplace(putToken, ...)` with a `produces<>()` token   |
-| Run multithreaded           | Switch to `edm::global::EDAnalyzer` / `edm::stream::`; `cmsRun -n 4 cfg.py`                |
-| Find collection labels      | `edmDumpEventContent <file>`; see [edm-file-tools.md](edm-file-tools.md)                   |
+| Want to…                    | Change                                                                                    |
+| --------------------------- | ----------------------------------------------------------------------------------------- |
+| Read another collection     | Add an `EDGetTokenT<...>`, its `#include`, the `<use>` in BuildFile, and a `desc.add<>()` |
+| Apply a trigger requirement | Put an `HLTHighLevel` EDFilter before the analyzer in the `cms.Path`                      |
+| Write a TTree, not hists    | `fs->make<TTree>(...)`, branches bound to member variables, `Fill()` once per event       |
+| Add new products            | Use `mkedprod` (EDProducer); `iEvent.emplace(putToken, ...)` with a `produces<>()` token  |
+| Run multithreaded           | Switch to `edm::global::EDAnalyzer` / `edm::stream::`; `cmsRun -n 4 cfg.py`               |
+| Find collection labels      | `edmDumpEventContent <file>`; see [edm-file-tools.md](edm-file-tools.md)                  |
 
 Trigger filter example (MiniAOD, Run 2015D):
 

@@ -55,13 +55,13 @@ fields.
 
 ## Option types and None
 
-| Produces `None`                          | Example                                     |
-| ---------------------------------------- | ------------------------------------------- |
-| `ak.firsts(x)` on an empty list          | leading object when there is none           |
-| `ak.pad_none(x, n, axis=1)`              | pad to at least `n` per event, then `[:, k]` |
-| `ak.mask(x, cond)`                       | keep length, replace failing entries by None |
-| `ak.max` / `ak.argmax` on an empty list  | see above                                   |
-| Indexing with an option-type index       | `muons.pt[ak.mask(idx, idx >= 0)]`          |
+| Produces `None`                         | Example                                      |
+| --------------------------------------- | -------------------------------------------- |
+| `ak.firsts(x)` on an empty list         | leading object when there is none            |
+| `ak.pad_none(x, n, axis=1)`             | pad to at least `n` per event, then `[:, k]` |
+| `ak.mask(x, cond)`                      | keep length, replace failing entries by None |
+| `ak.max` / `ak.argmax` on an empty list | see above                                    |
+| Indexing with an option-type index      | `muons.pt[ak.mask(idx, idx >= 0)]`           |
 
 Handle `None` with `ak.fill_none(x, value)`, `ak.is_none(x, axis=...)`, or
 `ak.drop_none(x)`. `x[:, 0]` raises `index out of range` if any list is
@@ -118,11 +118,11 @@ pairs.fields                                        # ['m1', 'm2']
 
 ## Functions that do / don't exist
 
-| Wanted              | Use                                                              |
-| ------------------- | ---------------------------------------------------------------- |
-| absolute value      | `abs(x)` or `np.abs(x)` (no `ak.abs`)                            |
-| max / min per event | `ak.max(x, axis=1)`, `ak.min(x, axis=1)` (they exist)            |
+| Wanted              | Use                                                                             |
+| ------------------- | ------------------------------------------------------------------------------- |
+| absolute value      | `abs(x)` or `np.abs(x)` (no `ak.abs`)                                           |
+| max / min per event | `ak.max(x, axis=1)`, `ak.min(x, axis=1)` (they exist)                           |
 | constant-like array | `ak.full_like(x, v)`, `ak.zeros_like(x)`, `ak.ones_like(x)` (no `ak.fill_like`) |
-| take by index       | jagged integer indexing `x[idx]` (no `ak.take`)                  |
-| add a dimension     | `x[:, np.newaxis]` or `ak.singletons` (no `ak.expand_dims`)      |
-| stack               | `np.stack` on rectangular data (no `ak.stack`)                   |
+| take by index       | jagged integer indexing `x[idx]` (no `ak.take`)                                 |
+| add a dimension     | `x[:, np.newaxis]` or `ak.singletons` (no `ak.expand_dims`)                     |
+| stack               | `np.stack` on rectangular data (no `ak.stack`)                                  |

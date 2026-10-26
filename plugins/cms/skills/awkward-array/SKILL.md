@@ -48,15 +48,15 @@ script.
 
 ## Key Concepts
 
-| Concept         | Meaning                                                                                       |
-| --------------- | --------------------------------------------------------------------------------------------- |
-| `axis=0`        | Events. `axis=1` (or `-1` for the innermost) is objects within an event                        |
-| Type string     | `20000 * var * float32` means 20000 events, variable number of floats each. Print with `ak.type(x)` |
-| Record          | `ak.zip({"pt": ..., "eta": ...})` gives `var * {pt, eta}`; access fields as `mu.pt` or `mu["pt"]` |
-| `ak.num(x, 1)`  | Number of entries per event (equals NanoAOD `nMuon`)                                          |
-| `ak.count(x, 1)`| Number of **non-None** entries per event                                                       |
-| Option type     | `?float32`: values may be `None`, produced by `ak.firsts`, `ak.mask`, `ak.pad_none`, argmax    |
-| Masks           | Boolean arrays with the same jagged structure select objects; 1D per-event booleans select events |
+| Concept          | Meaning                                                                                             |
+| ---------------- | --------------------------------------------------------------------------------------------------- |
+| `axis=0`         | Events. `axis=1` (or `-1` for the innermost) is objects within an event                             |
+| Type string      | `20000 * var * float32` means 20000 events, variable number of floats each. Print with `ak.type(x)` |
+| Record           | `ak.zip({"pt": ..., "eta": ...})` gives `var * {pt, eta}`; access fields as `mu.pt` or `mu["pt"]`   |
+| `ak.num(x, 1)`   | Number of entries per event (equals NanoAOD `nMuon`)                                                |
+| `ak.count(x, 1)` | Number of **non-None** entries per event                                                            |
+| Option type      | `?float32`: values may be `None`, produced by `ak.firsts`, `ak.mask`, `ak.pad_none`, argmax         |
+| Masks            | Boolean arrays with the same jagged structure select objects; 1D per-event booleans select events   |
 
 ## Canonical Patterns
 

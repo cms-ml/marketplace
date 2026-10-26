@@ -30,14 +30,14 @@ implementation plan.
 
 ## Key Concepts
 
-| Section                      | Must capture                                                                 |
-| ---------------------------- | ---------------------------------------------------------------------------- |
+| Section                      | Must capture                                                                                  |
+| ---------------------------- | --------------------------------------------------------------------------------------------- |
 | Data Samples                 | Exact DAS names (verbatim), tier, era/campaign, role. Golden JSON, triggers, MC normalisation |
-| Histograms                   | Quantity, LaTeX label with units (GeV), binning if given, entries per event, weights |
-| Analysis Steps               | Object and event selections, derived variables, explicit combinatorics      |
-| Corrections and Systematics  | POG corrections/SFs and variations, or "None"                                |
-| Workflow                     | Source-level skim, branches to read, then histogramming                      |
-| Statistical Analysis / Tools | Fit/limit or "None". Which tool does what                                    |
+| Histograms                   | Quantity, LaTeX label with units (GeV), binning if given, entries per event, weights          |
+| Analysis Steps               | Object and event selections, derived variables, explicit combinatorics                        |
+| Corrections and Systematics  | POG corrections/SFs and variations, or "None"                                                 |
+| Workflow                     | Source-level skim, branches to read, then histogramming                                       |
+| Statistical Analysis / Tools | Fit/limit or "None". Which tool does what                                                     |
 
 ## Canonical Patterns
 
@@ -65,17 +65,17 @@ grep -n '{{' specification.md || echo "no placeholders left"
 
 ### Defaults (when the user does not say)
 
-| Topic           | Default                                                                                      |
-| --------------- | -------------------------------------------------------------------------------------------- |
-| Data format     | NanoAOD (`NANOAOD` / `NANOAODSIM`)                                                            |
-| Dataset lookup  | `dasgoclient -query="dataset=/<Primary>/<Era>*/NANOAOD*"`. Never invent dataset names; ask   |
-| Data quality    | Apply the Golden JSON for the era (state it as a question if unconfirmed)                     |
-| MC weights      | `genWeight × σ × L / Σ Runs/genEventSumw`. Cross section and its source as a question         |
-| Reading/skim    | uproot + awkward (coffea for large multi-file processing)                                     |
-| Kinematics      | vector                                                                                       |
-| Corrections     | correctionlib with POG JSON files                                                             |
-| Histograms      | hist + mplhep (CMS style), PNG output                                                         |
-| Statistics      | Combine (binned shape fits, limits) when a fit is requested                                   |
+| Topic          | Default                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| Data format    | NanoAOD (`NANOAOD` / `NANOAODSIM`)                                                         |
+| Dataset lookup | `dasgoclient -query="dataset=/<Primary>/<Era>*/NANOAOD*"`. Never invent dataset names; ask |
+| Data quality   | Apply the Golden JSON for the era (state it as a question if unconfirmed)                  |
+| MC weights     | `genWeight × σ × L / Σ Runs/genEventSumw`. Cross section and its source as a question      |
+| Reading/skim   | uproot + awkward (coffea for large multi-file processing)                                  |
+| Kinematics     | vector                                                                                     |
+| Corrections    | correctionlib with POG JSON files                                                          |
+| Histograms     | hist + mplhep (CMS style), PNG output                                                      |
+| Statistics     | Combine (binned shape fits, limits) when a fit is requested                                |
 
 The `awkward-array`, `vector-awkward` and `hist` skills cover the
 implementation of these tools.

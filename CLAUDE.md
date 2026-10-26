@@ -64,7 +64,7 @@ Patterns → Gotchas → Reference Files → Docs.
   release. Versions in examples are "tested with" versions only (see the
   `cmssw` skill's "Choose the release" section).
 - Prefer facts the user can re-derive (e.g. `dasgoclient -query="release
-  dataset=..."`, `/cvmfs/cms.cern.ch/releases.map`, the release notes at
+dataset=..."`, `/cvmfs/cms.cern.ch/releases.map`, the release notes at
   <https://cmssdt.cern.ch/SDT/ReleaseNotes/>) over hard-coded tables. When a
   table is unavoidable, date it.
 - CMS units are **GeV** (MiniAOD, NanoAOD). Note it where kinematics appear.
