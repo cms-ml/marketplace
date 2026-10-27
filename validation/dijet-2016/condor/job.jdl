@@ -1,0 +1,20 @@
+# Submit from an NFS directory on an EL9 cmslpc node (not from /eos).
+# Usage: condor_submit JOBS=jobs_one.txt job.jdl   (OUTDIR defaults to the EOS test area below)
+universe              = vanilla
+executable            = job.sh
+transfer_input_files  = skim.py
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+if !defined JOBS
+  JOBS = jobs.txt
+endif
+if !defined OUTDIR
+  OUTDIR = root://cmseos.fnal.gov//store/user/<user>/cms-marketplace-tests/dijet-2016/skim
+endif
+arguments = "$(jobid) $(inputs) $(OUTDIR)"
+environment = "OUT_EXT=npz"
+output = logs/job_$(Cluster)_$(jobid).out
+error  = logs/job_$(Cluster)_$(jobid).err
+log    = logs/cluster_$(Cluster).log
+request_memory = 4000
+queue jobid,inputs from $(JOBS)

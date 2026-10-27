@@ -1,0 +1,86 @@
+dependent_variables:
+- header:
+    name: Injected events
+    units: Events
+  values:
+  - value: 0.0
+  - value: 672.0
+  - value: 1399.0
+  - value: 2722.0
+  - value: 4307.0
+  - value: 0.0
+  - value: 234.0
+  - value: 437.0
+  - value: 852.0
+  - value: 1335.0
+- header:
+    name: Recovered signal yield
+    units: Events
+  values:
+  - errors:
+    - label: fit (HESSE)
+      symerror: 518.89
+    value: -17.07
+  - errors:
+    - label: fit (HESSE)
+      symerror: 520.31
+    value: 684.71
+  - errors:
+    - label: fit (HESSE)
+      symerror: 521.77
+    value: 1313.7
+  - errors:
+    - label: fit (HESSE)
+      symerror: 524.65
+    value: 2722.7
+  - errors:
+    - label: fit (HESSE)
+      symerror: 527.88
+    value: 4226.8
+  - errors:
+    - label: fit (HESSE)
+      symerror: 157.45
+    value: 26.983
+  - errors:
+    - label: fit (HESSE)
+      symerror: 158.93
+    value: 256.71
+  - errors:
+    - label: fit (HESSE)
+      symerror: 160.27
+    value: 498.3
+  - errors:
+    - label: fit (HESSE)
+      symerror: 162.83
+    value: 877.67
+  - errors:
+    - label: fit (HESSE)
+      symerror: 165.67
+    value: 1351.4
+independent_variables:
+- header:
+    name: Category
+  values:
+  - value: 1b
+  - value: 1b
+  - value: 1b
+  - value: 1b
+  - value: 1b
+  - value: 2b
+  - value: 2b
+  - value: 2b
+  - value: 2b
+  - value: 2b
+- header:
+    name: Injection scale factor k
+  values:
+  - value: 0.0
+  - value: 0.5
+  - value: 1.0
+  - value: 2.0
+  - value: 3.0
+  - value: 0.0
+  - value: 0.5
+  - value: 1.0
+  - value: 2.0
+  - value: 3.0

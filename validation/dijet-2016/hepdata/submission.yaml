@@ -1,0 +1,201 @@
+---
+additional_resources:
+- description: Created with hepdata_lib 0.20.0
+  location: https://doi.org/10.5281/zenodo.1217998
+comment: 'Validation of analysis tooling on 2016G+H CMS Open Data (JetHT NanoAODv9).
+  Search for b-tagged dijet resonances, strategy after CMS-EXO-20-008. NOT an official
+  CMS result and no physics claim. Integrated luminosity of the processed subset:
+  16.393 fb^-1 at 13 TeV.'
+data_license:
+  description: CC0 enables reusers to distribute, remix, adapt, and build upon the
+    material in any medium or format, with no conditions.
+  name: CC0
+  url: https://creativecommons.org/publicdomain/zero/1.0/
+---
+additional_resources:
+- description: Image file
+  location: trigger_efficiency.png
+- description: Thumbnail image file
+  location: thumb_trigger_efficiency.png
+data_file: trigger_efficiency.yaml
+description: 'Efficiency of the OR of HLT_PFHT900, PFHT800, PFJet450, PFJet500, CaloJet500_NoJetID,
+  AK8PFJet450, AK8PFJet500, measured in events passing the prescaled reference HLT_PFJet260
+  (golden JSON, event filters, selection as in the qualifiers). Clopper-Pearson 68%
+  intervals. Chosen threshold m_jj > 1058 GeV. Open Data validation of analysis tooling:
+  NOT a CMS result, no physics claim.'
+keywords:
+- name: observables
+  values:
+  - EFF
+- name: reactions
+  values:
+  - P P --> JET JET
+- name: cmenergies
+  values:
+  - 13000.0
+- name: phrases
+  values:
+  - CMS Open Data
+  - dijet
+  - b tagging
+  - validation
+location: Data from plots/trigger_efficiency.png (validation/dijet-2016).
+name: Trigger efficiency
+---
+additional_resources:
+- description: Image file
+  location: fit_1b.png
+- description: Thumbnail image file
+  location: thumb_fit_1b.png
+data_file: mjj_spectrum_1b.yaml
+description: 'Dijet invariant mass spectrum in the category ''1b'' (>=1 DeepJet Medium
+  b tag(s)), data counts and the 3-parameter dijet-function fit p0 (1-x)^p1 / x^(p2+p3
+  ln x+p4 ln^2 x), x=m_jj/13000 (Poisson likelihood). Zero-content bins are kept because
+  they were part of the fit. Uncertainty on data: sqrt(N). Open Data validation of
+  analysis tooling: NOT a CMS result, no physics claim.'
+keywords:
+- name: observables
+  values:
+  - N
+- name: reactions
+  values:
+  - P P --> JET JET
+- name: cmenergies
+  values:
+  - 13000.0
+- name: phrases
+  values:
+  - CMS Open Data
+  - dijet
+  - b tagging
+  - validation
+location: Data from plots/fit_1b.png (validation/dijet-2016).
+name: mjj spectrum 1b
+---
+additional_resources:
+- description: Image file
+  location: fit_2b.png
+- description: Thumbnail image file
+  location: thumb_fit_2b.png
+data_file: mjj_spectrum_2b.yaml
+description: 'Dijet invariant mass spectrum in the category ''2b'' (2 DeepJet Medium
+  b tag(s)), data counts and the 4-parameter dijet-function fit p0 (1-x)^p1 / x^(p2+p3
+  ln x+p4 ln^2 x), x=m_jj/13000 (Poisson likelihood). Zero-content bins are kept because
+  they were part of the fit. Uncertainty on data: sqrt(N). Open Data validation of
+  analysis tooling: NOT a CMS result, no physics claim.'
+keywords:
+- name: observables
+  values:
+  - N
+- name: reactions
+  values:
+  - P P --> JET JET
+- name: cmenergies
+  values:
+  - 13000.0
+- name: phrases
+  values:
+  - CMS Open Data
+  - dijet
+  - b tagging
+  - validation
+location: Data from plots/fit_2b.png (validation/dijet-2016).
+name: mjj spectrum 2b
+---
+additional_resources:
+- description: Image file
+  location: ftest_1b.png
+- description: Thumbnail image file
+  location: thumb_ftest_1b.png
+- description: Image file
+  location: ftest_2b.png
+- description: Thumbnail image file
+  location: thumb_ftest_2b.png
+data_file: fit_results.yaml
+description: 'Dijet-function fit results per category and number of parameters: Poisson
+  deviance chi2, ndf and F-test p-value for adding one parameter (n to n+1; 0 for
+  the last function). ''Chosen'' is 1 for the number of parameters selected by the
+  F-test (lowest n with p > 0.05). Open Data validation of analysis tooling: NOT a
+  CMS result, no physics claim.'
+keywords:
+- name: observables
+  values:
+  - CHI2/NDF
+- name: reactions
+  values:
+  - P P --> JET JET
+- name: cmenergies
+  values:
+  - 13000.0
+- name: phrases
+  values:
+  - CMS Open Data
+  - dijet
+  - b tagging
+  - validation
+location: Data from summary.json (fit) and plots/ftest_*.png (validation/dijet-2016).
+name: Fit results
+---
+additional_resources:
+- description: Image file
+  location: btag_efficiency_vs_mass.png
+- description: Thumbnail image file
+  location: thumb_btag_efficiency_vs_mass.png
+data_file: btag_efficiency_vs_zprime_mass.yaml
+description: 'DeepJet (2016postVFP_UL working points) b-tagging efficiency for true
+  b jets (hadronFlavour 5) among the two selected jets of Z''->bb (narrow) MC, |deta|<1.1,
+  no scale factors. Event efficiencies for the categories at Medium relative to all
+  generated events (include m_jj threshold and acceptance). Open Data validation of
+  analysis tooling: NOT a CMS result, no physics claim.'
+keywords:
+- name: observables
+  values:
+  - EFF
+- name: reactions
+  values:
+  - P P --> JET JET
+- name: cmenergies
+  values:
+  - 13000.0
+- name: phrases
+  values:
+  - CMS Open Data
+  - dijet
+  - b tagging
+  - validation
+location: Data from plots/btag_efficiency_vs_mass.png (validation/dijet-2016).
+name: btag efficiency vs Zprime mass
+---
+additional_resources:
+- description: Image file
+  location: injection_linearity_1b.png
+- description: Thumbnail image file
+  location: thumb_injection_linearity_1b.png
+- description: Image file
+  location: injection_linearity_2b.png
+- description: Thumbnail image file
+  location: thumb_injection_linearity_2b.png
+data_file: signal_injection.yaml
+description: 'Injection of a Z'' (M = 2000 GeV, MC shape) into the data spectrum and
+  recovery with a signal+background fit. The scan factor k multiplies the nominal
+  injected yield (about 3 sigma of the background in the signal window); the injected
+  number of events is a Poisson draw of k times the nominal yield. Open Data validation
+  of analysis tooling: NOT a CMS result, no physics claim.'
+keywords:
+- name: observables
+  values:
+  - N
+- name: reactions
+  values:
+  - P P --> JET JET
+- name: cmenergies
+  values:
+  - 13000.0
+- name: phrases
+  values:
+  - CMS Open Data
+  - dijet
+  - b tagging
+  - validation
+location: Data from summary.json (injection) and plots/injection_linearity_*.png (validation/dijet-2016).
+name: Signal injection

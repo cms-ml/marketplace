@@ -1,0 +1,329 @@
+dependent_variables:
+- header:
+    name: Data events
+    units: Events
+  qualifiers:
+  - name: SQRT(S)
+    value: 13000 GeV
+  - name: Dataset
+    value: Run2016G+H JetHT NanoAODv9 (CMS Open Data)
+  - name: Selection
+    value: 2 leading AK4 CHS jets, tight ID, |eta|<2.4, |deta|<1.1
+  - name: Category
+    value: 2b
+  values:
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 117.38
+    value: 13777.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 105.74
+    value: 11180.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 94.742
+    value: 8976.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 85.405
+    value: 7294.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 77.711
+    value: 6039.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 69.685
+    value: 4856.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 62.506
+    value: 3907.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 56.551
+    value: 3198.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 51.303
+    value: 2632.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 46.83
+    value: 2193.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 41.94
+    value: 1759.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 37.577
+    value: 1412.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 33.211
+    value: 1103.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 29.833
+    value: 890.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 27.35
+    value: 748.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 23.896
+    value: 571.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 21.517
+    value: 463.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 19.925
+    value: 397.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 17.176
+    value: 295.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 15.716
+    value: 247.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 12.884
+    value: 166.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 12.042
+    value: 145.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 10.909
+    value: 119.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 9.5917
+    value: 92.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 8.0
+    value: 64.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 5.099
+    value: 26.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 6.245
+    value: 39.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 5.099
+    value: 26.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 5.099
+    value: 26.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 3.3166
+    value: 11.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 3.3166
+    value: 11.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 2.6458
+    value: 7.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 2.8284
+    value: 8.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 2.2361
+    value: 5.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 1.7321
+    value: 3.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 1.0
+    value: 1.0
+  - value: 0.0
+  - errors:
+    - label: stat (sqrt N)
+      symerror: 1.4142
+    value: 2.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+- header:
+    name: Fit expectation
+    units: Events
+  qualifiers:
+  - name: Fit parameters
+    value: '4'
+  values:
+  - value: 13699.0
+  - value: 11224.0
+  - value: 9048.7
+  - value: 7311.1
+  - value: 5994.2
+  - value: 4842.2
+  - value: 3964.5
+  - value: 3200.5
+  - value: 2615.7
+  - value: 2131.8
+  - value: 1732.5
+  - value: 1404.0
+  - value: 1134.5
+  - value: 913.91
+  - value: 740.47
+  - value: 585.9
+  - value: 475.17
+  - value: 372.56
+  - value: 298.75
+  - value: 233.69
+  - value: 183.35
+  - value: 142.81
+  - value: 110.4
+  - value: 84.679
+  - value: 64.834
+  - value: 49.09
+  - value: 36.534
+  - value: 26.94
+  - value: 19.887
+  - value: 14.38
+  - value: 10.259
+  - value: 7.2503
+  - value: 5.012
+  - value: 3.4256
+  - value: 2.2963
+  - value: 1.508
+  - value: 0.97264
+  - value: 0.60894
+  - value: 0.37181
+  - value: 0.22247
+  - value: 0.12813
+  - value: 0.07127
+  - value: 0.03827
+  - value: 0.01965
+  - value: 0.00961
+  - value: 0.00446
+  - value: 0.00193
+  - value: 0.00079
+independent_variables:
+- header:
+    name: $m_{jj}$
+    units: GeV
+  values:
+  - high: 1118.0
+    low: 1058.0
+  - high: 1181.0
+    low: 1118.0
+  - high: 1246.0
+    low: 1181.0
+  - high: 1313.0
+    low: 1246.0
+  - high: 1383.0
+    low: 1313.0
+  - high: 1455.0
+    low: 1383.0
+  - high: 1530.0
+    low: 1455.0
+  - high: 1607.0
+    low: 1530.0
+  - high: 1687.0
+    low: 1607.0
+  - high: 1770.0
+    low: 1687.0
+  - high: 1856.0
+    low: 1770.0
+  - high: 1945.0
+    low: 1856.0
+  - high: 2037.0
+    low: 1945.0
+  - high: 2132.0
+    low: 2037.0
+  - high: 2231.0
+    low: 2132.0
+  - high: 2332.0
+    low: 2231.0
+  - high: 2438.0
+    low: 2332.0
+  - high: 2546.0
+    low: 2438.0
+  - high: 2659.0
+    low: 2546.0
+  - high: 2775.0
+    low: 2659.0
+  - high: 2895.0
+    low: 2775.0
+  - high: 3019.0
+    low: 2895.0
+  - high: 3147.0
+    low: 3019.0
+  - high: 3279.0
+    low: 3147.0
+  - high: 3416.0
+    low: 3279.0
+  - high: 3558.0
+    low: 3416.0
+  - high: 3704.0
+    low: 3558.0
+  - high: 3854.0
+    low: 3704.0
+  - high: 4010.0
+    low: 3854.0
+  - high: 4171.0
+    low: 4010.0
+  - high: 4337.0
+    low: 4171.0
+  - high: 4509.0
+    low: 4337.0
+  - high: 4686.0
+    low: 4509.0
+  - high: 4869.0
+    low: 4686.0
+  - high: 5058.0
+    low: 4869.0
+  - high: 5253.0
+    low: 5058.0
+  - high: 5455.0
+    low: 5253.0
+  - high: 5663.0
+    low: 5455.0
+  - high: 5877.0
+    low: 5663.0
+  - high: 6099.0
+    low: 5877.0
+  - high: 6328.0
+    low: 6099.0
+  - high: 6564.0
+    low: 6328.0
+  - high: 6808.0
+    low: 6564.0
+  - high: 7060.0
+    low: 6808.0
+  - high: 7320.0
+    low: 7060.0
+  - high: 7589.0
+    low: 7320.0
+  - high: 7866.0
+    low: 7589.0
+  - high: 8152.0
+    low: 7866.0
