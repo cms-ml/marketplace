@@ -1,0 +1,236 @@
+dependent_variables:
+- header:
+    name: Efficiency
+  qualifiers:
+  - name: SQRT(S)
+    value: 13000 GeV
+  - name: Dataset
+    value: Run2016G+H JetHT NanoAODv9 (CMS Open Data)
+  - name: Selection
+    value: 2 leading AK4 CHS jets, tight ID, |eta|<2.4, |deta|<1.1
+  - name: Reference trigger
+    value: HLT_PFJet260
+  values:
+  - errors:
+    - asymerror:
+        minus: -0.00242
+        plus: 0.00241
+      label: stat (Clopper-Pearson)
+    value: 0.6688
+  - errors:
+    - asymerror:
+        minus: -0.00225
+        plus: 0.00222
+      label: stat (Clopper-Pearson)
+    value: 0.83518
+  - errors:
+    - asymerror:
+        minus: -0.00169
+        plus: 0.00164
+      label: stat (Clopper-Pearson)
+    value: 0.94076
+  - errors:
+    - asymerror:
+        minus: -0.00102
+        plus: 0.00095
+      label: stat (Clopper-Pearson)
+    value: 0.98566
+  - errors:
+    - asymerror:
+        minus: -0.00057
+        plus: 0.00048
+      label: stat (Clopper-Pearson)
+    value: 0.99731
+  - errors:
+    - asymerror:
+        minus: -0.0003
+        plus: 0.00015
+      label: stat (Clopper-Pearson)
+    value: 0.99977
+  - errors:
+    - asymerror:
+        minus: -0.00028
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00038
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00051
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00068
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00088
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00123
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00159
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00213
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00271
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00371
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.0049
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.00633
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.0083
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.01018
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+  - errors:
+    - asymerror:
+        minus: -0.01575
+        plus: 0.0
+      label: stat (Clopper-Pearson)
+    value: 1.0
+- header:
+    name: Events passing reference and signal trigger
+    units: Events
+  values:
+  - value: 25655.0
+  - value: 23385.0
+  - value: 19500.0
+  - value: 15323.0
+  - value: 11488.0
+  - value: 8656.0
+  - value: 6470.0
+  - value: 4838.0
+  - value: 3620.0
+  - value: 2712.0
+  - value: 2092.0
+  - value: 1494.0
+  - value: 1156.0
+  - value: 862.0
+  - value: 678.0
+  - value: 495.0
+  - value: 375.0
+  - value: 290.0
+  - value: 221.0
+  - value: 180.0
+  - value: 116.0
+- header:
+    name: Events passing reference trigger
+    units: Events
+  values:
+  - value: 38360.0
+  - value: 28000.0
+  - value: 20728.0
+  - value: 15546.0
+  - value: 11519.0
+  - value: 8658.0
+  - value: 6470.0
+  - value: 4838.0
+  - value: 3620.0
+  - value: 2712.0
+  - value: 2092.0
+  - value: 1494.0
+  - value: 1156.0
+  - value: 862.0
+  - value: 678.0
+  - value: 495.0
+  - value: 375.0
+  - value: 290.0
+  - value: 221.0
+  - value: 180.0
+  - value: 116.0
+independent_variables:
+- header:
+    name: $m_{jj}$
+    units: GeV
+  values:
+  - high: 890.0
+    low: 838.0
+  - high: 944.0
+    low: 890.0
+  - high: 1000.0
+    low: 944.0
+  - high: 1058.0
+    low: 1000.0
+  - high: 1118.0
+    low: 1058.0
+  - high: 1181.0
+    low: 1118.0
+  - high: 1246.0
+    low: 1181.0
+  - high: 1313.0
+    low: 1246.0
+  - high: 1383.0
+    low: 1313.0
+  - high: 1455.0
+    low: 1383.0
+  - high: 1530.0
+    low: 1455.0
+  - high: 1607.0
+    low: 1530.0
+  - high: 1687.0
+    low: 1607.0
+  - high: 1770.0
+    low: 1687.0
+  - high: 1856.0
+    low: 1770.0
+  - high: 1945.0
+    low: 1856.0
+  - high: 2037.0
+    low: 1945.0
+  - high: 2132.0
+    low: 2037.0
+  - high: 2231.0
+    low: 2132.0
+  - high: 2332.0
+    low: 2231.0
+  - high: 2438.0
+    low: 2332.0

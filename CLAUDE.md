@@ -100,6 +100,35 @@ dataset=..."`, `/cvmfs/cms.cern.ch/releases.map`, the release notes at
 ("Use when…"), `tools`, `model`, optional `color`, and optional `summary`
 (README text). Claude Code subagent format, not the skill spec.
 
+## Contribution standard: skill/agent + validation
+
+Every PR that adds or substantially changes a skill or agent also adds a
+validation under `validation/<name>/`: an analysis, or part of one, that
+uses it on real inputs (Open Data where possible) and is run by an agent.
+`validation/dijet-2016/` is the reference example and `validation/lpc-condor/`
+a smaller one.
+
+```text
+validation/<name>/
+  README.md          # goal, credits/references, differences from the reference analysis
+  PROMPT.md          # the task given to the agent (headless command + Task section)
+  specification.md   # written by the agent with analysis-spec-builder (analyses)
+  <code>             # re-runnable; relative paths, no usernames
+  plots/ summary.json hepdata/   # outputs (small files only; skims stay on EOS)
+  SKILLS_USED.md     # which skill guided each step, what was wrong or missing
+  check_results.py   # stdlib-only physics checks on summary.json; run in CI
+```
+
+- Run the agent on the task **before** the skill exists too, if you can:
+  its `SKILLS_USED.md` notes are the best seed for the new skill. Then rerun
+  the relevant steps following the new skill and record what changed.
+- Commit outputs, not inputs: no ROOT files or skims. State where they are
+  (`/store/user/$USER/...`) and how to rebuild them.
+- `check_results.py` tests physics sense (efficiencies in [0, 1], fit
+  quality, closure), not exact numbers. Exit 0/1/2, `SUMMARY=n/n` on stdout.
+- Fill in `.github/pull_request_template.md`. The contributor-facing
+  walkthrough is [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Commits and PRs
 
 Conventional Commits: `feat(cms): add cmssw skill`, `fix(cms): ...`,
