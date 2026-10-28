@@ -35,12 +35,12 @@ data.
 
 ## Key Concepts
 
-| Type name    | Use for                                   | Field names it understands                                 |
-| ------------ | ----------------------------------------- | ---------------------------------------------------------- |
-| `Momentum4D` | Particles (mass, boosts, sums)            | `pt, eta, phi, mass` / `px, py, pz, E` (also `energy`, `M`) |
-| `Momentum3D` | Directions (deltaR) without mass          | `pt, eta, phi` / `px, py, pz`                              |
-| `Momentum2D` | MET, transverse quantities                | `pt, phi` / `px, py`                                       |
-| `Vector4D`   | Generic (non-momentum) 4-vectors          | `x, y, z, t` (**not** `px…E` and **no** `.pt`)             |
+| Type name    | Use for                          | Field names it understands                                  |
+| ------------ | -------------------------------- | ----------------------------------------------------------- |
+| `Momentum4D` | Particles (mass, boosts, sums)   | `pt, eta, phi, mass` / `px, py, pz, E` (also `energy`, `M`) |
+| `Momentum3D` | Directions (deltaR) without mass | `pt, eta, phi` / `px, py, pz`                               |
+| `Momentum2D` | MET, transverse quantities       | `pt, phi` / `px, py`                                        |
+| `Vector4D`   | Generic (non-momentum) 4-vectors | `x, y, z, t` (**not** `px…E` and **no** `.pt`)              |
 
 Extra fields (e.g. `charge`, `btag`) ride along on the record and survive
 selections. They are dropped by arithmetic (`a + b`).
@@ -106,9 +106,9 @@ More recipes and the NumPy/object backends:
 ## Gotchas
 
 - **`Vector4D` with `px/py/pz/E` has no `.pt`**: it raises `AttributeError: no
-  field named 'pt'`. Use `Momentum4D` for momentum-named fields.
+field named 'pt'`. Use `Momentum4D` for momentum-named fields.
 - **Field names must match exactly.** `Pt` or `Muon_pt` give `ValueError: array
-  does not have azimuthal coordinates (x/px, y/py or rho/pt, phi)`. Rename in
+does not have azimuthal coordinates (x/px, y/py or rho/pt, phi)`. Rename in
   `ak.zip` (NanoAOD branches → `pt/eta/phi/mass`).
 - **Arithmetic drops extra fields and changes storage.** `(a + b).fields` is
   `['rho', 'phi', 'eta', 'tau']` and `ak.sum(jets, axis=1)` gives

@@ -1,0 +1,19 @@
+{
+  "name": "af-fnal-lpc",
+  "description": "Skills for the CMS LPC analysis facility at Fermilab (cmslpc): HTCondor batch jobs on the LPC pool with inputs and outputs over XRootD/EOS.",
+  "version": "0.1.0",
+  "homepage": "https://uscms.org/uscms_at_work/computing/setup/batch_systems.shtml",
+  "repository": "https://github.com/cms-ml/marketplace",
+  "license": "MIT",
+  "keywords": [
+    "CMS",
+    "LPC",
+    "Fermilab",
+    "FNAL",
+    "cmslpc",
+    "HTCondor",
+    "batch jobs",
+    "EOS",
+    "XRootD"
+  ]
+}

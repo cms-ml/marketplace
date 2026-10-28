@@ -14,10 +14,10 @@ Tested on cmslpc (EL9), 2026-10-09.
 
 ## Environments
 
-| Environment                      | awkward | uproot | vector | XRootD in uproot                          | Parquet               |
-| -------------------------------- | ------- | ------ | ------ | ----------------------------------------- | --------------------- |
-| `CMSSW_15_0_21` after `cmsenv`   | 2.6.3   | 5.3.3  | 1.4.0  | `handler=uproot.source.xrootd.XRootDSource` | not available (no pyarrow) |
-| pip venv (Python 3.9, 2026-10)   | 2.8.12  | 5.6.9  | 1.7.0  | `pip install fsspec-xrootd xrootd`        | `pip install pyarrow pandas` |
+| Environment                    | awkward | uproot | vector | XRootD in uproot                            | Parquet                      |
+| ------------------------------ | ------- | ------ | ------ | ------------------------------------------- | ---------------------------- |
+| `CMSSW_15_0_21` after `cmsenv` | 2.6.3   | 5.3.3  | 1.4.0  | `handler=uproot.source.xrootd.XRootDSource` | not available (no pyarrow)   |
+| pip venv (Python 3.9, 2026-10) | 2.8.12  | 5.6.9  | 1.7.0  | `pip install fsspec-xrootd xrootd`          | `pip install pyarrow pandas` |
 
 - In CMSSW, run `export PYTHONNOUSERSITE=1` so packages you installed with
   `pip install --user` in `~/.local` don't shadow the release's versions.

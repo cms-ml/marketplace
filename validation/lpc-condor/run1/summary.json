@@ -1,0 +1,118 @@
+{
+  "username": "<user>",
+  "n_jobs": 4,
+  "files_per_job": 2,
+  "n_files": 8,
+  "input_dir": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1",
+  "output_dir": "root://cmseos.fnal.gov//store/user/<user>/cms-marketplace-tests/lpc-condor/agent-test/out/",
+  "clusters": [
+    {
+      "role": "single-job test",
+      "cluster": 30979599,
+      "schedd": "lpcschedd5.fnal.gov",
+      "n_jobs": 1,
+      "wall_time_s": 112,
+      "output_dir": ".../agent-test/test/"
+    },
+    {
+      "role": "full submission",
+      "cluster": 4739979,
+      "schedd": "lpcschedd4.fnal.gov",
+      "n_jobs": 4
+    }
+  ],
+  "per_job": [
+    {
+      "jobid": 0,
+      "wall_time_s": 126,
+      "n_events": 40000,
+      "n_HLT_PFHT900": 5483,
+      "n_2jets_pt500": 734,
+      "files": [
+        {
+          "url": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/130000/CD205112-3009-AB40-ACE1-9C3C31285B4A.root",
+          "n_events": 20000,
+          "n_HLT_PFHT900": 2297,
+          "n_2jets_pt500": 325
+        },
+        {
+          "url": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/260000/D8330AFC-F254-DE44-BB3D-50ADDCB9533C.root",
+          "n_events": 20000,
+          "n_HLT_PFHT900": 3186,
+          "n_2jets_pt500": 409
+        }
+      ]
+    },
+    {
+      "jobid": 1,
+      "wall_time_s": 36,
+      "n_events": 40000,
+      "n_HLT_PFHT900": 7049,
+      "n_2jets_pt500": 1074,
+      "files": [
+        {
+          "url": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/260000/E3ABC65B-DD99-A24E-968B-66BC8015631B.root",
+          "n_events": 20000,
+          "n_HLT_PFHT900": 4034,
+          "n_2jets_pt500": 647
+        },
+        {
+          "url": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/260000/E44CD0EB-90A3-F047-B2B6-5F5C699C69FB.root",
+          "n_events": 20000,
+          "n_HLT_PFHT900": 3015,
+          "n_2jets_pt500": 427
+        }
+      ]
+    },
+    {
+      "jobid": 2,
+      "wall_time_s": 33,
+      "n_events": 40000,
+      "n_HLT_PFHT900": 5355,
+      "n_2jets_pt500": 790,
+      "files": [
+        {
+          "url": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/260000/F23925EA-B390-5D47-9544-2C17E1762642.root",
+          "n_events": 20000,
+          "n_HLT_PFHT900": 3107,
+          "n_2jets_pt500": 443
+        },
+        {
+          "url": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/260000/F6F79473-4432-0646-83B9-AB8D20272C5A.root",
+          "n_events": 20000,
+          "n_HLT_PFHT900": 2248,
+          "n_2jets_pt500": 347
+        }
+      ]
+    },
+    {
+      "jobid": 3,
+      "wall_time_s": 44,
+      "n_events": 40000,
+      "n_HLT_PFHT900": 4606,
+      "n_2jets_pt500": 641,
+      "files": [
+        {
+          "url": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/260000/FEA4C3C7-2082-3543-9BCC-EC0C1F802CFA.root",
+          "n_events": 20000,
+          "n_HLT_PFHT900": 1601,
+          "n_2jets_pt500": 226
+        },
+        {
+          "url": "root://eospublic.cern.ch//eos/opendata/cms/Run2016G/JetHT/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/260000/FF42B6D9-AC23-6448-8268-F5E4B8950B67.root",
+          "n_events": 20000,
+          "n_HLT_PFHT900": 3005,
+          "n_2jets_pt500": 415
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "n_events": 160000,
+    "n_HLT_PFHT900": 22493,
+    "n_2jets_pt500": 3239
+  },
+  "n_resubmissions": 0,
+  "all_exit_codes_zero": true,
+  "wall_time_note": "TimeExecute from condor job log (seconds); includes CVMFS/LCG setup, XRootD reads and stage-out"
+}

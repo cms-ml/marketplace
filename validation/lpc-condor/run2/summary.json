@@ -1,0 +1,75 @@
+{
+  "username": "<user>",
+  "n_jobs": 4,
+  "n_resubmissions": 0,
+  "test_job": {
+    "cluster": 4740442,
+    "schedd": "lpcschedd4.fnal.gov",
+    "wall_seconds": 78,
+    "output_area": "root://cmseos.fnal.gov//store/user/<user>/cms-marketplace-tests/lpc-condor/agent-test2/test/"
+  },
+  "main_submission": {
+    "cluster": 4740495,
+    "schedd": "lpcschedd4.fnal.gov",
+    "output_area": "root://cmseos.fnal.gov//store/user/<user>/cms-marketplace-tests/lpc-condor/agent-test2/out/"
+  },
+  "per_job": [
+    {
+      "jobid": 0,
+      "n_events": 40000,
+      "n_HLT_PFHT900": 5297,
+      "n_2jets_pt500": 753,
+      "wall_seconds_condor_exec_to_terminate": 36,
+      "payload_seconds_on_worker": 14.5,
+      "return_value": 0,
+      "files": [
+        "CD205112-3009-AB40-ACE1-9C3C31285B4A.root",
+        "0673B754-2FF9-A247-B862-C4F2F1EF6673.root"
+      ]
+    },
+    {
+      "jobid": 1,
+      "n_events": 40000,
+      "n_HLT_PFHT900": 5232,
+      "n_2jets_pt500": 761,
+      "wall_seconds_condor_exec_to_terminate": 35,
+      "payload_seconds_on_worker": 14.7,
+      "return_value": 0,
+      "files": [
+        "07E886E0-9B35-5444-9E9B-9721A82B1C82.root",
+        "0816386A-4B3B-3D40-926C-352F8F6FF782.root"
+      ]
+    },
+    {
+      "jobid": 2,
+      "n_events": 40000,
+      "n_HLT_PFHT900": 6000,
+      "n_2jets_pt500": 807,
+      "wall_seconds_condor_exec_to_terminate": 25,
+      "payload_seconds_on_worker": 16.0,
+      "return_value": 0,
+      "files": [
+        "0FAAB36E-8E5F-504B-9CB8-6453C6EFC9FD.root",
+        "1258413A-8BA3-2D48-9C66-58A8D165D600.root"
+      ]
+    },
+    {
+      "jobid": 3,
+      "n_events": 40000,
+      "n_HLT_PFHT900": 4854,
+      "n_2jets_pt500": 666,
+      "wall_seconds_condor_exec_to_terminate": 37,
+      "payload_seconds_on_worker": 12.2,
+      "return_value": 0,
+      "files": [
+        "1B2EC787-399E-B847-9F8F-A83EE589A022.root",
+        "1CA06DD5-7529-ED4D-AD22-BF21383E7EA6.root"
+      ]
+    }
+  ],
+  "totals": {
+    "n_events": 160000,
+    "n_HLT_PFHT900": 21383,
+    "n_2jets_pt500": 2987
+  }
+}

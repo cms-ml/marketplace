@@ -14,6 +14,7 @@ Type these in the Claude prompt. They are slash commands, not shell commands:
 /plugin marketplace add cms-ml/marketplace
 /plugin install cms@cms-marketplace
 /plugin install hep-python-tools@cms-marketplace
+/plugin install af-fnal-lpc@cms-marketplace
 ```
 
 ### From a terminal
@@ -22,7 +23,8 @@ Type these in the Claude prompt. They are slash commands, not shell commands:
 claude plugin marketplace add cms-ml/marketplace          # or a local clone: /path/to/marketplace
 claude plugin install cms@cms-marketplace
 claude plugin install hep-python-tools@cms-marketplace
-claude plugin list                                        # both should show "enabled"
+claude plugin install af-fnal-lpc@cms-marketplace         # LPC users: condor batch jobs
+claude plugin list                                        # each should show "enabled"
 ```
 
 **VS Code users on cmslpc:** the extension ships its own `claude` binary,
@@ -32,7 +34,20 @@ which isn't on `PATH`:
 alias claude="$(ls -d ~/.vscode-server/extensions/anthropic.claude-code-*/resources/native-binary/claude | tail -1)"
 ```
 
-After installing, **start a new conversation**. Skills are loaded when a
+### Updating, and getting new plugins
+
+When new skills or plugins are merged, refresh the marketplace and install
+any new plugins:
+
+```bash
+claude plugin marketplace update cms-marketplace
+claude plugin install <new-plugin>@cms-marketplace
+```
+
+A marketplace added from a **local clone** is read from that folder, so its
+skills follow the branch you have checked out there.
+
+After installing or updating, **start a new conversation**. Skills are loaded when a
 conversation starts. In VS Code, run "Developer: Reload Window" if a new chat
 still doesn't see them. `/skills` lists what is loaded.
 
@@ -87,6 +102,18 @@ See [examples/](examples/) for a complete prompt.
 
 ## Plugins
 
+### `af-fnal-lpc` (v0.1.0)
+
+Skills for the CMS LPC analysis facility at Fermilab (cmslpc): HTCondor batch jobs on the LPC pool with inputs and outputs over XRootD/EOS.
+
+**Skills:**
+
+| Skill        | Use when                                                                                        |
+| ------------ | ----------------------------------------------------------------------------------------------- |
+| `lpc-condor` | HTCondor batch jobs on cmslpc with XRootD in, EOS out, check and resubmit (tested on real jobs) |
+
+---
+
 ### `cms` (v0.1.0)
 
 Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), plus analysis specifications.
@@ -97,6 +124,7 @@ Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM m
 | ----------------------- | --------------------------------------------------------------------------------------------------- |
 | `analysis-spec-builder` | Turn an analysis request into a structured CMS specification.md (datasets, cuts, histograms, tools) |
 | `awkward-array`         | Jagged arrays with Awkward 2 on CMS NanoAOD (records, selection, combinatorics, indices, I/O)       |
+| `cmssw`                 | Release areas, architectures and containers, EDM modules, cmsRun configs, EDM file tools            |
 | `hist`                  | Histograms with hist + mplhep for CMS (weights, normalisation, UHI, CMS-style plots)                |
 | `vector-awkward`        | Four-vector kinematics on NanoAOD with vector + Awkward (masses, deltaR, mT, boosts)                |
 

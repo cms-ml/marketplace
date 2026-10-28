@@ -70,13 +70,13 @@ dataset, and check the
 [release notes](https://cmssdt.cern.ch/SDT/ReleaseNotes/) for the latest
 release in each cycle.
 
-| Data                                          | Release (from DAS)    | Arch(es) on CVMFS                            | On an EL9 host |
-| --------------------------------------------- | --------------------- | -------------------------------------------- | -------------- |
-| CMS Open Data 2011/2012 (Run 1)               | `CMSSW_5_3_32`        | `slc6_amd64_gcc472`                          | `cmssw-el6`    |
-| CMS Open Data 2015 MiniAOD                    | `CMSSW_7_6_7`         | `slc6_amd64_gcc493`, `slc7_amd64_gcc493`     | `cmssw-el7`    |
-| Run 2 Ultra-Legacy (`RunIISummer20UL*`)       | `CMSSW_10_6_X`        | `slc7_amd64_gcc700`                          | `cmssw-el7`    |
-| Run 3 2022 (`Run3Summer22MiniAODv4`)          | `CMSSW_13_0_13`       | `el8_amd64_gcc11`, `el9_amd64_gcc11`, …      | native         |
-| Run 3 2024 prompt (`Run2024A-PromptReco`)     | `CMSSW_14_0_4`        | `el8_amd64_gcc12`, `el9_amd64_gcc12`, …      | native         |
+| Data                                      | Release (from DAS) | Arch(es) on CVMFS                        | On an EL9 host |
+| ----------------------------------------- | ------------------ | ---------------------------------------- | -------------- |
+| CMS Open Data 2011/2012 (Run 1)           | `CMSSW_5_3_32`     | `slc6_amd64_gcc472`                      | `cmssw-el6`    |
+| CMS Open Data 2015 MiniAOD                | `CMSSW_7_6_7`      | `slc6_amd64_gcc493`, `slc7_amd64_gcc493` | `cmssw-el7`    |
+| Run 2 Ultra-Legacy (`RunIISummer20UL*`)   | `CMSSW_10_6_X`     | `slc7_amd64_gcc700`                      | `cmssw-el7`    |
+| Run 3 2022 (`Run3Summer22MiniAODv4`)      | `CMSSW_13_0_13`    | `el8_amd64_gcc11`, `el9_amd64_gcc11`, …  | native         |
+| Run 3 2024 prompt (`Run2024A-PromptReco`) | `CMSSW_14_0_4`     | `el8_amd64_gcc12`, `el9_amd64_gcc12`, …  | native         |
 
 ## Find the architectures of a release
 
@@ -133,10 +133,10 @@ Notes:
 
 ## Release naming
 
-| Form                         | Meaning                                                           |
-| ---------------------------- | ----------------------------------------------------------------- |
-| `CMSSW_15_0_21`              | Production release: cycle `15_0`, patch-level 21                  |
-| `CMSSW_15_0_X`               | The GitHub branch for that cycle; browse code here                |
-| `CMSSW_14_0_15_patch1`       | Patch release on top of `CMSSW_14_0_15`                           |
-| `CMSSW_15_1_0_pre3`          | Pre-release (development; not for analysis)                       |
-| `CMSSW_15_0_X_2026-10-05-2300` | Integration build (IB) on `/cvmfs/cms-ib.cern.ch`; short-lived  |
+| Form                           | Meaning                                                        |
+| ------------------------------ | -------------------------------------------------------------- |
+| `CMSSW_15_0_21`                | Production release: cycle `15_0`, patch-level 21               |
+| `CMSSW_15_0_X`                 | The GitHub branch for that cycle; browse code here             |
+| `CMSSW_14_0_15_patch1`         | Patch release on top of `CMSSW_14_0_15`                        |
+| `CMSSW_15_1_0_pre3`            | Pre-release (development; not for analysis)                    |
+| `CMSSW_15_0_X_2026-10-05-2300` | Integration build (IB) on `/cvmfs/cms-ib.cern.ch`; short-lived |

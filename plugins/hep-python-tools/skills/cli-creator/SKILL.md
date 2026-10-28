@@ -27,13 +27,13 @@ project's layout and conventions. Bootstrap a project only when none exists.
 
 ## Key Concepts
 
-| Piece                           | Role                                                            |
-| ------------------------------- | --------------------------------------------------------------- |
-| `app = typer.Typer()`           | Top-level command                                              |
-| `app.add_typer(sub, name="dataset")` | Command group: `mytool dataset …`                           |
-| `def main(): app()`             | Entry point referenced by the console script                   |
-| `[project.scripts]`             | `mytool = "my_pkg.cli:main"` in `pyproject.toml` (PEP 621)     |
-| `typer.testing.CliRunner`       | Run commands in tests without a subprocess                     |
+| Piece                                | Role                                                       |
+| ------------------------------------ | ---------------------------------------------------------- |
+| `app = typer.Typer()`                | Top-level command                                          |
+| `app.add_typer(sub, name="dataset")` | Command group: `mytool dataset …`                          |
+| `def main(): app()`                  | Entry point referenced by the console script               |
+| `[project.scripts]`                  | `mytool = "my_pkg.cli:main"` in `pyproject.toml` (PEP 621) |
+| `typer.testing.CliRunner`            | Run commands in tests without a subprocess                 |
 
 ## Canonical Patterns
 

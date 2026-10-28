@@ -31,14 +31,14 @@ Awkward). Summing the `.pt` field gives the scalar HT.
 
 ## Rapidity, pseudorapidity, angles
 
-| Quantity                  | Property / method        | Note                                         |
-| ------------------------- | ------------------------ | -------------------------------------------- |
-| pseudorapidity η          | `.eta`                   | NanoAOD stores η                              |
-| rapidity y                | `.rapidity`              | needs mass; differs from η for massive objects |
-| Δφ in (−π, π]             | `a.deltaphi(b)`          | signed; take `abs()` for cuts                 |
-| ΔR = √(Δη² + Δφ²)         | `a.deltaR(b)`            | uses η                                        |
-| ΔR with rapidity          | `a.deltaRapidityPhi(b)`  | jet-clustering style ΔR                       |
-| polar angle θ             | `.theta`                 |                                              |
+| Quantity          | Property / method       | Note                                           |
+| ----------------- | ----------------------- | ---------------------------------------------- |
+| pseudorapidity η  | `.eta`                  | NanoAOD stores η                               |
+| rapidity y        | `.rapidity`             | needs mass; differs from η for massive objects |
+| Δφ in (−π, π]     | `a.deltaphi(b)`         | signed; take `abs()` for cuts                  |
+| ΔR = √(Δη² + Δφ²) | `a.deltaR(b)`           | uses η                                         |
+| ΔR with rapidity  | `a.deltaRapidityPhi(b)` | jet-clustering style ΔR                        |
+| polar angle θ     | `.theta`                |                                                |
 
 ## Boosts
 

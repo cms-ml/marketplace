@@ -15,10 +15,10 @@ differently between CMSSW and a pip environment. Tested with mplhep 0.3.47
 
 ## Versions
 
-| Environment        | hist  | boost-histogram | mplhep | matplotlib | `histtype` values                              |
-| ------------------ | ----- | --------------- | ------ | ---------- | ---------------------------------------------- |
-| CMSSW_15_0_21      | 2.7.2 | 1.4.1           | 0.3.47 | 3.8.4      | `fill, step, errorbar, band`                   |
-| pip (2026-10)      | 2.9.2 | 1.6.1           | 1.1.3  | 3.9.4      | `fill, step, errorbar, band, bar, barstep`     |
+| Environment   | hist  | boost-histogram | mplhep | matplotlib | `histtype` values                          |
+| ------------- | ----- | --------------- | ------ | ---------- | ------------------------------------------ |
+| CMSSW_15_0_21 | 2.7.2 | 1.4.1           | 0.3.47 | 3.8.4      | `fill, step, errorbar, band`               |
+| pip (2026-10) | 2.9.2 | 1.6.1           | 1.1.3  | 3.9.4      | `fill, step, errorbar, band, bar, barstep` |
 
 Write code that uses only the common set to run in both.
 
