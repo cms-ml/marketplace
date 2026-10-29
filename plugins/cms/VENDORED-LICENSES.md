@@ -102,3 +102,70 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
+
+## combine-assistant
+
+The following skill was adapted from
+[combine-assistant](https://github.com/maxgalli/combine-assistant), the CMS
+Combine AI assistant (release `v0.5.5`, commit `5844cae`, 2026-10-14):
+
+- `skills/combine/`, from `config/skills/combine/SKILL.md` (last changed
+  upstream in `a74210b`) and the "How to behave" rules of the assistant's
+  persona, `config/AGENTS.md` (last changed upstream in `bc431bd`).
+
+**Original author:** Massimiliano Galli
+
+**What was kept:** the skill name, the five retrieval sources and the rules
+for picking one, the search-score and `fetch_doc` mode guidance, the citation
+and anti-hallucination rules, the execution routing (`command -v combine`
+first; the shell when Combine is on `PATH`, `combine-run-remote` otherwise),
+the `combine-run-remote` procedure and result fields, the reproduce → diagnose
+→ fix loop, and both worked examples.
+
+**What changed:**
+
+- Restructured to this marketplace's layout: a shorter `SKILL.md`, with the
+  full procedures in `references/retrieval.md` and `references/execution.md`.
+- Description rewritten as triggering situations only.
+- Tool names given in the Claude Code plugin form
+  (`mcp__plugin_cms_combine__search_docs`, …); the opencode column dropped.
+- Removed the note that `combine`, `text2workspace.py` and `combineCards.py`
+  run without a prompt, which described the assistant's opencode permission
+  configuration. The rule not to submit batch jobs is kept.
+- Removed the hard-coded `CMSSW_14_1_0_pre4` path and the `v11.1.0` pin of the
+  `combine-code` source.
+- Added `## Gotchas` (from real failures: no connection off the CERN network,
+  `run_combine` used while Combine is on `PATH`, a misspelled `fetch_doc` mode
+  returning the whole page, and others), `## Docs`, and the `base64 -i`
+  command for reading ROOT files (tested on macOS and Linux).
+- Added the four "How to behave" rules from `config/AGENTS.md`.
+
+**Keeping it up to date:** the skill is maintained upstream. To bring in later
+changes, follow "Skills adapted from combine-assistant" in the repository
+`CLAUDE.md`, and update the release and commits above.
+
+**License:** MIT License
+
+```text
+MIT License
+
+Copyright (c) 2026 Massimiliano Galli
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```

@@ -48,8 +48,8 @@
     },
     {
       "name": "cms",
-      "description": "Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), NanoAOD skimming with luminosity and normalisation bookkeeping, plus analysis specifications.",
-      "version": "0.5.0",
+      "description": "Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), NanoAOD skimming with luminosity and normalisation bookkeeping, analysis specifications, and CMS Combine: answering Combine questions from its docs, paper, code and forum, and running Combine commands (remote servers need the CERN network).",
+      "version": "0.6.0",
       "source": "./plugins/cms",
       "keywords": [
         "CMS",
@@ -67,7 +67,13 @@
         "hist",
         "mplhep",
         "skimming",
-        "golden JSON"
+        "golden JSON",
+        "Combine",
+        "HiggsAnalysis-CombinedLimit",
+        "statistics",
+        "limits",
+        "fits",
+        "MCP"
       ]
     },
     {
