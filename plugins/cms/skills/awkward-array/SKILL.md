@@ -160,6 +160,10 @@ environments.
   them is visibly off, so cast with `ak.values_astype(w, np.float64)` first.
 - **`root://` needs an XRootD backend.** Plain pip uproot fails with "Install
   fsspec-xrootd". In CMSSW pass `handler=uproot.source.xrootd.XRootDSource`.
+- **`step_size` over `root://`: use an event count.** With fsspec-xrootd,
+  `iterate(..., step_size="100 MB")` raises
+  `TypeError: integer argument expected for offset`. `step_size=200_000` works.
+  With `handler=XRootDSource`, call `f.close()` or the script can hang at exit.
 - **These functions don't exist:** `ak.abs` (use `abs()` / `np.abs`),
   `ak.take`, `ak.expand_dims`, `ak.stack` (`np.stack` works only on
   rectangular data), `ak.fill_like` (use `ak.full_like` / `ak.zeros_like`).

@@ -61,9 +61,22 @@ for chunk in events.iterate(["Muon_pt", "Muon_eta"], step_size=200_000):   # 200
     ...
 ```
 
-`step_size="100 MB"` also works, but it counts memory of the _selected_
-branches only. Two muon branches of the full 1.9M-event test file fit in a
-single 100 MB chunk.
+Give `step_size` as a number of events. A memory size such as
+`step_size="100 MB"` fails over `root://` with the pip backend
+(fsspec-xrootd 0.5.5, xrootd 6.2.1):
+`TypeError: integer argument expected for offset`. uproot passes NumPy integer
+byte offsets that the xrootd bindings reject. The same call works with
+`handler=uproot.source.xrootd.XRootDSource` and on local files. A memory size
+counts only the _selected_ branches, so two muon branches of the full
+1.9M-event test file fit in one 100 MB chunk.
+
+With `handler=uproot.source.xrootd.XRootDSource`, close the file yourself
+(`f.close()`, or `with uproot.open(...) as f:`). Otherwise the script can hang
+at exit: uproot's cleanup waits for an XRootD thread that never finishes.
+
+The `step_size` and close behaviour were tested 2026-10-29 on macOS with
+Python 3.13.7, uproot 5.7.7, awkward 2.14.0, fsspec-xrootd 0.5.5 and
+xrootd 6.2.1, reading Run2016H DoubleMuon NanoAOD from `eospublic`.
 
 - `how="zip"` groups branches sharing a prefix into one record collection
   (`Muon` with fields `pt`, `eta`, …). The counter branch `nMuon` equals
