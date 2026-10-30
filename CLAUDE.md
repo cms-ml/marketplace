@@ -94,6 +94,26 @@ dataset=..."`, `/cvmfs/cms.cern.ch/releases.map`, the release notes at
   claims you corrected), and the license text verbatim. Also add a row to
   `CREDITS.md` and link the upstream skill in the skill's `## Docs`.
 
+## Skills adapted from combine-assistant
+
+`plugins/cms/skills/combine/` is adapted from
+[combine-assistant](https://github.com/maxgalli/combine-assistant) and
+maintained there. The upstream release and commits it was made from are
+recorded in `plugins/cms/VENDORED-LICENSES.md` ("combine-assistant"). To bring
+in upstream changes:
+
+1. In a clone of combine-assistant, list what changed since the recorded
+   commit: `git diff <recorded commit>..<latest tag> -- config/skills/combine/ config/AGENTS.md`.
+2. Port each change into `SKILL.md` or `references/`, following this file's
+   skill rules. Don't copy upstream text wholesale: the adapted skill uses
+   the plugin tool names (`mcp__plugin_cms_combine__…`), has no opencode
+   specifics, and keeps Gotchas and Docs.
+3. If the MCP server URLs or names changed upstream (`config/opencode.json`),
+   update `plugins/cms/.mcp.json` and the tool-name table.
+4. Update the release, commits and change list in
+   `plugins/cms/VENDORED-LICENSES.md`.
+5. Run `check`, then `bump cms <next version>` so users receive the update.
+
 ## Subagents
 
 `plugins/<plugin>/agents/<name>.md` with frontmatter `name`, `description`
