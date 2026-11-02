@@ -1,0 +1,7 @@
+{
+ "id": "D1c_context",
+ "student_result": "G+H fraction of the full 2016 luminosity",
+ "ratio": 0.45158931099173555,
+ "verdict": "NOT COMPARABLE",
+ "reason": "EXO-20-008 2016 spectra use 36.3 fb^-1 (all of 2016, eras B-H); the student uses G+H only (0.452 of it). Only cross sections (N/L) can be compared, not counts."
+}

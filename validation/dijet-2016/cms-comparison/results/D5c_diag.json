@@ -1,0 +1,9 @@
+{
+ "id": "D5c_diag",
+ "student_result": "events per recorded fb^-1 vs run (diagnostic)",
+ "rate_G": 38616.51304478971,
+ "rate_H": 37782.304544546074,
+ "rms_over_mean": 0.024171331382805358,
+ "verdict": "DIAGNOSTIC",
+ "reason": "uniform rate per fb^-1 across runs -> flat factor is not a lost-run or prescale effect"
+}

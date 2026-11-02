@@ -1,0 +1,139 @@
+{
+ "id": "M1",
+ "student_result": "peak positions and core widths of J/psi, psi(2S), Upsilon(1S,2S,3S), Z from fits to histograms.pkl (unchanged)",
+ "counterpart": {
+  "report": "PDG",
+  "source": "PDG API (pdgapi.lbl.gov) edition 2026",
+  "hepdata_table": null
+ },
+ "level": "exact (constants): fitted detector-level peak positions vs PDG masses; no momentum corrections applied",
+ "statistic": 2.1519155675866486,
+ "statistic_name": "largest |mass offset| in per mille",
+ "ndf": null,
+ "p_value": null,
+ "ratio": null,
+ "rows": [
+  {
+   "state": "jpsi",
+   "pdg_mass_GeV": 3.096900354542921,
+   "pdg_err_GeV": 6.185881129937449e-06,
+   "fit_mass_GeV": 3.093827239262037,
+   "fit_mass_err": 0.0001395617640052027,
+   "offset_permille": -0.9923197161885167,
+   "offset_stat_permille": 0.04506498370232547,
+   "offset_fitsyst_permille": 1.0990742355578615,
+   "sigma_GeV": 0.03835020053407914,
+   "sigma_core_GeV": 0.027661279955253356,
+   "sigma_err": 0.0004944096376100155,
+   "sigma_syst": 0.005673285372966588,
+   "sigma_over_m_percent": 1.239571494083384,
+   "sigma_over_m_syst_percent": 0.1833743429810846,
+   "nsigma_offset": 0.9021106863193216
+  },
+  {
+   "state": "psi2s",
+   "pdg_mass_GeV": 3.686097362258823,
+   "pdg_err_GeV": 1.055310115798376e-05,
+   "fit_mass_GeV": 3.6836535642830657,
+   "fit_mass_err": 0.0007378428348123744,
+   "offset_permille": -0.6629770555652836,
+   "offset_stat_permille": 0.20016911174593277,
+   "offset_fitsyst_permille": 0.6465314304538953,
+   "sigma_GeV": 0.040014564932286924,
+   "sigma_core_GeV": 0.028861754761779365,
+   "sigma_err": 0.0011076555595782502,
+   "sigma_syst": 0.010399901825517276,
+   "sigma_over_m_percent": 1.0862738374821843,
+   "sigma_over_m_syst_percent": 0.28232573025746427,
+   "nsigma_offset": 0.9795628504544073
+  },
+  {
+   "state": "ups1s",
+   "pdg_mass_GeV": 9.460399964216766,
+   "pdg_err_GeV": 9.842982316061093e-05,
+   "fit_mass_GeV": 9.446915545514853,
+   "fit_mass_err": 0.00104229802482525,
+   "offset_permille": -1.425353975827215,
+   "offset_stat_permille": 0.11017483708592259,
+   "offset_fitsyst_permille": 0.11010612345823824,
+   "sigma_GeV": 0.12852509750767224,
+   "sigma_core_GeV": 0.07790538644346742,
+   "sigma_err": 0.005835011106609596,
+   "sigma_syst": 0.010571163107209569,
+   "sigma_over_m_percent": 1.3604980047555582,
+   "sigma_over_m_syst_percent": 0.1119006839457613,
+   "nsigma_offset": 9.150835463704968
+  },
+  {
+   "state": "ups2s",
+   "pdg_mass_GeV": 10.023399999999999,
+   "pdg_err_GeV": 0.0005,
+   "fit_mass_GeV": 10.012229581838932,
+   "fit_mass_err": 0.002324835332810693,
+   "offset_permille": -1.1144340404519726,
+   "offset_stat_permille": 0.23194079182819138,
+   "offset_fitsyst_permille": 0.16200930493652746,
+   "sigma_GeV": 0.1325916164494792,
+   "sigma_core_GeV": 0.08037030369141769,
+   "sigma_err": 0.006128769375604757,
+   "sigma_syst": 0.009262971087755853,
+   "sigma_over_m_percent": 1.324296605123654,
+   "sigma_over_m_syst_percent": 0.09251656698481873,
+   "nsigma_offset": 3.9390474257210752
+  },
+  {
+   "state": "ups3s",
+   "pdg_mass_GeV": 10.3551,
+   "pdg_err_GeV": 0.0005,
+   "fit_mass_GeV": 10.348220377599805,
+   "fit_mass_err": 0.0030279842620162256,
+   "offset_permille": -0.6643704454998289,
+   "offset_stat_permille": 0.29241477745422306,
+   "offset_fitsyst_permille": 0.05063882739901691,
+   "sigma_GeV": 0.1302772223436598,
+   "sigma_core_GeV": 0.07896743553031335,
+   "sigma_err": 0.008453967519565696,
+   "sigma_syst": 0.009800283522433784,
+   "sigma_over_m_percent": 1.2589335904138974,
+   "sigma_over_m_syst_percent": 0.09470501366252201,
+   "nsigma_offset": 2.23869329228162
+  },
+  {
+   "state": "z",
+   "pdg_mass_GeV": 91.18787329722134,
+   "pdg_err_GeV": 0.00196689903262915,
+   "fit_mass_GeV": 90.99164469309794,
+   "fit_mass_err": 0.015093476981564796,
+   "offset_permille": -2.1519155675866486,
+   "offset_stat_permille": 0.16552066010321922,
+   "offset_fitsyst_permille": 1.9379679159316232,
+   "sigma_GeV": 1.1703467517177435,
+   "sigma_core_GeV": 0.8336843758908032,
+   "sigma_err": 0.07800319870559809,
+   "sigma_syst": 0.11348275806446995,
+   "sigma_over_m_percent": 1.2862134272494568,
+   "sigma_over_m_syst_percent": 0.1247177787007053,
+   "nsigma_offset": 1.10636991149813
+  }
+ ],
+ "fit_quality": {
+  "jpsi": {
+   "deviance": 375.3218010762894,
+   "ndf": 147
+  },
+  "ups1s": {
+   "deviance": 103.69990555653646,
+   "ndf": 105
+  },
+  "z": {
+   "deviance": 298.4408068005396,
+   "ndf": 51
+  }
+ },
+ "gamma_Z_fixed_GeV": 2.4955,
+ "max_nsigma": 9.150835463704968,
+ "all_offsets_negative": true,
+ "expected": "scale offsets of order 1 per mille (up to a few) and sigma/m of 1-1.5 % without muon momentum corrections; CMS-SMP-17-010: pT resolution 1% barrel, <3% endcaps (20-100 GeV)",
+ "verdict": "INCONSISTENT",
+ "reason": "Formal test against the PDG masses with stat + fit-systematic uncertainties. All offsets are negative (-0.7 to -2.2 per mille), Upsilon(1S), (2S) deviate by >3 sigma formally; the size is that of an uncorrected tracker momentum scale (typical size of muon momentum-scale corrections, ~0.1-0.2 %, not re-measured here), not a physics disagreement."
+}

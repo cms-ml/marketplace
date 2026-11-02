@@ -1,0 +1,26 @@
+{
+ "id": "D5b",
+ "student_result": "inclusive dsigma/dm = N/(L dm), same data and selection as D5 (|deta|<1.1), L = 16.39 fb^-1",
+ "counterpart": {
+  "report": "CMS-EXO-16-056",
+  "inspire": 1676214,
+  "hepdata_record": "ins1676214",
+  "hepdata_table": "Differential dijet spectrum (High-mass analysis)",
+  "paper": "JHEP 08 (2018) 130, arXiv:1806.00843"
+ },
+ "level": "absolute: student detector-level N/(L dm) vs CMS cross section (pb/TeV, L = 35.9 fb^-1 recovered from the table); CMS uses |deta|<1.3 and wide jets",
+ "statistic": null,
+ "statistic_name": "n.a. (ratio far outside any plausible systematic envelope)",
+ "ndf": null,
+ "p_value": null,
+ "ratio": 0.5045499160696955,
+ "ratio_same_deta_cut": 0.6498658514383148,
+ "frac_deta11_over_deta13": 0.7763908735210521,
+ "ratio_slope_deta13_per_TeV": -0.0019351503477892731,
+ "ratio_slope_err": 0.0017687416346895545,
+ "mass_scale_needed_for_absolute": 1.08328064613682,
+ "mass_scale_residual_deviance": 846.1385534815244,
+ "rate_per_run_diagnostic": "see D5c_diag",
+ "verdict": "INCONSISTENT",
+ "reason": "Ratio 0.505 (|deta|<1.1 vs 1.3); 0.650 after correcting the |deta| acceptance with the student's own data; flat in m_jj (slope -0.0019 +- 0.0018 /TeV) and uniform in run, so not a mass-scale/wide-jet effect (a pure mass-scale fit needs s = 1.083 and then leaves deviance 846 for 35 bins). Cause not identified."
+}

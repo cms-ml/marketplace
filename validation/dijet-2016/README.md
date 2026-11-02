@@ -15,9 +15,11 @@ The plot set and analysis strategy follow:
   b-tagged high-mass dijet distributions in proton-proton collisions at
   √s = 13.6 TeV", APS lightning talk, 10 March 2026. This is the Run 3
   analysis carried out with the **CMS B2G** team.
-- **CMS Collaboration**, "Search for heavy resonances decaying to b quarks in
-  proton-proton collisions at √s = 13 TeV", CMS-EXO-20-008 (138 fb⁻¹ Run 2),
-  INSPIRE 1920627, with its HEPData record.
+- **CMS Collaboration**, "Search for narrow resonances in the b-tagged dijet
+  mass spectrum in proton-proton collisions at √s = 13 TeV", CMS-EXO-20-008,
+  Phys. Rev. D 108 (2023) 012009, arXiv:2205.01835 (INSPIRE 2676943; 138 fb⁻¹
+  Run 2). Its HEPData record is attached to the PAS, CMS-PAS-EXO-20-008
+  (INSPIRE 1920627).
 
 This is an **Open Data reproduction for validating tools**. It is not a CMS
 result and makes no physics claim. Plots are labelled "CMS Open Data".
@@ -54,20 +56,47 @@ result and makes no physics claim. Plots are labelled "CMS Open Data".
    unchanged. The skill issues it found are at the end of `SKILLS_USED.md` and
    have been fixed in the skills.
 
+## Comparison with published CMS results
+
+The `cms-results-validator` agent compared this analysis, and the dimuon
+demo of [examples/dimuon](../../examples/dimuon), with published CMS results
+on HEPData: 21 tests, each with its comparability, number and verdict, in
+[cms-comparison/COMPARISON.md](cms-comparison/COMPARISON.md). The task is
+[CMS_COMPARISON_PROMPT.md](CMS_COMPARISON_PROMPT.md). Highlights:
+
+| Test                                   | CMS counterpart              | Result                                          | Verdict      |
+| -------------------------------------- | ---------------------------- | ----------------------------------------------- | ------------ |
+| m_jj shape, 2 b tags                   | CMS-EXO-20-008, 2016 spectra | χ²/ndf = 22.3/23, ratio slope 0.000 ± 0.023/TeV | CONSISTENT   |
+| dσ/dm, 2 b tags                        | same                         | student/CMS = 0.968 ± 0.009                     | CONSISTENT   |
+| dσ/dm, ≥1 b tag                        | same, single-b categories    | ratio 0.72–0.84 (category definitions differ)   | INCONSISTENT |
+| Inclusive m_jj shape                   | CMS-EXO-16-056               | χ²/ndf = 43.2/34                                | CONSISTENT   |
+| Υ(2S)/Υ(1S), Υ(3S)/Υ(1S) (dimuon demo) | CMS-BPH-15-005               | student/CMS = 1.017 ± 0.045, 1.021 ± 0.053      | CONSISTENT   |
+| Z pT, \|y\|, mass shapes (dimuon demo) | CMS-SMP-17-010, SMP-17-001   | detector level vs unfolded: large differences   | INCONSISTENT |
+
+It also found three errors in published HEPData metadata: the 2016 tables of
+ins1920627 say `LUMINOSITY: 138` but are normalised to 36.3 fb⁻¹;
+SMP-17-010 Figure 14 is the combined μμ + ee result, while its covariance
+tables belong to the absolute dimuon result; and BPH-15-005 Table 12 has unit
+"PCT" for plain ratios. The comparison plots are not committed;
+`cms-comparison/run_all.sh` rebuilds them. This first run was made before a
+comparison skill exists; its [SKILLS_USED.md](cms-comparison/SKILLS_USED.md)
+seeds that skill.
+
 ## Files
 
-| File                                         | What it is                                                                   |
-| -------------------------------------------- | ---------------------------------------------------------------------------- |
-| [PROMPT.md](PROMPT.md)                       | The task given to the agent (headless command + Task section)                |
-| [specification.md](specification.md)         | Analysis specification written by the agent (analysis-spec-builder)          |
-| `skim.py`, `condor/`                         | Condor skim of NanoAOD to `.npz` (lpc-condor templates; 9 jobs, all exit 0)  |
-| `analysis.py`, `dijetlib.py`                 | Turn-on, selection, b-tag efficiencies, fits, F-test, injection, plots       |
-| `make_hepdata.py`, `hepdata/`                | HEPData record (hepdata skill template); `hepdata_validation.txt` is the log |
-| `plots/`                                     | The 7 plot types of the APS talk, PNG + PDF                                  |
-| `summary.json`, `input_files.json`           | Key numbers; exact input files and event counts per sample                   |
-| `hlt_paths_2016G.txt`, `hlt_paths_2016H.txt` | HLT menu seen in one file per era (`list_hlt_paths.py`)                      |
-| `SKILLS_USED.md`                             | Which skill guided each step, and what was wrong or missing                  |
-| `check_results.py`                           | Physics checks on the outputs (stdlib only; exit 0 = all pass)               |
+| File                                          | What it is                                                                            |
+| --------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [PROMPT.md](PROMPT.md)                        | The task given to the agent (headless command + Task section)                         |
+| [specification.md](specification.md)          | Analysis specification written by the agent (analysis-spec-builder)                   |
+| `skim.py`, `condor/`                          | Condor skim of NanoAOD to `.npz` (lpc-condor templates; 9 jobs, all exit 0)           |
+| `analysis.py`, `dijetlib.py`                  | Turn-on, selection, b-tag efficiencies, fits, F-test, injection, plots                |
+| `make_hepdata.py`, `hepdata/`                 | HEPData record (hepdata skill template); `hepdata_validation.txt` is the log          |
+| `plots/`                                      | The 7 plot types of the APS talk, PNG + PDF                                           |
+| `summary.json`, `input_files.json`            | Key numbers; exact input files and event counts per sample                            |
+| `hlt_paths_2016G.txt`, `hlt_paths_2016H.txt`  | HLT menu seen in one file per era (`list_hlt_paths.py`)                               |
+| `SKILLS_USED.md`                              | Which skill guided each step, and what was wrong or missing                           |
+| `check_results.py`                            | Physics checks on the outputs (stdlib only; exit 0 = all pass)                        |
+| `CMS_COMPARISON_PROMPT.md`, `cms-comparison/` | Comparison with published CMS results (cms-results-validator); `run_all.sh` reruns it |
 
 ## Reproduce
 

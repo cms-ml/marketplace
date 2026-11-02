@@ -1,0 +1,24 @@
+{
+ "id": "D1b",
+ "student_result": "Integrated luminosity of the processed 2016G+H data (recorded, golden JSON), 16.3927 fb^-1",
+ "counterpart": {
+  "report": "CMS Open Data luminosity record 1059 (Run2016Glumi.txt + Run2016Hlumi.txt), golden JSON record 14220",
+  "hepdata_table": null
+ },
+ "level": "exact (lumi)",
+ "statistic": 0.0035001017570090998,
+ "statistic_name": "|student/published - 1| in units of the 1.2% lumi uncertainty",
+ "ndf": 0,
+ "p_value": null,
+ "ratio": 0.9999579987789159,
+ "student_fb": 16.392691989,
+ "published_fb": 16.393380531,
+ "published_G": 7.653261227,
+ "published_H": 8.740119304,
+ "recomputed_csv_fb": 16.393380594000003,
+ "delivered_published_fb": 17.168970229000003,
+ "n_ls_published": 90526,
+ "n_ls_student": 90126,
+ "verdict": "CONSISTENT",
+ "reason": "Agrees to 4.2e-05 with the published G+H total and to 4.2e-05 with an independent csv+golden sum. Note: pp_2016lumibyls.csv header says 'Norm tag: None' while the Run2016G/H summaries use the composite normtag; the sums nevertheless agree to <1e-3."
+}

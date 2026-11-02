@@ -1,0 +1,80 @@
+{
+ "id": "D4a",
+ "student_result": "Z'->bb event efficiency vs mass, 2 b tags: summary.json btag_efficiency (selected/generated, |deta|<1.1, tight jets |eta|<2.4, mjj>1058)",
+ "counterpart": {
+  "report": "CMS-EXO-20-008",
+  "inspire_paper": 2676943,
+  "hepdata_record": "ins1920627",
+  "hepdata_table": "Figure 2",
+  "paper": "PRD 108 (2023) 012009, arXiv:2205.01835"
+ },
+ "level": "trend: MC efficiency vs mass (student detector-level, no SF) vs CMS acceptance x efficiency (2016-2018 average, with SF)",
+ "statistic": 2123.620942774014,
+ "statistic_name": "chi2 of the unit-normalised curves (student stat. + CMS 3-digit rounding)",
+ "ndf": 7,
+ "p_value": 0.0,
+ "ratio": 1.8716624372991273,
+ "details": {
+  "masses": [
+   1800.0,
+   2000.0,
+   2500.0,
+   3000.0,
+   3500.0,
+   4000.0,
+   4500.0,
+   5000.0
+  ],
+  "student": [
+   0.1904710144927536,
+   0.18505797101449276,
+   0.16428985507246377,
+   0.14230656934306568,
+   0.12170588235294118,
+   0.1058768115942029,
+   0.09034782608695652,
+   0.07889130434782608
+  ],
+  "cms": [
+   0.117,
+   0.125,
+   0.11,
+   0.088,
+   0.068,
+   0.051,
+   0.04,
+   0.03
+  ],
+  "ratio": [
+   1.6279573888269538,
+   1.480463768115942,
+   1.4935441370223979,
+   1.617120106171201,
+   1.7897923875432524,
+   2.0760159136118217,
+   2.258695652173913,
+   2.6297101449275364
+  ],
+  "ratio_err": [
+   0.011402789742029582,
+   0.010247435837321196,
+   0.011327530378117935,
+   0.014123334934678133,
+   0.01852486674254371,
+   0.026038245884294337,
+   0.034195857654466,
+   0.05006018272923768
+  ],
+  "ratio_mean": 1.8716624372991273,
+  "ratio_first": 1.6279573888269538,
+  "ratio_last": 2.6297101449275364,
+  "slope_per_TeV": 0.21579356068256353,
+  "slope_err": 0.007152198066566354,
+  "chi2_shape_normalised": 2123.620942774014,
+  "ndf_shape": 7,
+  "spearman_rho": 0.9761904761904763,
+  "spearman_p": 3.3143960262001043e-05
+ },
+ "verdict": "INCONSISTENT",
+ "reason": "ratio student/CMS 1.87 on average (first 1.63, last 2.63); trend in mass see slope; the acceptance offset and the faster fall of the CMS 2b efficiency with mass are discussed in COMPARISON.md"
+}

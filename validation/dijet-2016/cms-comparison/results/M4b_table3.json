@@ -1,0 +1,10 @@
+{
+ "id": "M4b_table3",
+ "student_result": "dimuon mass shape vs SMP-17-001 Table 3 (full phase space, FSR-corrected)",
+ "counterpart": {
+  "report": "CMS-SMP-17-001",
+  "hepdata_table": "Table 3"
+ },
+ "verdict": "NOT COMPARABLE",
+ "reason": "Table 3 is acceptance-corrected to the full phase space and FSR-corrected (dressed leptons); the student data are fiducial detector-level with no acceptance/FSR correction. Needs the acceptance and FSR response from simulation (not available here)."
+}

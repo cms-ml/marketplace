@@ -1,0 +1,38 @@
+{
+ "id": "D2c",
+ "student_result": "m_jj spectrum, exactly 1 b tag (>=1b minus 2b), 2016G+H, |deta|<1.1",
+ "counterpart": {
+  "report": "CMS-EXO-20-008",
+  "inspire_paper": 2676943,
+  "paper": "PRD 108 (2023) 012009, arXiv:2205.01835",
+  "hepdata_record": "ins1920627 (attached to PAS CMS-PAS-EXO-20-008)",
+  "hepdata_table": "Figure 3 second row first column"
+ },
+ "level": "shape (normalised, detector level)",
+ "statistic": 19.791361125123668,
+ "statistic_name": "two-sample Pearson chi2 (stat. only)",
+ "ndf": 28,
+ "p_value": 0.8719505962682246,
+ "ratio": null,
+ "details": {
+  "chi2": 19.791361125123668,
+  "ndf": 28,
+  "p_value": 0.8719505962682246,
+  "nsigma": 0.1611813161375649,
+  "range_GeV": [
+   1530.0,
+   7589.0
+  ],
+  "n_bins": 29,
+  "slope_per_TeV": 0.008793028637727724,
+  "slope_err": 0.008582045196296153,
+  "ratio_mean": 0.9997621143766526,
+  "ratio_mean_err": 0.003121048407758285,
+  "ratio_first_bin": 0.9909016375117696,
+  "ratio_last_bin": 1.226631398600459,
+  "N_student": 140710.0,
+  "N_cms": 379278.7735049179
+ },
+ "verdict": "CONSISTENT",
+ "reason": "Statistics only (student N and CMS N from Poisson errors). CMS: wide jets (R=1.1 FSR recombination), |eta|<2.5, DeepJet with data/MC scale factors, JEC of the 2016 legacy reprocessing, all of 2016 (eras B-H); student: AK4 CHS, |eta|<2.4, DeepJet medium, UL JEC, G+H only. "
+}

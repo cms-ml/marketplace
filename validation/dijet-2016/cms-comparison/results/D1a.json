@@ -1,0 +1,32 @@
+{
+ "id": "D1a",
+ "student_result": "DeepJet working points L/M/T used for the b-tag categories (2016postVFP_UL)",
+ "counterpart": {
+  "report": "BTV POG correctionlib json",
+  "path": "/cvmfs/cms.cern.ch/rsync/cms-nanoAOD/jsonpog-integration/POG/BTV/2016postVFP_UL/btagging.json.gz",
+  "key": "deepJet_wp_values"
+ },
+ "level": "exact (constants)",
+ "statistic": 0.0,
+ "statistic_name": "max |student - POG|",
+ "ndf": 0,
+ "p_value": null,
+ "ratio": null,
+ "student": {
+  "L": 0.048,
+  "M": 0.2489,
+  "T": 0.6377
+ },
+ "pog": {
+  "L": 0.048,
+  "M": 0.2489,
+  "T": 0.6377
+ },
+ "pog_preVFP": {
+  "L": 0.0508,
+  "M": 0.2598,
+  "T": 0.6502
+ },
+ "verdict": "CONSISTENT",
+ "reason": "Identical to the POG json for the correct era (Run2016G,H are postVFP); the preVFP values differ, so the era choice matters."
+}

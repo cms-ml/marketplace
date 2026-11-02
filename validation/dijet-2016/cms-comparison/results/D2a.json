@@ -1,0 +1,38 @@
+{
+ "id": "D2a",
+ "student_result": "m_jj spectrum, 2 b tags (both leading AK4 jets DeepJet medium), 2016G+H, |deta|<1.1, mjj>1058 GeV",
+ "counterpart": {
+  "report": "CMS-EXO-20-008",
+  "inspire_paper": 2676943,
+  "paper": "PRD 108 (2023) 012009, arXiv:2205.01835",
+  "hepdata_record": "ins1920627 (attached to PAS CMS-PAS-EXO-20-008)",
+  "hepdata_table": "Figure 3 first row first column"
+ },
+ "level": "shape: detector-level event counts vs CMS dsigma/dm (fb/GeV, detector level, not unfolded), both normalised on the common range",
+ "statistic": 22.276840567247017,
+ "statistic_name": "two-sample Pearson chi2 (stat. only)",
+ "ndf": 23,
+ "p_value": 0.5035957007260221,
+ "ratio": null,
+ "details": {
+  "chi2": 22.276840567247017,
+  "ndf": 23,
+  "p_value": 0.5035957007260221,
+  "nsigma": 0.6688428949570795,
+  "range_GeV": [
+   1530.0,
+   7589.0
+  ],
+  "n_bins": 24,
+  "slope_per_TeV": -0.00015696798114616108,
+  "slope_err": 0.02279530806438546,
+  "ratio_mean": 0.9973072187609324,
+  "ratio_mean_err": 0.009271896393751004,
+  "ratio_first_bin": 0.9976343989092051,
+  "ratio_last_bin": 1.307335987902141,
+  "N_student": 16659.0,
+  "N_cms": 38185.65724403894
+ },
+ "verdict": "CONSISTENT",
+ "reason": "Statistics only (student N and CMS N from Poisson errors). CMS: wide jets (R=1.1 FSR recombination), |eta|<2.5, DeepJet with data/MC scale factors, JEC of the 2016 legacy reprocessing, all of 2016 (eras B-H); student: AK4 CHS, |eta|<2.4, DeepJet medium, UL JEC, G+H only. "
+}

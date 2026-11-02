@@ -1,0 +1,57 @@
+{
+ "id": "D2b",
+ "student_result": "m_jj spectrum, >=1 b tag (inclusive of 2b), 2016G+H, |deta|<1.1",
+ "counterpart": {
+  "report": "CMS-EXO-20-008",
+  "inspire_paper": 2676943,
+  "paper": "PRD 108 (2023) 012009, arXiv:2205.01835",
+  "hepdata_record": "ins1920627 (attached to PAS CMS-PAS-EXO-20-008)",
+  "hepdata_table": "Figure 3 fourth row first column"
+ },
+ "level": "shape (normalised, detector level)",
+ "statistic": 38.68570784936267,
+ "statistic_name": "two-sample Pearson chi2 (stat. only)",
+ "ndf": 28,
+ "p_value": 0.0861120347304565,
+ "ratio": null,
+ "details": {
+  "chi2": 38.68570784936267,
+  "ndf": 28,
+  "p_value": 0.0861120347304565,
+  "nsigma": 1.7162732892210888,
+  "range_GeV": [
+   1530.0,
+   7589.0
+  ],
+  "n_bins": 29,
+  "slope_per_TeV": 0.034021623719558865,
+  "slope_err": 0.008044576132365597,
+  "ratio_mean": 0.9996149915327508,
+  "ratio_mean_err": 0.00289987281990976,
+  "ratio_first_bin": 0.9880061392858704,
+  "ratio_last_bin": 0.9738990280173081,
+  "N_student": 157369.0,
+  "N_cms": 485867.69843360106
+ },
+ "alt_definition_match": {
+  "chi2": 24.888434996971373,
+  "ndf": 28,
+  "p_value": 0.6339008021404688,
+  "nsigma": 0.47624365457056056,
+  "range_GeV": [
+   1530.0,
+   7589.0
+  ],
+  "n_bins": 29,
+  "slope_per_TeV": 0.014545233340875945,
+  "slope_err": 0.008074021422250242,
+  "ratio_mean": 0.9997342436256559,
+  "ratio_mean_err": 0.002957606670882329,
+  "ratio_first_bin": 0.9895926579988049,
+  "ratio_last_bin": 1.1737949599890762,
+  "N_student": 157369.0,
+  "N_cms": 417464.43074895686
+ },
+ "verdict": "TENSION",
+ "reason": "Statistics only (student N and CMS N from Poisson errors). CMS: wide jets (R=1.1 FSR recombination), |eta|<2.5, DeepJet with data/MC scale factors, JEC of the 2016 legacy reprocessing, all of 2016 (eras B-H); student: AK4 CHS, |eta|<2.4, DeepJet medium, UL JEC, G+H only. The CMS 'inclusive single b' table is NOT the sum of the single-b and double-b tables (ratio 1.11-1.17, mass dependent, see details); the alternative counterpart 1b+2b is given in alt_definition_match."
+}

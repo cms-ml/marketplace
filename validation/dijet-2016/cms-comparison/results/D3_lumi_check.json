@@ -1,0 +1,31 @@
+{
+ "id": "D3_lumi_check",
+ "student_result": "normalisation of the 2016 tables of ins1920627",
+ "ratio": 0.263543434070611,
+ "implied_lumi_fb_per_table": {
+  "Figure 3 first row first column": 36.36899390174432,
+  "Figure 3 second row first column": 36.34019776275876,
+  "Figure 3 fourth row first column": 36.34134078508386,
+  "Figure 3 third row first column": 36.38419630440479
+ },
+ "rel_spread": {
+  "Figure 3 first row first column": 0.26265893078451813,
+  "Figure 3 second row first column": 0.10344060050817687,
+  "Figure 3 fourth row first column": 0.16378380653186414,
+  "Figure 3 third row first column": 0.24845740963872012
+ },
+ "qualifier": [
+  {
+   "name": "SQRT(S)",
+   "units": "TeV",
+   "value": 13
+  },
+  {
+   "name": "LUMINOSITY",
+   "units": "fb$^{-1}$",
+   "value": 138
+  }
+ ],
+ "verdict": "NOT COMPARABLE",
+ "reason": "The 2016 tables carry LUMINOSITY=138 fb^-1 but N/(dsigma/dm * width) = 36.3 fb^-1 (the 2016 luminosity quoted in Fig. 3 of the paper): the qualifier is the Run 2 total, not the normalisation."
+}

@@ -1,0 +1,68 @@
+{
+ "id": "D5",
+ "student_result": "inclusive m_jj spectrum, 2016G+H JetHT, AK4 CHS, |deta|<1.1, rebuilt from skims (incl. golden JSON, trigger OR)",
+ "counterpart": {
+  "report": "CMS-EXO-16-056",
+  "inspire": 1676214,
+  "hepdata_record": "ins1676214",
+  "hepdata_table": "Differential dijet spectrum (High-mass analysis)",
+  "paper": "JHEP 08 (2018) 130, arXiv:1806.00843"
+ },
+ "level": "shape: detector-level counts (student) vs CMS observed event yields (detector level, wide jets); both normalised in the common range",
+ "statistic": 43.241963795219306,
+ "statistic_name": "two-sample Pearson chi2 (stat. errors only)",
+ "ndf": 34,
+ "p_value": 0.13305768246129784,
+ "nsigma": 1.5021526797870188,
+ "ratio": null,
+ "ratio_slope_per_TeV": -0.005912990464074612,
+ "ratio_slope_err": 0.0030076380857250408,
+ "range_GeV": [
+  1246.0,
+  8152.0
+ ],
+ "n_bins": 35,
+ "mass_scale_fit": {
+  "s": 0.9950034380779867,
+  "s_err": 0.004547161791532417,
+  "deviance_s1": 47.815740178302775,
+  "deviance_sfree": 44.52188138671828
+ },
+ "absolute_ratio_student_over_cms": 0.5045499160696955,
+ "supplementary_deta13": {
+  "chi2": 36.77312598891323,
+  "ndf": 34,
+  "p_value": 0.34164284168677955,
+  "slope_per_TeV": -0.0029777689403224844,
+  "slope_err": 0.0027217026879853574,
+  "frac_deta11_over_deta13": 0.7763908735210521,
+  "absolute_ratio_same_deta_cut": 0.6498658514383148,
+  "abs_ratio_deta13_mean": 0.6498464785930056,
+  "abs_ratio_deta13_slope_per_TeV": -0.0019351503477892731,
+  "abs_ratio_deta13_slope_err": 0.0017687416346895545,
+  "abs_mass_scale_fit": {
+   "s": 1.08328064613682,
+   "s_err": 0.00016287464883868452,
+   "deviance_s1": 322160.2074101287,
+   "deviance_sfit": 846.1385534815244
+  }
+ },
+ "cms_implied_lumi_fb": 35.90006856913097,
+ "student_lumi_fb": 16.392691989,
+ "closure": {
+  "1b": {
+   "max_abs_diff": 5.0,
+   "n_bins": 48,
+   "total_student_hepdata": 878749.0,
+   "total_rebuilt": 878756.0
+  },
+  "2b": {
+   "max_abs_diff": 0.0,
+   "n_bins": 48,
+   "total_student_hepdata": 72688.0,
+   "total_rebuilt": 72688.0
+  }
+ },
+ "verdict": "CONSISTENT",
+ "reason": "Shape differs by a mass-dependent slope; CMS uses wide jets (FSR recombination, mjj shifted up), |deta|<1.3 vs 1.1, |eta|<2.5 vs 2.4; a mass-scale factor s absorbs the slope (see mass_scale_fit). Statistical errors only."
+}
