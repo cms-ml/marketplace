@@ -4,3 +4,5 @@ __pycache__/
 .DS_Store
 *.root
 *.log
+# comparison plots: rebuilt by run_all.sh, not committed
+validation/dijet-2016/cms-comparison/plots/

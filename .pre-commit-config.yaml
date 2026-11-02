@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: check-json
       - id: check-yaml
-        exclude: ^validation/[^/]+/(hepdata/|summary\.json$|input_files\.json$) # generated; HEPData submission.yaml is multi-document
+        exclude: ^validation/.+/(hepdata/|results/|summary\.json$|input_files\.json$|comparison\.json$) # generated; HEPData submission.yaml is multi-document
       - id: check-merge-conflict
       - id: end-of-file-fixer
       - id: trailing-whitespace
@@ -15,7 +15,7 @@ repos:
     hooks:
       - id: prettier
         types_or: [markdown, json, yaml]
-        exclude: ^validation/[^/]+/(hepdata/|summary\.json$|input_files\.json$) # generated outputs stay as the code wrote them
+        exclude: ^validation/.+/(hepdata/|results/|summary\.json$|input_files\.json$|comparison\.json$) # generated outputs stay as the code wrote them
         args: [--prose-wrap=preserve]
 
   - repo: https://github.com/codespell-project/codespell

@@ -26,8 +26,7 @@ jobs:
         run: python scripts/marketplace.py check
       - name: Physics checks on committed validation results
         run: |
-          for c in validation/*/check_results.py; do
-            [ -e "$c" ] || continue
+          for c in $(find validation -name check_results.py | sort); do
             echo "== $c"; python "$c" "$(dirname "$c")" || exit 1
           done
       - name: pre-commit
