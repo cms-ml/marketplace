@@ -21,7 +21,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.13" # 3.9 is not available on ubuntu-latest (26.04); 3.13 matches the LCG_109 view
       - name: Validate skills, agents, manifests and generated files
         run: python scripts/marketplace.py check
       - name: Physics checks on committed validation results
