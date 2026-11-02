@@ -95,8 +95,58 @@ Examples:
 - "Write a spec for a Z→μμ data/MC comparison in 2016H." (`analysis-spec-builder`)
 - "Make this check a single-file script I can send to a colleague."
   (`standalone-script`)
+- "List the jet and HT triggers in one 2016G and one 2016H JetHT file, then
+  measure the turn-on of their OR vs m_jj with HLT_PFJet260 as reference and
+  tell me where it plateaus." (`trigger-efficiency`)
+- "Turn the spectra and efficiencies in summary.json into a HEPData record in
+  hepdata/, with the plots attached, and validate it." (`hepdata`)
+- "Split these 142 Open Data files into 10 condor jobs, write the outputs to
+  my EOS area, and resubmit any that fail." (`lpc-condor`)
+- "Use the cms-analysis-coder agent to implement specification.md: start on
+  2 files, then run everything, and write summary.json and SKILLS_USED.md."
+  (agent `cms-analysis-coder`)
 
-See [examples/](examples/) for a complete prompt.
+See [examples/](examples/) for a complete prompt, and
+[validation/dijet-2016/PROMPT.md](validation/dijet-2016/PROMPT.md) for a
+full analysis task given to the agent.
+
+### Running the agent on a long task
+
+In a chat, ask for it by name: "Use the cms-analysis-coder agent to …".
+For tasks that take hours (condor jobs, full datasets), run it headless
+inside `tmux`, so a closed laptop or a VS Code reconnect doesn't kill it:
+
+```bash
+tmux new -s agent                       # reattach later with: tmux attach -t agent
+cd marketplace                          # or your analysis directory
+sed -n '/^## Task/,$p' validation/dijet-2016/PROMPT.md | \
+  claude -p --agent cms:cms-analysis-coder \
+    --permission-mode acceptEdits \
+    --allowedTools "Bash Read Write Edit Glob Grep Skill TodoWrite" \
+    > agent_report.md 2>&1
+```
+
+The prompt goes on **stdin**: `--allowedTools` takes a list and would
+swallow a prompt given as an argument. Without `--allowedTools`, a headless
+agent cannot run shell commands. Allowing `Bash` lets it run any command in
+your account, so give it a clear working directory and limits in the prompt.
+
+Check progress without interrupting it:
+
+```bash
+ls -lt <workdir> <workdir>/plots | head                    # newest outputs first
+condor_q                                                   # its batch jobs
+eos root://cmseos.fnal.gov ls /store/user/$USER/<area>     # its EOS outputs
+```
+
+If it stops (for example, the node was rebooted), start a new run that
+resumes from what exists:
+
+> Use the cms-analysis-coder agent to resume `<workdir>`. These steps are
+> done: `<list, e.g. condor skims in /store/user/$USER/...>`; don't redo
+> them. Read `specification.md` and `SKILLS_USED.md` first, then finish
+> `<remaining deliverables>`. If an earlier run failed, find out why first
+> (memory: `/usr/bin/time -v`). Append new notes to `SKILLS_USED.md`.
 
 <!-- GENERATED:START -->
 
@@ -114,19 +164,27 @@ Skills for the CMS LPC analysis facility at Fermilab (cmslpc): HTCondor batch jo
 
 ---
 
-### `cms` (v0.1.0)
+### `cms` (v0.2.0)
 
 Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), plus analysis specifications.
 
+**Subagents:**
+
+| Subagent             | Purpose                                                                             |
+| -------------------- | ----------------------------------------------------------------------------------- |
+| `cms-analysis-coder` | Senior CMS PhD student that implements an analysis spec with the marketplace skills |
+
 **Skills:**
 
-| Skill                   | Use when                                                                                            |
-| ----------------------- | --------------------------------------------------------------------------------------------------- |
-| `analysis-spec-builder` | Turn an analysis request into a structured CMS specification.md (datasets, cuts, histograms, tools) |
-| `awkward-array`         | Jagged arrays with Awkward 2 on CMS NanoAOD (records, selection, combinatorics, indices, I/O)       |
-| `cmssw`                 | Release areas, architectures and containers, EDM modules, cmsRun configs, EDM file tools            |
-| `hist`                  | Histograms with hist + mplhep for CMS (weights, normalisation, UHI, CMS-style plots)                |
-| `vector-awkward`        | Four-vector kinematics on NanoAOD with vector + Awkward (masses, deltaR, mT, boosts)                |
+| Skill                   | Use when                                                                                               |
+| ----------------------- | ------------------------------------------------------------------------------------------------------ |
+| `analysis-spec-builder` | Turn an analysis request into a structured CMS specification.md (datasets, cuts, histograms, tools)    |
+| `awkward-array`         | Jagged arrays with Awkward 2 on CMS NanoAOD (records, selection, combinatorics, indices, I/O)          |
+| `cmssw`                 | Release areas, architectures and containers, EDM modules, cmsRun configs, EDM file tools               |
+| `hepdata`               | HEPData records with hepdata_lib, validated offline, following CMS requirements                        |
+| `hist`                  | Histograms with hist + mplhep for CMS (weights, normalisation, UHI, CMS-style plots)                   |
+| `trigger-efficiency`    | Trigger turn-ons and offline thresholds from NanoAOD (reference method, Clopper-Pearson, plateau rule) |
+| `vector-awkward`        | Four-vector kinematics on NanoAOD with vector + Awkward (masses, deltaR, mT, boosts)                   |
 
 ---
 
@@ -152,11 +210,43 @@ DoubleMuon NanoAOD. It needs no grid proxy. It ends by writing
 `SKILLS_USED.md`, a record of which skill guided each step and where a skill
 fell short. Bring that file back as an issue or PR to improve the skills.
 
+## Validations
+
+Every skill and agent is validated by an analysis that uses it, run by an
+agent, with its outputs committed. Each directory has a `README.md` (goal,
+results, how to reproduce), the `PROMPT.md` given to the agent, and a
+`SKILLS_USED.md` saying where the skills helped and where they fell short.
+
+| Validation                                     | Tests                                                                                        | Result                                                                    |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [validation/dijet-2016](validation/dijet-2016) | `cms-analysis-coder`, `trigger-efficiency`, `hepdata`, plus the core skills and `lpc-condor` | b-tagged dijet search on 142 Open Data files: 7 plot types, fits, HEPData |
+| [validation/lpc-condor](validation/lpc-condor) | `lpc-condor`                                                                                 | Two agent runs of split → submit → check → resubmit; all jobs exit 0      |
+
+To rerun one:
+
+1. Read its `README.md` (inputs, environment, cost).
+2. Run its `PROMPT.md` with the agent, as in
+   [Running the agent on a long task](#running-the-agent-on-a-long-task).
+3. Check the outputs: `python3 validation/<name>/check_results.py
+validation/<name>` prints `PASS`/`FAIL` per check and `SUMMARY=n/n`. CI
+   runs the same checks on the committed results.
+
+To add one for your own skill or agent, see
+[CONTRIBUTING.md](CONTRIBUTING.md#7-the-validation).
+
 ## Contributing
 
-See [CLAUDE.md](CLAUDE.md) for the authoring conventions, and run
-`python3 scripts/marketplace.py check` before opening a PR. Issues and PRs are
-welcome at <https://github.com/cms-ml/marketplace>.
+New skills, agents and plugins are welcome. **[CONTRIBUTING.md](CONTRIBUTING.md)**
+explains the pieces (skill, agent, plugin), which one to write, and how to
+make a PR step by step. Every skill or agent PR comes with a validation: an
+analysis that uses it, run by an agent, in `validation/<name>/`.
+[validation/dijet-2016](validation/dijet-2016) (a b-tagged dijet search on
+2016 Open Data, using the `cms-analysis-coder` agent and the
+`trigger-efficiency` and `hepdata` skills) is the reference example.
+[CLAUDE.md](CLAUDE.md) has the authoring rules that
+`python3 scripts/marketplace.py check` enforces.
+
+Issues and PRs are welcome at <https://github.com/cms-ml/marketplace>.
 
 ## License
 

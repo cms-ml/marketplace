@@ -1,0 +1,9 @@
+hepdata-validate exit code 0
+. is valid.
+	 ./submission.yaml is valid HEPData submission YAML.
+	 ./trigger_efficiency.yaml is valid HEPData data YAML.
+	 ./mjj_spectrum_1b.yaml is valid HEPData data YAML.
+	 ./mjj_spectrum_2b.yaml is valid HEPData data YAML.
+	 ./fit_results.yaml is valid HEPData data YAML.
+	 ./btag_efficiency_vs_zprime_mass.yaml is valid HEPData data YAML.
+	 ./signal_injection.yaml is valid HEPData data YAML.

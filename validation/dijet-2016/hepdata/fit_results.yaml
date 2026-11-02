@@ -1,0 +1,80 @@
+dependent_variables:
+- header:
+    name: chi2 (Poisson deviance)
+  qualifiers:
+  - name: SQRT(S)
+    value: 13000 GeV
+  values:
+  - value: 42.727
+  - value: 42.727
+  - value: 42.727
+  - value: 40.945
+  - value: 36.556
+  - value: 36.556
+- header:
+    name: ndf
+  qualifiers:
+  - name: SQRT(S)
+    value: 13000 GeV
+  values:
+  - value: 45.0
+  - value: 44.0
+  - value: 43.0
+  - value: 45.0
+  - value: 44.0
+  - value: 43.0
+- header:
+    name: chi2/ndf
+  qualifiers:
+  - name: SQRT(S)
+    value: 13000 GeV
+  values:
+  - value: 0.9495
+  - value: 0.9711
+  - value: 0.9936
+  - value: 0.9099
+  - value: 0.8308
+  - value: 0.8501
+- header:
+    name: F-test p-value for n+1 parameters
+  qualifiers:
+  - name: SQRT(S)
+    value: 13000 GeV
+  values:
+  - value: 0.9958
+  - value: 0.9785
+  - value: 0.0
+  - value: 0.0264
+  - value: 0.9926
+  - value: 0.0
+- header:
+    name: Chosen (1=yes)
+  qualifiers:
+  - name: SQRT(S)
+    value: 13000 GeV
+  values:
+  - value: 1.0
+  - value: 0.0
+  - value: 0.0
+  - value: 0.0
+  - value: 1.0
+  - value: 0.0
+independent_variables:
+- header:
+    name: Category
+  values:
+  - value: 1b
+  - value: 1b
+  - value: 1b
+  - value: 2b
+  - value: 2b
+  - value: 2b
+- header:
+    name: Number of fit parameters
+  values:
+  - value: 3
+  - value: 4
+  - value: 5
+  - value: 3
+  - value: 4
+  - value: 5

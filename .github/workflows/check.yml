@@ -24,5 +24,11 @@ jobs:
           python-version: "3.9"
       - name: Validate skills, agents, manifests and generated files
         run: python scripts/marketplace.py check
+      - name: Physics checks on committed validation results
+        run: |
+          for c in validation/*/check_results.py; do
+            [ -e "$c" ] || continue
+            echo "== $c"; python "$c" "$(dirname "$c")" || exit 1
+          done
       - name: pre-commit
         uses: pre-commit/action@v3.0.1
