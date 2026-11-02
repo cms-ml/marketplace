@@ -185,4 +185,5 @@ contact creates the real record. See
 - CMS B2G HEPData submissions (CERN GitLab): <https://gitlab.cern.ch/cms-b2g-hepdata>
 - CMS publication procedure (CMS internal twiki):
   <https://twiki.cern.ch/twiki/bin/viewauth/CMS/Internal/Publications>
-- Example CMS record (CMS-EXO-20-008): <https://www.hepdata.net/record/ins1920627>
+- Example CMS record (CMS-EXO-20-008; attached to the PAS, the paper is
+  INSPIRE 2676943): <https://www.hepdata.net/record/ins1920627>

@@ -164,15 +164,16 @@ Skills for the CMS LPC analysis facility at Fermilab (cmslpc): HTCondor batch jo
 
 ---
 
-### `cms` (v0.2.0)
+### `cms` (v0.3.0)
 
 Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), plus analysis specifications.
 
 **Subagents:**
 
-| Subagent             | Purpose                                                                             |
-| -------------------- | ----------------------------------------------------------------------------------- |
-| `cms-analysis-coder` | Senior CMS PhD student that implements an analysis spec with the marketplace skills |
+| Subagent                | Purpose                                                                             |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| `cms-analysis-coder`    | Senior CMS PhD student that implements an analysis spec with the marketplace skills |
+| `cms-results-validator` | ARC-style reviewer that compares an analysis with published CMS results on HEPData  |
 
 **Skills:**
 
@@ -217,10 +218,11 @@ agent, with its outputs committed. Each directory has a `README.md` (goal,
 results, how to reproduce), the `PROMPT.md` given to the agent, and a
 `SKILLS_USED.md` saying where the skills helped and where they fell short.
 
-| Validation                                     | Tests                                                                                        | Result                                                                    |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [validation/dijet-2016](validation/dijet-2016) | `cms-analysis-coder`, `trigger-efficiency`, `hepdata`, plus the core skills and `lpc-condor` | b-tagged dijet search on 142 Open Data files: 7 plot types, fits, HEPData |
-| [validation/lpc-condor](validation/lpc-condor) | `lpc-condor`                                                                                 | Two agent runs of split → submit → check → resubmit; all jobs exit 0      |
+| Validation                                                                   | Tests                                                                                        | Result                                                                           |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [validation/dijet-2016](validation/dijet-2016)                               | `cms-analysis-coder`, `trigger-efficiency`, `hepdata`, plus the core skills and `lpc-condor` | b-tagged dijet search on 142 Open Data files: 7 plot types, fits, HEPData        |
+| [validation/dijet-2016/cms-comparison](validation/dijet-2016/cms-comparison) | `cms-results-validator`                                                                      | 21 tests of the dijet and dimuon Open Data results against 6 CMS HEPData records |
+| [validation/lpc-condor](validation/lpc-condor)                               | `lpc-condor`                                                                                 | Two agent runs of split → submit → check → resubmit; all jobs exit 0             |
 
 To rerun one:
 
