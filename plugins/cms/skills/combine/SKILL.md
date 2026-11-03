@@ -24,13 +24,15 @@ significances and goodness-of-fit. This skill does two things:
 - **Answer questions** with citations, through the `combine` MCP server:
   read-only retrieval over the official docs, the Combine paper, the source
   code and the CMS forums (`search_docs`, `fetch_doc`).
-- **Run Combine**: in the shell when `combine` is on the user's `PATH`,
-  otherwise through the `combine-run-remote` MCP server (`run_combine`), a
-  CERN service that runs one command in a throwaway workspace.
+- **Run Combine**: in the shell when `combine` is on the user's `PATH`;
+  otherwise in the official Combine container from `/cvmfs`, when the site
+  has it; otherwise through the `combine-run-remote` MCP server
+  (`run_combine`), a CERN service that runs one command in a throwaway
+  workspace.
 
 `run_combine` sends the datacard and every shape file you pass to a
 CERN-hosted service. For an unpublished or blinded analysis, check that this
-is acceptable first, or run Combine locally.
+is acceptable first, or run Combine locally or from the `/cvmfs` container.
 
 Most requests need retrieval only. Run something when the user reports a
 command that misbehaves, asks you to run or try something, or when
@@ -139,9 +141,16 @@ The full procedure, the `mode` table and a worked example are in
 - **It prints a path** → run in the **shell** (the Bash tool), in the user's
   working directory, against their real files. Do **not** call `run_combine`
   in that session, even though it is in your tool list.
-- **It prints nothing** → use `run_combine`.
+- **It prints nothing, but `/cvmfs/unpacked.cern.ch` and `apptainer` exist**
+  (typical on lxplus and cmslpc) → run Combine in the official **Combine
+  container from `/cvmfs`**, still in the user's directory and against their
+  files. The command is in
+  [references/execution.md](references/execution.md#running-in-the-cvmfs-container).
+  Don't call `run_combine` here either.
+- **Neither** → use `run_combine`.
 
-Run one Combine command per call: no pipes, redirects or `&&` chains.
+Run one Combine command per call: no pipes, redirects or `&&` chains (the
+container wrapper's own `bash -c` setup is the exception).
 
 ```bash
 command -v combine        # decides the path
@@ -180,11 +189,14 @@ Details, the result fields and a worked example are in
 
 ## Gotchas
 
-- **The MCP servers answer only from the CERN network.** Off-site, every
-  `search_docs`, `fetch_doc` and `run_combine` call fails to connect (the
-  server shows as failed in `/mcp`). Connect to the CERN VPN or work from
-  lxplus, then reconnect the servers from `/mcp`. Without them, answer only
-  with clearly flagged prior knowledge, or run Combine locally.
+- **The MCP servers answer only from the CERN network.** Off-site (e.g. on
+  cmslpc), every `search_docs`, `fetch_doc` and `run_combine` call fails to
+  connect, and the servers show as failed in `/mcp`. The retrieval server is
+  CERN-only by design, because it also serves CMS-restricted forum content.
+  For retrieval, tell the user to run Claude Code on lxplus, or on a laptop
+  connected to the CERN VPN. For execution, use a local Combine or the
+  `/cvmfs` container. Without the server, answer only from this skill's
+  references and clearly flagged prior knowledge.
 - **Short tool names are not callable.** Calling `search_docs` instead of the
   prefixed name fails as an unknown tool. Use the name from your tool list.
 - **`run_combine` while Combine is on `PATH` fails with "file not found".**
@@ -207,7 +219,7 @@ Details, the result fields and a worked example are in
   `combine-code`.
 - **`run_combine` uploads the inputs.** The datacard and shape files go to a
   CERN-hosted server. For an unpublished analysis, ask the user before the
-  first upload, or use a local Combine.
+  first upload, or use a local Combine or the `/cvmfs` container.
 - **`combineTool.py` can submit batch jobs.** Never submit condor or crab jobs
   on the user's behalf.
 
@@ -216,9 +228,9 @@ Details, the result fields and a worked example are in
 - [retrieval.md](references/retrieval.md): read when routing a question
   across sources, choosing a `fetch_doc` mode, formatting citations, or when
   the corpus seems not to cover the question.
-- [execution.md](references/execution.md): read before running a command
-  through `combine-run-remote`, when interpreting its JSON result, or when
-  working through a failing command.
+- [execution.md](references/execution.md): read before running Combine from
+  the `/cvmfs` container or through `combine-run-remote`, when interpreting
+  the server's JSON result, or when working through a failing command.
 
 ## Docs
 
