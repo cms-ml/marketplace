@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "combine": {
+      "type": "http",
+      "url": "https://combine-mcp-git-combine-mcp.app.cern.ch/mcp",
+      "description": "Combine docs, paper, source code and forum retrieval (CERN network only)"
+    },
+    "combine-run-remote": {
+      "type": "http",
+      "url": "https://combine-run-mcp-git-combine-mcp.app.cern.ch/mcp",
+      "description": "Runs one Combine command in a remote sandbox (CERN network only)"
+    }
+  }
+}

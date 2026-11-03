@@ -164,9 +164,9 @@ Skills for the CMS LPC analysis facility at Fermilab (cmslpc): HTCondor batch jo
 
 ---
 
-### `cms` (v0.3.0)
+### `cms` (v0.4.0)
 
-Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), plus analysis specifications.
+Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), analysis specifications, and CMS Combine: answering Combine questions from its docs, paper, code and forum, and running Combine commands (remote servers need the CERN network).
 
 **Subagents:**
 
@@ -182,10 +182,18 @@ Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM m
 | `analysis-spec-builder` | Turn an analysis request into a structured CMS specification.md (datasets, cuts, histograms, tools)    |
 | `awkward-array`         | Jagged arrays with Awkward 2 on CMS NanoAOD (records, selection, combinatorics, indices, I/O)          |
 | `cmssw`                 | Release areas, architectures and containers, EDM modules, cmsRun configs, EDM file tools               |
+| `combine`               | Answer Combine questions from docs, paper, code and forum; run and debug Combine                       |
 | `hepdata`               | HEPData records with hepdata_lib, validated offline, following CMS requirements                        |
 | `hist`                  | Histograms with hist + mplhep for CMS (weights, normalisation, UHI, CMS-style plots)                   |
 | `trigger-efficiency`    | Trigger turn-ons and offline thresholds from NanoAOD (reference method, Clopper-Pearson, plateau rule) |
 | `vector-awkward`        | Four-vector kinematics on NanoAOD with vector + Awkward (masses, deltaR, mT, boosts)                   |
+
+**MCP servers:**
+
+| Server               | Endpoint                                                  | Purpose                                                                  |
+| -------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `combine`            | `https://combine-mcp-git-combine-mcp.app.cern.ch/mcp`     | Combine docs, paper, source code and forum retrieval (CERN network only) |
+| `combine-run-remote` | `https://combine-run-mcp-git-combine-mcp.app.cern.ch/mcp` | Runs one Combine command in a remote sandbox (CERN network only)         |
 
 ---
 
