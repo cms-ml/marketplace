@@ -124,6 +124,14 @@ Never present a forum reply as if it were the canonical documentation.
 The full procedure, the `mode` table and a worked example are in
 [references/retrieval.md](references/retrieval.md).
 
+### Write a datacard or pick a command
+
+Search `combine-docs` first: it covers every method and option. When the
+server is unreachable, use the tested minimal patterns in
+[references/datacards.md](references/datacards.md) (counting, template shapes,
+unbinned parametric, `RooParametricHist`, and the common `-M` commands), and
+tell the user that anything beyond them comes from prior knowledge.
+
 ### Decide whether to run
 
 - **Explain without running** when the cause is visible in the command itself
@@ -231,6 +239,9 @@ Details, the result fields and a worked example are in
 - [execution.md](references/execution.md): read before running Combine from
   the `/cvmfs` container or through `combine-run-remote`, when interpreting
   the server's JSON result, or when working through a failing command.
+- [datacards.md](references/datacards.md): read when writing a datacard or a
+  parametric workspace, or choosing a standard command, while the `combine`
+  server is unreachable.
 
 ## Docs
 
