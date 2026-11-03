@@ -1,16 +1,18 @@
 # Running Combine
 
-Read this reference before running a command through `combine-run-remote`,
-when interpreting its JSON result, or when working through a failing command.
+Read this reference before running Combine from the `/cvmfs` container or
+through `combine-run-remote`, when interpreting the server's JSON result, or
+when working through a failing command.
 
 ## Contents
 
 1. [When to run and when to explain](#when-to-run-and-when-to-explain)
 2. [Choosing how to execute](#choosing-how-to-execute)
 3. [Running in the shell](#running-in-the-shell)
-4. [Running through combine-run-remote](#running-through-combine-run-remote)
-5. [Interpreting the result](#interpreting-the-result)
-6. [Worked example](#worked-example)
+4. [Running in the /cvmfs container](#running-in-the-cvmfs-container)
+5. [Running through combine-run-remote](#running-through-combine-run-remote)
+6. [Interpreting the result](#interpreting-the-result)
+7. [Worked example](#worked-example)
 
 ## When to run and when to explain
 
@@ -49,11 +51,17 @@ the Bash tool. Its result decides everything else:
   files on disk, and the shell uses those files in place, by path. `run_combine`
   works in an isolated workspace that can't see the user's files, so it fails
   to find them.
-- **`combine` is not on `PATH`** → use the `combine-run-remote` server.
+- **`combine` is not on `PATH`, but the site has `/cvmfs/unpacked.cern.ch` and
+  `apptainer`** (check with `ls -d /cvmfs/unpacked.cern.ch` and
+  `command -v apptainer`; both are there on lxplus and cmslpc) → run Combine in
+  the official container, in the user's directory. See
+  [Running in the /cvmfs container](#running-in-the-cvmfs-container).
+- **Neither** → use the `combine-run-remote` server.
 
 The mere presence of the `run_combine` tool is not a reason to use it: it is a
-fallback for users without a local Combine. Once `command -v combine` prints a
-path, treat `run_combine` as unavailable for the session.
+fallback for users with neither a local Combine nor the container. Once a
+local or container Combine is available, treat `run_combine` as unavailable
+for the session.
 
 > **The mistake to avoid.** The user says: "run
 > `combine -M AsymptoticLimits -d data/tutorials/counting/realistic-counting-experiment.txt`".
@@ -68,17 +76,19 @@ path, treat `run_combine` as unavailable for the session.
 > `combine -M AsymptoticLimits -d data/tutorials/counting/realistic-counting-experiment.txt`.
 > Read the expected limit from stdout. No `run_combine` call.
 
-The two ways of running Combine are different tools. The shell runs the real
-executable in the user's directory against their files. `run_combine` copies
-the files you pass into a throwaway sandbox on a remote server.
+The ways of running Combine are different tools. The shell and the container
+run the real executable in the user's directory against their files.
+`run_combine` copies the files you pass into a throwaway sandbox on a remote
+server.
 
-| Path                 | When                       | Inputs                                     | Limits                                        |
-| -------------------- | -------------------------- | ------------------------------------------ | --------------------------------------------- |
-| Shell                | `combine` is on `PATH`     | The user's files, by path                  | None; outputs persist                         |
-| `combine-run-remote` | `combine` is not on `PATH` | Only the files you pass, flat by base name | Size-capped inputs, shorter timeouts          |
-| Neither              | No Combine, no server      | —                                          | Don't run; explain from the `combine` sources |
+| Path                 | When                                       | Inputs                                     | Limits                                                      |
+| -------------------- | ------------------------------------------ | ------------------------------------------ | ----------------------------------------------------------- |
+| Shell                | `combine` is on `PATH`                     | The user's files, by path                  | None; outputs persist                                       |
+| `/cvmfs` container   | No `combine`, but `/cvmfs` and `apptainer` | The user's files, in the bound directories | Outputs persist; ~15 s start-up per command                 |
+| `combine-run-remote` | Neither, and the CERN network is reachable | Only the files you pass, flat by base name | Size-capped inputs, shorter timeouts; inputs leave the site |
+| None                 | No Combine, no container, no server        | —                                          | Don't run; explain from the `combine` sources               |
 
-In both cases run **one** Combine-family command at a time (`combine`,
+In every case run **one** Combine-family command at a time (`combine`,
 `text2workspace.py`, `combineCards.py`, `combineTool.py`): no pipes, redirects
 or chained commands.
 
@@ -90,6 +100,33 @@ or chained commands.
 - Read the exit code, stdout and stderr directly. A non-zero exit is the
   debugging case: cross-check `stderr` against the `combine` sources.
 - Output files (e.g. `higgsCombine*.root`) land in the working directory.
+
+## Running in the /cvmfs container
+
+When Combine isn't installed, run it from the official Combine container,
+which CVMFS serves unpacked: there is no image to pull, and the user's files
+stay on their site:
+
+```bash
+IMG=/cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-analysis/general/combine-container:CMSSW_16_0_0-combine_v11.1.0-harvester_v4.0.0
+apptainer exec --cleanenv -B /cvmfs -B "$PWD" "$IMG" bash -c \
+  'source /cvmfs/cms.cern.ch/cmsset_default.sh; cd /home/cmsusr/CMSSW_16_0_0/src; eval $(scramv1 runtime -sh); cd '"$PWD"'; combine -M AsymptoticLimits -d datacard.txt -m 125'
+```
+
+- Replace only the last part (`combine …`) with the command to run. Keep one
+  Combine command per call.
+- **`-B` must cover every directory the command reads or writes**: the working
+  directory (`-B "$PWD"`) and wherever the datacards and shape files live,
+  e.g. `-B /uscms_data` on cmslpc or `-B /eos` on lxplus. A path outside the
+  bound directories looks missing inside the container.
+- `/home/cmsusr/CMSSW_<version>` is the CMSSW area inside the image; its
+  version matches the image tag.
+- Tested with the tag above (Combine v11.1.0) on cmslpc (EL9, no CERN
+  network): about 14 s per command, printing `<<< v11.1.0 >>>`. The same image
+  runs combine-assistant's CI. Other tags are listed by
+  `ls -d /cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-analysis/general/combine-container:*`
+  (not tested here). Pick the version the user's analysis needs, and say
+  which one you used.
 
 ## Running through combine-run-remote
 
