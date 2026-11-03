@@ -34,8 +34,8 @@ JetHT Open Data.
 - Choosing the signal-trigger OR and a reference trigger for a new analysis
 - Measuring a turn-on curve and setting the offline cut (m_jj, HT, pT)
 - Quoting a plateau efficiency and its uncertainty in `summary.json` or a note
-- **Not** for trigger scale factors with tag-and-probe on leptons (use the
-  POG recipes and their correctionlib JSON instead)
+- **Not** for muon trigger, ID or isolation efficiencies with tag and probe on
+  Z → μμ: use the `muon-tag-and-probe` skill (and the POG correctionlib JSON)
 
 ## Key Concepts
 
