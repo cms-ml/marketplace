@@ -139,6 +139,14 @@ the `combine-run-remote` procedure and result fields, the reproduce → diagnose
   returning the whole page, and others), `## Docs`, and the `base64 -i`
   command for reading ROOT files (tested on macOS and Linux).
 - Added the four "How to behave" rules from `config/AGENTS.md`.
+- Added an execution route through the official Combine container on
+  `/cvmfs/unpacked.cern.ch` (tested by a reviewer on cmslpc), for sites
+  without a local Combine and off the CERN network.
+- Added a user-facing note that `run_combine` uploads the datacard and shape
+  files to a CERN-hosted service.
+- Added `references/datacards.md`, tested datacard patterns written for this
+  marketplace (not from combine-assistant), as a fallback when the server is
+  unreachable.
 
 **Keeping it up to date:** the skill is maintained upstream. To bring in later
 changes, follow "Skills adapted from combine-assistant" in the repository

@@ -107,7 +107,9 @@ in upstream changes:
 2. Port each change into `SKILL.md` or `references/`, following this file's
    skill rules. Don't copy upstream text wholesale: the adapted skill uses
    the plugin tool names (`mcp__plugin_cms_combine__…`), has no opencode
-   specifics, and keeps Gotchas and Docs.
+   specifics, and keeps Gotchas and Docs. Keep the additions that exist only
+   here (listed in `VENDORED-LICENSES.md`): the `/cvmfs` container route, the
+   upload note and `references/datacards.md`.
 3. If the MCP server URLs or names changed upstream (`config/opencode.json`),
    update `plugins/cms/.mcp.json` and the tool-name table.
 4. Update the release, commits and change list in
