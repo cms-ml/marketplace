@@ -28,6 +28,10 @@ significances and goodness-of-fit. This skill does two things:
   otherwise through the `combine-run-remote` MCP server (`run_combine`), a
   CERN service that runs one command in a throwaway workspace.
 
+`run_combine` sends the datacard and every shape file you pass to a
+CERN-hosted service. For an unpublished or blinded analysis, check that this
+is acceptable first, or run Combine locally.
+
 Most requests need retrieval only. Run something when the user reports a
 command that misbehaves, asks you to run or try something, or when
 reproducing a result would confirm a diagnosis.
@@ -201,6 +205,9 @@ Details, the result fields and a worked example are in
 - **HyperNews answers can be outdated.** Threads predate 2022 and may describe
   removed options. Cross-check version-sensitive answers in `combine-docs` or
   `combine-code`.
+- **`run_combine` uploads the inputs.** The datacard and shape files go to a
+  CERN-hosted server. For an unpublished analysis, ask the user before the
+  first upload, or use a local Combine.
 - **`combineTool.py` can submit batch jobs.** Never submit condor or crab jobs
   on the user's behalf.
 
