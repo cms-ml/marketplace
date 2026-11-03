@@ -52,8 +52,10 @@ the Bash tool. Its result decides everything else:
   works in an isolated workspace that can't see the user's files, so it fails
   to find them.
 - **`combine` is not on `PATH`, but the site has `/cvmfs/unpacked.cern.ch` and
-  `apptainer`** (check with `ls -d /cvmfs/unpacked.cern.ch` and
-  `command -v apptainer`; both are there on lxplus and cmslpc) → run Combine in
+  `apptainer`** (check with `test -d /cvmfs/unpacked.cern.ch` and
+  `command -v apptainer`; both are there on lxplus and cmslpc; `test -d`
+  avoids the permission prompt Claude Code gives for listing a directory
+  outside the working directory) → run Combine in
   the official container, in the user's directory. See
   [Running in the /cvmfs container](#running-in-the-cvmfs-container).
 - **Neither** → use the `combine-run-remote` server.
