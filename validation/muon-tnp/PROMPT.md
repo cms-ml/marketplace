@@ -52,6 +52,13 @@ Start by writing `specification.md` with the analysis-spec-builder skill.
 
 ### Inputs
 
+**Speed:** this validation uses every 5th file (sorted path order, files 0, 5, 10, ...) of
+each of the Run2016G and Run2016H SingleMuon listings instead of all files, so that both
+eras are covered in proportion (14 + 17 files, about 22% of the full G+H luminosity),
+and Condor jobs of 7-14 files. The luminosity is still that of exactly the processed,
+certified lumi sections. The DY MC has only 28 files in total (about 3 M events); all
+of them are used (see the MC-statistics gotcha: this is less than the data pairs).
+
 - Data: `/eos/opendata/cms/Run2016G/SingleMuon/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/`
   and the Run2016H counterpart, all files; golden JSON (Open Data record
   14220). Report the luminosity of the processed, certified lumi sections
