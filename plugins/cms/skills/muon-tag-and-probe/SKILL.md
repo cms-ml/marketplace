@@ -85,7 +85,9 @@ cs = correctionlib.CorrectionSet.from_file(".../POG/MUO/2016postVFP_UL/muon_Z.js
 sf = cs["NUM_TightID_DEN_TrackerMuons"]
 sf.evaluate(-1.5, 35.0, "nominal")   # eta (abs taken inside), pt [GeV], variation -> 0.9905
 sf.evaluate(-1.5, 35.0, "systup")    # stat+syst up boundary   -> 0.9944
-# variations: nominal, systup, systdown, stat, syst (+ AltSig, massBin, massRange, tagIso)
+# SFs: nominal, systup, systdown. Uncertainties (not SFs): stat, syst, AltSig, massBin,
+# massRange, tagIso; systup - nominal = hypot(stat, syst). The IsoMu24 correction has no
+# tagIso ("Index not available in Category ... tagIso").
 ```
 
 Pick the era directory that matches the data: `2016preVFP_UL` (B–F early) or
@@ -106,10 +108,17 @@ python3 <skill>/scripts/tnp.py \
 # N_BINS=31  MEAN_PULL=0.92  RMS_PULL=1.19  OUT=tnp_tightid.json
 ```
 
-One 2016 SingleMuon file (1.5 M events) gives about 94 000 pairs in 30 s and
-1.3 GB. For the full G+H dataset, run the pair selection on Condor
-(`lpc-condor` skill), save the flat pair arrays, and fit once at the end.
-`tnp_pairs()` and `fit_pass_fail()` can be imported for that.
+2016 SingleMuon files hold 1.3–3.4 M events (mean 2.3 M); `tnp.py` needs
+about 30 s and 1.3 GB per 1.5 M events (2.5 GB for a 2.9 M-event file). For more than a few files, run the
+pair selection on Condor (`lpc-condor` skill), write a flat pair table, and
+fit once at the end. Do not reuse `tnp_pairs()` for that: it returns one
+working point's arrays, applies the HLT requirement itself, and keeps no
+run, lumi or HLT columns, so you cannot apply the golden JSON, compute the
+luminosity or split by era. Store per pair: run, luminosityBlock, the HLT
+flags, m, tag and probe pT/η/ID/iso/IP and the matched trigger-object pT per
+filter bit; build every working point and systematic from that table.
+`fit_pass_fail()` can be imported. `validation/muon-tnp/condor/skim.py` in
+the marketplace repository is a tested example.
 
 ### 3. Pairs in Awkward
 
@@ -144,25 +153,41 @@ pulls and every `FIT-NOT-OK` bin.
 
 ## Gotchas
 
-- **Filter bits are not paths.** A bit marks a type of filter, not one path,
-  so the "Iso" bit (2) does not mean the object fired IsoMu24. In a Run2016H file,
-  4% of events that fired **neither** `HLT_IsoMu24` nor `HLT_IsoTkMu24` still
-  have a muon object with bit 2 and pT ≥ 24 GeV. A bit + pT match therefore
-  overestimates the IsoMu24 efficiency, and the measured trigger SF differed
-  from the POG by 1–3% (tested). Use the POG HLT SFs in analyses, treat a
-  NanoAOD trigger measurement as a cross-check, and always add the pT
-  threshold to the match.
-- **Too little MC fakes a bias.** With 30 000 DY MC events the tight-ID SF
-  was 1.5% above the POG in every bin (mean pull +2.1); with 1 M events the
-  same data gave mean pull +0.9 and RMS 1.2. Use at least as many MC events
-  as data pairs.
-- **Run-period dependence.** Trigger and isolation efficiencies change
-  through 2016: the IsoMu24 SF at |η| 2.1–2.4 was 0.990 in two Run2016G files
-  and 0.963 in two Run2016H files. Compare with the POG only with data that
-  spans the same luminosity-weighted period, or say which runs you used.
+- **The NanoAOD IsoMu24 SF sits above the POG, cause open.** On 3.55 fb⁻¹ of
+  2016G+H (probe pass = muon object with bit 2 or 8, pT ≥ 24 GeV, ΔR < 0.1)
+  the SF is 0.8–1.5% above `NUM_IsoMu24_or_IsoTkMu24_DEN_..._PFIsoTight` at
+  30–60 GeV (barrel 40–50 GeV: 0.9767 vs 0.9627). It does not move with the
+  fit, mass window, background shape, pileup weights, tag pT, era or the
+  event-level HLT requirement. It does depend on the pass definition: bit 2
+  alone brings |η| > 0.9 within 0.1% of the POG (barrel stays +1.1%). Use the
+  POG HLT SFs in analyses and treat a NanoAOD trigger SF as a cross-check.
+- **Filter bits are not paths.** A bit marks a type of filter (64% of the
+  unfired events with a bit-2 object fired IsoMu22), not one path. Always add the pT threshold to
+  the match: it matters for probes below about 30 GeV (26–30 GeV: ε_data 0.87
+  at ≥ 24 GeV, 0.71 at ≥ 27 GeV), not above. Require the event to have fired
+  `HLT_IsoMu24 | HLT_IsoTkMu24` (`tnp.py` does). With that, probes matched in
+  events that fired neither path are 5 × 10⁻⁵ of all matched probes, and
+  dropping or tightening the requirement moves the SF by < 0.001: this is not
+  the cause of the offset above.
+- **Too little MC fakes a bias.** The template and the MC efficiency
+  fluctuate together and push every bin the same way: tight-ID mean SF/POG was
+  1.011, 1.015, 1.008, 1.005 at MC/data pair ratios 0.009, 0.044, 0.22, 0.44.
+  Aim for MC/data ≥ 0.5. The 2016postVFP `ZToMuMu_M-50To120` powheg sample has
+  only 2.96 M events (1.8 M pairs), against about 19 M pairs in full G+H data,
+  so subsample the data or add `DYJetsToLL_M-50` (negative weights: use
+  sign(genWeight)).
+- **Run-period dependence is small; state it anyway.** Between Run2016G and
+  Run2016H (14 and 17 files) the SFs differ by at most 0.4% per bin: mean
+  SF_G − SF_H is −0.0014 ± 0.0004 (IsoMu24), −0.0002 ± 0.0003 (tight iso),
+  +0.0012 ± 0.0002 (tight ID). Two-file samples are too small to see this
+  (a 2.4σ fluctuation looked like a 3% IsoMu24 change). The postVFP POG JSON
+  covers late F, G and H; say which runs you used.
 - **Fits at ε → 1.** When the fail category is almost empty (isolation at
-  high pT), Minuit reports invalid errors (`FIT-NOT-OK`). Merge pT bins or
-  quote the counting result with a Clopper-Pearson interval.
+  high pT), Minuit may report invalid errors (`FIT-NOT-OK`), or a valid status
+  with a useless error (tight iso, |η| 2.1–2.4, pT > 120 GeV: SF error 0.53).
+  Check the error size, not only the status; merge pT bins or quote the
+  counting result with a Clopper-Pearson interval
+  (`scipy.stats.beta.ppf([0.16, 0.84], [k, k + 1], [n - k + 1, n - k])`).
 - **Use the POG denominator.** A tight-ID SF on all reconstructed muons is
   not the same as `..._DEN_TrackerMuons`, and an isolation SF without the IP
   cut is not `..._DEN_TightIDandIPCut`. A different denominator gives a

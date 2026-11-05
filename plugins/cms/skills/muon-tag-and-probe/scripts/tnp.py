@@ -142,6 +142,8 @@ def read(files, wp, is_mc, era, max_events, step="200 MB"):
     out, n = [], 0
     branches = BRANCHES + (MC_BRANCHES if is_mc else [])
     for arrays in uproot.iterate([f"{f}:Events" for f in files], branches, step_size=step):
+        if max_events:
+            arrays = arrays[: max_events - n]   # stop at max_events, not at the end of the chunk
         if is_mc:
             arrays["puw"] = puw.evaluate(np.clip(ak.to_numpy(arrays.Pileup_nTrueInt), 0, 98.9), "nominal")
         out.append(tnp_pairs(arrays, wp, is_mc))
