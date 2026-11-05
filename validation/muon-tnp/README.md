@@ -34,6 +34,11 @@ The weighted SF/POG (inverse-variance, stat+syst, bins 30-40, 40-50, 50-60 GeV) 
 120-200 and 200+ GeV bins with 1-6 percent errors and is given only for continuity. The pulls are not Gaussian (POG uncertainties are 0.02-0.1 percent at
 30-60 GeV, so any real offset of a few per mille gives |pull| of 3-20); the mean and RMS pull are a poor summary except for tight ID.
 
+Comparison with CMS: the counterpart is the official CMS Muon POG scale factor (`2016postVFP_UL/muon_Z.json.gz`, the result CMS analyses apply).
+`plots/sf_vs_cms_<wp>` overlays our SF and the CMS SF per |eta| bin with an ours/CMS ratio panel (CMS uncertainty as the band);
+`plots/sf_vs_cms_overview` shows the weighted ours/CMS ratio at 30-60 GeV per |eta| bin for the three working points; `plots/sf_ratio_map_<wp>` gives every bin with its pull.
+The POG JSON holds scale factors only, so the efficiencies themselves cannot be compared with CMS.
+
 SF at 40 < pT < 50 GeV (ours: stat, then syst; POG nominal):
 
 | \|eta\| | tight ID                   | POG    | tight iso                  | POG    | IsoMu24                    | POG    |
@@ -99,16 +104,17 @@ The tag match (fixed OR of bits 2|8, 24 GeV) could not be varied offline.
 
 ## Layout
 
-| File                                                                                  | Purpose                                                                             |
-| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---- | ----------------------------------------------------------------- |
-| `specification.md`                                                                    | spec (analysis-spec-builder)                                                        |
-| `condor/make_jobs.py`, `job.jdl`, `job.sh`, `skim.py`, `input_files.json`, `jobs.txt` | subset choice, Condor submission, WP-agnostic pair skim (payload)                   |
-| `tnplib.py`, `analysis.py`, `plotlib.py`                                              | selections, fits (nominal + variations), POG comparison, G vs H, filter bits, plots |
-| `explore_trigger.py`, `explore_trigger.json`                                          | event-level filter-bit check and trigger-match cone/threshold scan (40-50 GeV only) |
-| `REVIEW.md`                                                                           | external ARC review (not edited)                                                    |
-| `large_pull_notes.json`                                                               | hand-written status and note of each                                                | pull | > 5 bin (`explained` or `open_issue`, merged into `summary.json`) |
-| `run_all.sh`, `check_results.py`                                                      | rerun after the Condor step; checks (exit 0/1/2, `SUMMARY=n/n`)                     |
-| `summary.json`, `plots/`                                                              | outputs                                                                             |
+| File                                                                                  | Purpose                                                                                                         |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `specification.md`                                                                    | spec (analysis-spec-builder)                                                                                    |
+| `condor/make_jobs.py`, `job.jdl`, `job.sh`, `skim.py`, `input_files.json`, `jobs.txt` | subset choice, Condor submission, WP-agnostic pair skim (payload)                                               |
+| `tnplib.py`, `analysis.py`, `plotlib.py`                                              | selections, fits (nominal + variations), POG comparison, G vs H, filter bits, plots                             |
+| `explore_trigger.py`, `explore_trigger.json`                                          | event-level filter-bit check and trigger-match cone/threshold scan (40-50 GeV only)                             |
+| `REVIEW.md`                                                                           | external ARC review (not edited)                                                                                |
+| `large_pull_notes.json`                                                               | hand-written status and note of each \|pull\| > 5 bin (`explained` or `open_issue`, merged into `summary.json`) |
+| `plot_cms_comparison.py`                                                              | our SFs against the CMS Muon POG SFs from `summary.json`: `plots/sf_vs_cms_*`, `sf_ratio_map_*`                 |
+| `run_all.sh`, `check_results.py`                                                      | rerun after the Condor step; checks (exit 0/1/2, `SUMMARY=n/n`)                                                 |
+| `summary.json`, `plots/`                                                              | outputs                                                                                                         |
 
 ## Checks (`check_results.py`, stdlib only, exit 0/1/2, `SUMMARY=n/n`)
 

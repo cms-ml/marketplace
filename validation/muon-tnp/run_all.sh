@@ -25,4 +25,5 @@ P
 /usr/bin/time -v python3 explore_trigger.py --data "$DG" "$DH" --mc "$MC" --max-events 1000000 -o explore_trigger.json > "$SCRATCH/explore.log" 2>&1; echo EXIT $? >> "$SCRATCH/explore.log"
 /usr/bin/time -v python3 analysis.py --skims "$SCRATCH/skim" --work "$SCRATCH" > "$SCRATCH/analysis.log" 2>&1; echo EXIT $? >> "$SCRATCH/analysis.log"
 tail -3 "$SCRATCH/analysis.log"
+python3 plot_cms_comparison.py summary.json plots   # ours vs CMS Muon POG SF plots
 python3 check_results.py

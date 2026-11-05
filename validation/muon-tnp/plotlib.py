@@ -83,7 +83,8 @@ def map_plot(wp, S, lumi, outdir):
     ax.set_yticks(np.arange(len(etas)) + 0.5); ax.set_yticklabels([f"{e[0]:g}-{e[1]:g}" for e in etas])
     ax.set_xlabel(r"Probe $p_{T}$ [GeV]"); ax.set_ylabel(r"Probe $|\eta|$")
     ax.set_title(f"SF ours / SF POG (pull) : {TITLE[wp]}", fontsize=16, y=1.12)
-    fig.colorbar(im, ax=ax, label="SF ours / SF POG (colour range 0.95-1.05, numbers exact)")
+    cb = fig.colorbar(im, ax=ax); cb.set_label("SF ours / SF POG", fontsize=18)
+    ax.text(1.0, -0.2, "colour range 0.95-1.05; numbers exact", transform=ax.transAxes, ha="right", fontsize=12)
     label(ax, lumi, fs=14)
     save(fig, outdir, f"sf_ratio_map_{wp}")
 
