@@ -1,0 +1,44 @@
+# name | script (old = pre-change tnp.py, new = current) | data set (all, D1, D2) | MC set (all, A, B) | arguments
+# (a) preset equivalence: the pre-change script, the new presets, and the same definitions spelled out
+old_tightid | old | all | all | --wp tightid
+old_tightiso | old | all | all | --wp tightiso
+old_isomu24 | old | all | all | --wp isomu24
+wp_tightid | new | all | all | --wp tightid --syst --correctionlib @R/wp_tightid_cl.json
+wp_tightiso | new | all | all | --wp tightiso --syst --correctionlib @R/wp_tightiso_cl.json
+wp_isomu24 | new | all | all | --wp isomu24 --syst --correctionlib @R/wp_isomu24_cl.json
+expr_tightid | new | all | all | --den isTracker --num tightId --tag "tightId and pfRelIso04_all < 0.15" --tag-pt 29 --tag-trigger 2:24 --tag-hlt HLT_IsoMu24,HLT_IsoTkMu24 --pog NUM_TightID_DEN_TrackerMuons --mc-replicas 0
+expr_tightiso | new | all | all | --den "tightId & (abs(dxy) < 0.2) & (abs(dz) < 0.5)" --num "pfRelIso04_all < 0.15" --tag "tightId & (pfRelIso04_all < 0.15)" --tag-pt 29 --tag-trigger 2:24 --tag-hlt HLT_IsoMu24,HLT_IsoTkMu24 --pog NUM_TightRelIso_DEN_TightIDandIPCut --mc-replicas 0
+expr_isomu24 | new | all | all | --den "tightId & (pfRelIso04_all < 0.15)" --num-trigger 2:24 --tag-pt 29 --tag-trigger 2:24 --tag-hlt HLT_IsoMu24,HLT_IsoTkMu24 --pog NUM_IsoMu24_or_IsoTkMu24_DEN_CutBasedIdTight_and_PFIsoTight --mc-replicas 0
+# (b) new working points with a POG counterpart
+mediumid | new | all | all | --den isTracker --num mediumId --pog NUM_MediumID_DEN_TrackerMuons --name mediumid --syst --correctionlib @R/mediumid_cl.json
+looseid | new | all | all | --den isTracker --num looseId --pog NUM_LooseID_DEN_TrackerMuons --name looseid --syst --correctionlib @R/looseid_cl.json
+softid | new | all | all | --den isTracker --num softId --pog NUM_SoftID_DEN_TrackerMuons --name softid --syst
+highptid | new | all | all | --den isTracker --num "highPtId == 2" --pog NUM_HighPtID_DEN_TrackerMuons --name highptid --syst
+looseiso_med | new | all | all | --den mediumId --num "pfRelIso04_all < 0.25" --pog NUM_LooseRelIso_DEN_MediumID --name looseiso_medium --syst
+tkiso_loose | new | all | all | --den "highPtId == 2" --num "tkRelIso < 0.1" --pog NUM_LooseRelTkIso_DEN_HighPtIDandIPCut --name tkiso_loose --syst
+mvamedium | new | all | all | --den isTracker --num "mvaId >= 2" --name mvamedium --correctionlib @R/mvamedium_cl.json
+# (b) triggers without a POG counterpart, offline, explicit edges
+isomu22 | new | all | all | --den "tightId & (pfRelIso04_all < 0.15)" --num-trigger 2:22 --pt-edges 20 22 24 26 30 40 60 120 inf --no-pog --no-pu --name isomu22 --correctionlib @R/isomu22_cl.json
+mu17leg | new | all | all | --den "tightId & (pfRelIso04_all < 0.15)" --num-trigger 1:17 --pt-edges 15 17 19 22 26 30 40 60 120 inf --no-pog --no-pu --name mu17leg
+# (d) MC-statistics coverage: two independent halves of the MC, same data
+halfA_tightid | new | all | A | --wp tightid
+halfB_tightid | new | all | B | --wp tightid
+halfA_tightiso | new | all | A | --wp tightiso
+halfB_tightiso | new | all | B | --wp tightiso
+halfA_isomu24 | new | all | A | --wp isomu24
+halfB_isomu24 | new | all | B | --wp isomu24
+halfA_mediumid | new | all | A | --den isTracker --num mediumId --pog NUM_MediumID_DEN_TrackerMuons
+halfB_mediumid | new | all | B | --den isTracker --num mediumId --pog NUM_MediumID_DEN_TrackerMuons
+# (R5) golden-JSON lumi mask: the same working points with the mask, compared with the runs above
+mediumid_golden | new | all | all | --den isTracker --num mediumId --pog NUM_MediumID_DEN_TrackerMuons --mc-replicas 0 --lumi-mask @G
+softid_golden   | new | all | all | --den isTracker --num softId --pog NUM_SoftID_DEN_TrackerMuons --mc-replicas 0 --lumi-mask @G
+# (d2) data-statistics coverage: two independent halves of the data (G1+H2, G2+H4), same MC
+dsplit1_tightid  | new | D1 | all | --wp tightid --mc-replicas 0
+dsplit2_tightid  | new | D2 | all | --wp tightid --mc-replicas 0
+dsplit1_mediumid | new | D1 | all | --den isTracker --num mediumId --pog NUM_MediumID_DEN_TrackerMuons --mc-replicas 0
+dsplit2_mediumid | new | D2 | all | --den isTracker --num mediumId --pog NUM_MediumID_DEN_TrackerMuons --mc-replicas 0
+dsplit1_tightiso | new | D1 | all | --wp tightiso --mc-replicas 0
+dsplit2_tightiso | new | D2 | all | --wp tightiso --mc-replicas 0
+# (e) offline mode
+offline_flags | new | all | all | --wp tightid --no-pog --no-pu --max-events 1000000 --mc-replicas 10
+offline_badpath | new | all | all | --wp tightid --pog-json /nonexistent/muon_Z.json.gz --pu-json /nonexistent/puWeights.json.gz --max-events 1000000 --mc-replicas 10
