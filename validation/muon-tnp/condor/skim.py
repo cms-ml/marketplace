@@ -6,6 +6,9 @@ Writes one flat row per (tag, probe) ordered pair (each muon is tag once) that i
 the probe is any tracker muon (the loosest POG denominator); tight ID, IP, isolation and the
 trigger-object match of the probe are stored as columns, so that the three working points,
 the systematics and the filter-bit study are all done later without touching the NanoAOD again.
+Trigger matching is stored separately per filter bit for tag and probe: m2pt / m8pt = pT [GeV] of the
+matched bit-2 (Iso) / bit-8 (IsoTkMu) object of the probe (0 if none, dR < 0.1), tag2 / tag8 = the tag is matched to a
+bit-2 / bit-8 object with pT >= 24 GeV; hlt = bit mask of the HLT_Iso(Tk)Mu{22,24,27} paths (see HLT_NAMES).
 
 Tag: tight ID, PF iso < 0.15, pT > 29 GeV, |eta| < 2.4, matched (dR < 0.1) to a muon TrigObj with
 filter bit 2 (Iso) or 8 (IsoTkMu) and pT >= 24 GeV (the skill's definition, tnp.py).
@@ -72,7 +75,7 @@ def process(ev, is_mc, puw, selfcheck):
     w = np.ones(len(ev), dtype=np.float32)
     if is_mc:
         w = (np.sign(ak.to_numpy(ev.genWeight)) * puw).astype(np.float32)
-    cols = {"m": m, "tpt": t.pt, "teta": t.eta, "tiso": t.iso, "ppt": p.pt, "peta": p.eta, "piso": p.iso,
+    cols = {"m": m, "tpt": t.pt, "tiso": t.iso, "tag2": t.m2pt >= 24, "tag8": t.m8pt >= 24, "ppt": p.pt, "peta": p.eta, "piso": p.iso,
             "ptight": p.tightId, "pip": (abs(p.dxy) < 0.2) & (abs(p.dz) < 0.5), "m2pt": p.m2pt, "m8pt": p.m8pt,
             "hlt": b(hlt), "run": b(ev.run), "lumi": b(ev.luminosityBlock), "gen": p.gen, "w": b(w)}
     return {k: ak.to_numpy(ak.flatten(v[good])) for k, v in cols.items()}
@@ -121,7 +124,7 @@ def main(argv=None):
         info["files"].append({"url": f, "n_events": n_f, "n_pairs": n_p})
         print(f"{f.split('/')[-1]} events={n_f} pairs={n_p}", file=sys.stderr)
     arr = {k: np.concatenate([o[k] for o in out]) for k in out[0]}
-    for k in ("m", "tpt", "teta", "tiso", "ppt", "peta", "piso", "m2pt", "m8pt", "w"):
+    for k in ("m", "tpt", "tiso", "ppt", "peta", "piso", "m2pt", "m8pt", "w"):
         arr[k] = arr[k].astype(np.float32)
     arr["ls"] = np.unique(np.concatenate(ls))
     arr["info"] = np.array(json.dumps(info))

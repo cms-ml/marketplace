@@ -45,7 +45,7 @@ POWHEG Z to mumu MC with tag and probe, form data/MC scale factors, and compare 
    - Muons: |eta| < 2.4, pT > 15 GeV, `isTracker`
    - Tag: tight ID, `pfRelIso04_all < 0.15`, pT > 29 GeV, matched (dR < 0.1) to a muon TrigObj with filter bit 2 (Iso) or 8 (IsoTkMu), pT >= 24 GeV
    - Probe: the other muon of an opposite-charge pair, 70 < m < 115 GeV; every ordered pair is used (each muon is tag once)
-   - Stored per pair: m, tag pT/iso, probe pT/eta/iso, tight ID, IP cut, matched-object pT for bit 2 and bit 8, HLT flags, run, lumi section, MC gen-match and weight
+   - Stored per pair: m, tag pT/iso, tag match to bit 2 and to bit 8, probe pT/eta/iso, tight ID, IP cut, probe matched-object pT for bit 2 and bit 8, HLT flags, run, lumi section, MC gen-match and weight
 2. Working points (POG chain, all in `muon_Z.json.gz`)
    - `NUM_TightID_DEN_TrackerMuons`: probe isTracker; pass = tightId
    - `NUM_TightRelIso_DEN_TightIDandIPCut`: probe tight ID, |dxy| < 0.2, |dz| < 0.5 cm; pass = `pfRelIso04_all < 0.15`
@@ -65,10 +65,11 @@ POWHEG Z to mumu MC with tag and probe, form data/MC scale factors, and compare 
   - mass window 70-115 vs. 75-110 GeV
   - tag selection: tag pT > 33 GeV vs. 29 GeV; tag isolation < 0.05 vs. < 0.15 (the larger deviation is taken)
   - signal template (the POG `AltSig`) and MC-template statistics are not varied (not part of the minimum set); listed as a limitation
-- Trigger filter-bit study, probe pass definitions, all offline from the stored columns (the tag match is the stored OR of bits 2|8 and is not varied):
-  S = skill (event fired IsoMu24 or IsoTkMu24, probe matched to a bit 2 or 8 object, pT >= 24 GeV); A = bit + pT only, no HLT requirement;
-  C = path-specific (IsoMu24 fired and bit 2, or IsoTkMu24 fired and bit 8); B2 / B8 = event fired and bit 2 only / bit 8 only.
-  Plus a scan of the probe object pT threshold (24, 26, 27, 30 GeV) in the 26-30, 30-40 and 40-50 GeV probe bins.
+- Trigger matching study (IsoMu24), all offline from the stored columns (the skim stores the tag and probe matches to bit 2 and bit 8 separately, object pT >= 24 GeV, dR < 0.1, and the HLT_IsoMu22 / IsoTkMu22 / IsoMu24 / IsoTkMu24 flags):
+  (a) skill: tag and probe bit 2|8 (nominal); (b) tag bit 2, probe bit 2; (c) tag bit 2|8, probe bit 2; (d) tag bit 8, probe bit 8;
+  (e) path-aware: bit 2 if IsoMu24 fired, bit 8 if IsoTkMu24 fired (tag and probe); plus no-HLT and HLT-path-specific variants. Each is compared with the POG per bin, per |eta| at 40-50 GeV and weighted over 30-60 GeV.
+  A scan of the probe object pT threshold (24, 26, 27, 30 GeV) in the 26-30, 30-40 and 40-50 GeV probe bins for (a) and (b).
+- Input subset unchanged in this second round (same files as above, skim redone); the full G+H dataset and additional DY MC are out of scope by decision of the user.
 
 ## Workflow
 

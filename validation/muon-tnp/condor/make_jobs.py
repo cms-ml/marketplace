@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build jobs.txt (+ input_files.json) from make_filelist.py listings (lines '<idx> <url>').
 
-Data: every STEP-th file (sorted path order) of the Run2016G and Run2016H listings, in NG and NH jobs of
-contiguous files (G and H stay in separate jobs). MC: all files, dealt round-robin into NM jobs.
+Data: every STEP-th file (sorted path order, files 0, 5, 10, ...) of the Run2016G and Run2016H listings, in NG and NH jobs of
+contiguous files (G and H stay in separate jobs). MC: all files of the powheg ZToMuMu listing, dealt round-robin into NM jobs.
 Usage: make_jobs.py data_G.txt data_H.txt mc_all.txt [--step 5] -o jobs.txt
 """
 import argparse

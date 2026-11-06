@@ -21,6 +21,8 @@ Every 5th file (sorted path order) of the Run2016G (14 of 70) and Run2016H (17 o
 Processed and certified: **3.55 fb^-1** (G 1.62, H 1.93) = **21.7 percent** of the full G+H golden luminosity (16.39 fb^-1). 70.3 M data events,
 4.08 M data pairs (nominal, tight-ID denominator), 1.79 M MC pairs from 2.96 M MC events. The MC sample is exhausted: MC/data pairs = 0.44
 (the skill's rule "MC at least as many pairs as data" cannot be met even for this subset, and not at all for the full dataset).
+The skim was redone ("v2", same files, `condor/skim.py`) with separate bit-2 and bit-8 match columns for the tag and the probe and the HLT_IsoMu22 / IsoTkMu22 / IsoMu24 / IsoTkMu24 flags, to test
+the IsoMu24 matching definitions. Not done, by decision of the user: the full G+H dataset, additional DY MC (DYJetsToLL_M-50 exists in the Open Data, 41 amcatnloFXFX and 61 madgraphMLM files; not used) and a generator cross-check.
 
 ## Results
 
@@ -51,10 +53,10 @@ SF at 40 < pT < 50 GeV (ours: stat, then syst; POG nominal):
 - Tight ID agrees with the POG: no bin above 3 sigma, weighted SF/POG 1.0008. The nominal fit is bit-identical to `tnp.fit_pass_fail` on the test bin.
 - Tight iso is 0.3 percent above the POG at 30-60 GeV (weighted 1.0028; one bin above 5 sigma, nine above 3 sigma). A fit-free counting cross-check by the reviewer
   gives the same offset, so it is not a fit artefact. A part may be MC statistics (the MC-statistics ladder below was run for tight ID only).
-- **IsoMu24 is an open issue.** The SF is 0.8-1.5 percent above the POG at 30-60 GeV (weighted 1.013; 8 bins above 5 sigma, 21.6 sigma at barrel 40-50 GeV). It is robust against the fit,
-  mass window, background shape, pileup weights, tag pT, run era (G vs H) and the event-level HLT requirement (skill / no HLT / path-specific). It **depends on the probe pass definition**
-  (table below): with bit 2 (Iso) alone instead of bit 2 or bit 8, SF/POG at 40-50 GeV is 1.000-1.001 for |eta| > 0.9 and 1.012 in the barrel (weighted 30-60 GeV 1.008). This is a lead,
-  not an explanation: the tag match stays the OR of bits 2|8 (fixed in the skim, not changed offline) and I do not know the filters the POG probe definition uses. The cause is open.
+- **IsoMu24 with the skill's matching (a) is 0.8-1.5 percent above the POG** at 30-60 GeV (weighted 1.013; 8 bins above 5 sigma, 21.6 sigma at barrel 40-50 GeV). It is robust against the fit,
+  mass window, background shape, pileup weights, tag pT, run era (G vs H) and the event-level HLT requirement. **It is a matching effect, and it closes outside the barrel:** matching the tag and the probe to the
+  bit-2 (Iso, IsoMu24-type) object alone (definition b) gives SF/POG = 1.000-1.001 at 40-50 GeV for |eta| > 0.9 (weighted 30-60 GeV: 1.0007, 1.0019, 0.9992 in the |eta| 0.9-1.2, 1.2-2.1, 2.1-2.4 bins).
+  **The barrel does not close**: SF/POG stays 1.012 for |eta| < 0.9 at every pT from 26 to 120 GeV (weighted 1.0123). The cause of the barrel gap is open. The tag match is not the issue: (b) and (c) agree within 0.0003.
 - Median systematics at 30-60 GeV (SF units): tight ID stat 0.0007, background 0.0005, window 0.0003, tag 0.0003; tight iso 0.0007 / 0.0002 / 0.0001 / 0.0005;
   IsoMu24 0.0011 / 0.0007 / 0.0003 / 0.0006. All are small compared with the offsets above. The background shape is exponential vs second-order polynomial, the window
   70-115 vs 75-110 GeV, the tag pT > 29 vs 33 GeV and tag iso < 0.15 vs 0.05 (larger of the two taken). Not varied: signal template (POG `AltSig`), MC-template statistics.
@@ -77,25 +79,43 @@ have such an object, 1.0 M events) but it is the wrong denominator: only 2.3 per
 `tnp.py` requires the event to have fired anyway. 64 percent of the events of those 146 probes fired IsoMu22 (the skill's guess is supported), 23 percent fired none of the listed paths.
 This says nothing about a probe-level path ambiguity (a probe matched to an object of a looser filter in an event that fired because of the tag), which the event-level test cannot see.
 
-Probe pass definition (event fired; tag match fixed to bits 2|8; fits as the nominal; SF/POG at 40-50 GeV per |eta| bin, weighted over 30-60 GeV):
+IsoMu24 trigger-matching definitions (new skim with separate tag and probe columns per filter bit; same 3.55 fb^-1, same 28 MC files; fits as the nominal; object pT >= 24 GeV, dR < 0.1; the event must have fired
+HLT_IsoMu24 or HLT_IsoTkMu24 unless stated). SF ours / SF POG at 40-50 GeV per |eta| bin, and weighted (inverse variance, statistical) over the 30-60 GeV bins:
 
-| pass definition                       | 0-0.9  | 0.9-1.2 | 1.2-2.1 | 2.1-2.4 | weighted 30-60 GeV |
-| ------------------------------------- | ------ | ------- | ------- | ------- | ------------------ |
-| skill: bit 2 or 8, pT >= 24 (S)       | 1.0145 | 1.0094  | 1.0084  | 1.0162  | 1.0127             |
-| bit + pT only, no HLT requirement (A) | 1.0145 | 1.0093  | 1.0087  | 1.0167  | 1.0128             |
-| path-specific (C)                     | 1.0145 | 1.0093  | 1.0084  | 1.0163  | 1.0127             |
-| bit 2 only (B2)                       | 1.0118 | 1.0000  | 1.0009  | 1.0002  | 1.0081             |
-| bit 8 only (B8)                       | 0.9857 | 0.9664  | 0.9630  | 0.9804  | 0.9753             |
+| definition                                                                      | 0-0.9  | 0.9-1.2 | 1.2-2.1 | 2.1-2.4 | weighted 30-60 GeV (by                     | eta | bin: 0-0.9 / 0.9-1.2 / 1.2-2.1 / 2.1-2.4) |
+| ------------------------------------------------------------------------------- | ------ | ------- | ------- | ------- | ------------------------------------------ | --- | ----------------------------------------- |
+| (a) skill: tag bit 2\|8, probe bit 2\|8                                         | 1.0145 | 1.0094  | 1.0084  | 1.0162  | 1.0127 (1.0147 / 1.0098 / 1.0097 / 1.0152) |
+| (b) tag bit 2, probe bit 2                                                      | 1.0121 | 1.0000  | 1.0010  | 1.0010  | 1.0082 (1.0123 / 1.0007 / 1.0019 / 0.9992) |
+| (c) tag bit 2\|8, probe bit 2 (previous round "B2")                             | 1.0118 | 1.0000  | 1.0009  | 1.0002  | 1.0081 (1.0122 / 1.0007 / 1.0017 / 0.9986) |
+| (d) tag bit 8, probe bit 8                                                      | 0.9880 | 0.9687  | 0.9600  | 0.9814  | 0.9766 (0.9828 / 0.9709 / 0.9646 / 0.9809) |
+| (e) path-aware tag and probe (bit 2 if IsoMu24 fired, bit 8 if IsoTkMu24 fired) | 1.0145 | 1.0093  | 1.0084  | 1.0163  | 1.0127 (1.0147 / 1.0097 / 1.0096 / 1.0152) |
+| (n) bit 2\|8 and pT only, no HLT requirement                                    | 1.0145 | 1.0093  | 1.0087  | 1.0167  | 1.0128 (1.0147 / 1.0097 / 1.0100 / 1.0156) |
+| (b) with HLT_IsoMu24 required                                                   | 1.0121 | 1.0001  | 1.0011  | 1.0010  | 1.0082                                     |
 
-Probe object pT threshold (S definition): 3.2 percent of matched probes have a matched-object pT in [24, 27) GeV. The threshold matters below about 30 GeV: all-|eta| counting efficiency
-(80-100 GeV) in the 26-30 GeV bin is 0.876 (data) / 0.901 (MC) at >= 24 GeV, 0.867 / 0.893 at >= 26, 0.709 / 0.733 at >= 27. The SF moves much less (barrel 26-30 GeV: 0.9685, 0.9672, 0.9593 for 24, 26, 27 GeV;
-weighted SF/POG over 26-50 GeV 1.0128, 1.0128, 1.0125). At 30-50 GeV the thresholds 24-27 give identical results (object pT is close to the offline pT there), so the scan at 40-50 GeV alone is vacuous.
-The tag match (fixed OR of bits 2|8, 24 GeV) could not be varied offline.
+Reading: bit 2 alone (b, c) removes the offset outside the barrel and about 0.3 percent in the barrel; bit 8 alone (d) gives 1.5-4 percent below the POG (the IsoTkMu-type object has a lower
+data/MC efficiency ratio); the path-aware definition (e) equals the OR (a) to 1e-4, because bit-8 objects exist whenever IsoTkMu24 fired, so the HLT flags add nothing; requiring the event-level
+path (a vs n, b vs b with HLT) changes SF/POG by less than 0.0005. Fit status: one bin (|eta| 0.9-1.2, 26-30 GeV) is not valid for (b) and (c) (and one other bin for (d) with the IsoTkMu24 requirement);
+the weighted numbers are not affected beyond their errors. Only the matching definition changes between rows: the tag selection, pairs, MC and systematics are the same as in the nominal measurement,
+and the nominal IsoMu24 SF in the tables above remains (a), the skill's definition. Tight ID, tight iso and G vs H, rerun from the new skim, are bit-identical to the previous results (max |dSF| = 0 over all 91 bins).
+
+Probe object pT threshold (probe pT bins 26-30, 30-40, 40-50 GeV; the tag match is fixed at 24 GeV): 3.2 percent of matched probes have a matched-object pT in [24, 27) GeV. The threshold
+matters below about 30 GeV for the efficiencies (all-|eta| counting, 80-100 GeV window, 26-30 GeV bin, data / MC): (a) 0.876 / 0.901 at >= 24 GeV, 0.867 / 0.893 at >= 26, 0.709 / 0.733 at >= 27;
+(b) 0.858 / 0.888, 0.838 / 0.867, 0.675 / 0.702. In the 30-40 and 40-50 GeV bins thresholds from 24 to 27 GeV give identical results. The weighted SF/POG moves much less:
+
+| definition | probe pT bin | >= 24 GeV | >= 26 GeV | >= 27 GeV |
+| ---------- | ------------ | --------- | --------- | --------- |
+| (a)        | 26-30        | 1.0189    | 1.0183    | 1.0118    |
+| (a)        | 30-40        | 1.0129    | 1.0129    | 1.0129    |
+| (b)        | 26-30        | 1.0135    | 1.0133    | 1.0072    |
+| (b)        | 30-40        | 1.0088    | 1.0088    | 1.0087    |
+
+A threshold of 30 GeV removes nearly all probes of the 26-30 GeV bin (efficiency 0.04) and is not meaningful there. The earlier scan at 40-50 GeV only (`explore_trigger.json`, matching cones 0.05-0.5) was vacuous
+for the threshold. The threshold choice moves the SF by up to 0.6 percent below 30 GeV and does not touch the barrel offset at 30-60 GeV.
 
 ## Skill findings (details in `SKILLS_USED.md`)
 
-1. The filter-bit gotcha overstates the problem: the event-level bias is negligible (4.6e-5) and does not explain the trigger SF excess. The 0.8-1.5 percent IsoMu24 excess is an open issue,
-   with a lead in the pass definition (bit 2 alone brings |eta| > 0.9 within 0.1 percent of the POG).
+1. The filter-bit gotcha overstates the problem: the event-level bias is negligible (4.6e-5). The IsoMu24 excess is a matching-definition effect: matching tag and probe to the bit-2 (Iso) object only brings
+   the SF to within 0.2 percent of the POG for |eta| > 0.9 (weighted 30-60 GeV 1.0007, 1.0019, 0.9992); the barrel stays 1.2 percent high (open). Matching to the bit-8 object alone is 1.5-4 percent low, and the skill's OR is 1.0-1.5 percent high.
 2. `tnp.py` / `tnp_pairs()` cannot be used for a full Open Data measurement as is: no run/lumi (no golden JSON, no G/H split), no luminosity, WP-specific pairs (three passes over the data),
    no systematics options, `--max-events` only honoured per 200 MB chunk. I wrote `condor/skim.py` (WP-agnostic pair table) and `tnplib.py` (varied fit) around the skill code.
 3. The MC-statistics gotcha is correct and quantified here (tight-ID mean SF/POG 1.011 with 0.9 percent of the pairs, 1.0145, 1.0077, 1.0046 with MC/data pairs 0.044, 0.22, 0.44), but DY ZToMuMu
@@ -124,7 +144,7 @@ Criteria and why they are what they are:
 - Tight ID: RMS pull < 2 (kept).
 - Tight ID and tight iso: weighted SF/POG over 30-60 GeV within 1 percent of 1. **Changed** from "tight-iso RMS pull < 2": the POG uncertainties are 0.02-0.1 percent in the high-statistics bins, so a real 0.3 percent
   offset gives |pull| up to 5 and the RMS pull (2.54) says more about the POG's quoted precision than about the agreement. The tolerance is in SF units. The RMS pull of tight iso and IsoMu24 is printed as INFO.
-- IsoMu24: weighted SF/POG at 30-60 GeV printed as INFO (open issue, no threshold), plus G vs H and the filter-bit numbers.
+- IsoMu24: weighted SF/POG at 30-60 GeV of the nominal (a) is printed as INFO (open issue, no threshold). **New:** for the bit-2 definition (b) the weighted SF/POG at 30-60 GeV must be within 1 percent of 1 in each |eta| bin above 0.9 (PASS: 1.0007, 1.0019, 0.9992). The barrel (+1.2 percent) is printed as INFO and is deliberately not a criterion, because it is the unexplained remainder of the issue; it would fail a 1 percent tolerance. The INFO lines list definitions (a)-(e) with their weighted SF/POG per |eta| bin, plus G vs H and the filter-bit numbers.
 - |pull| > 5: every such bin must carry a structured note in `large_pull_notes.json` (`status` = `explained` or `open_issue` and a non-empty `note`); an empty or unstructured note fails.
   Bins with status `open_issue` are counted separately and printed as INFO (currently 9, none explained): they are accepted, not explained.
 
@@ -138,7 +158,7 @@ for r in G H; do $L/make_filelist.py --xrootd-dir $O/Run2016$r/SingleMuon/NANOAO
 $L/make_filelist.py --xrootd-dir $O/mc/RunIISummer20UL16NanoAODv9/ZToMuMu_M-50To120_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM --files-per-job 1 -o <scratch>/mc_all.txt
 cd validation/muon-tnp/condor
 python3 make_jobs.py <scratch>/data_G.txt <scratch>/data_H.txt <scratch>/mc_all.txt -o jobs.txt     # every 5th data file: 4 data + 2 MC jobs
-eos root://cmseos.fnal.gov mkdir -p /store/user/$USER/tnp/skim; mkdir -p logs
+eos root://cmseos.fnal.gov mkdir -p /store/user/$USER/tnp/skim_v2; mkdir -p logs
 condor_submit job.jdl                                                                                # about 6 minutes
 cd ../../..
 # 2. after the jobs finished (6 x output_{G0,G1,H0,H1,mc0,mc1}.npz on EOS)

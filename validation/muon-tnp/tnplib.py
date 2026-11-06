@@ -59,38 +59,66 @@ def recorded_lumi_fb(csv_path, keys):
 
 
 # ------------------------------------------------------------------ selection
+# IsoMu24 trigger-matching definitions: name -> (tag match, probe pass, HLT requirement of the event).
+# Match kinds: 'or' = bit 2 or bit 8 object, '2' = bit 2 (Iso) object only, '8' = bit 8 (IsoTkMu) object only,
+# 'path' = bit 2 object if HLT_IsoMu24 fired or bit 8 object if HLT_IsoTkMu24 fired. Object pT >= 24 GeV (probe: `thr`), dR < 0.1.
+# HLT kinds: 'or' = HLT_IsoMu24 or HLT_IsoTkMu24, 'mu24' / 'tk24' = that path alone, 'none' = no HLT requirement.
+TRIG_DEFS = {
+    "a": ("or", "or", "or"),       # the skill (tnp.py): tag and probe bit 2|8
+    "b": ("2", "2", "or"),         # tag bit 2, probe bit 2
+    "c": ("or", "2", "or"),        # tag bit 2|8, probe bit 2 (the previous round's "B2")
+    "d": ("8", "8", "or"),         # tag bit 8, probe bit 8
+    "e": ("path", "path", "or"),   # path-aware tag and probe
+    "e2": ("or", "path", "or"),    # path-aware probe, tag bit 2|8 (the previous round's "C")
+    "n": ("or", "or", "none"),     # bit 2|8 and pT only, no HLT requirement (the previous round's "A")
+    "b_hlt": ("2", "2", "mu24"),   # as b, event fired HLT_IsoMu24
+    "d_hlt": ("8", "8", "tk24"),   # as d, event fired HLT_IsoTkMu24
+}
+
+
 def fired(d):
     return (d["hlt"] & 3) != 0
 
 
-def wp_masks(d, wp, trig="S", tag_pt=29.0, tag_iso=0.15, mlo=70.0, mhi=115.0, thr=24.0):
+def _match(d, kind, who, thr):
+    if who == "tag":
+        b2, b8 = d["tag2"], d["tag8"]
+    else:
+        b2, b8 = d["m2pt"] >= thr, d["m8pt"] >= thr
+    if kind == "or":
+        return b2 | b8
+    if kind == "2":
+        return b2
+    if kind == "8":
+        return b8
+    if kind == "path":
+        return (((d["hlt"] & 1) != 0) & b2) | (((d["hlt"] & 2) != 0) & b8)
+    raise ValueError(kind)
+
+
+def wp_masks(d, wp, trig="a", tag_pt=29.0, tag_iso=0.15, mlo=70.0, mhi=115.0, thr=24.0):
     """(denominator mask, passing mask) of the probes of working point `wp`.
 
-    trig (isomu24 only matters for the pass definition; 'S' and 'C' also require the event to have fired):
-      S = skill (tnp.py): event fired IsoMu24 or IsoTkMu24; pass = bit 2 or 8 object within dR 0.1 with pT >= 24 GeV
-      A = bit match only, no HLT requirement at all (the filter-bit-only definition)
-      C = path specific: (IsoMu24 fired and bit-2 match) or (IsoTkMu24 fired and bit-8 match)
-      B2 / B8 = event fired + probe matched to a bit-2 (Iso) object only / a bit-8 (IsoTkMu) object only
-    thr: matched-object pT threshold [GeV] of the probe (the tag match stays at 24 GeV, bits 2 | 8, fixed in the skim).
+    trig selects the IsoMu24 matching definition in TRIG_DEFS (tag match, probe pass, event HLT requirement). It also sets the tag
+    match and the HLT requirement of the tight-ID and tight-iso pairs ('a' = the skill's selection, the nominal one).
+    thr: matched-object pT threshold [GeV] of the probe (the tag match is at 24 GeV, fixed in the skim).
     """
+    tagk, prbk, hltk = TRIG_DEFS[trig]
     base = (d["tpt"] > tag_pt) & (d["tiso"] < tag_iso) & (d["m"] > mlo) & (d["m"] < mhi)
-    if trig != "A":
+    if tagk != "or":
+        base &= _match(d, tagk, "tag", thr)
+    if hltk == "or":
         base &= fired(d)
+    elif hltk == "mu24":
+        base &= (d["hlt"] & 1) != 0
+    elif hltk == "tk24":
+        base &= (d["hlt"] & 2) != 0
     if wp == "tightid":
         return base, d["ptight"]
     if wp == "tightiso":
         return base & d["ptight"] & d["pip"], d["piso"] < 0.15
     if wp == "isomu24":
-        den = base & d["ptight"] & (d["piso"] < 0.15)
-        if trig == "C":
-            ps = (((d["hlt"] & 1) != 0) & (d["m2pt"] >= thr)) | (((d["hlt"] & 2) != 0) & (d["m8pt"] >= thr))
-        elif trig == "B2":
-            ps = d["m2pt"] >= thr
-        elif trig == "B8":
-            ps = d["m8pt"] >= thr
-        else:
-            ps = (d["m2pt"] >= thr) | (d["m8pt"] >= thr)
-        return den, ps
+        return base & d["ptight"] & (d["piso"] < 0.15), _match(d, prbk, "probe", thr)
     raise ValueError(wp)
 
 
@@ -188,7 +216,7 @@ def _groups(d, mask, eta_e, pt_e):
     return out
 
 
-def measure(dd, dm, wp, trig="S", tag_pt=29.0, tag_iso=0.15, mlo=70.0, mhi=115.0, bkg="exp", sel_d=None, min_n=50,
+def measure(dd, dm, wp, trig="a", tag_pt=29.0, tag_iso=0.15, mlo=70.0, mhi=115.0, bkg="exp", sel_d=None, min_n=50,
             keep_hists=False, thr=24.0):
     """Per-bin efficiencies and SF for one analysis variation.
 

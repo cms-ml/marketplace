@@ -10,7 +10,7 @@ if !defined JOBS
   JOBS = jobs.txt
 endif
 if !defined OUTDIR
-  OUTDIR = root://cmseos.fnal.gov//store/user/$ENV(USER)/tnp/skim
+  OUTDIR = root://cmseos.fnal.gov//store/user/$ENV(USER)/tnp/skim_v2
 endif
 arguments = "$(jobid) $(inputs) $(OUTDIR)"
 environment = "ENV_MODE=lcg OUT_EXT=npz"

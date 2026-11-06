@@ -112,8 +112,20 @@ def main() -> int:
     if "filter_bits" in s:
         fb = s["filter_bits"]
         fr = fb["data"]["fraction_matched_probes_in_event_fired_neither"]
-        check("filter-bit fraction reported", 0.0 <= fr <= 1.0 and "bias_SF_A_minus_S_mean" in fb,
-              f"matched probes in events that fired neither path: {fr:.2e}; mean SF shift bit-only vs skill {fb['bias_SF_A_minus_S_mean']:+.4f}, path-specific vs skill {fb['bias_SF_C_minus_S_mean']:+.4f}")
+        check("filter-bit fraction reported", 0.0 <= fr <= 1.0 and "bias_SF_n_minus_a_mean" in fb,
+              f"matched probes in events that fired neither path: {fr:.2e}; mean SF shift no-HLT vs skill {fb['bias_SF_n_minus_a_mean']:+.4f}, path-aware probe vs skill {fb['bias_SF_e2_minus_a_mean']:+.4f}")
+        m = fb["measurement"]
+        names = {"a": "tag 2|8, probe 2|8 (skill)", "b": "tag 2, probe 2", "c": "tag 2|8, probe 2", "d": "tag 8, probe 8", "e": "path-aware"}
+        for k, nm in names.items():
+            v = m[k]
+            be = ", ".join(f"{e}: {x:.4f}" for e, x in sorted(v["weighted_SF_over_POG_30_60GeV_by_eta"].items(), key=lambda t: float(t[0])))
+            info(f"IsoMu24 ({k}) {nm}", f"SF/POG weighted 30-60 GeV {v['weighted_SF_over_POG_30_60GeV']:.4f}; by |eta| bin lower edge ({be})")
+        # Physics criterion for the bit-2 definition (b): outside the barrel its weighted SF/POG at 30-60 GeV is within 1% of 1 per |eta| bin.
+        # The barrel (|eta| < 0.9) stays about +1.2% high: reported as an open issue (INFO), not a criterion.
+        by = {float(e): x for e, x in m["b"]["weighted_SF_over_POG_30_60GeV_by_eta"].items()}
+        bad = {e: x for e, x in by.items() if e >= 0.9 and abs(x - 1.0) > 0.01}
+        check("IsoMu24 (b) weighted SF/POG within 1% for |eta| > 0.9", not bad, f"{ {e: round(x, 4) for e, x in by.items() if e >= 0.9} }; violations {bad or 'none'}")
+        info("IsoMu24 (b) barrel (open issue)", f"SF/POG {by.get(0.0, float('nan')):.4f} for |eta| 0-0.9, not covered by a criterion")
 
     # --- files: plots, no personal paths
     plots = os.path.join(base, "plots")

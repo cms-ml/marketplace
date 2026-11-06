@@ -154,21 +154,26 @@ def gh_plot(wp, S, lumi, outdir):
 
 def filterbit_plot(S, lumi, outdir):
     d = S["filter_bits"]["measurement"]
-    fig, ax = plt.subplots(1, 2, figsize=(14, 5.5))
-    names = {"S": "skill (event fired + bit + pT)", "A": "bit + pT only", "C": "path-specific"}
-    cols = {"S": "k", "A": "tab:red", "C": "tab:green"}
-    for t in "SAC":
-        bb = [b for b in d[t]["bins"] if b["pt_lo"] == 40.0]
-        xs = np.arange(len(bb)) + {"S": -0.15, "A": 0.0, "C": 0.15}[t]
-        ax[0].errorbar(xs, [b["sf"] for b in bb], yerr=[b["sf_stat"] for b in bb], fmt="o", color=cols[t], label=names[t])
-    ax[0].plot(np.arange(len(bb)), [b["pog_sf"] for b in bb], "_", color="tab:blue", ms=40, mew=2, label="POG")
-    ax[0].set_xticks(np.arange(len(bb))); ax[0].set_xticklabels([f"{b['aeta_lo']:g}-" for b in bb])
-    ax[0].set_xlabel(r"Probe $|\eta|$ bin (lower edge), $p_T$ 40-50 GeV"); ax[0].set_ylabel("IsoMu24 SF"); ax[0].legend(fontsize=12)
-    for nm, c in (("data", "k"), ("mc", "tab:red")):
-        f = S["filter_bits"][nm]
-        ax[1].bar(nm, 100 * f["fraction_matched_probes_in_event_fired_neither"], color=c)
-    ax[1].set_ylabel("Matched probes in events with neither path fired [%]")
-    label(ax[0], lumi, fs=13)
+    names = {"a": "(a) skill: tag, probe bit 2|8", "b": "(b) tag bit 2, probe bit 2", "c": "(c) tag 2|8, probe bit 2",
+             "d": "(d) tag bit 8, probe bit 8", "e": "(e) path-aware tag, probe"}
+    cols = {"a": "k", "b": "tab:red", "c": "tab:orange", "d": "tab:purple", "e": "tab:green"}
+    marks = {"a": "o", "b": "s", "c": "^", "d": "v", "e": "D"}
+    etas = sorted(float(k) for k in d["a"]["SF_over_POG_40_50_by_eta"])
+    lab = ["0-0.9", "0.9-1.2", "1.2-2.1", "2.1-2.4"]
+    fig, ax = plt.subplots(1, 2, figsize=(15, 6.5), sharey=True)
+    for k, t in enumerate(names):
+        off = (k - 2) * 0.12
+        v1 = [d[t]["SF_over_POG_40_50_by_eta"][str(e)] if str(e) in d[t]["SF_over_POG_40_50_by_eta"] else d[t]["SF_over_POG_40_50_by_eta"][e] for e in etas]
+        v2 = [d[t]["weighted_SF_over_POG_30_60GeV_by_eta"][str(e)] if str(e) in d[t]["weighted_SF_over_POG_30_60GeV_by_eta"] else d[t]["weighted_SF_over_POG_30_60GeV_by_eta"][e] for e in etas]
+        ax[0].plot(np.arange(len(etas)) + off, v1, marks[t], color=cols[t], ms=9, label=names[t])
+        ax[1].plot(np.arange(len(etas)) + off, v2, marks[t], color=cols[t], ms=9, label=names[t])
+    for a, ttl in zip(ax, ("$p_T$ 40-50 GeV", "weighted over $p_T$ 30-60 GeV")):
+        a.axhline(1.0, color="tab:blue", lw=2); a.set_xticks(range(len(etas))); a.set_xticklabels(lab[:len(etas)])
+        a.set_xlabel(r"Probe $|\eta|$"); a.set_title(ttl, fontsize=16, y=1.0)
+    ax[0].set_ylabel("IsoMu24 SF ours / SF POG"); ax[0].legend(fontsize=12, loc="lower left")
+    ax[0].set_ylim(0.95, 1.03)
+    label(ax[0], lumi, fs=14)
+    fig.subplots_adjust(top=0.85)
     save(fig, outdir, "filter_bits")
 
 

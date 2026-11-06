@@ -68,6 +68,14 @@ def overview(S, lumi, outdir, ptlo=30.0, pthi=60.0):
             xs.append(j + 0.15 * (k - 1)); ys.append(np.sum(w * q) / np.sum(w)); es.append(1 / np.sqrt(np.sum(w)))
         m, c = style.get(wp, ("o", None))
         ax.errorbar(xs, ys, yerr=es, fmt=m, color=c, ms=9, label=TITLE[wp].split(" (")[0])
+    if "filter_bits" in S:   # IsoMu24 with bit-2 matching for tag and probe (definition b), stat uncertainty only
+        bb = [r for r in S["filter_bits"]["measurement"]["b"]["bins"] if r["pt"][0] >= ptlo and r["pt"][1] and r["pt"][1] <= pthi]
+        xs, ys, es = [], [], []
+        for j, e in enumerate(etas):
+            rr = [r for r in bb if r["aeta_lo"] == e[0]]
+            q = np.array([r["sf_over_pog"] for r in rr]); s_ = np.array([np.hypot(r["sf_stat"], r["pog_unc"]) / r["pog_sf"] for r in rr]); w = 1 / s_ ** 2
+            xs.append(j + 0.15 * 2); ys.append(np.sum(w * q) / np.sum(w)); es.append(1 / np.sqrt(np.sum(w)))
+        ax.errorbar(xs, ys, yerr=es, fmt="D", color="tab:green", mfc="none", ms=9, label="IsoMu24, tag and probe bit 2 only (stat)")
     ax.axhline(1, color="gray", ls="--")
     ax.set_xticks(range(len(etas))); ax.set_xticklabels([f"{e[0]:g}-{e[1]:g}" for e in etas])
     ax.set_xlabel(r"Probe $|\eta|$"); ax.set_ylabel(f"SF ours / SF CMS ({ptlo:g}-{pthi:g} GeV)")

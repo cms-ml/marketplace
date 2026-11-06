@@ -254,6 +254,10 @@ def _js(o):
     raise TypeError(type(o))
 
 
+def _wr(rows):
+    return T.weighted_ratio_30_60([dict(r, sf_total_err=r["sf_stat"]) for r in rows])
+
+
 def _bin_index(d, mask, eta_e, pt_e):
     return T._groups(d, mask, eta_e, pt_e)
 
@@ -262,7 +266,7 @@ def filter_bit_study(dd, dm, isG, pdat, wpsum):
     """How often a probe matched to an Iso/IsoTkMu object (pT >= 24 GeV) is in an event that fired neither path, and its effect."""
     out = {}
     for nm, d in (("data", dd), ("mc", dm)):
-        den, _ = T.wp_masks(d, "isomu24", "A")           # denominator without any HLT requirement
+        den, _ = T.wp_masks(d, "isomu24", "n")           # denominator without any HLT requirement
         matched = den & ((d["m2pt"] >= 24) | (d["m8pt"] >= 24))
         f = T.fired(d)
         neither = ~f
@@ -282,20 +286,20 @@ def filter_bit_study(dd, dm, isG, pdat, wpsum):
             mt = den & ((d["m2pt"] >= thr) | (d["m8pt"] >= thr))
             o[f"fraction_matched_in_neither_objpt_ge_{thr}"] = float((mt & neither).sum() / mt.sum())
         out[nm] = o
-    # effect on the measurement: skill definition (S), bit-only (A), path-specific (C), bit-2-only (B2), bit-8-only (B8)
-    # (the tag match stays the stored OR of bits 2|8 for all variants: it cannot be changed offline)
-    res = {t: T.measure(dd, dm, "isomu24", trig=t) for t in ("S", "A", "C", "B2", "B8")}
+    # IsoMu24 matching definitions (tnplib.TRIG_DEFS): a skill OR, b tag2 & probe2, c tag OR & probe2, d tag8 & probe8, e path-aware, ...
     eta_e, pt_e = pdat["eta_e"], pdat["pt_e"]
-    pog = {k: T.pog_values("isomu24", eta_e[k[0]], eta_e[k[0] + 1], pt_e[k[1]], pt_e[k[1] + 1]) for k in res["S"]}
+    res = {t: T.measure(dd, dm, "isomu24", trig=t) for t in T.TRIG_DEFS}
+    pog = {k: T.pog_values("isomu24", eta_e[k[0]], eta_e[k[0] + 1], pt_e[k[1]], pt_e[k[1] + 1]) for k in res["a"]}
 
     def pack(r):
         rows = []
         for k in sorted(r):
-            if k not in res["S"]:
+            if k not in res["a"]:
                 continue
             p, pu = pog[k]
             rows.append(dict(label=binlab(k, eta_e, pt_e), eff_data=r[k]["eff_data"], eff_mc=r[k]["eff_mc"], sf=r[k]["sf"], sf_stat=r[k]["sf_stat"],
-                             pog_sf=p, pull_stat_only=(r[k]["sf"] - p) / math.hypot(r[k]["sf_stat"], pu), fit_ok=r[k]["fit_ok"],
+                             sf_over_pog=r[k]["sf"] / p, n_data=r[k]["n_data"],
+                             pog_sf=p, pog_unc=pu, pull_stat_only=(r[k]["sf"] - p) / math.hypot(r[k]["sf_stat"], pu), fit_ok=r[k]["fit_ok"],
                              pt=[float(pt_e[k[1]]), float(pt_e[k[1] + 1])], pt_lo=float(pt_e[k[1]]), aeta_lo=float(eta_e[k[0]])))
         return rows
 
@@ -303,58 +307,67 @@ def filter_bit_study(dd, dm, isG, pdat, wpsum):
     for t, r in res.items():
         rows = pack(r)
         m, rm, _ = pulls_of(rows, "pull_stat_only")
-        defs[t] = dict(bins=rows, mean_pull_stat_only=m, rms_pull_stat_only=rm,
+        defs[t] = dict(match=dict(zip(("tag", "probe", "hlt"), T.TRIG_DEFS[t])), bins=rows, n_bins=len(rows), mean_pull_stat_only=m, rms_pull_stat_only=rm,
+                       n_fit_not_ok=int(sum(not x["fit_ok"] for x in rows)),
                        mean_SF_over_POG_all_bins_unweighted=float(np.mean([x["sf"] / x["pog_sf"] for x in rows])),
                        weighted_SF_over_POG_30_60GeV=T.weighted_ratio_30_60(rows),
                        SF_40_50_by_eta={x["aeta_lo"]: x["sf"] for x in rows if x["pt_lo"] == 40.0},
                        SF_over_POG_40_50_by_eta={x["aeta_lo"]: x["sf"] / x["pog_sf"] for x in rows if x["pt_lo"] == 40.0},
+                       weighted_SF_over_POG_30_60GeV_by_eta={e: _wr([x for x in rows if x["aeta_lo"] == e]) for e in sorted({x["aeta_lo"] for x in rows})},
                        mean_eff_data=float(np.mean([x["eff_data"] for x in rows])), mean_eff_mc=float(np.mean([x["eff_mc"] for x in rows])))
-    ref = {r["label"]: r for r in defs["S"]["bins"]}
-    for t in ("A", "C", "B2", "B8"):
+    ref = {r["label"]: r for r in defs["a"]["bins"]}
+    for t in defs:
+        if t == "a":
+            continue
         dsf = [x["sf"] - ref[x["label"]]["sf"] for x in defs[t]["bins"] if x["label"] in ref]
         d_eff_data = [x["eff_data"] - ref[x["label"]]["eff_data"] for x in defs[t]["bins"] if x["label"] in ref]
         dem = [x["eff_mc"] - ref[x["label"]]["eff_mc"] for x in defs[t]["bins"] if x["label"] in ref]
-        defs[t]["mean_delta_SF_vs_S"] = float(np.mean(dsf)); defs[t]["max_abs_delta_SF_vs_S"] = float(np.max(np.abs(dsf)))
-        defs[t]["mean_delta_eff_data_vs_S"] = float(np.mean(d_eff_data)); defs[t]["mean_delta_eff_mc_vs_S"] = float(np.mean(dem))
-        defs[t]["delta_SF_40_50_by_eta"] = {x["aeta_lo"]: x["sf"] - ref[x["label"]]["sf"] for x in defs[t]["bins"] if x["pt_lo"] == 40.0 and x["label"] in ref}
-    out["definitions"] = {"S_skill_event_fired_plus_bit2or8_and_pt": "S", "A_bit2or8_and_pt_only_no_HLT": "A", "C_path_specific": "C",
-                          "B2_event_fired_bit2_only": "B2", "B8_event_fired_bit8_only": "B8"}
+        defs[t]["mean_delta_SF_vs_a"] = float(np.mean(dsf)); defs[t]["max_abs_delta_SF_vs_a"] = float(np.max(np.abs(dsf)))
+        defs[t]["mean_delta_eff_data_vs_a"] = float(np.mean(d_eff_data)); defs[t]["mean_delta_eff_mc_vs_a"] = float(np.mean(dem))
+    out["definitions"] = {"a": "skill (tnp.py): tag and probe bit 2|8, event fired IsoMu24|IsoTkMu24", "b": "tag bit 2, probe bit 2",
+                          "c": "tag bit 2|8, probe bit 2 (previous B2)", "d": "tag bit 8, probe bit 8", "e": "path-aware tag and probe",
+                          "e2": "tag bit 2|8, path-aware probe (previous C)", "n": "bit 2|8 and pT only, no HLT requirement (previous A)",
+                          "b_hlt": "as b, event fired HLT_IsoMu24", "d_hlt": "as d, event fired HLT_IsoTkMu24"}
     out["measurement"] = defs
-    out["measurement_caveat"] = "the tag match is the stored OR of bits 2|8 and is not varied (skim); only the probe pass definition changes"
 
-    # probe-matched object pT: threshold scan (OR definition S, probe pT bins 26-30, 30-40, 40-50 GeV)
-    den_d, _ = T.wp_masks(dd, "isomu24", "S")
+    # probe-matched object pT: threshold scan for definitions a (skill) and b (bit 2 both) in the probe pT bins 26-30, 30-40, 40-50 GeV.
+    # The tag match (24 GeV) is fixed in the skim.
     mx = np.maximum(dd["m2pt"], dd["m8pt"])
+    den_d, _ = T.wp_masks(dd, "isomu24", "a")
     matched_d = den_d & (mx >= 24)
     out["fraction_matched_probes_objpt_24_27_data"] = float((matched_d & (mx < 27)).sum() / matched_d.sum())
     scan = {}
-    for thr in (24.0, 26.0, 27.0, 30.0):
-        r = T.measure(dd, dm, "isomu24", trig="S", thr=thr)
-        bins = []
-        for k in sorted(r):
-            if pt_e[k[1]] in (26.0, 30.0, 40.0):
-                bins.append(dict(label=binlab(k, eta_e, pt_e), aeta_lo=float(eta_e[k[0]]), pt_lo=float(pt_e[k[1]]), eff_data=r[k]["eff_data"], eff_mc=r[k]["eff_mc"],
-                                 sf=r[k]["sf"], sf_stat=r[k]["sf_stat"], fit_ok=r[k]["fit_ok"], pog_sf=pog[k][0]))
-        # all-eta counting efficiency (80 < m < 100 GeV window, no background subtraction) per pT bin
-        cnt = {}
-        for lo, hi in ((26, 30), (30, 40), (40, 50)):
-            for nm, d in (("data", dd), ("mc", dm)):
-                den, ps = T.wp_masks(d, "isomu24", "S", thr=thr)
-                sel = den & (d["ppt"] >= lo) & (d["ppt"] < hi) & (d["m"] > 80) & (d["m"] < 100)
-                if nm == "mc":
-                    sel &= d["gen"]
-                w = d["w"][sel] if nm == "mc" else np.ones(sel.sum())
-                cnt[f"{nm}_{lo}_{hi}"] = float((w * ps[sel]).sum() / w.sum())
-        scan[f"{thr:g}"] = dict(bins=bins, counting_alleta_80_100=cnt,
-                                weighted_SF_over_POG_26_50=float(np.average([b["sf"] / b["pog_sf"] for b in bins if b["pt_lo"] in (26.0, 30.0, 40.0)],
-                                                                            weights=[1 / (b["sf_stat"] / b["pog_sf"]) ** 2 for b in bins if b["pt_lo"] in (26.0, 30.0, 40.0)])))
+    for t in ("a", "b"):
+        scan[t] = {}
+        for thr in (24.0, 26.0, 27.0, 30.0):
+            r = T.measure(dd, dm, "isomu24", trig=t, thr=thr)
+            bins = []
+            for k in sorted(r):
+                if pt_e[k[1]] in (26.0, 30.0, 40.0):
+                    bins.append(dict(label=binlab(k, eta_e, pt_e), aeta_lo=float(eta_e[k[0]]), pt_lo=float(pt_e[k[1]]), eff_data=r[k]["eff_data"], eff_mc=r[k]["eff_mc"],
+                                     sf=r[k]["sf"], sf_stat=r[k]["sf_stat"], fit_ok=r[k]["fit_ok"], pog_sf=pog[k][0]))
+            cnt = {}   # all-eta counting efficiency (80 < m < 100 GeV, no background subtraction) per pT bin
+            for lo, hi in ((26, 30), (30, 40), (40, 50)):
+                for nm, d in (("data", dd), ("mc", dm)):
+                    den, ps = T.wp_masks(d, "isomu24", t, thr=thr)
+                    sel = den & (d["ppt"] >= lo) & (d["ppt"] < hi) & (d["m"] > 80) & (d["m"] < 100)
+                    if nm == "mc":
+                        sel &= d["gen"]
+                    w = d["w"][sel] if nm == "mc" else np.ones(sel.sum())
+                    cnt[f"{nm}_{lo}_{hi}"] = float((w * ps[sel]).sum() / w.sum())
+            by_pt = {}
+            for pl in (26.0, 30.0, 40.0):
+                bb = [b for b in bins if b["pt_lo"] == pl]
+                by_pt[f"{pl:g}"] = float(np.average([b["sf"] / b["pog_sf"] for b in bb], weights=[1 / (b["sf_stat"] / b["pog_sf"]) ** 2 for b in bb])) if bb else None
+            scan[t][f"{thr:g}"] = dict(bins=bins, counting_alleta_80_100=cnt, weighted_SF_over_POG_by_ptbin_lo=by_pt,
+                                       weighted_SF_over_POG_26_50=float(np.average([b["sf"] / b["pog_sf"] for b in bins], weights=[1 / (b["sf_stat"] / b["pog_sf"]) ** 2 for b in bins])))
     out["object_pt_threshold_scan"] = scan
     # headline numbers for the check script / README
     out["fraction_probe_matched_in_event_fired_neither_data"] = out["data"]["fraction_matched_probes_in_event_fired_neither"]
-    out["bias_eff_data_A_minus_S_mean"] = defs["A"]["mean_delta_eff_data_vs_S"]
-    out["bias_SF_A_minus_S_mean"] = defs["A"]["mean_delta_SF_vs_S"]
-    out["bias_SF_C_minus_S_mean"] = defs["C"]["mean_delta_SF_vs_S"]
-    out["event_level_bias_negligible"] = bool(abs(defs["A"]["mean_delta_SF_vs_S"]) < 0.002 and abs(defs["C"]["mean_delta_SF_vs_S"]) < 0.002)
+    out["bias_eff_data_n_minus_a_mean"] = defs["n"]["mean_delta_eff_data_vs_a"]
+    out["bias_SF_n_minus_a_mean"] = defs["n"]["mean_delta_SF_vs_a"]
+    out["bias_SF_e2_minus_a_mean"] = defs["e2"]["mean_delta_SF_vs_a"]
+    out["event_level_bias_negligible"] = bool(abs(defs["n"]["mean_delta_SF_vs_a"]) < 0.002 and abs(defs["e2"]["mean_delta_SF_vs_a"]) < 0.002)
     return out, defs
 
 
