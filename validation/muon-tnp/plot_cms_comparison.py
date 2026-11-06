@@ -17,8 +17,8 @@ from plotlib import PT_TOP, TITLE, label, plt, save, _xy
 CMS = "CMS Muon POG, 2016postVFP UL"
 
 
-def sf_vs_cms(wp, S, lumi, outdir):
-    rows = S["wp"][wp]["bins"]
+def sf_vs_cms(wp, S, lumi, outdir, rows=None, name=None, title=None, err_label="stat+syst"):
+    rows = rows if rows is not None else S["wp"][wp]["bins"]
     etas = sorted({tuple(r["aeta"]) for r in rows})
     fig, ax = plt.subplots(2, len(etas), figsize=(6.0 * len(etas), 9), sharex="col",
                            gridspec_kw=dict(height_ratios=[3, 1.6], hspace=0.05))
@@ -30,7 +30,7 @@ def sf_vs_cms(wp, S, lumi, outdir):
         a, b = ax[0, i], ax[1, i]
         a.errorbar(x, pg, yerr=pu, xerr=[x - lo, hi - x], fmt="s", color="tab:red", mfc="none", ms=8, label=CMS)
         a.errorbar(x, sf, yerr=err, xerr=[x - lo, hi - x], fmt="o", color="black", ms=6,
-                   label="This work, 3.6 fb$^{-1}$ Open Data")
+                   label=f"This work, 3.6 fb$^{{-1}}$ Open Data ({err_label})")
         r = sf / pg
         for l_, h_, u_ in zip(lo, hi, pu / pg):
             b.fill_between([l_, h_], 1 - u_, 1 + u_, color="tab:red", alpha=0.25, lw=0)
@@ -48,8 +48,8 @@ def sf_vs_cms(wp, S, lumi, outdir):
             a.set_ylabel("Data / MC scale factor"); b.set_ylabel("Ours / CMS")
     ax[0, 0].legend(loc="upper left", fontsize=13)
     label(ax[0, 0], lumi, fs=16)
-    fig.suptitle(f"{TITLE[wp]}: scale factor vs CMS", y=0.99, fontsize=20)
-    save(fig, outdir, f"sf_vs_cms_{wp}")
+    fig.suptitle(title or f"{TITLE[wp]}: scale factor vs CMS", y=0.99, fontsize=20)
+    save(fig, outdir, name or f"sf_vs_cms_{wp}")
 
 
 def overview(S, lumi, outdir, ptlo=30.0, pthi=60.0):
@@ -85,6 +85,18 @@ def overview(S, lumi, outdir, ptlo=30.0, pthi=60.0):
     save(fig, outdir, "sf_vs_cms_overview")
 
 
+def bit2_plot(S, lumi, outdir):
+    """IsoMu24 with tag and probe matched to the bit-2 (Iso) object only: the definition the skill uses."""
+    m = S.get("filter_bits", {}).get("measurement", {}).get("b")
+    if not m:
+        return
+    edges = sorted({tuple(r["aeta"]) for r in S["wp"]["isomu24"]["bins"]})
+    lo2e = {e[0]: e for e in edges}
+    rows = [dict(r, aeta=list(lo2e[r["aeta_lo"]]), sf_total_err=r["sf_stat"]) for r in m["bins"]]
+    sf_vs_cms("isomu24", S, lumi, outdir, rows=rows, name="sf_vs_cms_isomu24_bit2", err_label="stat",
+              title="IsoMu24 or IsoTkMu24, tag and probe matched to bit 2 (Iso) only: scale factor vs CMS")
+
+
 def main():
     path = sys.argv[1] if len(sys.argv) > 1 else "summary.json"
     outdir = sys.argv[2] if len(sys.argv) > 2 else "plots"
@@ -94,6 +106,7 @@ def main():
         sf_vs_cms(wp, S, lumi, outdir)
         plotlib.map_plot(wp, S, lumi, outdir)
     overview(S, lumi, outdir)
+    bit2_plot(S, lumi, outdir)
     print("OUT=" + outdir)
 
 
