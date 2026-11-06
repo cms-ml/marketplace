@@ -28,6 +28,8 @@ with open(a.o, "w") as fo:
     for j, u in jobs:
         fo.write(f"{j} {','.join(u)}\n")
         print(j, len(u), "files")
-json.dump({"step": a.step, "n_listed": {"G": len(G), "H": len(H), "mc": len(M)},
-           "selected": {k: [u.split("/eos/opendata/cms/")[1] for u in v] for k, v in sel.items()}},
-          open(a.files_json, "w"), indent=0)
+with open(a.files_json, "w") as fj:
+    json.dump({"step": a.step, "n_listed": {"G": len(G), "H": len(H), "mc": len(M)},
+               "selected": {k: [u.split("/eos/opendata/cms/")[1] for u in v] for k, v in sel.items()}},
+              fj, indent=0)
+    fj.write("\n")
