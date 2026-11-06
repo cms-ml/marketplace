@@ -1,0 +1,24 @@
+# LPC condor submit file (from the lpc-condor template). Submit from an EL9 cmslpc node, not from /eos.
+# jobs.txt lines are "<jobid> <url1,url2,...>" (make_jobs.py). tnp.py is the skill script, shipped for its constants.
+universe              = vanilla
+executable            = job.sh
+transfer_input_files  = skim.py,../../../plugins/cms/skills/muon-tag-and-probe/scripts/tnp.py
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+if !defined JOBS
+  JOBS = jobs.txt
+endif
+if !defined OUTDIR
+  OUTDIR = root://cmseos.fnal.gov//store/user/$ENV(USER)/tnp/skim_v2
+endif
+arguments = "$(jobid) $(inputs) $(OUTDIR)"
+environment = "ENV_MODE=lcg OUT_EXT=npz"
+
+output = logs/job_$(Cluster)_$(jobid).out
+error  = logs/job_$(Cluster)_$(jobid).err
+log    = logs/cluster_$(Cluster).log
+
+request_memory = 4000
+request_cpus = 1
+queue jobid,inputs from $(JOBS)
