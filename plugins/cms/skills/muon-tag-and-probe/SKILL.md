@@ -25,9 +25,12 @@ after the background under the Z peak is removed by a fit. Measure it in data
 and in DY MC with the same code, in the POG |η| × pT bins (GeV). The
 **scale factor** SF = ε_data / ε_MC is what analyses apply to MC.
 
-The Muon POG publishes official SFs as correctionlib JSON on cvmfs. Use those
-in an analysis. Measure your own when you need a selection the POG does not
-cover, a cross-check, or Open Data validation.
+The Muon POG publishes official SFs as correctionlib JSON on cvmfs. When the
+task is to **measure** scale factors (your own selection, Open Data, a
+calibration task), the measurement is the answer: compare with the POG as a
+sanity check on real CMS data, but never report POG values in place of a
+measurement. In simulated or modified-detector samples the true SFs are not
+the POG ones.
 
 [scripts/tnp.py](scripts/tnp.py) does the whole chain (pairs, pass/fail fit,
 MC counting, SF, comparison with the POG JSON, fit plots) for three working
@@ -56,11 +59,11 @@ points: `tightid`, `tightiso`, `isomu24`.
 
 The denominators follow the POG chain:
 
-| Step       | Denominator (probe)                      | Numerator                              | POG correction (Run 2 UL)                                     |
-| ---------- | ---------------------------------------- | -------------------------------------- | ------------------------------------------------------------- |
-| `tightid`  | `Muon_isTracker`                         | `Muon_tightId`                         | `NUM_TightID_DEN_TrackerMuons`                                |
-| `tightiso` | tight ID, \|dxy\| < 0.2, \|dz\| < 0.5 cm | `Muon_pfRelIso04_all < 0.15`           | `NUM_TightRelIso_DEN_TightIDandIPCut`                         |
-| `isomu24`  | tight ID and tight iso                   | matched to an IsoMu24/IsoTkMu24 object | `NUM_IsoMu24_or_IsoTkMu24_DEN_CutBasedIdTight_and_PFIsoTight` |
+| Step       | Denominator (probe)                      | Numerator                       | POG correction (Run 2 UL)                                     |
+| ---------- | ---------------------------------------- | ------------------------------- | ------------------------------------------------------------- |
+| `tightid`  | `Muon_isTracker`                         | `Muon_tightId`                  | `NUM_TightID_DEN_TrackerMuons`                                |
+| `tightiso` | tight ID, \|dxy\| < 0.2, \|dz\| < 0.5 cm | `Muon_pfRelIso04_all < 0.15`    | `NUM_TightRelIso_DEN_TightIDandIPCut`                         |
+| `isomu24`  | tight ID and tight iso                   | matched to a bit-2 (Iso) object | `NUM_IsoMu24_or_IsoTkMu24_DEN_CutBasedIdTight_and_PFIsoTight` |
 
 ## Canonical Patterns
 
@@ -135,7 +138,7 @@ passing = ak.flatten(num(p)[good])
 
 ```python
 to = events.TrigObj
-sel = (to.id == 13) & ((to.filterBits & (2 | 8)) != 0) & (to.pt >= 24)  # Iso | IsoTkMu, threshold
+sel = (to.id == 13) & ((to.filterBits & 2) != 0) & (to.pt >= 24)  # Iso bit only, plus threshold
 # deltaR(muon, object) < 0.1 with ak.cartesian(..., nested=True), then ak.any(axis=-1)
 ```
 
@@ -153,14 +156,19 @@ pulls and every `FIT-NOT-OK` bin.
 
 ## Gotchas
 
-- **The NanoAOD IsoMu24 SF sits above the POG, cause open.** On 3.55 fb⁻¹ of
-  2016G+H (probe pass = muon object with bit 2 or 8, pT ≥ 24 GeV, ΔR < 0.1)
-  the SF is 0.8–1.5% above `NUM_IsoMu24_or_IsoTkMu24_DEN_..._PFIsoTight` at
-  30–60 GeV (barrel 40–50 GeV: 0.9767 vs 0.9627). It does not move with the
-  fit, mass window, background shape, pileup weights, tag pT, era or the
-  event-level HLT requirement. It does depend on the pass definition: bit 2
-  alone brings |η| > 0.9 within 0.1% of the POG (barrel stays +1.1%). Use the
-  POG HLT SFs in analyses and treat a NanoAOD trigger SF as a cross-check.
+- **IsoMu24: match bit 2 only, not bit 2 | 8.** For
+  `NUM_IsoMu24_or_IsoTkMu24_...`, the obvious match (object with bit 2 or 8)
+  gives an SF 1.0–1.5% above the POG at 30–60 GeV; bit 8 alone is 1.5–4%
+  below. Matching the probe to a bit-2 (Iso) object, pT ≥ 24 GeV, ΔR < 0.1,
+  brings |η| 0.9–2.4 within 0.2% of the POG (3.55 fb⁻¹ of 2016G+H). The tag's
+  match does not matter (≤ 0.0003), and a path-aware match (bit 2 if IsoMu24
+  fired, bit 8 if IsoTkMu24 fired) equals the OR. `tnp.py` uses bit 2.
+- **The barrel IsoMu24 SF is still +1.2% above the POG, cause open.** With
+  bit 2, |η| < 0.9 stays at SF/POG ≈ 1.012 at every pT from 26 to 120 GeV.
+  It does not move with the fit, mass window, background shape, pileup
+  weights, tag pT or match, era, HLT requirement or object-pT threshold. On
+  real CMS data, quote it as a systematic (or state it) when you compare with
+  the POG.
 - **Filter bits are not paths.** A bit marks a type of filter (64% of the
   unfired events with a bit-2 object fired IsoMu22), not one path. Always add the pT threshold to
   the match: it matters for probes below about 30 GeV (26–30 GeV: ε_data 0.87
@@ -168,7 +176,8 @@ pulls and every `FIT-NOT-OK` bin.
   `HLT_IsoMu24 | HLT_IsoTkMu24` (`tnp.py` does). With that, probes matched in
   events that fired neither path are 5 × 10⁻⁵ of all matched probes, and
   dropping or tightening the requirement moves the SF by < 0.001: this is not
-  the cause of the offset above.
+  the cause of the IsoMu24 offsets above. A higher object threshold (27 GeV)
+  changes the 26–30 GeV efficiencies a lot but the SF by at most 0.7%.
 - **Too little MC fakes a bias.** The template and the MC efficiency
   fluctuate together and push every bin the same way: tight-ID mean SF/POG was
   1.011, 1.015, 1.008, 1.005 at MC/data pair ratios 0.009, 0.044, 0.22, 0.44.

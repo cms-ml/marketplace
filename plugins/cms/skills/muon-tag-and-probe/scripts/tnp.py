@@ -111,7 +111,9 @@ def tnp_pairs(events, wp, is_mc, tag_pt=29.0):
         "pfRelIso04_all": events.Muon_pfRelIso04_all, "dxy": events.Muon_dxy, "dz": events.Muon_dz,
         "genPartFlav": events.Muon_genPartFlav if is_mc else ak.zeros_like(events.Muon_charge),
     }, with_name="Momentum4D")
-    mu["trig_matched"] = _trigger_match(mu, events, BIT_ISO | BIT_ISOTK)
+    # Bit 2 (Iso, IsoMu24-type filter) only: the OR with bit 8 (IsoTkMu) gave an IsoMu24 SF
+    # 1.0-1.5% above the POG; bit 2 alone agrees within 0.2% for |eta| > 0.9 (validation/muon-tnp).
+    mu["trig_matched"] = _trigger_match(mu, events, BIT_ISO)
     fired = events.HLT_IsoMu24 | events.HLT_IsoTkMu24
     mu = mu[(abs(mu.eta) < 2.4) & (mu.pt > 15)]
 

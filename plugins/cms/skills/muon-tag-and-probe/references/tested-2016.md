@@ -99,7 +99,18 @@ filter-bit bias is negligible; it does not explain the IsoMu24 offset below.
 | `isomu24`  | 27   | +4.90     | 6.63     | +0.8–1.5%, cause open     |
 
 Pulls are large for small offsets because the POG uncertainty is only
-0.02–0.1% in the populated bins. The IsoMu24 offset is the same for every fit
-and selection variation tried, but with bit 2 alone as the probe pass the
-|η| > 0.9 bins come within 0.1% of the POG (barrel stays +1.1%). An
-independent review (`validation/muon-tnp/REVIEW.md`) reproduced all numbers.
+0.02–0.1% in the populated bins. The `isomu24` row uses the bit 2 | 8 match.
+Trigger-match definitions, SF/POG at 40–50 GeV per |η| bin and weighted over
+30–60 GeV:
+
+| Probe pass (tag)                  | 0–0.9  | 0.9–1.2 | 1.2–2.1 | 2.1–2.4 | 30–60 GeV |
+| --------------------------------- | ------ | ------- | ------- | ------- | --------- |
+| bit 2 \| 8 (bit 2 \| 8)           | 1.0145 | 1.0094  | 1.0084  | 1.0162  | 1.0127    |
+| **bit 2 (bit 2)**                 | 1.0121 | 1.0000  | 1.0010  | 1.0010  | 1.0082    |
+| bit 2 (bit 2 \| 8)                | 1.0118 | 1.0000  | 1.0009  | 1.0002  | 1.0081    |
+| bit 8 (bit 8)                     | 0.9880 | 0.9687  | 0.9600  | 0.9814  | 0.9766    |
+| path-aware (IsoMu24→2, IsoTkMu→8) | 1.0145 | 1.0093  | 1.0084  | 1.0163  | 1.0127    |
+
+Bit 2 closes the gap outside the barrel; the barrel stays +1.2% for every
+definition, fit and selection variation tried. An independent review
+(`validation/muon-tnp/REVIEW.md`) reproduced the nominal numbers.
