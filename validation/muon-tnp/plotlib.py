@@ -154,7 +154,7 @@ def gh_plot(wp, S, lumi, outdir):
 
 def filterbit_plot(S, lumi, outdir):
     d = S["filter_bits"]["measurement"]
-    names = {"a": "(a) skill: tag, probe bit 2|8", "b": "(b) tag bit 2, probe bit 2", "c": "(c) tag 2|8, probe bit 2",
+    names = {"a": "(a) tag, probe bit 2|8 (first skill version)", "b": "(b) tag bit 2, probe bit 2 (skill now)", "c": "(c) tag 2|8, probe bit 2",
              "d": "(d) tag bit 8, probe bit 8", "e": "(e) path-aware tag, probe"}
     cols = {"a": "k", "b": "tab:red", "c": "tab:orange", "d": "tab:purple", "e": "tab:green"}
     marks = {"a": "o", "b": "s", "c": "^", "d": "v", "e": "D"}
