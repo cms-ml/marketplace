@@ -11,6 +11,7 @@ Contents:
 - Isolation and IsoMu24: run dependence
 - The filter-bit check
 - Full G+H subset: comparison with the POG
+- Generic working points, uncertainties and correctionlib output
 
 Tested November 2026 on cmslpc (EL9) with the LCG_109 view
 (`/cvmfs/sft.cern.ch/lcg/views/LCG_109/x86_64-el9-gcc15-opt`: uproot,
@@ -114,3 +115,60 @@ Trigger-match definitions, SF/POG at 40–50 GeV per |η| bin and weighted over
 Bit 2 closes the gap outside the barrel; the barrel stays +1.2% for every
 definition, fit and selection variation tried. An independent review
 (`validation/muon-tnp/REVIEW.md`) reproduced the nominal numbers.
+
+## Generic working points, uncertainties and correctionlib output
+
+`validation/muon-tnp-generic/` in the marketplace repository (November 2026,
+LCG_109, same POG file): 2 Run2016G + 2 Run2016H SingleMuon files (7.09 M
+events, 412 k tight-ID pairs) and 8 `ZToMuMu_M-50To120` files (1.25 M events,
+748 k pairs, MC/data 1.8), copied locally. Each `tnp.py` run took about
+1 min and 1.9 GB with 50 bootstrap replicas and `--syst`.
+
+- The presets, the same definitions spelled with `--den/--num/--num-trigger/--tag*`,
+  and the `tnp.py` before this change give bit-identical per-bin results
+  (`tightid` 32, `tightiso` 32, `isomu24` 26 bins).
+- New working points, weighted SF/POG over 30–60 GeV (total uncertainty):
+
+| `--num` (`--den`)                    | POG correction                           | SF/POG | RMS pull (total) |
+| ------------------------------------ | ---------------------------------------- | ------ | ---------------- |
+| `mediumId` (`isTracker`)             | `NUM_MediumID_DEN_TrackerMuons`          | 0.9977 | 1.69             |
+| `looseId` (`isTracker`)              | `NUM_LooseID_DEN_TrackerMuons`           | 1.0006 | 1.39             |
+| `highPtId == 2` (`isTracker`)        | `NUM_HighPtID_DEN_TrackerMuons`          | 1.0006 | 0.88             |
+| `softId` (`isTracker`)               | `NUM_SoftID_DEN_TrackerMuons`            | 0.9966 | 3.12             |
+| `pfRelIso04_all < 0.25` (`mediumId`) | `NUM_LooseRelIso_DEN_MediumID`           | 1.0004 | 1.26             |
+| `tkRelIso < 0.1` (`highPtId == 2`)   | `NUM_LooseRelTkIso_DEN_HighPtIDandIPCut` | 1.0007 | 1.22             |
+
+Soft ID is 1.3% below the POG at |η| 0.9–1.2 (other |η| bins within 0.5%).
+
+- Without a POG counterpart, offline (`--no-pog --no-pu`, explicit edges):
+  IsoMu22 (`--num-trigger 2:22`) and the Mu17 leg (`1:17`) run; the Mu17 leg
+  plateau (30–120 GeV) is ε_data 0.96–0.99, SF 0.97–1.00. IsoMu22 is switched off in part
+  of the data (fired in 0.61–0.63 of `HLT_IsoMu24` events in the G files,
+  0.48–0.49 in H, 0.99 in MC; on or off per lumi section), so its SF is
+  0.93–0.99 at 30–120 GeV and 0.53 at |η| 2.1–2.4, 22–24 GeV, where
+  `IsoMu22_eta2p1` cannot provide the bit-2 object.
+- MC statistics: on two independent halves of the MC (same data), the RMS of
+  (SF_A − SF_B)/√(σ_mc,A² + σ_mc,B²) over 111 bins of tight ID, tight iso,
+  IsoMu24 and medium ID was 1.04 ± 0.07 (with the MC counting error instead:
+  4.7; 8.8 for tight iso); `mc_stat` of a half over the full sample followed √(N_full/N_half)
+  within 15%. The finite-MC bias, (SF_A + SF_B)/2 − SF_full, was +0.001 to
+  +0.004 per working point; the bootstrap mean and a split-half jackknife did
+  not predict it.
+- Median uncertainties at 30–60 GeV (tight ID, SF units): stat 0.0015, mc_stat
+  0.0009, syst 0.0017 (background 0.0011, window 0.0004, tag 0.0007); POG systup −
+  nominal 0.0032.
+- correctionlib: every file loads and passes `correction validate`; nominal,
+  `up`/`down` (`down` clipped at 0), `systup`/`systdown` and the quadrature
+  of `stat`, `mc_stat`, `syst`, `fill` equal the `tnp.py` JSON or the
+  documented fill to 2 × 10⁻¹⁶; η beyond 2.4 and pT outside the edges clamp.
+  1–11 bins per file are filled from a neighbour; e.g. medium ID |η| 0.9–1.2,
+  pT > 120 GeV (no failing MC probe) had a raw SF 0.877 ± 0.886 and is
+  written as 1.002 ± 0.125.
+- Data statistics: two halves of the data with the same MC gave an RMS of
+  (SF_1 − SF_2)/√(stat_1² + stat_2²) of 0.85 ± 0.07 over 81 bins.
+- Golden JSON: 95.6% of the data events are certified; with `--lumi-mask`
+  the medium- and soft-ID SFs moved by at most 0.0009 at 30–60 GeV
+  (0.0015 in any bin, at most 0.55 × the data-stat error).
+- Soft ID is also 0.4% low in the barrel (0.9958); an independent review
+  found the offset with a fit-free counting method and in G and H
+  separately.
