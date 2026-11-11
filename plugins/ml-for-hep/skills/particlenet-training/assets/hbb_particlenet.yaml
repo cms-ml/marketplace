@@ -1,0 +1,74 @@
+# weaver-core data config: H->bb vs QCD AK8 jets from the CMS Open Data
+# "Sample with jet, track and secondary vertex properties for Hbb tagging ML
+# studies" (doi:10.7483/OPENDATA.CMS.JGJX.MS7Q). Tested with weaver-core 0.5.4.
+# Kinematics in GeV. Columns per line: [name, center, scale, clip_min, clip_max, pad_value];
+# center "auto" (preprocess.method: auto) is filled from data on the first run and
+# saved to <this file stem>.<hash>.auto.yaml next to the config.
+treename: deepntuplizer/tree
+
+selection: (fj_pt > 300) & (fj_pt < 2000) & (fj_sdmass > 40) & (fj_sdmass < 200)
+test_time_selection: (fj_pt > 300) & (fj_pt < 2000)
+
+new_variables:
+  pf_mask: ak.ones_like(pfcand_etarel)
+  pfcand_ptrel_log: np.log(np.maximum(pfcand_ptrel, 1e-6))
+  pfcand_erel_log: np.log(np.maximum(pfcand_erel, 1e-6))
+  is_qcd: fj_isQCD
+  is_hbb: label_H_bb
+
+preprocess:
+  method: auto
+  data_fraction: 0.5
+
+inputs:
+  pf_points:
+    length: 100
+    pad_mode: wrap
+    vars:
+      - [pfcand_etarel, null]
+      - [pfcand_phirel, null]
+  pf_features:
+    length: 100
+    pad_mode: wrap
+    vars:
+      - [pfcand_ptrel_log, auto]
+      - [pfcand_erel_log, auto]
+      - [pfcand_etarel, null]
+      - [pfcand_phirel, null]
+      - [pfcand_deltaR, null]
+      - [pfcand_charge, null]
+      - [pfcand_isChargedHad, null]
+      - [pfcand_isNeutralHad, null]
+      - [pfcand_isGamma, null]
+      - [pfcand_isEl, null]
+      - [pfcand_isMu, null]
+      - [pfcand_dxysig, auto]
+      - [pfcand_dzsig, auto]
+      - [pfcand_puppiw, null]
+  pf_mask:
+    length: 100
+    pad_mode: constant
+    vars:
+      - [pf_mask, null]
+
+labels:
+  type: simple
+  value: [is_qcd, is_hbb]
+
+observers:
+  - event_no
+  - fj_pt
+  - fj_eta
+  - fj_sdmass
+
+weights:
+  use_precomputed_weights: false
+  reweight_method: flat
+  # flatten (pt, msd) per class: the network cannot learn the mass or pt
+  # spectrum difference between H and QCD (a decorrelation lever).
+  reweight_vars:
+    fj_pt: [300, 400, 500, 600, 800, 1000, 1500, 2000]
+    fj_sdmass: [40, 60, 80, 100, 120, 140, 160, 200]
+  reweight_classes: [is_qcd, is_hbb]
+  class_weights: [1, 1]
+  reweight_threshold: 10
