@@ -201,6 +201,30 @@ Experiment-neutral Python developer tooling for HEP work, with cmslpc notes: PEP
 | `cli-creator`       | Typer CLIs wired into pyproject.toml console scripts (uv + Hatch bootstrap, tests) |
 | `standalone-script` | Single-file PEP 723 scripts run by uv, with Typer CLIs (cmslpc-tested)             |
 
+---
+
+### `ml-for-hep` (v0.1.0)
+
+Machine learning for HEP analyses, built for unattended agent workflows: leakage-safe feature tables, BDT and ParticleNet training, hyperparameter scans (local and HTCondor), evaluation, mass-sculpting and closure checks, and a model card that gates the result. Experiment-neutral, with CMS Open Data examples.
+
+**Subagents:**
+
+| Subagent         | Purpose                                                                                                                                   |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `hep-ml-trainer` | ML-training expert that takes a HEP classifier from task definition to a gated model card, refusing to call it done until the checks pass |
+
+**Skills:**
+
+| Skill                  | Use when                                                                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `bdt-training`         | Gradient-boosted classifiers on flat features with weights, early stopping, overtraining test, SHAP and ONNX                    |
+| `closure-tests`        | ABCD, predicted-vs-observed and k-fold closure with pulls, chi2 and a non-closure systematic                                    |
+| `hep-ml-data-prep`     | Leakage-safe feature tables from NanoAOD (weights, event-number folds, pre-training checks)                                     |
+| `hyperparam-scan`      | Grid, random and Optuna scans around any KEY=VALUE trainer, resumable, with pruning, k-fold CV and HTCondor workers             |
+| `mass-sculpting-check` | Background mass shape before/after score cuts (chi2, JSD, distance correlation), with a DDT map and decorrelation remedies      |
+| `model-evaluation`     | Model-agnostic evaluation from a scores table (ROC, working points, overtraining, calibration, data/MC) and the model-card gate |
+| `particlenet-training` | ParticleNet jet taggers with weaver-core or plain PyTorch, tested on CPU with the CMS Open Data H->bb sample                    |
+
 <!-- GENERATED:END -->
 
 ## Example: dimuon resonances on CMS Open Data

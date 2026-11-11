@@ -19,8 +19,11 @@ CREDITS.md                          # attribution for third-party teaching mater
 Plugins: `cms` (core: CMSSW, data tools, and the Scikit-HEP stack with CMS
 examples, e.g. `awkward-array`), `af-fnal-lpc` (LPC facility: `lpc-condor`)
 and `hep-python-tools` (experiment-neutral dev tooling: `standalone-script`,
-`cli-creator`) exist. Planned: `cms-ml` (weaver training, ONNX/TF/SONIC
-inference in CMSSW). Physics/data libraries with CMS examples go in `cms`, as
+`cli-creator`) and `ml-for-hep` (experiment-neutral ML for HEP analyses with
+CMS examples: data prep, BDT and ParticleNet training, hyperparameter scans,
+evaluation, mass-sculpting and closure checks, and the `hep-ml-trainer`
+agent) exist. Future scope for `ml-for-hep`: ONNX/TF/SONIC inference in
+CMSSW. Physics/data libraries with CMS examples go in `cms`, as
 ATLAS does with its `atlas` plugin. Only create a plugin directory once
 it has at least one skill, since `check` rejects empty plugins.
 
