@@ -1,0 +1,4 @@
+{
+  "max_depth": { "type": "categorical", "choices": [3, 5] },
+  "learning_rate": { "type": "categorical", "choices": [0.05, 0.2] }
+}
