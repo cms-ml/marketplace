@@ -1,0 +1,28 @@
+{
+  "name": "ml-for-hep",
+  "description": "Machine learning for HEP analyses, built for unattended agent workflows: leakage-safe feature tables, BDT and ParticleNet training, hyperparameter scans (local and HTCondor), evaluation, mass-sculpting and closure checks, and a model card that gates the result. Experiment-neutral, with CMS Open Data examples.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cms-ml/marketplace",
+  "repository": "https://github.com/cms-ml/marketplace",
+  "license": "MIT",
+  "keywords": [
+    "HEP",
+    "CMS",
+    "machine learning",
+    "BDT",
+    "XGBoost",
+    "LightGBM",
+    "ParticleNet",
+    "weaver",
+    "PyTorch",
+    "Optuna",
+    "hyperparameter scan",
+    "ONNX",
+    "mass sculpting",
+    "decorrelation",
+    "closure test",
+    "ABCD",
+    "jet tagging",
+    "NanoAOD"
+  ]
+}
