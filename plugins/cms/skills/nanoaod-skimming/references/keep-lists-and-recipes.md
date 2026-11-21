@@ -125,9 +125,59 @@ ROOT.RDataFrame("LuminosityBlocks", src).Snapshot("LuminosityBlocks", out, "", o
 - For data, apply the golden JSON before the Filter. The simplest way is
   a C++ helper or, on several files, `skim.py`. Then also filter the
   LuminosityBlocks Snapshot by the same JSON.
+- Write the Cutflow tree too (next section), so the skim has the same
+  bookkeeping as one from `skim.py`.
 - ROOT 6.38 changed the Snapshot default compression to ZSTD level 5 and
   prints an info message about it. Set `ROOT_RDF_SNAPSHOT_INFO=0` to
   silence it.
+
+### Cutflow tree with RDataFrame
+
+Same branch names as `skim.py`'s Cutflow, so `scripts/cutflow.py` reads it.
+Tested with ROOT 6.38 on the full DY file above: one event loop, about 30 s with 4
+threads, `w_all` equal to the Runs `genEventSumw` (2.42e10).
+
+```python
+import ROOT, numpy as np
+ROOT.EnableImplicitMT(4)
+steps = [("trigger", "HLT_IsoMu24 || HLT_IsoTkMu24"), ("two_muons", "Sum(Muon_pt > 20) >= 2")]
+is_mc = True                       # data: genWeight does not exist, use 1.0
+
+df = ROOT.RDataFrame("Events", src).Define("w_", "(double)genWeight" if is_mc else "1.0").Define("w2_", "w_ * w_")
+for name, expr in steps:
+    df = df.Define(f"p_{name}", f"(bool)({expr})")
+df = df.Define("nfail_", " + ".join(f"!p_{n}" for n, _ in steps))
+cuts = {"all": "true", "lumimask": "true"}  # data: "lumimask" is the golden-JSON column
+cuts.update({n: " && ".join(f"p_{m}" for m, _ in steps[: i + 1]) for i, (n, _) in enumerate(steps)})
+cuts.update({f"m1_{n}": f"nfail_ == 0 || (nfail_ == 1 && !p_{n})" for n, _ in steps})
+res = {}
+for k, c in cuts.items():   # booked lazily, filled in one event loop
+    f = df.Filter(c)
+    res[k] = (f.Count(), f.Sum("w_"), f.Sum("w2_"))
+
+lazy = ROOT.RDF.RSnapshotOptions()
+lazy.fLazy = True                  # so the Snapshot and the counts share one event loop
+snap = df.Filter(cuts[steps[-1][0]]).Snapshot("Events", out, keep, lazy)
+ROOT.RDF.RunGraphs([snap] + [r for res_k in res.values() for r in res_k])
+
+def branch(k, p):                  # prefix n, w or w2: "m1_x" -> nm1_x / wm1_x / w2m1_x, else n_x / w_x / w2_x
+    return f"{p}m1_{k[3:]}" if k.startswith("m1_") else f"{p}_{k}"
+cf = {}
+for k, (c, w, w2) in res.items():
+    cf[branch(k, "n")] = np.array([c.GetValue()], np.int64)
+    if is_mc:
+        cf[branch(k, "w")] = np.array([w.GetValue()], np.float64)
+        cf[branch(k, "w2")] = np.array([w2.GetValue()], np.float64)
+order = ["all", "lumimask"] + [n for n, _ in steps] + [f"m1_{n}" for n, _ in steps]
+names = [branch(k, p) for p in (("n", "w", "w2") if is_mc else ("n",)) for k in order]
+opts = ROOT.RDF.RSnapshotOptions()
+opts.fMode = "UPDATE"
+ROOT.RDF.FromNumpy({b: cf[b] for b in names}).Snapshot("Cutflow", out, "", opts)
+# then the Runs and LuminosityBlocks Snapshots above
+```
+
+One Cutflow entry per output file. Run one input file per job (as for the
+uproot skim) so `hadd` and `cutflow.py` sum entries the same way.
 
 ## NanoAODTools post-processor
 

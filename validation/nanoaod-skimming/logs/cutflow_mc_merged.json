@@ -1,0 +1,35 @@
+{
+  "n_files": 1,
+  "n_input_files": 3,
+  "is_mc": true,
+  "steps": ["trigger", "two_muons"],
+  "n_all": 2857158.0,
+  "n_lumimask": 2857158.0,
+  "cutflow": {
+    "trigger": 619808.0,
+    "two_muons": 385701.0
+  },
+  "nminus1": {
+    "trigger": 404317.0,
+    "two_muons": 619808.0
+  },
+  "w_all": 48548789981.57031,
+  "w_lumimask": 48548789981.57031,
+  "cutflow_w": {
+    "trigger": 10514541308.347656,
+    "two_muons": 6661051767.498047
+  },
+  "nminus1_w": {
+    "trigger": 6980990796.205078,
+    "two_muons": 10514541308.347656
+  },
+  "w2_all": 1823012867354877.8,
+  "cutflow_w2": {
+    "trigger": 395469189764617.7,
+    "two_muons": 246096955769210.47
+  },
+  "nminus1_w2": {
+    "trigger": 257974915454561.62,
+    "two_muons": 395469189764617.7
+  }
+}

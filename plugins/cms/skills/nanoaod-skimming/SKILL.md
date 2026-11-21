@@ -32,15 +32,20 @@ What a skim must not lose is the **bookkeeping**:
 - **LuminosityBlocks** tree: which lumi sections were processed. This is
   what the data luminosity is computed from.
 - `run`, `luminosityBlock`, `event` for every event, and `genWeight` for MC.
+- **Cutflow** tree: how many events (and, for MC, how much Σ genWeight) each
+  preselection step kept, sequentially and N-1. The events that failed are
+  gone after the skim, so this can only be counted while skimming. `skim.py`
+  always writes it.
 
-Three scripts do the work (tested with LCG_109, Python 3.13, uproot 5.6,
+Four scripts do the work (tested with LCG_109, Python 3.13, uproot 5.6,
 awkward 2.8, ROOT 6.38 on cmslpc, 2016 UL NanoAODv9 Open Data):
 
-| Script                             | Does                                                                                        | Prints                                      |
-| ---------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| [scripts/skim.py](scripts/skim.py) | keep/drop globs, `--cut` expression, golden JSON for data, copies Runs and LuminosityBlocks | `EVENTS_IN`, `EVENTS_OUT`, `SUMW_READ`, ... |
-| [scripts/sumw.py](scripts/sumw.py) | sums Runs over files, combines LHE variation sums correctly, `--xsec --lumi` weight factor  | `SUMW`, `N_EFF`, `WEIGHT_FACTOR`, ...       |
-| [scripts/lumi.py](scripts/lumi.py) | integrated luminosity of the skims' lumi sections, or of a whole golden JSON                | `LUMI_PB`, `LUMI_FB`, `N_LS_MISSING`        |
+| Script                                   | Does                                                                                                         | Prints                                                        |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| [scripts/skim.py](scripts/skim.py)       | keep/drop globs, named `--step` cuts, golden JSON for data, copies Runs and LuminosityBlocks, writes Cutflow | `EVENTS_IN`, `EVENTS_OUT`, `SUMW_READ`, `CUTFLOW_<step>`, ... |
+| [scripts/cutflow.py](scripts/cutflow.py) | sums the Cutflow tree over skims: sequential and N-1 counts, efficiencies, Σ genWeight for MC                | the table, `CUTFLOW_<step>`, `NMINUS1_<step>`, ...            |
+| [scripts/sumw.py](scripts/sumw.py)       | sums Runs over files, combines LHE variation sums correctly, `--xsec --lumi` weight factor                   | `SUMW`, `N_EFF`, `WEIGHT_FACTOR`, ...                         |
+| [scripts/lumi.py](scripts/lumi.py)       | integrated luminosity of the skims' lumi sections, or of a whole golden JSON                                 | `LUMI_PB`, `LUMI_FB`, `N_LS_MISSING`                          |
 
 All take `--help`, write `KEY=VALUE` to stdout and progress to stderr, and
 read local paths or `root://` URLs. Kinematics in NanoAOD are in **GeV**.
@@ -114,11 +119,16 @@ python3 scripts/skim.py \
   -i root://eospublic.cern.ch//eos/opendata/cms/Run2016G/SingleMuon/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/130000/0A4230E2-0C75-604D-890F-A4CE5E5C164E.root \
   -o skim_SingleMuon_2016G_0.root \
   --keep 'Muon_*' 'HLT_IsoMu24' 'HLT_IsoTkMu24' 'MET_pt' 'MET_phi' 'PV_npvs' --drop 'Muon_*Err' \
-  --cut '(HLT_IsoMu24 | HLT_IsoTkMu24) & (ak.sum((Muon_pt > 26) & Muon_tightId, axis=1) >= 1)' \
+  --step 'trigger=HLT_IsoMu24 | HLT_IsoTkMu24' \
+  --step 'tight_muon=ak.sum((Muon_pt > 26) & Muon_tightId, axis=1) >= 1' \
   --lumi-json Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt
 ```
 
-The `--cut` is a Python expression over branch names with `ak` and `np`.
+Each `--step NAME=EXPR` is one cut of the preselection. The steps are ANDed
+in the order given and each gets its own line in the Cutflow tree, so give
+every independent requirement its own step rather than one long `&`
+expression. `--cut EXPR` still works and counts as one step named `cut`.
+An expression is Python over branch names with `ak` and `np`.
 Branches it needs are read even if not kept. Use `&`, `|`, `~` (not `and`,
 `or`). Per-object cuts go through `ak.sum(..., axis=1)` or `ak.any`.
 `--lumi-json` takes a local file (download the golden JSON first) and is
@@ -134,14 +144,59 @@ Write the output locally (the job's working directory), then copy it:
 xrdcp -f skim_SingleMuon_2016G_0.root root://cmseos.fnal.gov//store/user/$USER/skims/2016/SingleMuon/
 ```
 
-### 3. Skim with RDataFrame (faster on big inputs, multithreaded)
+### 3. Record the cutflow
+
+Every `skim.py` output has a `Cutflow` tree with one entry per input file:
+`n_all` (events read), `n_lumimask` (after the golden JSON; equal to
+`n_all` for MC), `n_<step>` (passing every step up to this one) and
+`nm1_<step>` (N-1: passing every step except this one), plus, for MC,
+`w_*` and `wm1_*` with Σ genWeight and `w2_*` and `w2m1_*` with Σ genWeight²
+(the statistical uncertainty of a weighted count is its square root). `hadd` concatenates the entries, so sum
+them, over per-job or merged skims alike:
+
+```bash
+python3 scripts/cutflow.py -i skim_SingleMuon_2016G_*.root --json cutflow_data.json
+```
+
+```text
+step                                 N      eff      cum           N-1  final/N-1
+all                              50000      nan   1.0000
+lumimask                         50000   1.0000   1.0000
+trigger                          35450   0.7090   0.7090          5329     0.7208
+two_muons                         3971   0.1120   0.0794         33866     0.1134
+met                               3841   0.9673   0.0768          3971     0.9673
+```
+
+(50k events of a 2016G SingleMuon file.) `final/N-1` is the efficiency of
+a step with all the other steps applied. A step with `final/N-1` close to 1
+does almost nothing and can be dropped. The last `n_<step>` summed over all
+files equals the Events entries of the merged skim, which is a quick check.
+For MC the cutflow in Σ genWeight, not the event count, is the one to
+compare with data, because of negative weights. Multiplied by
+σ L / Σ genEventSumw it is in expected events. On complete files the `all`
+row then equals σ L (Σ genWeight read = Σ genEventSumw), which checks the
+normalisation before any cut.
+
+Continue the cutflow in the analysis from the skim's last step: read the
+skim totals with `cutflow.py --json` and append the analysis steps counted
+on the skimmed events. Analysis cuts can only be studied N-1 if the
+preselection is looser than them (see Key Concepts).
+
+For object-level cuts (muon pT, η, ID, isolation), a sequential step means
+"enough objects pass every object cut so far", and the N-1 of an object cut
+selects the objects without that cut and then applies every other object
+and event cut. Event-level cuts on a pair (charge, leading pT, mass window)
+use the leading selected objects and fail when there are too few. Write
+these definitions next to the table: N-1 numbers mean nothing without them.
+
+### 4. Skim with RDataFrame (faster on big inputs, multithreaded)
 
 Recipe with the Runs and LuminosityBlocks copy in
 [references/keep-lists-and-recipes.md](references/keep-lists-and-recipes.md#rdataframe-snapshot).
 `Snapshot` writes only the tree it was called on. Copy the other two with
 `fMode = "UPDATE"` or the skim has no bookkeeping.
 
-### 4. Run over a dataset
+### 5. Run over a dataset
 
 One job per input file (or a few small files) keeps failures cheap. List
 files with `dasgoclient -query="file dataset=/SingleMuon/Run2016G-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD"`
@@ -150,7 +205,7 @@ cmslpc, or the `crab` skill for large central samples. Each job runs `skim.py` o
 files and `xrdcp`s the result to EOS. Keep each job's stdout: its
 `EVENTS_IN` total must equal the dataset's event count.
 
-### 5. Merge
+### 6. Merge
 
 ```bash
 hadd -f -k skim_SingleMuon_2016G.root skim_SingleMuon_2016G_*.root   # target 1 to 4 GB per output
@@ -160,7 +215,7 @@ hadd -f -k skim_SingleMuon_2016G.root skim_SingleMuon_2016G_*.root   # target 1 
 has one entry per input, and `sumw.py` sums them, so normalisation survives.
 `-k` skips corrupt inputs instead of failing, so recount the inputs afterwards.
 
-### 6. Bookkeeping: normalisation and luminosity
+### 7. Bookkeeping: normalisation and luminosity
 
 ```bash
 python3 scripts/sumw.py -i @dy_files.txt --xsec 6077.22 --lumi 36313.8   # MC: SUMW and WEIGHT_FACTOR
@@ -180,6 +235,12 @@ publishes the CSV for each year.
 
 ## Gotchas
 
+- **`cutflow.py` exits 2 with "has no Cutflow tree"**: the skim was made
+  with a `skim.py` from before the Cutflow tree, or by another tool. Re-skim,
+  or count the preselection on the original NanoAOD. With "skims made with
+  different steps", the files were skimmed with different `--step` lists:
+  `hadd` merges them without complaint, but the cutflow would mix
+  definitions, so re-skim them with one list.
 - **MC normalised by events instead of Σ genEventSumw** gives a wrong
   scale. In 2016 UL amcatnlo DY, 16% of `genWeight` values are negative
   and all have the same magnitude (about 1.7e4). Weighting each event by

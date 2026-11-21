@@ -4,7 +4,9 @@
 Reads summary.json (and plots/ next to it) and checks that the skim kept its
 bookkeeping: event counts are conserved through merging, the MC sum of
 weights in the skim equals the original NanoAOD, the luminosity is
-consistent, and the normalised DY Z peak agrees with data. Standard library
+consistent, the normalised DY Z peak agrees with data, and the cutflow
+(skim steps from the skims' Cutflow trees, then the analysis steps with
+N-1) is consistent with all of these. Standard library
 only, so CI can run it. It does not rerun the skim.
 
 Usage:
@@ -80,9 +82,42 @@ def main() -> int:
     check("MC stat unc sensible", 0 < unc < 0.1 * z["mc_events_normalised"],
           f"{unc:.1f} on {z['mc_events_normalised']:.1f}")
 
-    for ext in ("png", "pdf"):
-        p = os.path.join(base, "plots", f"mmumu.{ext}")
-        check(f"plot {ext}", os.path.isfile(p) and os.path.getsize(p) > 1000, p)
+    # --- cutflow (skim Cutflow trees + analysis steps)
+    c = s.get("cutflow")
+    check("cutflow present", isinstance(c, dict), "summary.json has a cutflow block")
+    if isinstance(c, dict):
+        steps = c["steps"]
+        cd, cm = c["data"], c["mc_normalised"]
+        ok_len = all(len(x) == len(steps) for x in (cd["sequential"], cd["nminus1"], cm["sequential"], cm["nminus1"]))
+        check("cutflow lists match steps", ok_len, f"{len(steps)} steps")
+        if ok_len:
+            i = {k: n for n, k in enumerate(steps)}
+            seq_d, seq_m, nm1_d, nm1_m = cd["sequential"], cm["sequential"], cd["nminus1"], cm["nminus1"]
+            check("cutflow skim rows = skim counts",
+                  seq_d[i["all"]] == d["events_in"] and seq_d[i["lumimask"]] == d["events_after_lumimask"]
+                  and seq_d[i[c["skim_steps"][-1]]] == d["events_out"],
+                  f"all {seq_d[i['all']]}, lumimask {seq_d[i['lumimask']]}, last skim step {seq_d[i[c['skim_steps'][-1]]]}")
+            check("cutflow per-file == merged", c["skim_per_file_equals_merged"] is True,
+                  "Cutflow trees of the per-file and merged skims agree")
+            check("data cutflow non-increasing", all(a >= b for a, b in zip(seq_d, seq_d[1:])), "sequential counts")
+            check("mc cutflow non-increasing", all(a >= b * (1 - 1e-9) for a, b in zip(seq_m, seq_m[1:])), "normalised")
+            check("cutflow ends at Z peak", seq_d[-1] == z["data_events"] and rel(seq_m[-1], z["mc_events_normalised"]) < 1e-6,
+                  f"data {seq_d[-1]} vs {z['data_events']}, MC {seq_m[-1]:.1f} vs {z['mc_events_normalised']:.1f}")
+            xl = m["xsec_pb"] * d["lumi_pb"]
+            check("mc all row = xsec * lumi", rel(seq_m[i["all"]], xl) < 1e-4,
+                  f"{seq_m[i['all']]:.1f} vs {xl:.1f} (complete files: sum genWeight read = genEventSumw)")
+            cuts = [k for k in steps if k not in ("all", "lumimask")]
+            check("N-1 >= final", all(nm1_d[i[k]] >= seq_d[-1] and nm1_m[i[k]] >= seq_m[-1] * (1 - 1e-9) for k in cuts),
+                  "every N-1 count is at least the final count (data and MC)")
+            check("N-1 of last step = previous row", nm1_d[-1] == seq_d[-2] and rel(nm1_m[-1], seq_m[-2]) < 1e-9,
+                  f"data {nm1_d[-1]} vs {seq_d[-2]}")
+            r_tight = seq_d[-1] / seq_m[-1]
+            check("data/MC after full selection", rel(r_tight, z["data_over_mc"]) < 1e-6, f"{r_tight:.4f}")
+
+    for name in ("mmumu", "cutflow"):
+        for ext in ("png", "pdf"):
+            p = os.path.join(base, "plots", f"{name}.{ext}")
+            check(f"plot {name}.{ext}", os.path.isfile(p) and os.path.getsize(p) > 1000, p)
 
     for ok, name, detail in results:
         print(f"{'PASS' if ok else 'FAIL'} {name}: {detail}")

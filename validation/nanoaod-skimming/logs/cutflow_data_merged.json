@@ -1,0 +1,16 @@
+{
+  "n_files": 1,
+  "n_input_files": 3,
+  "is_mc": false,
+  "steps": ["trigger", "two_muons"],
+  "n_all": 9457915.0,
+  "n_lumimask": 9441598.0,
+  "cutflow": {
+    "trigger": 6245012.0,
+    "two_muons": 645024.0
+  },
+  "nminus1": {
+    "trigger": 952534.0,
+    "two_muons": 6245012.0
+  }
+}

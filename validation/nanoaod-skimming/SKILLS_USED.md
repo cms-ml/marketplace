@@ -1,5 +1,79 @@
 # SKILLS_USED: nanoaod-skimming validation
 
+Run 2 (cutflow, 2026-11-20) is the first section. Run 1 (2026-11-16, before the cutflow) follows unchanged.
+
+## Run 2: cutflow (2026-11-20)
+
+Environment: `set +u; source /cvmfs/sft.cern.ch/lcg/views/LCG_109/x86_64-el9-gcc15-opt/setup.sh; export PYTHONNOUSERSITE=1` on cmslpc. Python 3.13.11, uproot 5.6.0, awkward 2.8.9, hist 2.9.0, mplhep 0.4.1, hadd and xrdcp from the same view. Full chain: `bash validation/nanoaod-skimming/run_all.sh`, run twice end to end (the second run is the final one, after a plot-only fix in `zpeak.py`). Each full run took about 5 min with `MAX_JOBS=2`.
+
+### How the skill was loaded
+
+- `nanoaod-skimming` was **not** loaded with the Skill tool, as instructed by the task. `SKILL.md`, `references/keep-lists-and-recipes.md` and the four scripts were read directly. `--help` was run for all four scripts.
+- `cms:hist` was loaded with the Skill tool. The loaded copy came from the user's main marketplace checkout (an older branch), not from this worktree. Its CMS-label example still reads `hep.cms.label("Preliminary", data=True, lumi=16.8, com=13, ax=ax)`. That conflicts with the Open Data labelling rule, so I used `hep.cms.label(label="Open Data", ...)` as in run 1.
+
+### Step 1: skims (SKILL.md "Canonical Patterns 2" and "3. Record the cutflow", `scripts/skim.py`)
+
+- Used `--step 'trigger=HLT_IsoMu24 | HLT_IsoTkMu24' --step 'two_muons=ak.sum(Muon_pt > 20, axis=1) >= 2'` in place of run 1's single `--cut`. Each step got its own Cutflow entry. This worked on the first try.
+- Keep list: as run 1, `Muon_*`, `HLT_IsoMu24`, `HLT_IsoTkMu24`, `PV_npvs`, `MET_pt`, `MET_phi`, `Pileup_nTrueInt`, `LHEScaleWeight`. The PROMPT says "MET"; I read that as `MET_pt` and `MET_phi`, as in run 1. Data logs: `MISSING_PATTERNS=Pileup_nTrueInt,LHEScaleWeight` (expected). MC: none missing.
+- Golden JSON applied to data: `EVENTS_IN` 9457915, `EVENTS_AFTER_LUMIMASK` 9441598, `EVENTS_OUT` 645024. The skim cutflow `n_lumimask` equals the lumimask count.
+- `skim.py --help` lists `MISSING_PATTERNS` and `SUMW_READ` as expected. `SUMW_READ` now prints with `.10g` (HEAD also has `.10g`). See the run 1 section for the precision note.
+- I did not use `--dry-run` this run (it was used in run 1). I did run a 100k-event test of one MC file into the scratchpad (`--max-events`, marked `PARTIAL_FILES=1`), to check the step and cutflow mechanics before the full run.
+
+### Step 1b: skim cutflow (SKILL.md "3. Record the cutflow", `scripts/cutflow.py`)
+
+- `cutflow.py -i per_file/skim_*.root` and `cutflow.py -i merged/*.root` both ran with `--json`. Both give identical integers (`n_all`, `n_lumimask`, sequential, N-1). The MC Σ genWeight values agree to within 1e-9 relative. The merged file reports `N_FILES=1 N_INPUT_FILES=3`.
+- Independent check of the N-1 logic on 100k MC events, with uproot and awkward directly: `trigger` 21647, `two_muons` 14186, `trigger & two_muons` 13550. These match `cutflow.py`: `CUTFLOW_trigger=21647`, `NMINUS1_trigger=14186` (passes `two_muons`), `CUTFLOW_two_muons=13550`, `NMINUS1_two_muons=21647` (passes `trigger`). The Σ genWeight agrees to 1e-7 (float32 accumulation in my direct sum).
+
+### Step 4: analysis cutflow (`zpeak.py`, the skill has no text for it)
+
+The SKILL says "Continue the cutflow in the analysis from the skim's last step ... Analysis cuts can only be studied N-1 if the preselection is looser than them". It does not say how per-muon cuts or pair-based cuts count as events, so I had to define them. My definitions are stated in the `zpeak.py` docstring:
+
+- Muon-level steps (`muon_pt`, `muon_eta`, `muon_tight_id`, `muon_iso`), sequential: "at least two muons pass all muon requirements so far".
+- Event-level steps use the pT-sorted selected muons. `exactly_two` is "exactly 2 selected". `opposite_charge`, `leading_pt` and `z_window` use the two leading selected muons, and fail when fewer than two are selected.
+- N-1 of a muon-level step: muons selected without that cut, all other steps applied (event-level steps included).
+- N-1 of an event-level step: all muon requirements and all other event-level steps applied.
+
+Checks on these definitions: the sequential `muon_pt` equals the skim `two_muons` count (data 645024, MC 408892.66 both ways), and the last sequential `z_window` equals the independent run-1 selection (data 281527, MC 297829.249). The sequential cutflow is non-increasing.
+
+### Step 4 plot
+
+- `plots/cutflow.png/pdf`: top panel log-scale, data vs normalised MC, all 12 steps. Bottom panel: data/MC from `trigger` on, log scale.
+- Problem: a linear ratio range of 0.5 to 1.5 hid the first four steps (data/MC 9.7 at `trigger`, 1.58 at `two_muons`, `muon_pt` and `muon_eta`). These are not a mistake. The data are the SingleMuon primary dataset, and the MC is the inclusive DY sample, so before the muon selection they are different populations. I changed the ratio to a log scale (0.1 to 20) and documented that in the code.
+- MC stat uncertainty on the skim steps is not shown (see gaps below).
+
+### Gaps and problems in the skill (run 2)
+
+1. **The Cutflow tree has no Σ genWeight², so MC stat errors are impossible for skim steps.** SKILL.md says "`w_*` , `wm1_<step>` the same as sums of genWeight (MC only)". For a normalised MC plot the stat error on skim steps needs Σw², which is not stored. Suggestion: add `w2_<step>` to the Cutflow tree.
+2. **`cutflow.py` `cum` column is confusing for the `all` row.** The `all` row prints `cum 1.0017` for data, because `cum` is N / n_lumimask and `all` > `lumimask`. The docstring says `cum  N / n_lumimask (cumulative efficiency)`. Suggest `cum` relative to `n_all`, or print `-` on `all`.
+3. **`cutflow.py` prints `N_FILES` and `N_INPUT_FILES`, and the names are easy to confuse.** On the merged file it prints `N_FILES=1 N_INPUT_FILES=3`. The docstring does not say that `N_FILES` counts the files passed on the command line.
+4. **No guidance for analysis steps after the skim.** Quoted from SKILL.md "3. Record the cutflow": "Continue the cutflow in the analysis from the skim's last step ... append the analysis steps counted on the skimmed events." The definition of a per-muon step, and of N-1 for a pair-based step, is missing (see above). A short recipe or a helper would help.
+5. **Units of normalised MC in the skim cutflow.** SKILL.md says "For MC the cutflow in Σ genWeight, not the event count, is the one to compare with data". The PROMPT wants normalised events (`genWeight * xsec * lumi / SUMW`). I applied `WEIGHT_FACTOR` to Σ genWeight, and the `all` row is then `xsec * lumi` (2980196.6 against 2980195.8, relative 2.8e-7). The skill could state this identity directly, because it is a good check.
+6. **Run time.** Measured: each data skim about 50 s with two in parallel, each MC skim 10 to 17 s. The whole chain took about 5 min.
+7. **Earlier note on `SUMW_READ` (run 1, see below) does not match the current code.** HEAD `skim.py` prints `SUMW_READ={sumw_read:.10g}`. The run 1 summary already held `48548789980.0`, so the 6-digit observation in run 1 could not be reproduced.
+
+   Supervisor: the run 1 note was right when it was written. `skim.py` was changed from 6 to 10 digits after run 1, and the chain was rerun before run 1 was committed (see README).
+
+### Changed in the skill after run 2 (supervisor)
+
+- Gap 1: the Cutflow tree now has `w2_<step>` and `w2m1_<step>` (Σ genWeight²), in `skim.py` and in the RDataFrame recipe. `cutflow.py` prints `W err` and `CUTFLOW_WERR_<step>`. Checked against a direct sum on a skim.
+- Gap 2: `cum` is now N / `n_all`.
+- Gap 3: the `cutflow.py` docstring says what `N_FILES` (skim files read) and `N_INPUT_FILES` (original NanoAOD files) count.
+- Gaps 4 and 5: SKILL.md now defines object-level and pair-level steps and their N-1 (the definitions used here), and states the `all` row = σ L check.
+- The chain was rerun with the final `skim.py`. `check_results.py` gained 13 cutflow checks.
+
+### Files changed in run 2
+
+- `validation/nanoaod-skimming/run_all.sh`: named `--step` preselection, `cutflow.py` per file and merged (four JSON and log pairs in `logs/`).
+- `validation/nanoaod-skimming/zpeak.py`: analysis cutflow (sequential and N-1), cutflow plot, `cutflow` block in `summary.json`, cross-checks.
+- `validation/nanoaod-skimming/summary.json`: exact PROMPT keys, plus `cutflow`.
+- `validation/nanoaod-skimming/plots/cutflow.png/.pdf` (new), `plots/mmumu.png/.pdf` (regenerated, unchanged).
+- `validation/nanoaod-skimming/logs/*`: overwritten by the run, including `cutflow_*.json` and `cutflow_*.log`.
+- `validation/nanoaod-skimming/SKILLS_USED.md`: this section.
+- Skims in `/uscms_data/d3/$USER/skims/nanoaod-skimming-validation/` (overwritten, outside the repository).
+- Not touched: `check_results.py`, `README.md`, `PROMPT.md`, anything under `plugins/`. No git commit, push or stash.
+
+## Run 1 (2026-11-16, before the cutflow)
+
 Run date 2026-11-16, cmslpc. Environment: `source /cvmfs/sft.cern.ch/lcg/views/LCG_109/x86_64-el9-gcc15-opt/setup.sh` (set +u first), with `PYTHONNOUSERSITE=1`. Versions: Python 3.13.11, uproot 5.6.0, awkward 2.8.9, numpy 2.2.6, hist 2.9.0, mplhep 0.4.1, ROOT 6.38.00, hadd and xrdcp from the same view.
 
 Caveat for every skill step: `python3 -I` drops the view's `PYTHONPATH` and breaks imports (uproot not found). Do not use `-I` with the LCG view.

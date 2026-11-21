@@ -4,8 +4,16 @@ event preselection and (for data) a golden-JSON lumi mask, and copy the Runs
 and LuminosityBlocks trees so normalisation and luminosity stay recoverable.
 
 Output: one ROOT file with Events (kept branches, NanoAOD naming, n<Coll>
-counters), Runs (unchanged, all entries) and LuminosityBlocks (lumi sections
-that were read, golden-JSON filtered for data).
+counters), Runs (unchanged, all entries), LuminosityBlocks (lumi sections
+that were read, golden-JSON filtered for data) and Cutflow (always written,
+one entry per input file, so hadd keeps it like Runs):
+  n_all, n_lumimask          events read; after the golden JSON (= n_all for MC)
+  n_<step>                   events passing the lumi mask and every step up to <step>
+  nm1_<step>                 N-1: events passing the lumi mask and every step except <step>
+  w_* , wm1_<step>           the same as sums of genWeight (MC only)
+  w2_*, w2m1_<step>          sums of genWeight**2, for the MC statistical uncertainty (MC only)
+Steps are the --step NAME=EXPR cuts in the order given (--cut EXPR is one step
+named "cut"). Sum the tree over skims with cutflow.py.
 
 The output is written as <output>.part and renamed when the job succeeds.
 
@@ -18,6 +26,8 @@ Examples:
       --cut 'ak.sum((Muon_pt > 26) & Muon_tightId, axis=1) >= 1' \
       --lumi-json Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt
   skim.py -i @files.txt -o out.root --keep-file keep.txt --cut 'nMuon >= 2'
+  skim.py -i in.root -o out.root --keep 'Muon_*' \
+      --step 'trigger=HLT_IsoMu24 | HLT_IsoTkMu24' --step 'two_muons=ak.sum(Muon_pt > 20, axis=1) >= 2'
 """
 import argparse
 import fnmatch
@@ -119,7 +129,10 @@ def main():
     p.add_argument("--keep", nargs="*", default=[], help="branch glob patterns to keep (default: all)")
     p.add_argument("--keep-file", nargs="*", help="files with one glob pattern per line (# comments)")
     p.add_argument("--drop", nargs="*", default=[], help="branch glob patterns to drop after --keep")
-    p.add_argument("--cut", help="event selection: Python expression over branch names, ak and np")
+    p.add_argument("--cut", help="event selection: Python expression over branch names, ak and np (one step named 'cut')")
+    p.add_argument("--step", action="append", default=[], metavar="NAME=EXPR",
+                   help="named selection step, repeatable, applied in order; all steps (and --cut) are ANDed "
+                        "and recorded in the Cutflow tree with sequential and N-1 counts")
     p.add_argument("--lumi-json", help="golden JSON; applied only to data (files without genWeight)")
     p.add_argument("--step-size", default="100 MB", help="uproot iterate step size (default 100 MB)")
     p.add_argument("--max-events", type=int, help="stop after this many input events per file (tests only)")
@@ -140,14 +153,28 @@ def main():
     missing = [pt for pt in keep if not any(fnmatch.fnmatchcase(b, pt) for b in names)]
     if missing:  # normal for MC-only branches in a list shared with data; fatal for typos
         log(f"WARNING: --keep patterns match no branch: {missing}")
-    # counters for kept collections, needed to rebuild jagged arrays on write
-    cut_inputs = []
+    steps = []  # [(name, expr)] in cutflow order
+    for st in a.step:
+        name, sep, expr = st.partition("=")
+        name = name.strip()
+        if not sep or not expr.strip() or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", name):
+            log(f"ERROR: --step must be NAME=EXPR with NAME a plain identifier, got {st!r}")
+            return 2
+        steps.append((name, expr))
     if a.cut:
-        idents = set(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", a.cut)) - {"ak", "np", "axis", "True", "False", "None"}
+        steps.append(("cut", a.cut))
+    step_names = [n for n, _ in steps]
+    if len(set(step_names)) != len(step_names) or {"all", "lumimask"} & set(step_names):
+        log(f"ERROR: step names must be unique and not 'all' or 'lumimask': {step_names}")
+        return 2
+    cut_inputs = []
+    if steps:
+        text = " ".join(e for _, e in steps)
+        idents = set(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", text)) - {"ak", "np", "axis", "True", "False", "None"}
         cut_inputs = sorted(i for i in idents if i in names)
         unknown = sorted(i for i in idents if i not in names and not hasattr(ak, i) and not hasattr(np, i))
         if unknown:
-            log(f"ERROR: names in --cut are not branches: {unknown}")
+            log(f"ERROR: names in --cut/--step are not branches: {unknown}")
             return 2
     to_read = sorted(set(kept) | set(cut_inputs))
 
@@ -155,6 +182,7 @@ def main():
     if a.dry_run:
         print("\n".join(f"KEEP={b}" for b in kept))
         print(f"IS_MC={int(is_mc)}\nN_KEPT={len(kept)}\nN_BRANCHES={len(names)}")
+        print(f"STEPS={','.join(step_names)}")
         print(f"MISSING_PATTERNS={','.join(missing)}")
         return 0
 
@@ -164,6 +192,10 @@ def main():
 
     n_in = n_lumi = n_out = 0
     sumw_read = sumw_out = 0.0
+    k = len(steps)
+    tot_n = np.zeros(2 + 2 * k, np.int64)  # all, lumimask, n_<step>..., nm1_<step>...
+    tot_w = np.zeros(2 + 2 * k, np.float64)
+    tot_w2 = np.zeros(2 + 2 * k, np.float64)
     t0 = time.time()
     tmp = a.output + ".part"  # renamed only on success, so a failed job leaves no <output>
     any_partial = False
@@ -181,6 +213,9 @@ def main():
                 partial = stop is not None and stop < ev.num_entries
                 any_partial |= partial
                 seen = set()
+                cf_n = np.zeros(2 + 2 * k, np.int64)  # this input file's Cutflow entry
+                cf_w = np.zeros(2 + 2 * k, np.float64)
+                cf_w2 = np.zeros(2 + 2 * k, np.float64)
                 for arr in ev.iterate(to_read, step_size=a.step_size, entry_stop=stop, library="ak"):
                     n = len(arr)
                     n_in += n
@@ -192,11 +227,27 @@ def main():
                     n_lumi += int(sel.sum())
                     if partial:
                         seen.update(np.unique((ak.to_numpy(arr["run"]).astype(np.int64) << 20) | ak.to_numpy(arr["luminosityBlock"])).tolist())
-                    if a.cut:
+                    gw = ak.to_numpy(arr["genWeight"]).astype(np.float64) if is_mc else np.ones(n)
+                    rows = [np.ones(n, bool), sel.copy()]
+                    if steps:
                         ns = {b: arr[b] for b in cut_inputs}
                         ns.update(ak=ak, np=np)
-                        c = eval(a.cut, {"__builtins__": {}}, ns)
-                        sel &= np.asarray(ak.fill_none(c, False), bool)
+                        passes = []
+                        for _, expr in steps:
+                            c = np.asarray(ak.fill_none(eval(expr, {"__builtins__": {}}, ns), False), bool)
+                            passes.append(np.broadcast_to(c, (n,)))
+                        nfail = np.sum([~q for q in passes], axis=0)
+                        cum = sel.copy()
+                        for q in passes:
+                            cum &= q
+                            rows.append(cum.copy())
+                        for q in passes:  # N-1: every other step passes; this one may fail
+                            rows.append(sel & ((nfail == 0) | ((nfail == 1) & ~q)))
+                        sel = cum
+                    for j, r in enumerate(rows):
+                        cf_n[j] += int(r.sum())
+                        cf_w[j] += float(gw[r].sum())
+                        cf_w2[j] += float((gw[r] ** 2).sum())
                     out = arr[sel]
                     n_out += len(out)
                     if is_mc:
@@ -204,6 +255,20 @@ def main():
                     if len(out):
                         write_chunk(fout, "Events", to_writable(out, kept, counters))
                     log(f"  {fn.rsplit('/', 1)[-1]}: read {n_in} pass {n_out} ({time.time() - t0:.0f}s)")
+                cf = {"n_all": cf_n[:1], "n_lumimask": cf_n[1:2]}
+                cf.update({f"n_{s}": cf_n[2 + j:3 + j] for j, s in enumerate(step_names)})
+                cf.update({f"nm1_{s}": cf_n[2 + k + j:3 + k + j] for j, s in enumerate(step_names)})
+                if is_mc:
+                    cf.update({"w_all": cf_w[:1], "w_lumimask": cf_w[1:2]})
+                    cf.update({f"w_{s}": cf_w[2 + j:3 + j] for j, s in enumerate(step_names)})
+                    cf.update({f"wm1_{s}": cf_w[2 + k + j:3 + k + j] for j, s in enumerate(step_names)})
+                    cf.update({"w2_all": cf_w2[:1], "w2_lumimask": cf_w2[1:2]})
+                    cf.update({f"w2_{s}": cf_w2[2 + j:3 + j] for j, s in enumerate(step_names)})
+                    cf.update({f"w2m1_{s}": cf_w2[2 + k + j:3 + k + j] for j, s in enumerate(step_names)})
+                write_chunk(fout, "Cutflow", cf)
+                tot_n += cf_n
+                tot_w += cf_w
+                tot_w2 += cf_w2
                 runs = fin["Runs"].arrays(library="ak")
                 rnames = [b for b in runs.fields if not (b.startswith("n") and b[1:] in runs.fields)]
                 write_chunk(fout, "Runs", {b: runs[b] for b in rnames})
@@ -225,6 +290,11 @@ def main():
     print(f"MISSING_PATTERNS={','.join(missing)}")
     if is_mc:
         print(f"SUMW_READ={sumw_read:.10g}\nSUMW_OUT={sumw_out:.10g}")
+    print(f"STEPS={','.join(step_names)}")
+    for j, s in enumerate(step_names):
+        print(f"CUTFLOW_{s}={tot_n[2 + j]}\nNMINUS1_{s}={tot_n[2 + k + j]}")
+        if is_mc:
+            print(f"CUTFLOW_W_{s}={tot_w[2 + j]:.10g}\nNMINUS1_W_{s}={tot_w[2 + k + j]:.10g}")
     return 0
 
 

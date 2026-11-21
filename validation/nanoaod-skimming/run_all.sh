@@ -45,14 +45,14 @@ fi
 
 # Keep list (same for data and MC; patterns absent in data are reported as MISSING_PATTERNS)
 KEEP=(--keep 'Muon_*' 'HLT_IsoMu24' 'HLT_IsoTkMu24' 'PV_npvs' 'MET_pt' 'MET_phi' 'Pileup_nTrueInt' 'LHEScaleWeight')
-# Preselection: trigger OR and at least two muons with pT > 20 GeV
-PRESEL='(HLT_IsoMu24 | HLT_IsoTkMu24) & (ak.sum(Muon_pt > 20, axis=1) >= 2)'
+# Preselection as two named steps (each gets a line in the Cutflow tree of every skim)
+STEPS=(--step 'trigger=HLT_IsoMu24 | HLT_IsoTkMu24' --step 'two_muons=ak.sum(Muon_pt > 20, axis=1) >= 2')
 
 # ---- 1. skim each input file separately (one output per input) ----
 skim_one() {  # name url [extra args]
   local name="$1" url="$2"; shift 2
   python3 "$SCR/skim.py" -i "$url" -o "$PER_FILE/$name.root" "${KEEP[@]}" \
-      --cut "$PRESEL" "$@" > "$LOGS/$name.log" 2> "$LOGS/$name.err"
+      "${STEPS[@]}" "$@" > "$LOGS/$name.log" 2> "$LOGS/$name.err"
 }
 
 # Each skim holds about 2 GB at the default step size; a shared login node can OOM-kill
@@ -85,6 +85,12 @@ size_of() {  # url -> bytes
 # ---- 2. merge skims with hadd (one data file, one MC file) ----
 hadd -f -k "$MERGED/SingleMuon_2016G.root" "$PER_FILE"/skim_SingleMuon_2016G_*.root > "$LOGS/hadd_data.log" 2>&1
 hadd -f -k "$MERGED/DYJetsToLL_M50.root"   "$PER_FILE"/skim_DYJetsToLL_M50_*.root   > "$LOGS/hadd_mc.log" 2>&1
+
+# ---- 2b. skim cutflow (Cutflow trees): per input file and merged; the two must agree ----
+python3 "$SCR/cutflow.py" -i "$PER_FILE"/skim_SingleMuon_2016G_*.root --json "$LOGS/cutflow_data_per_file.json" > "$LOGS/cutflow_data_per_file.log"
+python3 "$SCR/cutflow.py" -i "$MERGED/SingleMuon_2016G.root" --json "$LOGS/cutflow_data_merged.json" > "$LOGS/cutflow_data_merged.log"
+python3 "$SCR/cutflow.py" -i "$PER_FILE"/skim_DYJetsToLL_M50_*.root --json "$LOGS/cutflow_mc_per_file.json" > "$LOGS/cutflow_mc_per_file.log"
+python3 "$SCR/cutflow.py" -i "$MERGED/DYJetsToLL_M50.root" --json "$LOGS/cutflow_mc_merged.json" > "$LOGS/cutflow_mc_merged.log"
 
 # ---- 3. bookkeeping ----
 # Data luminosity of the processed lumi sections (merged data skim)
