@@ -1,8 +1,12 @@
 # CMS Marketplace
 
-Claude Code plugin marketplace for CMS physics analysis. Each skill is
-grounded in commands tested on cmslpc against real CMS releases and data
-(CMS Open Data where possible), in both CMSSW and plain pip environments.
+Skills for CMS physics analysis in Claude Code and Codex. Use them to set up
+CMSSW, skim NanoAOD, measure efficiencies, run batch jobs at Fermilab or CERN,
+and package results for HEPData. The `cms` plugin also includes two Claude Code
+subagents for implementing an analysis and reviewing it against published CMS results.
+
+Browse the [plugin catalog](#plugins) to choose skills or jump to the
+[validation results](#validations) for worked analyses and batch runs.
 
 ## Installation
 
@@ -18,7 +22,7 @@ Type these in the Claude prompt. They are slash commands, not shell commands:
 /plugin install af-cern-lxplus@cms-marketplace
 ```
 
-### From a terminal
+### From a terminal with Claude Code
 
 ```bash
 claude plugin marketplace add cms-ml/marketplace          # or a local clone: /path/to/marketplace
@@ -36,7 +40,7 @@ which isn't on `PATH`:
 alias claude="$(ls -d ~/.vscode-server/extensions/anthropic.claude-code-*/resources/native-binary/claude | tail -1)"
 ```
 
-### Updating, and getting new plugins
+### Updating Claude Code plugins
 
 When new skills or plugins are merged, refresh the marketplace and install
 any new plugins:
@@ -53,10 +57,28 @@ After installing or updating, **start a new conversation**. Skills are loaded wh
 conversation starts. In VS Code, run "Developer: Reload Window" if a new chat
 still doesn't see them. `/skills` lists what is loaded.
 
-**Other agents (Codex, etc.):** skills follow the
-[Agent Skills specification](https://agentskills.io/specification), so you can
-symlink a plugin's `skills/` directory into the agent's skill path, e.g.
-`ln -s $PWD/plugins/cms/skills ~/.agents/skills/cms`.
+### From a terminal with Codex
+
+Register the marketplace and list its plugins:
+
+```bash
+codex plugin marketplace add cms-ml/marketplace
+codex plugin list --marketplace cms-marketplace --available --json
+```
+
+For a local checkout, use `codex plugin marketplace add /path/to/marketplace`
+in the first step. Install the plugins you need, then start a new Codex session
+in your analysis directory:
+
+```bash
+codex plugin add cms@cms-marketplace               # CMSSW and NanoAOD analysis
+codex plugin add af-fnal-lpc@cms-marketplace       # Fermilab LPC and CMS Connect
+codex plugin add af-cern-lxplus@cms-marketplace    # CERN lxplus, EOS and CRAB
+codex plugin add hep-python-tools@cms-marketplace  # standalone Python scripts and CLIs
+```
+
+For example, ask Codex to “use the `nanoaod-skimming` skill to skim these DY
+files and check that the merged output preserves the sum of generator weights.”
 
 ## One-time setup on cmslpc
 
@@ -77,10 +99,9 @@ symlink a plugin's `skills/` directory into the agent's skill path, e.g.
 
 ## Usage
 
-You don't call skills by name. Claude picks them up when your request matches
-their description. Describe the physics task and where things should go.
-Mentioning a skill ("use the analysis-spec-builder skill…") makes sure it is
-used.
+Claude Code and Codex can select skills from the task description. Describe the
+physics task, name the skill if you want a particular workflow, and say where
+to write the outputs.
 
 Good requests name:
 
@@ -106,7 +127,7 @@ Examples:
   my EOS area, and resubmit any that fail." (`lpc-condor`)
 - "Use the cms-analysis-coder agent to implement specification.md: start on
   2 files, then run everything, and write summary.json and SKILLS_USED.md."
-  (agent `cms-analysis-coder`)
+  (Claude Code agent `cms-analysis-coder`)
 
 See [examples/](examples/) for a complete prompt, and
 [validation/dijet-2016/PROMPT.md](validation/dijet-2016/PROMPT.md) for a
@@ -114,7 +135,7 @@ full analysis task given to the agent.
 
 ### Running the agent on a long task
 
-In a chat, ask for it by name: "Use the cms-analysis-coder agent to …".
+In Claude Code, ask for the agent by name: "Use the cms-analysis-coder agent to …".
 For tasks that take hours (condor jobs, full datasets), run it headless
 inside `tmux`, so a closed laptop or a VS Code reconnect doesn't kill it:
 
@@ -233,25 +254,30 @@ fell short. Bring that file back as an issue or PR to improve the skills.
 
 ## Validations
 
-Every skill and agent is validated by an analysis that uses it, run by an
-agent, with its outputs committed. Each directory has a `README.md` (goal,
-results, how to reproduce), the `PROMPT.md` given to the agent, and a
-`SKILLS_USED.md` saying where the skills helped and where they fell short.
+These runs show what the skills and agents produced on CMS Open Data and on
+the two batch facilities. Follow each report for the inputs, results and limits
+of the comparison.
 
-| Validation                                                                   | Tests                                                                                        | Result                                                                           |
-| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| [validation/dijet-2016](validation/dijet-2016)                               | `cms-analysis-coder`, `trigger-efficiency`, `hepdata`, plus the core skills and `lpc-condor` | b-tagged dijet search on 142 Open Data files: 7 plot types, fits, HEPData        |
-| [validation/dijet-2016/cms-comparison](validation/dijet-2016/cms-comparison) | `cms-results-validator`                                                                      | 21 tests of the dijet and dimuon Open Data results against 6 CMS HEPData records |
-| [validation/lpc-condor](validation/lpc-condor)                               | `lpc-condor`                                                                                 | Two agent runs of split → submit → check → resubmit; all jobs exit 0             |
+| Workflow                                                                                    | What the run demonstrates                                                                                                                                           |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [NanoAOD skimming](validation/nanoaod-skimming/README.md)                                   | Skims 2016G SingleMuon and DY to 2–3% of their input size, preserves the MC sum of generator weights, and checks the luminosity normalization with the Z peak.      |
+| [Muon tag and probe](validation/muon-tnp/README.md)                                         | Compares tight ID, isolation and trigger scale factors with the Muon POG. Tight ID agrees. A roughly 1.2% IsoMu24 offset remains in the barrel with bit-2 matching. |
+| [b-tagged dijet search](validation/dijet-2016/README.md)                                    | Runs the analysis on 142 Open Data files, from trigger turn-ons and mass fits to CMS-style plots and HEPData tables.                                                |
+| [Comparison with published CMS results](validation/dijet-2016/cms-comparison/COMPARISON.md) | The results validator compares the dijet and dimuon analyses with six HEPData records and explains where the selections or normalizations differ.                   |
+| [Fermilab LPC batch](validation/lpc-condor/RESULTS.md)                                      | Splits JetHT inputs across HTCondor jobs and checks the outputs on EOS. All jobs exited successfully in both runs.                                                  |
+| [CERN lxplus batch](validation/lxplus-condor/RESULTS.md)                                    | Runs the same JetHT selection on lxbatch and stages the outputs to FNAL EOS. The successful run matches the LPC counts job by job.                                  |
 
-To rerun one:
+To check the committed results locally, run the checker from the repository
+root for a validation that provides one. For example:
 
-1. Read its `README.md` (inputs, environment, cost).
-2. Run its `PROMPT.md` with the agent, as in
-   [Running the agent on a long task](#running-the-agent-on-a-long-task).
-3. Check the outputs: `python3 validation/<name>/check_results.py
-validation/<name>` prints `PASS`/`FAIL` per check and `SUMMARY=n/n`. CI
-   runs the same checks on the committed results.
+```bash
+python3 validation/nanoaod-skimming/check_results.py
+```
+
+To reproduce a full run, follow its report for the environment, input data
+and commands. The [dijet prompt](validation/dijet-2016/PROMPT.md) and the
+[CMS comparison prompt](validation/dijet-2016/CMS_COMPARISON_PROMPT.md)
+show how to give the implementation and review tasks to the Claude Code agents.
 
 To add one for your own skill or agent, see
 [CONTRIBUTING.md](CONTRIBUTING.md#7-the-validation).
