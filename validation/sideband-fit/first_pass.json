@@ -1,0 +1,155 @@
+{
+  "seed_commit": "f48e8ccead09a445ca9c75f6add24ebfad25dd8b",
+  "seed_skill_git_blob": "aa8b25d921019e6ce712ef249a489830e82d63a0",
+  "configuration_sha256_before_formatting": "5e864de7aea7207bf08aa7bb94e8e7131663a25ddd23afe389ce7b1207d4bda1",
+  "specification_sha256_before_formatting": "11bdbaeae9cdf16dfca6ab2dd043ba4785d3c76a87dd54e6b4ae885c56b42dcb",
+  "samples": {
+    "jpsi": {
+      "full_output_sha256": "8acc3ec956f338c09f4c03c73e149732e883f75aeeed90a822568c5eb37e1582",
+      "selected_order": 2,
+      "candidates": [
+        {
+          "order": 1,
+          "deviance": 54.385324760165645,
+          "aic_deviance": 58.385324760165645,
+          "window_expected": [2306.506860937376],
+          "window_covariance": [[1172.6569027616133]]
+        },
+        {
+          "order": 2,
+          "deviance": 26.804759006670622,
+          "aic_deviance": 32.80475900667062,
+          "window_expected": [2627.50041453745],
+          "window_covariance": [[5626.545480653691]]
+        }
+      ]
+    },
+    "continuum": {
+      "full_output_sha256": "4cb82405ba1188e5748d918ee98fda73b8ec00ed2fbbd55ddd3ef816ae9ea3ee",
+      "selected_order": 2,
+      "candidates": [
+        {
+          "order": 1,
+          "deviance": 146.7398436689033,
+          "aic_deviance": 150.7398436689033,
+          "window_expected": [549.811494269053, 65.84777807457317],
+          "window_covariance": [
+            [76.03170321403292, 19.09834053789801],
+            [19.098340537898007, 5.901847791809881]
+          ]
+        },
+        {
+          "order": 2,
+          "deviance": 95.24135584385326,
+          "aic_deviance": 101.24135584385326,
+          "window_expected": [599.5313323713575, 56.623857105659326],
+          "window_covariance": [
+            [142.33127977428626, 9.48509553469853],
+            [9.485095534698544, 7.691656205939495]
+          ]
+        }
+      ]
+    }
+  },
+  "before_numerical_retry": {
+    "full_summary_sha256": "c89d530da07ddcd562438303fef47d43b24835b1aa5da3a564318c1c94af21b2",
+    "ensemble_failures": {
+      "linear_inject_0": {
+        "fixed_linear": {
+          "sideband_failed": 2,
+          "signal_failed": 5,
+          "signal_boundary": 0
+        },
+        "aic": {
+          "sideband_failed": 0,
+          "signal_failed": 4,
+          "signal_boundary": 0
+        }
+      },
+      "linear_inject_45": {
+        "fixed_linear": {
+          "sideband_failed": 2,
+          "signal_failed": 3,
+          "signal_boundary": 0
+        },
+        "aic": {
+          "sideband_failed": 0,
+          "signal_failed": 3,
+          "signal_boundary": 0
+        }
+      },
+      "quadratic_inject_0": {
+        "fixed_linear": {
+          "sideband_failed": 4,
+          "signal_failed": 4,
+          "signal_boundary": 0
+        },
+        "aic": {
+          "sideband_failed": 0,
+          "signal_failed": 4,
+          "signal_boundary": 0
+        }
+      },
+      "quadratic_inject_45": {
+        "fixed_linear": {
+          "sideband_failed": 5,
+          "signal_failed": 2,
+          "signal_boundary": 0
+        },
+        "aic": {
+          "sideband_failed": 0,
+          "signal_failed": 2,
+          "signal_boundary": 0
+        }
+      },
+      "smooth_mixture_inject_0": {
+        "fixed_linear": {
+          "sideband_failed": 22,
+          "signal_failed": 5,
+          "signal_boundary": 0
+        },
+        "aic": {
+          "sideband_failed": 0,
+          "signal_failed": 2,
+          "signal_boundary": 0
+        }
+      },
+      "smooth_mixture_inject_45": {
+        "fixed_linear": {
+          "sideband_failed": 15,
+          "signal_failed": 1,
+          "signal_boundary": 0
+        },
+        "aic": {
+          "sideband_failed": 0,
+          "signal_failed": 1,
+          "signal_boundary": 0
+        }
+      },
+      "broad_modulation_inject_0": {
+        "fixed_linear": {
+          "sideband_failed": 5,
+          "signal_failed": 1,
+          "signal_boundary": 0
+        },
+        "aic": {
+          "sideband_failed": 0,
+          "signal_failed": 1,
+          "signal_boundary": 0
+        }
+      },
+      "broad_modulation_inject_45": {
+        "fixed_linear": {
+          "sideband_failed": 4,
+          "signal_failed": 1,
+          "signal_boundary": 0
+        },
+        "aic": {
+          "sideband_failed": 0,
+          "signal_failed": 1,
+          "signal_boundary": 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "jpsi": {
+    "binning_GeV": [2.8, 3.4, 30],
+    "masked_GeV": [[3.0, 3.2]],
+    "coordinate": "mass",
+    "orders": [1, 2]
+  },
+  "continuum": {
+    "input_edge_slice": [0, 150],
+    "masks_bin_index": [
+      [25, 31],
+      [55, 61]
+    ],
+    "coordinate": "log_mass",
+    "orders": [1, 2]
+  },
+  "toys": {
+    "attempts_per_scenario": 600,
+    "master_seed": 20261124,
+    "signal_relative_sigma": 0.025,
+    "signal_center": "geometric midpoint of first continuum mask",
+    "injected_signal_events": [0, 45],
+    "truths": ["linear", "quadratic", "smooth_mixture", "broad_modulation"],
+    "mixture_fraction_in_sidebands": 0.12,
+    "mixture_slope_shift": 2.0,
+    "broad_modulation_amplitude": 0.07,
+    "broad_modulation_relative_sigma": 0.045,
+    "coverage_z": 1.0
+  },
+  "rules": {
+    "fixed_order": 1,
+    "complete_selection": "minimum sideband Poisson deviance plus twice the number of parameters, ties prefer lower order",
+    "bounds": [-12, 12],
+    "heldout_observations": "release only after predictions and toy truth parameters are fixed"
+  }
+}

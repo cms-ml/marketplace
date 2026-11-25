@@ -1,0 +1,24 @@
+{
+  "jpsi_csv": {
+    "path_from_inputs": "jpsi/dimuon_summary_data.csv",
+    "url": "https://raw.githubusercontent.com/mattbellis/datasets_for_education/master/physics/dimuon_summary_data.csv",
+    "sha256": "624ff96eba27919d5a8406ff46708a69799146f27c5fc37bf5054eae618a3fb3",
+    "format": "100000 headerless rows of combined E, px, py, pz, charge category",
+    "unit": "GeV with c=1; used to reproduce the workshop's mass and yield"
+  },
+  "jpsi_notebook": {
+    "path_from_inputs": "jpsi/workshop.ipynb",
+    "url": "https://raw.githubusercontent.com/cms-opendata-workshop/workshop2024-lesson-background-modeling/main/instructors/background_modeling_lesson.ipynb",
+    "sha256": "2e095656033fce1bfe691574b6e09c015d32d05c25eac1ba34bcfe4869d46a03",
+    "role": "source for the CSV and its interpretation"
+  },
+  "continuum": {
+    "path_from_inputs": "dimuon-zprime/results/templates.json",
+    "sha256": "219104de226904bdc6247f58c7775458341a56c4ebf8f56d966333a4c3c57316",
+    "raw_keys": ["edges", "data_counts", "luminosity_fb"],
+    "unit": "GeV and integer event counts",
+    "documented_source": "Run2016G and Run2016H SingleMuon NanoAODv9 with selection in snapshot specification.md",
+    "crosscheck_input": "dimuon-zprime/results/bkg_fit.json",
+    "crosscheck_sha256": "7e05f7abf3b5f038beb56f8a2c4580ce43273e6e8697c75132119c57a8c32f55"
+  }
+}

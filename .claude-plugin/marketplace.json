@@ -48,8 +48,8 @@
     },
     {
       "name": "background-est",
-      "description": "Data-driven background estimation for CMS analyses: ABCD with closure tests and a likelihood version, and Rhalphabet pass/fail transfer-factor fits for jet-substructure searches.",
-      "version": "0.1.0",
+      "description": "Data-driven background estimation for CMS analyses: ABCD with closure tests and a likelihood version, Rhalphabet pass/fail transfer-factor fits for jet-substructure searches, and blinded mass-sideband fits for resonance backgrounds.",
+      "version": "0.2.0",
       "source": "./plugins/background-est",
       "keywords": [
         "CMS",
@@ -57,6 +57,7 @@
         "data-driven",
         "ABCD",
         "Rhalphabet",
+        "sideband fit",
         "transfer factor",
         "QCD multijet",
         "Combine"
