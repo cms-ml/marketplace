@@ -44,7 +44,10 @@ deviance and residuals. Compare both window estimates. Include the normalization
 contribution and the full covariance when aggregating bins. Large shape spread,
 unstable bounds or correlated residual structure warrant an independently
 validated model choice or interval. Plot the fitted mean band separately from
-the data errors. Use `cms:hist` for `hist` and `mplhep` conventions.
+the data errors. Fisher intervals treat the selected order as fixed and omit
+uncertainty introduced by choosing the order from the same data. Measure
+coverage with the selection step repeated before relying on those intervals.
+Use `cms:hist` for `hist` and `mplhep` conventions.
 
 ## Validate the inference
 
@@ -58,7 +61,11 @@ the data errors. Use `cms:hist` for `hist` and `mplhep` conventions.
 - In toys, fluctuate all bins, including the sidebands. Test in-family
   and plausible out-of-family truths. Run a signed signal-plus-background fit
   at zero and nonzero injection with positive total bin means, including signal
-  tails in fitted regions. Distinguish signed diagnostics from physical limits.
+  tails in fitted regions. Signal leakage into a background-only sideband
+  likelihood can shift the fitted normalization, shape and selected order.
+  Check background-yield coverage at nonzero injection even when the true
+  background is exactly in the fitted family. Distinguish signed diagnostics
+  from physical limits.
 - Report bias, pull mean/width, interval width, coverage with Monte Carlo error,
   and all attempts, failures and boundary counts. Separate coverage at fixed
   order from coverage rerunning model selection. Also state whether reported

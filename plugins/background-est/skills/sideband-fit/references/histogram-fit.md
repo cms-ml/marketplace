@@ -71,7 +71,11 @@ entries. The shape family describes the spectrum after selection.
   log-delta approximation. `window_observed_intervals` are central
   Poisson-gamma quantile intervals with gamma mean and variance set to
   the fitted expectation and its covariance. These plug-in approximations
-  require coverage checks. Cross-bin covariance allows joint summaries,
+  require coverage checks. They propagate only the chosen model's parameter
+  covariance and omit the variation from data-dependent order selection.
+  Test the whole selection procedure with pseudoexperiments. If a signal
+  contributes in the sidebands, test the background intervals at nonzero
+  injection even for in-family backgrounds. Cross-bin covariance allows joint summaries,
   while the reported marginal intervals have no simultaneous guarantee.
 - Signed square-root deviance residuals show where fit discrepancies occur.
   The observation variance is incorporated by the Poisson deviance itself.
