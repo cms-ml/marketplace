@@ -47,6 +47,22 @@
       ]
     },
     {
+      "name": "background-est",
+      "description": "Data-driven background estimation for CMS analyses: ABCD with closure tests and a likelihood version, and Rhalphabet pass/fail transfer-factor fits for jet-substructure searches.",
+      "version": "0.1.0",
+      "source": "./plugins/background-est",
+      "keywords": [
+        "CMS",
+        "background estimation",
+        "data-driven",
+        "ABCD",
+        "Rhalphabet",
+        "transfer factor",
+        "QCD multijet",
+        "Combine"
+      ]
+    },
+    {
       "name": "cms",
       "description": "Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), plus analysis specifications.",
       "version": "0.4.0",

@@ -1,0 +1,34 @@
+{
+ "driver_per_bin": [
+  "DATA VR3_xyshift",
+  "MC VR1_xshift",
+  "MC VR3_xyshift",
+  "MC VR3_xyshift",
+  "DATA VR1_xshift",
+  "MC VR3_xyshift",
+  "DATA VR1_xshift",
+  "DATA VR3_xyshift",
+  "DATA VR1_xshift",
+  "MC VR3_xyshift",
+  "DATA VR1_xshift",
+  "MC VR1_xshift",
+  "DATA VR2_yshift",
+  "MC closure (A)"
+ ],
+ "shape_term": [
+  0.046076142302839095,
+  0.03259954563835244,
+  0.029333828611580112,
+  0.012434097169421478,
+  0.025636138202450556,
+  0.038334296938424856,
+  0.060042130796522195,
+  0.07617869774192713,
+  0.08415916783915686,
+  0.10785969555204833,
+  0.08432217410722592,
+  0.11766569128365131,
+  0.2007573841240973,
+  0.1673029572757897
+ ]
+}

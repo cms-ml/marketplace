@@ -1,0 +1,3 @@
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_zz_0.parquet
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_zz_1.parquet
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_zz_2.parquet

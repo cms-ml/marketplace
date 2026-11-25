@@ -1,0 +1,7 @@
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_wqq_HT600to800_0.parquet
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_wqq_HT600to800_1.parquet
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_wqq_HT600to800_2.parquet
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_wqq_HT600to800_3.parquet
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_wqq_HT600to800_4.parquet
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_wqq_HT600to800_5.parquet
+root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_wqq_HT600to800_6.parquet

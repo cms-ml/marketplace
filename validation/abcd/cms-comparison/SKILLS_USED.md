@@ -1,0 +1,19 @@
+# Skills used for the ARC comparison (CMS Open Data, private work; not a CMS result)
+
+| Step | Skill | How it helped / what was wrong or missing | What I did instead |
+|---|---|---|---|
+| Plot colours and marks | `dataviz` (loaded) | Fixed categorical order (with skill blue `#2a78d6`, without skill orange `#eb6834`, CMS-like emulation aqua `#1baf7a`, QCD MC magenta `#e87ba4`, CMS dark grey), one axis per panel, legends always, marker shape as secondary encoding. Its HTML hover/tooltip and dark-mode steps do not apply to static matplotlib PNG/PDF for a review | Static PNG + PDF; no palette validator run (node not set up in the LCG env), colours taken from the validated default palette |
+| Judging the with-skill ABCD | `background-est:abcd` (read SKILL.md and `scripts/abcd.py`, not invoked) | Used as the rule book for item 2/7: κ ranking, TF table, shifted-boundary VRs, non-closure rule, `chi2_cov` | Rebuilt the with-skill per-bin MC closure (not stored by the student) in `scripts/closure_mc_a.py` |
+| HEPData | `cms:hepdata` (not loaded) | The skill is for writing records; reading was two `curl` calls to `/record/ins1685989?format=json` and `/record/data/85857/<table>/1` as given in the task | `scripts/fetch_hepdata.sh` |
+| Trigger / awkward / hist | not loaded | Not needed: I checked the students' trigger choices against the paper text, used pyarrow + numpy | — |
+
+Gaps worth adding to the `abcd` skill (details in COMPARISON.md item 7): fitted-TF propagation helper, a too-small-χ² (over-coverage) check, fail-band width, sigmoid option in `tf_fit_ftest`, signal contamination without signal MC, and a "compare with the published reference" step.
+Gap for the review workflow itself: EXO-17-021 Fig. 4 (TF vs m) is not tabulated in HEPData, so the transfer factors could only be compared qualitatively (sigmoid, rising) and are not overlaid.
+
+## Second round (extra validation plots)
+
+| Step | Skill | Note |
+|---|---|---|
+| All new plots | `dataviz` (already loaded) | Same fixed colour order; diverging RdBu for κ−1 and obs/pred−1 heatmaps (grey/white midpoint), text values in cells so colour is never the only carrier |
+| CMS Fig. 2 / Fig. 4 overlays | none | Used the provided extracted values (`ref/cms_extracted/`), labelled "extracted" everywhere; HEPData has only Fig. 5, Fig. 3 and the limits |
+| Gap found | `background-est:abcd` | The skill does not warn that substructure working points (τ21<0.45) are tagger-version specific: PUPPI τ21 in UL NanoAOD passes 4.7× more QCD jets than the CHS τ21 of 2016 legacy papers |
