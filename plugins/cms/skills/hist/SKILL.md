@@ -96,7 +96,7 @@ import matplotlib.pyplot as plt, mplhep as hep
 plt.style.use(hep.style.CMS)
 fig, ax = plt.subplots()
 h[:, "SR", "DY", "nominal"].plot(ax=ax, histtype="fill", label="DY")
-hep.cms.label("Preliminary", data=True, lumi=16.8, com=13, ax=ax)   # MC only: data=False
+hep.cms.label("Open Data", data=True, lumi=16.8, com=13, ax=ax)   # "CMS Open Data"; MC only: data=False
 ax.set_ylabel("Events / 1 GeV")
 ax.legend()
 fig.savefig("mll.png")
@@ -110,6 +110,10 @@ ranges and binning are in
 
 ## Gotchas
 
+- **"CMS Preliminary" on Open Data or private plots.** "Preliminary" is
+  only for results approved by CMS. Label Open Data plots "Open Data" (shows
+  "CMS Open Data") and unapproved CMS-internal plots "Private work" or
+  "Work in progress", following your group's rules.
 - **`Int64` silently ignores the meaning of weights.** Filling `.Int64()` with
   `weight=` raises no error, but the storage is integer and no Σw² is kept.
   Use `.Weight()` for any weighted fill.

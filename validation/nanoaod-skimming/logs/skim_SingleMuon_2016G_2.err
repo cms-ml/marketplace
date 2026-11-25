@@ -1,0 +1,6 @@
+WARNING: --keep patterns match no branch: ['Pileup_nTrueInt', 'LHEScaleWeight']
+files=1 is_mc=False kept_branches=63 of 1370 cut_inputs=['HLT_IsoMu24', 'HLT_IsoTkMu24', 'Muon_pt']
+  C760C7A6-E4AB-E447-93BB-1EAD0177DB41.root: read 923433 pass 58768 (15s)
+  C760C7A6-E4AB-E447-93BB-1EAD0177DB41.root: read 1846866 pass 124000 (26s)
+  C760C7A6-E4AB-E447-93BB-1EAD0177DB41.root: read 2770299 pass 185711 (37s)
+  C760C7A6-E4AB-E447-93BB-1EAD0177DB41.root: read 3248538 pass 212832 (43s)

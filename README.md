@@ -194,9 +194,9 @@ Data-driven background estimation for CMS analyses: ABCD (matrix) estimates with
 
 ---
 
-### `cms` (v0.4.0)
+### `cms` (v0.5.0)
 
-Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), plus analysis specifications.
+Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), NanoAOD skimming with luminosity and normalisation bookkeeping, plus analysis specifications.
 
 **Subagents:**
 
@@ -215,6 +215,7 @@ Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM m
 | `hepdata`               | HEPData records with hepdata_lib, validated offline, following CMS requirements                                                                |
 | `hist`                  | Histograms with hist + mplhep for CMS (weights, normalisation, UHI, CMS-style plots)                                                           |
 | `muon-tag-and-probe`    | Muon ID, isolation and trigger efficiencies and scale factors from Z → μμ tag and probe in NanoAOD, with the Muon POG correctionlib comparison |
+| `nanoaod-skimming`      | Skim and slim NanoAOD (uproot or RDataFrame) with golden JSON, genEventSumw bookkeeping and luminosity accounting                              |
 | `trigger-efficiency`    | Trigger turn-ons and offline thresholds from NanoAOD (reference method, Clopper-Pearson, plateau rule)                                         |
 | `vector-awkward`        | Four-vector kinematics on NanoAOD with vector + Awkward (masses, deltaR, mT, boosts)                                                           |
 

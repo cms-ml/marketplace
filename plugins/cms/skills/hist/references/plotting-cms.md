@@ -26,14 +26,17 @@ Write code that uses only the common set to run in both.
 
 ```python
 plt.style.use(hep.style.CMS)
-hep.cms.label("Preliminary", data=True, lumi=16.8, com=13, ax=ax)   # "CMS Preliminary", "16.8 fb^-1 (13 TeV)"
+hep.cms.label("Open Data", data=True, lumi=16.8, com=13, ax=ax)     # "CMS Open Data", "16.8 fb^-1 (13 TeV)"
 hep.cms.label("Open Data", data=False, com=13, ax=ax)               # "CMS Simulation Open Data", "(13 TeV)"
+hep.cms.label("Private work", data=True, lumi=16.8, com=13, ax=ax)  # "CMS Private work"
 ```
 
 - `data=False` adds "Simulation". `lumi` is in fb⁻¹, and `com` is √s in TeV
   (13.6 for Run 3).
-- The first argument is the extra text ("Preliminary", "Work in progress",
-  "Private work"). Follow your group's rules for what may be shown.
+- The first argument is the extra text. Use "Open Data" for CMS Open Data,
+  "Private work" or "Work in progress" for unapproved CMS-internal plots, and
+  "Preliminary" only for results CMS has approved. Follow your group's rules.
+  Tested with mplhep 0.4.1 (LCG_109).
 
 ## Stack + data + ratio
 
@@ -42,7 +45,7 @@ fig, (ax, rax) = plt.subplots(2, 1, sharex=True, gridspec_kw={"height_ratios": [
 mc = [h[:, "SR", p, "nominal"] for p in ["ttbar", "DY"]]
 hep.histplot(mc, ax=ax, stack=True, histtype="fill", label=["ttbar", "DY"])
 hep.histplot(h_data, ax=ax, histtype="errorbar", color="black", label="Data")
-hep.cms.label("Preliminary", data=True, lumi=16.8, com=13, ax=ax)
+hep.cms.label("Open Data", data=True, lumi=16.8, com=13, ax=ax)
 ax.legend()
 
 ax.set_xlabel("")                                   # x title only on the ratio panel

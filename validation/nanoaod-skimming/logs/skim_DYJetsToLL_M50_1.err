@@ -1,0 +1,2 @@
+files=1 is_mc=True kept_branches=68 of 1504 cut_inputs=['HLT_IsoMu24', 'HLT_IsoTkMu24', 'Muon_pt']
+  18DA8B20-842D-0741-BAFB-1A1C7C522921.root: read 1092797 pass 147353 (19s)

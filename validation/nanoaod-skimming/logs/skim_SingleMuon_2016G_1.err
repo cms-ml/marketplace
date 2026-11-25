@@ -1,0 +1,6 @@
+WARNING: --keep patterns match no branch: ['Pileup_nTrueInt', 'LHEScaleWeight']
+files=1 is_mc=False kept_branches=63 of 1380 cut_inputs=['HLT_IsoMu24', 'HLT_IsoTkMu24', 'Muon_pt']
+  A3279183-BDA6-F44C-8EF3-C063BC598B68.root: read 916934 pass 69247 (14s)
+  A3279183-BDA6-F44C-8EF3-C063BC598B68.root: read 1833868 pass 127922 (25s)
+  A3279183-BDA6-F44C-8EF3-C063BC598B68.root: read 2750802 pass 193839 (36s)
+  A3279183-BDA6-F44C-8EF3-C063BC598B68.root: read 3269596 pass 225787 (42s)

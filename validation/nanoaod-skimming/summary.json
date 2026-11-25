@@ -1,0 +1,34 @@
+{
+  "data": {
+    "n_files": 3,
+    "events_in": 9457915,
+    "events_after_lumimask": 9441598,
+    "events_out": 645024,
+    "merged_entries": 645024,
+    "n_ls": 2852,
+    "lumi_pb": 490.388,
+    "input_bytes": 7519298354,
+    "skim_bytes": 151752565
+  },
+  "mc": {
+    "n_files": 3,
+    "events_in": 2857158,
+    "events_out": 385701,
+    "merged_entries": 385701,
+    "sumw_runs_original": 48548790310.0,
+    "sumw_runs_merged_skim": 48548790310.0,
+    "sumw_read": 48548789980.0,
+    "neg_weight_fraction": 0.1581510029789915,
+    "xsec_pb": 6077.22,
+    "weight_factor": 6.13856e-5,
+    "input_bytes": 3630445193,
+    "skim_bytes": 96475019
+  },
+  "golden_2016_lumi_fb": 36.3138,
+  "z_peak": {
+    "data_events": 281527,
+    "mc_events_normalised": 297829.25,
+    "mc_stat_unc": 818.3656616210938,
+    "data_over_mc": 0.94526309957803
+  }
+}
