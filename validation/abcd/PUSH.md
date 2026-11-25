@@ -94,8 +94,7 @@ $ prettier --check <65 .md/.json files under validation/abcd and plugins/backgro
 `README.md` and `PUSH.md` (rewritten here) pass. The other 58 files do not:
 the prompts, `shared_inputs/*.json` and `INPUTS.md`, the students' REPORT.md,
 SKILLS_USED.md, TASK\*.md and `*.json`, the validator's COMPARISON.md and
-`*.json`, and the `rhalphabet` skill under `plugins/background-est/`
-(not part of this ABCD work). I did not format them because the task said not
+`*.json`. I did not format them because the task said not
 to modify the skill, the student workspaces or the comparison output. CI runs
 prettier on all files, so **run `--write` on them before pushing**. It only
 changes whitespace and table alignment, but it does touch the students' files:
@@ -117,7 +116,7 @@ codespell is not installed on cmslpc and was **not run**. Run `pre-commit run --
 ## (c) Stage and commit
 
 ```bash
-cd /uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace
+cd <REPO>
 git add plugins/background-est .claude-plugin/marketplace.json README.md validation/abcd
 git status --short | grep -v '^A ' | grep -v '^ M\|^M '   # only unrelated untracked paths should remain
 git commit -m "feat(background-est): add abcd skill with validation vs CMS EXO-17-021

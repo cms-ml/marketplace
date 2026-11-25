@@ -1,5 +1,8 @@
 # Task for the cms-analysis-coder agent: ABCD estimate of QCD multijet for boosted paired dijets, with and without the skill
 
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
+
 This validation runs an ABCD (matrix) estimate of the QCD multijet background
 in a search for pair-produced boosted resonances, each decaying to two quarks
 and reconstructed as one AK8 jet, in the CMS 2016 G+H JetHT Open Data. The
@@ -86,3 +89,4 @@ Keep intermediate files inside the workspace (never /tmp).
 Rules: everything runs as scripts with output to logs/; read only `tail -n 30` of logs; never print arrays,
 dataframes or branch lists; the interactive node has about 6 GB of free memory (read only the columns you need,
 in chunks, or on condor). If a step fails three times, record it in results.json and go on.
+<!-- prettier-ignore-end -->

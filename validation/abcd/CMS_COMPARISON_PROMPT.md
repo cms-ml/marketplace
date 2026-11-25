@@ -1,5 +1,8 @@
 # Task for the cms-results-validator agent: compare two ABCD estimates with CMS EXO-17-021
 
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
+
 Run after both student runs of [PROMPT.md](PROMPT.md) have finished (`run_validator.sh` does this).
 
 ## Task
@@ -55,3 +58,4 @@ closure band.
 
 Write `<OUT>/COMPARISON.md` (summary table first, <= 3 pages), `<OUT>/comparison.json` (per run, per item:
 verdict, numbers), the plots, and the scripts that made them (re-runnable, relative paths).
+<!-- prettier-ignore-end -->

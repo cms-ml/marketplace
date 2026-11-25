@@ -1,5 +1,8 @@
 # Inputs (prepared by hand; contain no analysis-design choices)
 
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
+
 All paths relative to your workspace. inputs/ holds:
 
 skim_files/<sample>.txt  one xrootd URL per line (root://cmseos.fnal.gov//store/...), Parquet files: a pre-made skim of
@@ -31,4 +34,5 @@ py_env.sh                `set +u; source inputs/py_env.sh` for numpy/scipy/uproo
 
 The data skim is about 50 M rows x 78 columns per era: read only the columns you need, in chunks, or on condor.
 Note: the LCG 109 pyarrow has no zstd codec; write Parquet with compression="snappy" (or none).
-EOS scratch for condor outputs: root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/abcd-2016/ws_skill/
+EOS scratch for condor outputs: root://cmseos.fnal.gov//store/user/<USER>/cms-marketplace-tests/abcd-2016/ws_skill/
+<!-- prettier-ignore-end -->

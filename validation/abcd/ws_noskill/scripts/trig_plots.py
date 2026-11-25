@@ -1,6 +1,7 @@
+import os
 import sys, json, numpy as np, matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt, mplhep as hep
-sys.path.insert(0,"/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/plugins/cms/skills/trigger-efficiency/scripts")
+sys.path.insert(0,os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../..', 'plugins/cms/skills/trigger-efficiency/scripts'))
 from turnon import efficiency, find_threshold, plateau, plot_turnon
 plt.style.use(hep.style.CMS)
 z=np.load("fits/trig_counts.npz"); pt_e=z["pt_e"]; ht_e=z["ht_e"]

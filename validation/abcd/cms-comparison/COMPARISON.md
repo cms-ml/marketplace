@@ -8,26 +8,26 @@
 
 **Verdict thresholds:**
 
-| Verdict | Criterion |
-|---|---|
-| CONSISTENT | p ≥ 0.05 and a ratio slope below 2σ |
-| TENSION | 0.0027 ≤ p < 0.05, or a slope of 2–3σ, or a clear trend |
-| INCONSISTENT | p < 0.0027 (more than 3σ), or a slope above 3σ, or a result off by a known factor |
-| NOT COMPARABLE | a difference that can neither be corrected nor bounded |
+| Verdict        | Criterion                                                                         |
+| -------------- | --------------------------------------------------------------------------------- |
+| CONSISTENT     | p ≥ 0.05 and a ratio slope below 2σ                                               |
+| TENSION        | 0.0027 ≤ p < 0.05, or a slope of 2–3σ, or a clear trend                           |
+| INCONSISTENT   | p < 0.0027 (more than 3σ), or a slope above 3σ, or a result off by a known factor |
+| NOT COMPARABLE | a difference that can neither be corrected nor bounded                            |
 
 Items 1 and 6 are judged on the definitions. **The new plots changed no verdict.** They changed two explanations (§8.2, §8.4, §5).
 
 ## Summary
 
-| Item | with skill | without skill |
-|---|---|---|
-| 1 Comparability | **TENSION**: same ABCD pair as CMS (masym × Δη), different cuts, no τ21/τ32 cuts. Data 48/48 files, exact recount | **INCONSISTENT**: N2 × N2 ABCD, no Δη cut, pT 550/300. Data 48/48 files, exact recount |
-| 2 Method validity | **CONSISTENT**: B·C/D = 470 261 ± 1 359 vs obs 471 753. MC closure 1.001 but slopes (0.83 in the last bin) | **TENSION**: per-bin TF reproduced exactly. MC VR_asym 0.940 ± 0.002, MC VR_pt1 0.90 ± 0.07. The 5% syst is taken from a VR that is then used to validate |
-| 3 Pred vs obs (unblinded A) | **CONSISTENT**: χ² 2.2/14, max 0.66σ, no excess. Over-covered (p = 0.9998). Stat-only χ² 49.7/14 | **CONSISTENT**: χ² 9.3/17 (10.4/17 with the 5% term correlated), max 1.35σ. Stat-only χ² 35.2/17 |
-| 4 Shape vs CMS (80–480 / 80–440 GeV) | **TENSION**: χ² 27.2/11 (p = 0.004, 2.9σ), slope −0.01 ± 0.05 per 100 GeV | **INCONSISTENT**: χ² 202/14 (12σ), slope +0.86 ± 0.08 per 100 GeV |
-| 5 Level / closure vs CMS | **INCONSISTENT** level (6.5× CMS after lumi scaling) / **CONSISTENT** closure (1.001 vs ±10%) | **INCONSISTENT** level (1.33× CMS, agreement by accident) / **CONSISTENT** closure (0.991, per-bin 0.90–1.11) |
-| 6 Method choices vs CMS | **CONSISTENT**: same variables, fitted smooth TF(m), unblinded last | **INCONSISTENT**: different variables, per-bin TF. Unblinded last |
-| 7 Skill effect | The variable choice, fitted TF, covariance χ² and non-closure rule all trace to the skill | — |
+| Item                                 | with skill                                                                                                        | without skill                                                                                                                                             |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 Comparability                      | **TENSION**: same ABCD pair as CMS (masym × Δη), different cuts, no τ21/τ32 cuts. Data 48/48 files, exact recount | **INCONSISTENT**: N2 × N2 ABCD, no Δη cut, pT 550/300. Data 48/48 files, exact recount                                                                    |
+| 2 Method validity                    | **CONSISTENT**: B·C/D = 470 261 ± 1 359 vs obs 471 753. MC closure 1.001 but slopes (0.83 in the last bin)        | **TENSION**: per-bin TF reproduced exactly. MC VR_asym 0.940 ± 0.002, MC VR_pt1 0.90 ± 0.07. The 5% syst is taken from a VR that is then used to validate |
+| 3 Pred vs obs (unblinded A)          | **CONSISTENT**: χ² 2.2/14, max 0.66σ, no excess. Over-covered (p = 0.9998). Stat-only χ² 49.7/14                  | **CONSISTENT**: χ² 9.3/17 (10.4/17 with the 5% term correlated), max 1.35σ. Stat-only χ² 35.2/17                                                          |
+| 4 Shape vs CMS (80–480 / 80–440 GeV) | **TENSION**: χ² 27.2/11 (p = 0.004, 2.9σ), slope −0.01 ± 0.05 per 100 GeV                                         | **INCONSISTENT**: χ² 202/14 (12σ), slope +0.86 ± 0.08 per 100 GeV                                                                                         |
+| 5 Level / closure vs CMS             | **INCONSISTENT** level (6.5× CMS after lumi scaling) / **CONSISTENT** closure (1.001 vs ±10%)                     | **INCONSISTENT** level (1.33× CMS, agreement by accident) / **CONSISTENT** closure (0.991, per-bin 0.90–1.11)                                             |
+| 6 Method choices vs CMS              | **CONSISTENT**: same variables, fitted smooth TF(m), unblinded last                                               | **INCONSISTENT**: different variables, per-bin TF. Unblinded last                                                                                         |
+| 7 Skill effect                       | The variable choice, fitted TF, covariance χ² and non-closure rule all trace to the skill                         | —                                                                                                                                                         |
 
 A CMS-like selection on the same Open Data (my emulation: 4/48 data files, 13 QCD MC files) gives **1.93× the CMS data yield**. QCD MC gives 1.99× the CMS background, so the emulated data and MC agree with each other. That factor is **not explained**.
 
@@ -35,16 +35,16 @@ Fig. 2 now shows why the emulation cannot simply be called "CMS on Open Data". T
 
 ## Comparability matrix
 
-| | CMS EXO-17-021 boosted | with skill | without skill |
-|---|---|---|---|
-| Data | all 2016, 35.9 fb⁻¹, legacy | 2016 G+H, 16.3 fb⁻¹, UL | same as with skill |
-| Trigger | HT800/HT900 OR AK8PFJet360_TrimMass30 OR AK8PFHT(700/750)_TrimMass50, >98% | PFHT900 OR PFJet450 OR AK8PFJet450, 0.9957 above HT>1100 | same OR, 0.998 above pT1>550 |
-| Offline | 2 AK8, pT>150, \|η\|<2.5, HT_AK8>900 | 2 AK8, pT>250, \|η\|<2.4, tight ID, HT_AK4>1100, lepton veto | pT1>550, pT2>300, \|η\|<2.5, tight ID, lepton veto, masym<0.2 |
-| Substructure | τ21<0.45, τ32>0.57 on both jets (CHS) | none | N2<0.3 per jet, used as the ABCD axes (PUPPI) |
-| ABCD axes | masym 0.1 × Δη 1.5 | masym 0.2 (fail band 0.2–0.4) × Δη 1.2 | N2(j1) 0.3 × N2(j2) 0.3 |
-| TF | B/D = masym ratio at Δη>1.5, sigmoid in m, applied to C | Δη ratio in the masym fail band, quadratic (F-test), applied to C | per-bin C/D, applied to B |
-| Mass, range | pruned, 60–450 GeV | soft-drop, 40–480 GeV | soft-drop, 40–440 GeV |
-| Bkg syst | closure 10% (yield), TF fit 1–4%, C count 1–23%, resonant 10% | 1.6% yield + 1–20% per-bin shape, non-QCD 30% | 5.5–17% per bin (incl. a flat 5%), non-QCD 50% |
+|              | CMS EXO-17-021 boosted                                                      | with skill                                                        | without skill                                                 |
+| ------------ | --------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------- |
+| Data         | all 2016, 35.9 fb⁻¹, legacy                                                 | 2016 G+H, 16.3 fb⁻¹, UL                                           | same as with skill                                            |
+| Trigger      | HT800/HT900 OR AK8PFJet360_TrimMass30 OR AK8PFHT(700/750)\_TrimMass50, >98% | PFHT900 OR PFJet450 OR AK8PFJet450, 0.9957 above HT>1100          | same OR, 0.998 above pT1>550                                  |
+| Offline      | 2 AK8, pT>150, \|η\|<2.5, HT_AK8>900                                        | 2 AK8, pT>250, \|η\|<2.4, tight ID, HT_AK4>1100, lepton veto      | pT1>550, pT2>300, \|η\|<2.5, tight ID, lepton veto, masym<0.2 |
+| Substructure | τ21<0.45, τ32>0.57 on both jets (CHS)                                       | none                                                              | N2<0.3 per jet, used as the ABCD axes (PUPPI)                 |
+| ABCD axes    | masym 0.1 × Δη 1.5                                                          | masym 0.2 (fail band 0.2–0.4) × Δη 1.2                            | N2(j1) 0.3 × N2(j2) 0.3                                       |
+| TF           | B/D = masym ratio at Δη>1.5, sigmoid in m, applied to C                     | Δη ratio in the masym fail band, quadratic (F-test), applied to C | per-bin C/D, applied to B                                     |
+| Mass, range  | pruned, 60–450 GeV                                                          | soft-drop, 40–480 GeV                                             | soft-drop, 40–440 GeV                                         |
+| Bkg syst     | closure 10% (yield), TF fit 1–4%, C count 1–23%, resonant 10%               | 1.6% yield + 1–20% per-bin shape, non-QCD 30%                     | 5.5–17% per bin (incl. a flat 5%), non-QCD 50%                |
 
 All comparisons are detector-level counts on both sides. The CMS total background includes resonant backgrounds below 8%. It is compared with each student's QCD + non-QCD total.
 
@@ -113,14 +113,14 @@ On closure, CMS has ±10%. With skill gives 1.0006 ± 0.004, within ±10% per bi
 
 ## 7. Skill effect (with skill vs without skill)
 
-| Aspect | with skill | without skill | Traces to skill? |
-|---|---|---|---|
-| ABCD pair | masym × Δη (= CMS), κ ranking of 6 variables | N2 × N2, which the skill warns against | **yes**: pattern 1 (`SKILLS_USED.md`, `scripts/rank.py`) |
-| TF form | quadratic by F-test (`tf_fit_ftest`) | per bin | **yes**: the flat/smooth/per-bin table |
-| VRs | 3 MC + 3 data shifted-boundary | 3, two of them inverted-cut sidebands | **yes** |
-| Non-closure | `nonclosure_syst` → 1.6% + shape term | flat 5% from the VR it then validates | **yes**: without skill breaks "never take a systematic from the test it covers" |
-| Unblinded χ² | `chi2_cov`, full covariance | diagonal | **yes** |
-| κ at the chosen point (§8.7) | +0.8 ± 0.4% | +9.4 ± 0.6% (inclusive) | **yes**: ranking by κ |
+| Aspect                       | with skill                                   | without skill                          | Traces to skill?                                                                |
+| ---------------------------- | -------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------- |
+| ABCD pair                    | masym × Δη (= CMS), κ ranking of 6 variables | N2 × N2, which the skill warns against | **yes**: pattern 1 (`SKILLS_USED.md`, `scripts/rank.py`)                        |
+| TF form                      | quadratic by F-test (`tf_fit_ftest`)         | per bin                                | **yes**: the flat/smooth/per-bin table                                          |
+| VRs                          | 3 MC + 3 data shifted-boundary               | 3, two of them inverted-cut sidebands  | **yes**                                                                         |
+| Non-closure                  | `nonclosure_syst` → 1.6% + shape term        | flat 5% from the VR it then validates  | **yes**: without skill breaks "never take a systematic from the test it covers" |
+| Unblinded χ²                 | `chi2_cov`, full covariance                  | diagonal                               | **yes**                                                                         |
+| κ at the chosen point (§8.7) | +0.8 ± 0.4%                                  | +9.4 ± 0.6% (inclusive)                | **yes**: ranking by κ                                                           |
 
 **What the skill got wrong or did not cover:**
 
@@ -158,13 +158,13 @@ The with-skill masym ratio (CMS convention) rises 2.0×, close to CMS. Its own �
 
 ![t21](plots/fig2_tau21_lead.png)
 
-| Variable | Cut efficiency, Open Data | Cut efficiency, CMS | Ratio | TVD |
-|---|---|---|---|---|
-| masym <0.1 | 0.249 | 0.291 | 0.85 | 0.09 |
-| Δη <1.5 | 0.679 | 0.711 | 0.95 | 0.03 |
-| leading τ21 <0.45 | 0.439 | 0.094 | **4.7** | 0.55 |
-| subleading τ21 <0.45 | 0.417 | 0.092 | **4.6** | 0.55 |
-| τ32 >0.57 (lead/sub) | 0.93 / 0.92 | 0.99 / 0.99 | 0.94 | 0.24–0.26 |
+| Variable             | Cut efficiency, Open Data | Cut efficiency, CMS | Ratio   | TVD       |
+| -------------------- | ------------------------- | ------------------- | ------- | --------- |
+| masym <0.1           | 0.249                     | 0.291               | 0.85    | 0.09      |
+| Δη <1.5              | 0.679                     | 0.711               | 0.95    | 0.03      |
+| leading τ21 <0.45    | 0.439                     | 0.094               | **4.7** | 0.55      |
+| subleading τ21 <0.45 | 0.417                     | 0.092               | **4.6** | 0.55      |
+| τ32 >0.57 (lead/sub) | 0.93 / 0.92               | 0.99 / 0.99         | 0.94    | 0.24–0.26 |
 
 The kinematic variables agree. τ21 does not: Open Data τ21 (PUPPI, UL) peaks at 0.45, CMS's (CHS) at 0.8. The product of the τ efficiency ratios (~19×) cannot be reconciled with the 1.9× yield ratio without a roughly 10× lower pre-substructure rate in the emulation (1.2×10⁶ against about 1.4×10⁷ implied by CMS). I cannot explain that.
 
@@ -178,13 +178,13 @@ The plots mark the CMS cut and each run's cut. Neither student cuts on τ21 or �
 
 The values below are inclusive, as % of the SR background.
 
-| Source | with skill | without skill | CMS (arXiv Table 3) |
-|---|---|---|---|
-| non-closure yield | 1.6 | 4.75 | 10 |
-| non-closure shape | 1.25 (per bin 1.2–19) | 1.1 (per bin 1.6–14) | n/a |
-| TF fit / stat | 0.23 (per bin 0.3–5.8) | 0.40 (per bin 0.9–26) | 1–4 |
-| shape-region stat | 0.16 (0.4–9.5) | 0.26 (0.6–15) | 1–23 |
-| other backgrounds | 1.6 | 1.85 | ≤ 2.4 (bound) |
+| Source            | with skill             | without skill         | CMS (arXiv Table 3) |
+| ----------------- | ---------------------- | --------------------- | ------------------- |
+| non-closure yield | 1.6                    | 4.75                  | 10                  |
+| non-closure shape | 1.25 (per bin 1.2–19)  | 1.1 (per bin 1.6–14)  | n/a                 |
+| TF fit / stat     | 0.23 (per bin 0.3–5.8) | 0.40 (per bin 0.9–26) | 1–4                 |
+| shape-region stat | 0.16 (0.4–9.5)         | 0.26 (0.6–15)         | 1–23                |
+| other backgrounds | 1.6                    | 1.85                  | ≤ 2.4 (bound)       |
 
 The paper numbers this table 3; it is the table requested as "Table 6". Both students carry a smaller yield term than CMS's 10%, and similar per-bin shape terms at high mass.
 
@@ -202,12 +202,12 @@ The CMS ±10% band is on both panels. The numbers are unchanged (§5).
 
 ![kappa](plots/closure_heatmap.png)
 
-| Selection and pair | κ−1 at the marked point | Range over the grid |
-|---|---|---|
-| CMS-like selection, CMS pair, CMS point (0.1, 1.5) | +0.4 ± 1.4% | −3 to +7% |
-| with-skill selection, its banded pair, (0.2, 1.2) | +0.8 ± 0.4% | −1 to +2% |
-| with-skill selection, unbanded (all masym>cut) | +9.4% | 6–15% |
-| without-skill N2 × N2 at (0.3, 0.3) | +9.4 ± 0.6% | 7–37% |
+| Selection and pair                                 | κ−1 at the marked point | Range over the grid |
+| -------------------------------------------------- | ----------------------- | ------------------- |
+| CMS-like selection, CMS pair, CMS point (0.1, 1.5) | +0.4 ± 1.4%             | −3 to +7%           |
+| with-skill selection, its banded pair, (0.2, 1.2)  | +0.8 ± 0.4%             | −1 to +2%           |
+| with-skill selection, unbanded (all masym>cut)     | +9.4%                   | 6–15%               |
+| without-skill N2 × N2 at (0.3, 0.3)                | +9.4 ± 0.6%             | 7–37%               |
 
 The fail band is what makes the masym × Δη pair close in the with-skill selection. The without-skill pair is correlated inclusively; its per-bin TF absorbs part of this, and the residual is its 0.90–1.11 per-bin closure.
 
@@ -255,12 +255,12 @@ Overall: **correct, and they support the analysis, with two caveats.**
 
 ## Files
 
-| File | Contents |
-|---|---|
-| `comparison.json` | Verdicts per run (`runs["with skill"]`, `runs["without skill"]`), `plots`, `review_with_skill_plots`, `verdict_changes` |
-| `out/*.json` | Intermediate results |
-| `plots/` | `mavg_SR_vs_cms`, `cmslike_od_vs_cms`, `tf_vs_mavg_vs_cms`, `fig2_{masym,deta,tau21_lead,tau21_sub,tau32_lead,tau32_sub}`, `syst_breakdown_vs_cms`, `closure_summary`, `closure_heatmap`, `nonclosure_heatmap` (PNG and PDF) |
-| `scripts/run_all.sh` | Reruns everything: `fetch_hepdata.sh`, `skim_check.py`, `recompute.py`, `closure_mc_a.py`, `compare_cms.py`, `cmslike.py`, `tests_perbin.py`, `plots_v2.py`, `write_json.py` |
-| `ref/` | HEPData JSON (CC0); `cms_extracted/` (figure values, provided) |
+| File                 | Contents                                                                                                                                                                                                                     |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `comparison.json`    | Verdicts per run (`runs["with skill"]`, `runs["without skill"]`), `plots`, `review_with_skill_plots`, `verdict_changes`                                                                                                      |
+| `out/*.json`         | Intermediate results                                                                                                                                                                                                         |
+| `plots/`             | `mavg_SR_vs_cms`, `cmslike_od_vs_cms`, `tf_vs_mavg_vs_cms`, `fig2_{masym,deta,tau21_lead,tau21_sub,tau32_lead,tau32_sub}`, `syst_breakdown_vs_cms`, `closure_summary`, `closure_heatmap`, `nonclosure_heatmap` (PNG and PDF) |
+| `scripts/run_all.sh` | Reruns everything: `fetch_hepdata.sh`, `skim_check.py`, `recompute.py`, `closure_mc_a.py`, `compare_cms.py`, `cmslike.py`, `tests_perbin.py`, `plots_v2.py`, `write_json.py`                                                 |
+| `ref/`               | HEPData JSON (CC0); `cms_extracted/` (figure values, provided)                                                                                                                                                               |
 
 Skim files (4 data, 13 QCD MC) are re-copied to `skimcache/` by `run_all.sh`; they are not kept.

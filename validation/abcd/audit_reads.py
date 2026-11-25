@@ -7,6 +7,7 @@ workspace, /cvmfs, /tmp, EOS and the background-est skill directory that a
 tool call touched. Exit 1 if the run without the skill touched ABCD
 skill files or earlier test directories.
 """
+import os
 import json
 import re
 import sys
@@ -38,8 +39,7 @@ def main(tests):
             print(f"{ws.name}: no transcript")
             continue
         wsr = str(ws.resolve())
-        alts = {wsr, wsr.replace("/uscms_data/d3/", "/uscms/home/").replace("/ashrivas/", "/ashrivas/nobackup/", 1),
-                str(ws)}
+        alts = {wsr, str(ws)}
         n, skills, outside = Counter(), [], Counter()
         for name, inp in calls(t):
             n[name] += 1
@@ -48,7 +48,8 @@ def main(tests):
             text = " ".join(str(v) for v in inp.values())
             for p in PATH_RE.findall(text):
                 p = p.rstrip(".,:")
-                if any(p.startswith(a) for a in alts) or p.startswith(ALLOWED):
+                # the same workspace may be reached through symlinked paths: compare resolved paths too
+                if any(p.startswith(a) for a in alts) or os.path.realpath(p).startswith(wsr) or p.startswith(ALLOWED):
                     continue
                 outside[p] += 1
         print(f"== {ws.name}: tool calls {dict(n)}")

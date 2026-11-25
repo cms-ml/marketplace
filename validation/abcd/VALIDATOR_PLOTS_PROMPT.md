@@ -1,5 +1,8 @@
 # Follow-up task for the validator (resumed session): more validation plots
 
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
+
 Sent by `run_followups.sh` with `claude -p --resume <validator session>` after the student follow-up.
 
 ## Task
@@ -35,3 +38,4 @@ Use a subset of skim files where you need events (as before); the node has ~6 GB
 
 Add each plot to COMPARISON.md with one paragraph (key number, caveat) and to comparison.json. Do not change your
 verdicts unless a new plot changes them; if it does, say so. Write `<OUT>/PLOTS_DONE` at the end.
+<!-- prettier-ignore-end -->

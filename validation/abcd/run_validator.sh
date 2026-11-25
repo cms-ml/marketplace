@@ -5,7 +5,7 @@ set -uo pipefail
 TESTS=$(realpath "${1:-$(dirname "$0")}")
 REPO=$(realpath "$(dirname "$0")/../..")
 OUT=$REPO/validation/abcd/${2:-cms-comparison}
-CLAUDE=${CLAUDE:-$(command -v claude || echo "$(ls -d ~/nobackup/.vscode-server/extensions/anthropic.claude-code-*-linux-x64 | sort -V | tail -1)/resources/native-binary/claude")}
+CLAUDE=${CLAUDE:-claude}   # path to the Claude Code CLI if it is not on PATH
 until [ -f "$TESTS/ws_skill/AGENT_DONE" ] && [ -f "$TESTS/ws_noskill/AGENT_DONE" ]; do sleep 300; done
 mkdir -p "$OUT"
 python3 "$REPO/validation/abcd/audit_reads.py" "$TESTS" > "$OUT/audit_reads.txt" 2>&1

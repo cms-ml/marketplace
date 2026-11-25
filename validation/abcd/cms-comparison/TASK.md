@@ -1,11 +1,13 @@
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
 
 Two students did the same thing on the same data with the same model and prompt: an ABCD estimate of the QCD
 multijet background versus the average soft-drop mass of the two leading AK8 jets (m_avg), for a search for
 pair-produced boosted resonances each decaying to two quarks, in the CMS 2016 G+H JetHT Open Data (UL
-NanoAODv9, ~16.3 fb-1). They chose the ABCD variables, cuts and validation blind. Run A is `/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/validation/abcd/run3/ws_skill`
-(had the `background-est:abcd` skill), run B is `/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/validation/abcd/run3/ws_noskill` (had not). Their task is in
-`/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/validation/abcd/run3/ws_skill/TASK.md` and inputs in `/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/validation/abcd/run3/ws_skill/INPUTS.md`. Each workspace has results.json, fits/,
-plots/, scripts/, logs/, REPORT.md, SKILLS_USED.md. Write everything into `/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/validation/abcd/run3/cms-comparison` (create it); do not modify the
+NanoAODv9, ~16.3 fb-1). They chose the ABCD variables, cuts and validation blind. Run A is `<REPO>/validation/abcd/run3/ws_skill`
+(had the `background-est:abcd` skill), run B is `<REPO>/validation/abcd/run3/ws_noskill` (had not). Their task is in
+`<REPO>/validation/abcd/run3/ws_skill/TASK.md` and inputs in `<REPO>/validation/abcd/run3/ws_skill/INPUTS.md`. Each workspace has results.json, fits/,
+plots/, scripts/, logs/, REPORT.md, SKILLS_USED.md. Write everything into `<REPO>/validation/abcd/run3/cms-comparison` (create it); do not modify the
 workspaces and do not rerun the students' full analyses (you may run small scripts of your own on their
 histogram and prediction files, and read a few skim files to recompute a check).
 
@@ -48,5 +50,6 @@ predicted and observed m_avg in A for A, B with the CMS background prediction (n
 transfer factor versus mass for A and B; closure summary (MC and validation regions) for A and B with the CMS
 closure band.
 
-Write `/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/validation/abcd/run3/cms-comparison/COMPARISON.md` (summary table first, <= 3 pages), `/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/validation/abcd/run3/cms-comparison/comparison.json` (per run, per item:
+Write `<REPO>/validation/abcd/run3/cms-comparison/COMPARISON.md` (summary table first, <= 3 pages), `<REPO>/validation/abcd/run3/cms-comparison/comparison.json` (per run, per item:
 verdict, numbers), the plots, and the scripts that made them (re-runnable, relative paths).
+<!-- prettier-ignore-end -->

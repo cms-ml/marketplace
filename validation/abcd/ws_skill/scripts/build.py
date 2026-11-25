@@ -21,7 +21,7 @@ for g,lst in groups.items():
         for i in (0,1):
             for v in ('pt','eta','phi','mass','msoftdrop','tau1','tau2','tau3','n2b1','n3b1','btagHbb'): o[f'j{i}_{v}']=d[f'j{i}_{v}'].values
         if g!='data':
-            o['w']=(d.genWeight.values.astype('f8')*xs[s]*LUMI/sumw[s]); 
+            o['w']=(d.genWeight.values.astype('f8')*xs[s]*LUMI/sumw[s]);
             for i in (0,1):
                 o[f'j{i}_bosonDR']=d[f'j{i}_bosonDR'].values; o[f'j{i}_bosonId']=d[f'j{i}_bosonId'].values
         else: o['w']=1.0

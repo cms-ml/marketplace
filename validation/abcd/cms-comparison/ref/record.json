@@ -1,1 +1,356 @@
-{"access_count":{"sum":2328},"additional_resources":false,"breadcrumb_text":"Sirunyan, Albert M et al.","coordinator":423,"data_tables":[{"data":{"csv":"https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/csv","json":"https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/json","root":"https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/root","yaml":"https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/yaml","yoda":"https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/yoda","yoda.h5":"https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/yoda.h5","yoda1":"https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/yoda1"},"description":"Signal efficiency as a function of stop mass for the inclusive and b-tagged selections. Efficiency is estimated from the number...","doi":"10.17182/hepdata.85857.v1/t1","id":348180,"location":"Data from Figure 3 (right).","messages":false,"name":"Boosted search: signal efficiency","processed_name":"Boostedsearch:signalefficiency","resources":[{"description":"Image file","type":"png","url":"https://www.hepdata.net/record/resource/763462?landing_page=true"},{"description":"Thumbnail image file","type":"png","url":"https://www.hepdata.net/record/resource/763463?landing_page=true"}]},{"data":{"csv":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/csv","json":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/json","root":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/root","yaml":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/yaml","yoda":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/yoda","yoda.h5":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/yoda.h5","yoda1":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/yoda1"},"description":"Boosted search average pruned mass distribution for data (black points) and for the total background prediction for the inclusive selection.","doi":"10.17182/hepdata.85857.v1/t2","id":348181,"location":"Data from Figure 5 (left).","messages":false,"name":"Average pruned jet mass spectrum (Inclusive analysis)","processed_name":"Averageprunedjetmassspectrum(Inclusiveanalysis)","resources":[{"description":"Image file","type":"png","url":"https://www.hepdata.net/record/resource/763465?landing_page=true"},{"description":"Thumbnail image file","type":"png","url":"https://www.hepdata.net/record/resource/763466?landing_page=true"}]},{"data":{"csv":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/csv","json":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/json","root":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/root","yaml":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/yaml","yoda":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/yoda","yoda.h5":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/yoda.h5","yoda1":"https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/yoda1"},"description":"Boosted search average pruned mass distribution for data and for the total background prediction for the b-tagged selection.","doi":"10.17182/hepdata.85857.v1/t3","id":348182,"location":"Data from Figure 5 (right).","messages":false,"name":"Average pruned jet average mass spectrum (B-tagged analysis)","processed_name":"Averageprunedjetaveragemassspectrum(B-taggedanalysis)","resources":[{"description":"Image file","type":"png","url":"https://www.hepdata.net/record/resource/763468?landing_page=true"},{"description":"Thumbnail image file","type":"png","url":"https://www.hepdata.net/record/resource/763469?landing_page=true"}]},{"data":{"csv":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/csv","json":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/json","root":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/root","yaml":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/yaml","yoda":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/yoda","yoda.h5":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/yoda.h5","yoda1":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/yoda1"},"description":"Resolved search distribution of average dijet mass for the data, along with the resulting fit to the functional form for...","doi":"10.17182/hepdata.85857.v1/t4","id":348183,"location":"Data from Figure 9 (left).","messages":false,"name":"Average dijet mass spectrum (Inclusive analysis)","processed_name":"Averagedijetmassspectrum(Inclusiveanalysis)","resources":[{"description":"Image file","type":"png","url":"https://www.hepdata.net/record/resource/763471?landing_page=true"},{"description":"Thumbnail image file","type":"png","url":"https://www.hepdata.net/record/resource/763472?landing_page=true"}]},{"data":{"csv":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/csv","json":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/json","root":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/root","yaml":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/yaml","yoda":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/yoda","yoda.h5":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/yoda.h5","yoda1":"https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/yoda1"},"description":"Resolved search distribution of average dijet mass for the data, along with the resulting fit to the functional form for...","doi":"10.17182/hepdata.85857.v1/t5","id":348184,"location":"Data from Figure 9 (right).","messages":false,"name":"Average dijet mass spectrum (B-tagged analysis)","processed_name":"Averagedijetmassspectrum(B-taggedanalysis)","resources":[{"description":"Image file","type":"png","url":"https://www.hepdata.net/record/resource/763474?landing_page=true"},{"description":"Thumbnail image file","type":"png","url":"https://www.hepdata.net/record/resource/763475?landing_page=true"}]},{"data":{"csv":"https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/csv","json":"https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/json","root":"https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/root","yaml":"https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/yaml","yoda":"https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/yoda","yoda.h5":"https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/yoda.h5","yoda1":"https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/yoda1"},"description":"Signal efficiency as a function of stop mass for the inclusive and b-tagged selections. Efficiency is estimated from the number...","doi":"10.17182/hepdata.85857.v1/t6","id":348185,"location":"Data from Figure 10 (right).","messages":false,"name":"Resolved search: signal efficiency","processed_name":"Resolvedsearch:signalefficiency","resources":[{"description":"Image file","type":"png","url":"https://www.hepdata.net/record/resource/763477?landing_page=true"},{"description":"Thumbnail image file","type":"png","url":"https://www.hepdata.net/record/resource/763478?landing_page=true"}]},{"data":{"csv":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./csv","json":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./json","root":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./root","yaml":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./yaml","yoda":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./yoda","yoda.h5":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./yoda.h5","yoda1":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./yoda1"},"description":"Observed and expected 95% CL upper limits on the signal cross section as a function of stop mass. The branching...","doi":"10.17182/hepdata.85857.v1/t7","id":348186,"location":"Data from Figure 11 (left).","messages":false,"name":"Statistical interpretation for inclusive selection.","processed_name":"Statisticalinterpretationforinclusiveselection.","resources":[{"description":"Image file","type":"png","url":"https://www.hepdata.net/record/resource/763480?landing_page=true"},{"description":"Thumbnail image file","type":"png","url":"https://www.hepdata.net/record/resource/763481?landing_page=true"}]},{"data":{"csv":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./csv","json":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./json","root":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./root","yaml":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./yaml","yoda":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./yoda","yoda.h5":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./yoda.h5","yoda1":"https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./yoda1"},"description":"Observed and expected 95% CL upper limits on the signal cross section as a function of stop mass. The branching...","doi":"10.17182/hepdata.85857.v1/t8","id":348187,"location":"Data from Figure 11 (right).","messages":false,"name":"Statistical interpretation for b-tagged selection.","processed_name":"Statisticalinterpretationforb-taggedselection.","resources":[{"description":"Image file","type":"png","url":"https://www.hepdata.net/record/resource/763483?landing_page=true"},{"description":"Thumbnail image file","type":"png","url":"https://www.hepdata.net/record/resource/763484?landing_page=true"}]}],"mode":"record","overall_status":"finished","participant_count":2,"recid":85857,"record":{"abstract":"A search for the pair production of resonances, each decaying to two quarks, is reported. The search is conducted separately for heavier resonances (masses above 400 GeV), where each of the four final-state quarks generates a hadronic jet resulting in a four-jet signature, and for lighter resonances (masses between 80 and 400 GeV), where the pair of quarks from each resonance is collimated and reconstructed as a single jet resulting in a two-jet signature. In addition, a b-tagged selection is applied to target resonances with a bottom quark in the final state. The analysis uses data collected with the CMS detector at the CERN LHC, corresponding to an integrated luminosity of 35.9 fb$^{-1}$, from proton-proton collisions at a center-of-mass energy of 13 TeV. The mass spectra are analyzed for the presence of new resonances, and are found to be consistent with standard model expectations. The results are interpreted in the framework of $R$-parity-violating supersymmetry assuming the pair production of scalar top quarks decaying via the hadronic coupling $\\lambda_{312}\"$ or $\\lambda_{323}\"$, and upper limits on the cross section as a function of the top squark mass are set. These results probe lower masses than previously explored at the LHC, and extend the top squark mass limits in the $\\widetilde{\\mathrm{t}}$$\\to$qq$'$ scenario.","access_urls":{"links":{"csv":"https://www.hepdata.net/download/submission/ins1685989/1/csv","json":"https://www.hepdata.net/download/submission/ins1685989/1/json","root":"https://www.hepdata.net/download/submission/ins1685989/1/root","yaml":"https://www.hepdata.net/download/submission/ins1685989/1/yaml","yoda":"https://www.hepdata.net/download/submission/ins1685989/1/yoda","yoda-h5":"https://www.hepdata.net/download/submission/ins1685989/1/yoda.h5"}},"analyses":[],"arxiv_id":"arXiv:1808.03124","collaborations":["CMS"],"control_number":"85857","creation_date":"2018-08-09","data_abstract":"A general search for the pair production of resonances, each decaying to twoquarks, is reported. The search is conducted separately for heavier resonances(masses above 400 GeV), where each of the four final-state quarks generates ahadronic jet resulting in a four-jet signature, and for lighter resonances(masses between 80 and 400 GeV), where the pair of quarks from each resonanceis collimated and reconstructed as a single jet resulting in a two-jetsignature. In addition, a b-tagged selection is applied to target resonanceswith a bottom quark in the final state. The analysis uses data collected withthe CMS detector at the CERN LHC, corresponding to an integrated luminosity of35.9 fb-1, from proton-proton collisions at a center-of-mass energy of 13 TeV.The mass spectra are analyzed for the presence of new resonances, and arefound to be consistent with standard model expectations. The results areinterpreted in the framework of R-parity-violating supersymmetry assuming thepair production of scalar top quarks decaying via the hadronic couplingUDD_{312} or UDD_{323}, and upper limits on the cross section as a function of the top squark mass are set. These results probe a wider range of masses than previously explored at the LHC, andextend the top squark mass limits in the stop-&gt;qq scenario.","data_keywords":{"cmenergies":[],"observables":["Stop mass","Average dijet mass","Average pruned jet mass"]},"doc_type":"publication","doi":"10.1103/PhysRevD.98.112014","first_author":{"affiliation":"Yerevan Phys. Inst.","full_name":"Sirunyan, Albert M"},"hepdata_doi":"10.17182/hepdata.85857.v1","id":85857,"inspire_id":"1685989","journal_info":"Phys.Rev.D 98 (2018) 112014","keywords":[{"source":"publisher","value":"Particle Physics Experiments"},{"schema":"INSPIRE","value":"p p: colliding beams"},{"schema":"INSPIRE","value":"squark: mass"},{"schema":"INSPIRE","value":"p p: scattering"},{"schema":"INSPIRE","value":"resonance: pair production"},{"schema":"INSPIRE","value":"resonance: hadronic decay"},{"schema":"INSPIRE","value":"stop: pair production"},{"schema":"INSPIRE","value":"bottom: particle identification"},{"schema":"INSPIRE","value":"jet: hadronic"},{"schema":"INSPIRE","value":"R parity: violation"},{"schema":"INSPIRE","value":"CERN LHC Coll"},{"schema":"INSPIRE","value":"signature"},{"schema":"INSPIRE","value":"mass spectrum"},{"schema":"INSPIRE","value":"supersymmetry"},{"schema":"INSPIRE","value":"collimator"},{"schema":"INSPIRE","value":"CERN Lab"},{"schema":"INSPIRE","value":"CMS"},{"schema":"INSPIRE","value":"channel cross section: upper limit"},{"schema":"INSPIRE","value":"mass dependence"},{"schema":"INSPIRE","value":"stop: mass: lower limit"},{"schema":"INSPIRE","value":"experimental results"},{"schema":"INSPIRE","value":"13000 GeV-cms"},{"schema":"PDG","value":"S015HP"},{"schema":"PDG","value":"S046STV"}],"last_updated":"Mon, 10 Dec 2018 11:12:39 GMT","parent_child_join":{"name":"parent_publication"},"publication_date":"2018-09-17T00:00:00","recid":85857,"resources":[],"subject_area":["hep-ex"],"summary_authors":[{"affiliation":"Yerevan Phys. Inst.","full_name":"Sirunyan, Albert M"},{"affiliation":"Yerevan Phys. Inst.","full_name":"Tumasyan, Armen"},{"affiliation":"Vienna, OAW","full_name":"Adam, Wolfgang"},{"affiliation":"Vienna, OAW","full_name":"Ambrogi, Federico"},{"affiliation":"Vienna, OAW","full_name":"Asilar, Ece"},{"affiliation":"Vienna, OAW","full_name":"Bergauer, Thomas"},{"affiliation":"Vienna, OAW","full_name":"Brandstetter, Johannes"},{"affiliation":"Vienna, OAW","full_name":"Dragicevic, Marko"},{"affiliation":"Vienna, OAW","full_name":"Er\u00f6, Janos"},{"affiliation":"Vienna, OAW","full_name":"Escalante Del Valle, Alberto"}],"title":"Search for pair-produced resonances decaying to quark pairs in proton-proton collisions at $\\sqrt{s}=$ 13 TeV","type":["article"],"uuid":"3d5e0ac2-6c74-4148-887d-3143645732d3","version":1,"year":"2018"},"record_type":"publication","related_recids":[],"related_to_this_recids":[],"resources_with_doi":[],"reviewers_notified":false,"site_url":"https://www.hepdata.net","status":"finished","table_id_to_show":348180,"table_name_to_show":"Boosted search: signal efficiency","version":1,"version_count":1,"watched":false}
+{
+  "access_count": { "sum": 2328 },
+  "additional_resources": false,
+  "breadcrumb_text": "Sirunyan, Albert M et al.",
+  "coordinator": 423,
+  "data_tables": [
+    {
+      "data": {
+        "csv": "https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/csv",
+        "json": "https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/json",
+        "root": "https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/root",
+        "yaml": "https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/yaml",
+        "yoda": "https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/yoda",
+        "yoda.h5": "https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/yoda.h5",
+        "yoda1": "https://www.hepdata.net/download/table/ins1685989/Boosted search: signal efficiency/yoda1"
+      },
+      "description": "Signal efficiency as a function of stop mass for the inclusive and b-tagged selections. Efficiency is estimated from the number...",
+      "doi": "10.17182/hepdata.85857.v1/t1",
+      "id": 348180,
+      "location": "Data from Figure 3 (right).",
+      "messages": false,
+      "name": "Boosted search: signal efficiency",
+      "processed_name": "Boostedsearch:signalefficiency",
+      "resources": [
+        {
+          "description": "Image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763462?landing_page=true"
+        },
+        {
+          "description": "Thumbnail image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763463?landing_page=true"
+        }
+      ]
+    },
+    {
+      "data": {
+        "csv": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/csv",
+        "json": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/json",
+        "root": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/root",
+        "yaml": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/yaml",
+        "yoda": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/yoda",
+        "yoda.h5": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/yoda.h5",
+        "yoda1": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet mass spectrum (Inclusive analysis)/yoda1"
+      },
+      "description": "Boosted search average pruned mass distribution for data (black points) and for the total background prediction for the inclusive selection.",
+      "doi": "10.17182/hepdata.85857.v1/t2",
+      "id": 348181,
+      "location": "Data from Figure 5 (left).",
+      "messages": false,
+      "name": "Average pruned jet mass spectrum (Inclusive analysis)",
+      "processed_name": "Averageprunedjetmassspectrum(Inclusiveanalysis)",
+      "resources": [
+        {
+          "description": "Image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763465?landing_page=true"
+        },
+        {
+          "description": "Thumbnail image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763466?landing_page=true"
+        }
+      ]
+    },
+    {
+      "data": {
+        "csv": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/csv",
+        "json": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/json",
+        "root": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/root",
+        "yaml": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/yaml",
+        "yoda": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/yoda",
+        "yoda.h5": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/yoda.h5",
+        "yoda1": "https://www.hepdata.net/download/table/ins1685989/Average pruned jet average mass spectrum (B-tagged analysis)/yoda1"
+      },
+      "description": "Boosted search average pruned mass distribution for data and for the total background prediction for the b-tagged selection.",
+      "doi": "10.17182/hepdata.85857.v1/t3",
+      "id": 348182,
+      "location": "Data from Figure 5 (right).",
+      "messages": false,
+      "name": "Average pruned jet average mass spectrum (B-tagged analysis)",
+      "processed_name": "Averageprunedjetaveragemassspectrum(B-taggedanalysis)",
+      "resources": [
+        {
+          "description": "Image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763468?landing_page=true"
+        },
+        {
+          "description": "Thumbnail image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763469?landing_page=true"
+        }
+      ]
+    },
+    {
+      "data": {
+        "csv": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/csv",
+        "json": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/json",
+        "root": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/root",
+        "yaml": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/yaml",
+        "yoda": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/yoda",
+        "yoda.h5": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/yoda.h5",
+        "yoda1": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (Inclusive analysis)/yoda1"
+      },
+      "description": "Resolved search distribution of average dijet mass for the data, along with the resulting fit to the functional form for...",
+      "doi": "10.17182/hepdata.85857.v1/t4",
+      "id": 348183,
+      "location": "Data from Figure 9 (left).",
+      "messages": false,
+      "name": "Average dijet mass spectrum (Inclusive analysis)",
+      "processed_name": "Averagedijetmassspectrum(Inclusiveanalysis)",
+      "resources": [
+        {
+          "description": "Image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763471?landing_page=true"
+        },
+        {
+          "description": "Thumbnail image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763472?landing_page=true"
+        }
+      ]
+    },
+    {
+      "data": {
+        "csv": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/csv",
+        "json": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/json",
+        "root": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/root",
+        "yaml": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/yaml",
+        "yoda": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/yoda",
+        "yoda.h5": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/yoda.h5",
+        "yoda1": "https://www.hepdata.net/download/table/ins1685989/Average dijet mass spectrum (B-tagged analysis)/yoda1"
+      },
+      "description": "Resolved search distribution of average dijet mass for the data, along with the resulting fit to the functional form for...",
+      "doi": "10.17182/hepdata.85857.v1/t5",
+      "id": 348184,
+      "location": "Data from Figure 9 (right).",
+      "messages": false,
+      "name": "Average dijet mass spectrum (B-tagged analysis)",
+      "processed_name": "Averagedijetmassspectrum(B-taggedanalysis)",
+      "resources": [
+        {
+          "description": "Image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763474?landing_page=true"
+        },
+        {
+          "description": "Thumbnail image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763475?landing_page=true"
+        }
+      ]
+    },
+    {
+      "data": {
+        "csv": "https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/csv",
+        "json": "https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/json",
+        "root": "https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/root",
+        "yaml": "https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/yaml",
+        "yoda": "https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/yoda",
+        "yoda.h5": "https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/yoda.h5",
+        "yoda1": "https://www.hepdata.net/download/table/ins1685989/Resolved search: signal efficiency/yoda1"
+      },
+      "description": "Signal efficiency as a function of stop mass for the inclusive and b-tagged selections. Efficiency is estimated from the number...",
+      "doi": "10.17182/hepdata.85857.v1/t6",
+      "id": 348185,
+      "location": "Data from Figure 10 (right).",
+      "messages": false,
+      "name": "Resolved search: signal efficiency",
+      "processed_name": "Resolvedsearch:signalefficiency",
+      "resources": [
+        {
+          "description": "Image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763477?landing_page=true"
+        },
+        {
+          "description": "Thumbnail image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763478?landing_page=true"
+        }
+      ]
+    },
+    {
+      "data": {
+        "csv": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./csv",
+        "json": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./json",
+        "root": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./root",
+        "yaml": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./yaml",
+        "yoda": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./yoda",
+        "yoda.h5": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./yoda.h5",
+        "yoda1": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for inclusive selection./yoda1"
+      },
+      "description": "Observed and expected 95% CL upper limits on the signal cross section as a function of stop mass. The branching...",
+      "doi": "10.17182/hepdata.85857.v1/t7",
+      "id": 348186,
+      "location": "Data from Figure 11 (left).",
+      "messages": false,
+      "name": "Statistical interpretation for inclusive selection.",
+      "processed_name": "Statisticalinterpretationforinclusiveselection.",
+      "resources": [
+        {
+          "description": "Image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763480?landing_page=true"
+        },
+        {
+          "description": "Thumbnail image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763481?landing_page=true"
+        }
+      ]
+    },
+    {
+      "data": {
+        "csv": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./csv",
+        "json": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./json",
+        "root": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./root",
+        "yaml": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./yaml",
+        "yoda": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./yoda",
+        "yoda.h5": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./yoda.h5",
+        "yoda1": "https://www.hepdata.net/download/table/ins1685989/Statistical interpretation for b-tagged selection./yoda1"
+      },
+      "description": "Observed and expected 95% CL upper limits on the signal cross section as a function of stop mass. The branching...",
+      "doi": "10.17182/hepdata.85857.v1/t8",
+      "id": 348187,
+      "location": "Data from Figure 11 (right).",
+      "messages": false,
+      "name": "Statistical interpretation for b-tagged selection.",
+      "processed_name": "Statisticalinterpretationforb-taggedselection.",
+      "resources": [
+        {
+          "description": "Image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763483?landing_page=true"
+        },
+        {
+          "description": "Thumbnail image file",
+          "type": "png",
+          "url": "https://www.hepdata.net/record/resource/763484?landing_page=true"
+        }
+      ]
+    }
+  ],
+  "mode": "record",
+  "overall_status": "finished",
+  "participant_count": 2,
+  "recid": 85857,
+  "record": {
+    "abstract": "A search for the pair production of resonances, each decaying to two quarks, is reported. The search is conducted separately for heavier resonances (masses above 400 GeV), where each of the four final-state quarks generates a hadronic jet resulting in a four-jet signature, and for lighter resonances (masses between 80 and 400 GeV), where the pair of quarks from each resonance is collimated and reconstructed as a single jet resulting in a two-jet signature. In addition, a b-tagged selection is applied to target resonances with a bottom quark in the final state. The analysis uses data collected with the CMS detector at the CERN LHC, corresponding to an integrated luminosity of 35.9 fb$^{-1}$, from proton-proton collisions at a center-of-mass energy of 13 TeV. The mass spectra are analyzed for the presence of new resonances, and are found to be consistent with standard model expectations. The results are interpreted in the framework of $R$-parity-violating supersymmetry assuming the pair production of scalar top quarks decaying via the hadronic coupling $\\lambda_{312}\"$ or $\\lambda_{323}\"$, and upper limits on the cross section as a function of the top squark mass are set. These results probe lower masses than previously explored at the LHC, and extend the top squark mass limits in the $\\widetilde{\\mathrm{t}}$$\\to$qq$'$ scenario.",
+    "access_urls": {
+      "links": {
+        "csv": "https://www.hepdata.net/download/submission/ins1685989/1/csv",
+        "json": "https://www.hepdata.net/download/submission/ins1685989/1/json",
+        "root": "https://www.hepdata.net/download/submission/ins1685989/1/root",
+        "yaml": "https://www.hepdata.net/download/submission/ins1685989/1/yaml",
+        "yoda": "https://www.hepdata.net/download/submission/ins1685989/1/yoda",
+        "yoda-h5": "https://www.hepdata.net/download/submission/ins1685989/1/yoda.h5"
+      }
+    },
+    "analyses": [],
+    "arxiv_id": "arXiv:1808.03124",
+    "collaborations": ["CMS"],
+    "control_number": "85857",
+    "creation_date": "2018-08-09",
+    "data_abstract": "A general search for the pair production of resonances, each decaying to twoquarks, is reported. The search is conducted separately for heavier resonances(masses above 400 GeV), where each of the four final-state quarks generates ahadronic jet resulting in a four-jet signature, and for lighter resonances(masses between 80 and 400 GeV), where the pair of quarks from each resonanceis collimated and reconstructed as a single jet resulting in a two-jetsignature. In addition, a b-tagged selection is applied to target resonanceswith a bottom quark in the final state. The analysis uses data collected withthe CMS detector at the CERN LHC, corresponding to an integrated luminosity of35.9 fb-1, from proton-proton collisions at a center-of-mass energy of 13 TeV.The mass spectra are analyzed for the presence of new resonances, and arefound to be consistent with standard model expectations. The results areinterpreted in the framework of R-parity-violating supersymmetry assuming thepair production of scalar top quarks decaying via the hadronic couplingUDD_{312} or UDD_{323}, and upper limits on the cross section as a function of the top squark mass are set. These results probe a wider range of masses than previously explored at the LHC, andextend the top squark mass limits in the stop-&gt;qq scenario.",
+    "data_keywords": {
+      "cmenergies": [],
+      "observables": [
+        "Stop mass",
+        "Average dijet mass",
+        "Average pruned jet mass"
+      ]
+    },
+    "doc_type": "publication",
+    "doi": "10.1103/PhysRevD.98.112014",
+    "first_author": {
+      "affiliation": "Yerevan Phys. Inst.",
+      "full_name": "Sirunyan, Albert M"
+    },
+    "hepdata_doi": "10.17182/hepdata.85857.v1",
+    "id": 85857,
+    "inspire_id": "1685989",
+    "journal_info": "Phys.Rev.D 98 (2018) 112014",
+    "keywords": [
+      { "source": "publisher", "value": "Particle Physics Experiments" },
+      { "schema": "INSPIRE", "value": "p p: colliding beams" },
+      { "schema": "INSPIRE", "value": "squark: mass" },
+      { "schema": "INSPIRE", "value": "p p: scattering" },
+      { "schema": "INSPIRE", "value": "resonance: pair production" },
+      { "schema": "INSPIRE", "value": "resonance: hadronic decay" },
+      { "schema": "INSPIRE", "value": "stop: pair production" },
+      { "schema": "INSPIRE", "value": "bottom: particle identification" },
+      { "schema": "INSPIRE", "value": "jet: hadronic" },
+      { "schema": "INSPIRE", "value": "R parity: violation" },
+      { "schema": "INSPIRE", "value": "CERN LHC Coll" },
+      { "schema": "INSPIRE", "value": "signature" },
+      { "schema": "INSPIRE", "value": "mass spectrum" },
+      { "schema": "INSPIRE", "value": "supersymmetry" },
+      { "schema": "INSPIRE", "value": "collimator" },
+      { "schema": "INSPIRE", "value": "CERN Lab" },
+      { "schema": "INSPIRE", "value": "CMS" },
+      { "schema": "INSPIRE", "value": "channel cross section: upper limit" },
+      { "schema": "INSPIRE", "value": "mass dependence" },
+      { "schema": "INSPIRE", "value": "stop: mass: lower limit" },
+      { "schema": "INSPIRE", "value": "experimental results" },
+      { "schema": "INSPIRE", "value": "13000 GeV-cms" },
+      { "schema": "PDG", "value": "S015HP" },
+      { "schema": "PDG", "value": "S046STV" }
+    ],
+    "last_updated": "Mon, 10 Dec 2018 11:12:39 GMT",
+    "parent_child_join": { "name": "parent_publication" },
+    "publication_date": "2018-09-17T00:00:00",
+    "recid": 85857,
+    "resources": [],
+    "subject_area": ["hep-ex"],
+    "summary_authors": [
+      {
+        "affiliation": "Yerevan Phys. Inst.",
+        "full_name": "Sirunyan, Albert M"
+      },
+      { "affiliation": "Yerevan Phys. Inst.", "full_name": "Tumasyan, Armen" },
+      { "affiliation": "Vienna, OAW", "full_name": "Adam, Wolfgang" },
+      { "affiliation": "Vienna, OAW", "full_name": "Ambrogi, Federico" },
+      { "affiliation": "Vienna, OAW", "full_name": "Asilar, Ece" },
+      { "affiliation": "Vienna, OAW", "full_name": "Bergauer, Thomas" },
+      { "affiliation": "Vienna, OAW", "full_name": "Brandstetter, Johannes" },
+      { "affiliation": "Vienna, OAW", "full_name": "Dragicevic, Marko" },
+      { "affiliation": "Vienna, OAW", "full_name": "Er\u00f6, Janos" },
+      {
+        "affiliation": "Vienna, OAW",
+        "full_name": "Escalante Del Valle, Alberto"
+      }
+    ],
+    "title": "Search for pair-produced resonances decaying to quark pairs in proton-proton collisions at $\\sqrt{s}=$ 13 TeV",
+    "type": ["article"],
+    "uuid": "3d5e0ac2-6c74-4148-887d-3143645732d3",
+    "version": 1,
+    "year": "2018"
+  },
+  "record_type": "publication",
+  "related_recids": [],
+  "related_to_this_recids": [],
+  "resources_with_doi": [],
+  "reviewers_notified": false,
+  "site_url": "https://www.hepdata.net",
+  "status": "finished",
+  "table_id_to_show": 348180,
+  "table_name_to_show": "Boosted search: signal efficiency",
+  "version": 1,
+  "version_count": 1,
+  "watched": false
+}

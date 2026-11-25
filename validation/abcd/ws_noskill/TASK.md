@@ -1,5 +1,7 @@
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
 
-Work only inside your workspace `/uscms_data/d3/ashrivas/AGENTS-AI/tests/abcd_official_run3/ws_noskill` (the current directory; create scripts/, logs/, plots/, fits/ there).
+Work only inside your workspace `<REPO>/validation/abcd/ws_noskill` (the current directory; create scripts/, logs/, plots/, fits/ there).
 Do not read, list or search any file outside it, except /cvmfs, the targets of inputs/py_env.sh, the EOS files
 listed in inputs/, your EOS scratch directory and the skill files your Skill tool loads. Do not look up or cite
 CMS papers or results: this is a method test. Read `INPUTS.md` first.
@@ -53,3 +55,4 @@ Keep intermediate files inside the workspace (never /tmp).
 Rules: everything runs as scripts with output to logs/; read only `tail -n 30` of logs; never print arrays,
 dataframes or branch lists; the interactive node has about 6 GB of free memory (read only the columns you need,
 in chunks, or on condor). If a step fails three times, record it in results.json and go on.
+<!-- prettier-ignore-end -->

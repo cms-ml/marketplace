@@ -20,7 +20,7 @@ pj=dict(edges=r["edges"],data_A_blinded_fill_removed="observed_A below is filled
 pj.pop("data_A_blinded_fill_removed"); json.dump(pj,open("fits/prediction.json","w"),indent=1)
 cx=0.5*(EDGES[1:]+EDGES[:-1]); xe=0.5*(EDGES[1:]-EDGES[:-1]); LAB=dict(lumi=16.3,com=13)
 fig,(a,b)=plt.subplots(2,1,figsize=(11,11),gridspec_kw=dict(height_ratios=[3,1],hspace=0.05),sharex=True)
-tot_err_stat=np.sqrt(st**2+eo**2); 
+tot_err_stat=np.sqrt(st**2+eo**2);
 a.stairs(pred,EDGES,color="C0",fill=True,alpha=0.5,label="QCD (ABCD prediction)"); a.stairs(pred+oth,EDGES,baseline=pred,color="C2",fill=True,alpha=0.6,label="W/Z/tt/VV/H (MC)")
 band=lambda e:np.repeat(e,2)
 a.fill_between(np.repeat(EDGES,2)[1:-1],np.repeat(exp-eexp,2),np.repeat(exp+eexp,2),facecolor="none",edgecolor="gray",hatch="///",label="Stat. $\\oplus$ syst.")

@@ -2,7 +2,7 @@ import json, numpy as np, matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt, mplhep as hep
 from abcd import *
 plt.style.use(hep.style.CMS); out={}
-Q=derived(load("qcd")); Dd=derived(load("data")); 
+Q=derived(load("qcd")); Dd=derived(load("data"));
 raw={g:np.load(f"fits/slim_{g}.npz") for g in ["wqq","zqq","vv"]}
 # (a) N2 cut: V-matched leading jets vs QCD, 60<msd<120
 def vm(z,i): return (np.abs(z[f"bosonId{i}"])>=23)&(np.abs(z[f"bosonId{i}"])<=24)&(z[f"bosonDR{i}"]<0.8)
@@ -14,7 +14,7 @@ ax.axvline(CUT,color="k",ls="--"); ax.set_xlabel("Jet $N_2^{\\beta=1}$ ($60<m_{S
 es=Vw[V<CUT].sum()/Vw.sum(); eb=Q["w"][m][Q["n2b10"][m]<CUT].sum()/Q["w"][m].sum(); out["n2_cut"]=CUT; out["V_eff_n2"]=float(es); out["QCD_eff_n2"]=float(eb)
 ax.legend(title=f"cut N2<{CUT}: V eff {es:.2f}, QCD eff {eb:.2f}",fontsize=14); hep.cms.label("Private work",data=False,ax=ax,com=13)
 fig.savefig("plots/boundary_n2_cut.png"); fig.savefig("plots/boundary_n2_cut.pdf"); plt.close(fig)
-# (b) mass asymmetry: dibosons with both leading jets V-matched vs QCD MC (preselected, pT1>300) 
+# (b) mass asymmetry: dibosons with both leading jets V-matched vs QCD MC (preselected, pT1>300)
 z=raw["vv"]; both=vm(z,0)&vm(z,1)&(z["pt1"]>PT1MIN); zz=derived({k:z[k] for k in ["msoftdrop0","msoftdrop1","w"]})
 fig,ax=plt.subplots(); s=(Q["pt1"]>PT1MIN)&(Q["mavg"]>40)
 ax.hist(Q["asym"][s],40,(0,1),weights=Q["w"][s],density=True,histtype="step",label="QCD MC",lw=2)
@@ -30,7 +30,7 @@ ax.hist(Q["pt1"][(Q["n2b10"]>=CUT)&(Q["n2b11"]>=CUT)],50,(200,900),weights=Q["w"
 ax.axvline(PT1MIN,color="k",ls="--"); ax.set_yscale("log"); ax.set_xlabel("Subleading AK8 jet $p_T$ [GeV]"); ax.set_ylabel("Events / 14 GeV"); ax.legend(fontsize=14); hep.cms.label("Private work",data=True,ax=ax,lumi=16.3,com=13)
 fig.savefig("plots/boundary_pt1.png"); fig.savefig("plots/boundary_pt1.pdf"); plt.close(fig)
 # (d) m_avg binning: resolution proxy from VV (both V matched): m_avg distribution + bins
-fig,ax=plt.subplots(); ax.hist(zz["mavg"][both],np.arange(0,200,5),histtype="step",lw=2,label="VV MC both jets V-matched"); 
+fig,ax=plt.subplots(); ax.hist(zz["mavg"][both],np.arange(0,200,5),histtype="step",lw=2,label="VV MC both jets V-matched");
 for e in EDGES: ax.axvline(e,color="gray",lw=0.5)
 ax.set_xlabel("$m_{avg}$ [GeV]"); ax.set_ylabel("Events"); ax.legend(fontsize=14); hep.cms.label("Private work",data=False,ax=ax,com=13)
 mm=zz["mavg"][both]; out["VV_mavg_res_rel"]=float(np.std(mm[(mm>60)&(mm<110)])/np.mean(mm[(mm>60)&(mm<110)]))

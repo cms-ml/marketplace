@@ -1,6 +1,6 @@
-root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_qcd_HT1500to2000_0.parquet
-root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_qcd_HT1500to2000_1.parquet
-root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_qcd_HT1500to2000_2.parquet
-root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_qcd_HT1500to2000_3.parquet
-root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_qcd_HT1500to2000_4.parquet
-root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/rhalphabet-tf/ws_noskill/skim/output_qcd_HT1500to2000_5.parquet
+${SKIM_BASE}/output_qcd_HT1500to2000_0.parquet
+${SKIM_BASE}/output_qcd_HT1500to2000_1.parquet
+${SKIM_BASE}/output_qcd_HT1500to2000_2.parquet
+${SKIM_BASE}/output_qcd_HT1500to2000_3.parquet
+${SKIM_BASE}/output_qcd_HT1500to2000_4.parquet
+${SKIM_BASE}/output_qcd_HT1500to2000_5.parquet

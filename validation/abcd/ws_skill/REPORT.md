@@ -15,7 +15,9 @@
 **Reproduce** (from workspace): `bash` env `set +u; source inputs/py_env.sh`; `cat logs/jobs.txt | xargs -P 3 -L1 python3 scripts/slim.py`; `python3 scripts/trig.py`; `scripts/build.py`; `scripts/reduce.py`; `scripts/proxy.py`; `scripts/rank.py`; `scripts/indep.py`; `scripts/band_scan.py`; `scripts/abcd_run.py` (blind), then `scripts/abcd_run.py --unblind`; `scripts/write_results.py`. Slimmed skims (`slim/`, `sel/`, `red/`) are local intermediates. `jobs.txt` is built from `inputs/skim_files/*.txt` (see build loop in the shell log; one line `sample url slim/sample__i.parquet`).
 
 ## Plots (added after freezing; prediction, systematics and unblinded numbers unchanged)
+
 All in `plots/` (PNG+PDF), scripts `scripts/extra1-5.py` (shared code `core.py` reproduces the frozen MC closure 1.0006 and shape term exactly).
+
 1. `closure_mc_perbin`: shows where in m_avg the MC closure deviates (flat to ±2% below 300 GeV, -4% in the last bin) against the stat and frozen syst band.
 2. `closure_mc_variations`: closure ratio when boundaries (masym 0.15/0.25, |Δη| 1.0/1.4), fail band, HT cut and TF form change. All within ±0.8% (inside the 1.6%) except the fail band "all >0.2" (+4.4%, chi2/ndf 850/14, the reason for the 0.2-0.4 band) and the constant TF (ratio 1.008 but chi2/ndf 609/14, the reason for the fitted TF).
 3. `validation_regions_data_perbin`: the three data VRs per bin with stat and frozen-syst bands; they lie within the band except the last 1-2 bins of VR2/VR3 which are statistics-limited.

@@ -1,9 +1,14 @@
 # Inputs (prepared by hand; contain no analysis-design choices)
 
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
+
 All paths relative to your workspace. inputs/ holds:
 
 skim_files/<sample>.txt  one xrootd URL per line (root://cmseos.fnal.gov//store/...), Parquet files: a pre-made skim of
                          CMS Open Data 2016 UL NanoAODv9 (postVFP, eras G+H). Use these; you do not need to skim NanoAOD.
+                         (In the repo copy the directory is written ${SKIM_BASE}; run_students.sh fills it in from the
+                         SKIM_BASE environment variable. To rebuild the skim, run skim_payload.py on nanoaod_filelists/.)
   data:   data_JetHT_2016{G,H}            (24 files each)
   MC:     qcd_HT{300to500,500to700,700to1000,1000to1500,1500to2000,2000toInf}
           wqq_HT{400to600,600to800,800toInf}  zqq_HT{400to600,600to800,800toInf}   (W/Z -> qq, all flavours)
@@ -31,4 +36,5 @@ py_env.sh                `set +u; source inputs/py_env.sh` for numpy/scipy/uproo
 
 The data skim is about 50 M rows x 78 columns per era: read only the columns you need, in chunks, or on condor.
 Note: the LCG 109 pyarrow has no zstd codec; write Parquet with compression="snappy" (or none).
-EOS scratch for condor outputs: root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/abcd-2016/<WSNAME>/
+EOS scratch for condor outputs: root://cmseos.fnal.gov//store/user/<USER>/cms-marketplace-tests/abcd-2016/<WSNAME>/
+<!-- prettier-ignore-end -->

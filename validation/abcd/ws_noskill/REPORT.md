@@ -2,7 +2,7 @@
 
 **What was done.** Pair-produced resonance → 2 boosted AK8 jets; observable m_avg=(m_SD1+m_SD2)/2, 40–440 GeV, 17 bins (20 GeV wide up to 300, then 30/30/40/40; ~13% resolution proxy from VV MC). Data region A was never filled until the prediction was frozen (`fits/blind_results.json`); `scripts/unblind.py` then filled it.
 
-**Trigger.** OR of HLT_PFHT900, HLT_PFJet450, HLT_AK8PFJet450 (present in both eras; HT800 is absent in 2016H; mass-trimmed paths avoided because they bias m_SD). Turn-on vs leading-AK8 pT with reference PFJet260 (cross-checks AK8PFJet260, PFJet320; Clopper–Pearson): plateau 0.998 above **pT1>550 GeV** (target 0.99, 128k ref. events; three references agree), subleading plateau above 275 → **pT2>300 GeV** (`plots/trigger_*`). No trigger on MC (above plateau). Cost: acceptance for light (80 GeV) resonances near threshold is limited by this boosted selection.
+**Trigger.** OR of HLT*PFHT900, HLT_PFJet450, HLT_AK8PFJet450 (present in both eras; HT800 is absent in 2016H; mass-trimmed paths avoided because they bias m_SD). Turn-on vs leading-AK8 pT with reference PFJet260 (cross-checks AK8PFJet260, PFJet320; Clopper–Pearson): plateau 0.998 above **pT1>550 GeV** (target 0.99, 128k ref. events; three references agree), subleading plateau above 275 → **pT2>300 GeV** (`plots/trigger*\*`). No trigger on MC (above plateau). Cost: acceptance for light (80 GeV) resonances near threshold is limited by this boosted selection.
 
 **Preselection.** golden JSON, MET filters, tight jetId, |η|<2.5, lepton veto, pT1>550, pT2>300, mass asymmetry |m1−m2|/(m1+m2)<0.2 (equal-mass pair; QCD eff 0.14, VV both-V-matched eff 0.45 — low because many V jets are not fully merged).
 
@@ -12,7 +12,7 @@
 
 **Other backgrounds.** W/Z+jets, tt, VV, H from MC×xsec×lumi: 3.5/3.8/2.3% of data in B/C/D, 5.0% of A; subtracted in B,C,D, added back in A; ±50% normalisation varied (syst).
 
-**Uncertainties.** Stat: Poisson of B,C,D (+MC stat of subtraction). Syst per bin: MC non-closure √((ρ_MC−1)²+σ²_ρ+0.05²) (0.05 flat from data-vs-MC ρ differences in VR_asym, fixed before unblinding), ⊕ non-QCD normalisation. Prediction total QCD in A: **80 200 ± 400 (stat) ± 5 500 (syst, linear sum)**.
+**Uncertainties.** Stat: Poisson of B,C,D (+MC stat of subtraction). Syst per bin: MC non-closure √((ρ*MC−1)²+σ²*ρ+0.05²) (0.05 flat from data-vs-MC ρ differences in VR_asym, fixed before unblinding), ⊕ non-QCD normalisation. Prediction total QCD in A: **80 200 ± 400 (stat) ± 5 500 (syst, linear sum)**.
 
 **Validation.**
 | test | ratio obs/pred | χ²/ndf (stat only) | χ²/ndf (with syst) |

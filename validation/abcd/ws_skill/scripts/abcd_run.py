@@ -118,11 +118,11 @@ names=['MC_SR','MC_VR1_xshift','MC_VR2_yshift','DATA_VR1_xshift','DATA_VR2_yshif
 fig,axs=plt.subplots(2,6,figsize=(40,10),gridspec_kw=dict(height_ratios=[3,1]),sharex='col')
 for j,k in enumerate(names):
     p,c=res['tests'][k]; ax,rx=axs[0,j],axs[1,j]
-    ax.stairs(c['obs'],EDGES,label='observed A$_{test}$' ,color='k',lw=2); 
+    ax.stairs(c['obs'],EDGES,label='observed A$_{test}$' ,color='k',lw=2);
     ax.stairs(c['pred'],EDGES,label='predicted',color='C3',lw=2)
     e=np.sqrt(np.diag(p['cov'])); ax.stairs(c['pred']+e,EDGES,baseline=c['pred']-e,fill=True,alpha=.3,color='C3')
     ax.set_yscale('log'); ax.set_title(f"{k}: ratio {c['ratio']:.3f}, $\\chi^2$/ndf {c['chi2']:.0f}/{c['ndf']}",fontsize=16); ax.legend(fontsize=12)
-    ax.set_ylabel('Events / bin'); 
+    ax.set_ylabel('Events / bin');
     r=c['obs']/c['pred']; rx.errorbar(MC_,r,e/c['pred'],fmt='ko'); rx.axhline(1,c='gray',ls=':'); rx.set_ylim(.7,1.3); rx.set_xlabel('$m_{avg}$ [GeV]'); rx.set_ylabel('obs/pred')
 fig.savefig('plots/closure_and_validation.png',dpi=70); fig.savefig('plots/closure_and_validation.pdf')
 # TF vs mavg

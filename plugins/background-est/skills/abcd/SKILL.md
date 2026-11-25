@@ -39,7 +39,8 @@ with correlated systematics (`abcd.py --demo` runs a toy).
   tagger score and a mass, displaced-vertex counts in two detectors
 - **Not** when the handles are correlated by construction (both built from the
   same jet constituents) unless one is explicitly decorrelated
-- For a smooth mass spectrum in a pass/fail tagger split, use `rhalphabet`
+- For a smooth mass spectrum in a pass/fail tagger split, a Rhalphabet-style
+  transfer-factor fit in (pT, rho) is usually the better tool
 
 ## Key Concepts
 

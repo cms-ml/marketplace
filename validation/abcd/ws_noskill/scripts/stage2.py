@@ -1,7 +1,7 @@
 """Stage 2: read reduced skim file, apply golden JSON (data), filters, jetId; write slim columns (npz-like parquet) to fits/ntuples/."""
 import sys, json, os, numpy as np, fsspec, pyarrow as pa, pyarrow.parquet as pq
 from multiprocessing import Pool
-BASE="root://cmseos.fnal.gov//store/user/ashrivas/cms-marketplace-tests/abcd-2016/ws_noskill_run3/red/"
+BASE=f"root://cmseos.fnal.gov//store/user/{os.environ['USER']}/cms-marketplace-tests/abcd-2016/ws_noskill_run3/red/"
 OUT="fits/ntuples/"
 gold=json.load(open("inputs/golden_2016.json"))
 TRIG=["HLT_PFJet200","HLT_PFJet260","HLT_PFJet320","HLT_PFJet400","HLT_PFJet450","HLT_PFJet500","HLT_AK8PFJet200","HLT_AK8PFJet260",

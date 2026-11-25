@@ -1,4 +1,5 @@
 # Skills used
+
 Loaded (Skill tool) before the relevant step: `cms:trigger-efficiency`, `cms:awkward-array`, `cms:hist`, `af-fnal-lpc:lpc-condor`. Not loaded: `cms:hepdata`, `vector-awkward` (not needed), `standalone-script` (scripts use the provided LCG env instead of uv), `cms:cmssw`.
 
 - **trigger-efficiency** (followed): reference-trigger method, Clopper-Pearson, plateau rule (target 0.99, min_events 100), several references, per-era path check. I used `turnon.py` (`efficiency`, `find_threshold`, `plateau`, `plot_turnon`) directly on counts accumulated over files; worked as documented. Gaps: `list_hlt_paths.py` is for NanoAOD ROOT; our inputs are Parquet so I wrote my own listing (`scripts/hltlist.py`). The skill's advice (HT800 absent in 2016H) was confirmed. It gives no guidance on 2-D (j0,j1) turn-ons or on choosing the OR for boosted-jet analyses; I did that myself. Its demo/threshold example is dijet m_jj; the variable choice here (leading-jet pT) is mine.

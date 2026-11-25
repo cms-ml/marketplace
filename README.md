@@ -184,14 +184,13 @@ Skills for the CMS LPC analysis facility at Fermilab (cmslpc): HTCondor batch jo
 
 ### `background-est` (v0.1.0)
 
-Data-driven background estimation for CMS analyses: ABCD with closure tests and a likelihood version, and Rhalphabet pass/fail transfer-factor fits for jet-substructure searches.
+Data-driven background estimation for CMS analyses: ABCD (matrix) estimates with variable ranking, fitted transfer factors, closure and validation tests, non-closure systematics and a likelihood version.
 
 **Skills:**
 
-| Skill        | Use when                                                                                                                       |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `abcd`       | ABCD background estimate (independence and closure tests, uncertainties, Combine rateParam version)                            |
-| `rhalphabet` | Rhalphabet transfer factor (DDT preselection, two-step TF, toy F-test, GoF) with scripts, plus the full rhalphalib/Combine fit |
+| Skill  | Use when                                                                                            |
+| ------ | --------------------------------------------------------------------------------------------------- |
+| `abcd` | ABCD background estimate (independence and closure tests, uncertainties, Combine rateParam version) |
 
 ---
 

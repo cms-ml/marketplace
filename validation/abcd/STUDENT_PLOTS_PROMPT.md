@@ -1,5 +1,8 @@
 # Follow-up task for the with-skill student (resumed session): more plots
 
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
+
 Sent by `run_followups.sh` with `claude -p --resume <student session>` in the student's workspace.
 
 ## Task
@@ -28,3 +31,4 @@ Add these plots to `plots/` (PNG + PDF, label "CMS Open Data, private work"), ea
 
 Update REPORT.md (a "Plots" section; keep <= 2.5 pages), results.json (add `plots` with one line each) and
 SKILLS_USED.md (whether the skill helped with any of these). Write `PLOTS_DONE` in your workspace at the end.
+<!-- prettier-ignore-end -->

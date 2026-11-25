@@ -1,3 +1,5 @@
+<!-- prettier-ignore-start -->
+<!-- kept verbatim: this is the text the agents were given -->
 
 Your analysis is final; reviewers asked for more plots documenting it. Do NOT change the frozen prediction,
 the systematics or the unblinded numbers in results.json / fits/prediction.json. Same rules as before: work only in
@@ -23,3 +25,4 @@ Add these plots to `plots/` (PNG + PDF, label "CMS Open Data, private work"), ea
 
 Update REPORT.md (a "Plots" section; keep <= 2.5 pages), results.json (add `plots` with one line each) and
 SKILLS_USED.md (whether the skill helped with any of these). Write `PLOTS_DONE` in your workspace at the end.
+<!-- prettier-ignore-end -->

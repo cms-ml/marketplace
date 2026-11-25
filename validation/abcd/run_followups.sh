@@ -4,7 +4,7 @@
 # Usage: bash run_followups.sh   (in tmux)
 set -uo pipefail
 V=$(realpath "$(dirname "$0")"); REPO=$(realpath "$V/../.."); A=$V/ws_skill; OUT=$V/cms-comparison
-CLAUDE=${CLAUDE:-$(command -v claude || echo ~/.local/bin/claude)}
+CLAUDE=${CLAUDE:-claude}   # path to the Claude Code CLI if it is not on PATH
 COMMON=(--setting-sources project --strict-mcp-config --permission-mode acceptEdits
         --allowedTools "Bash Read Write Edit Glob Grep Skill TodoWrite" --output-format stream-json --verbose)
 sid() { head -c 4000 "$1" | grep -o '"session_id":"[^"]*"' | head -1 | cut -d'"' -f4; }

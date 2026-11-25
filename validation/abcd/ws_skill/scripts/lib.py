@@ -1,5 +1,6 @@
+import os
 import numpy as np, pandas as pd, sys
-sys.path.insert(0,'/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/plugins/background-est/skills/abcd/scripts')
+sys.path.insert(0,os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../..', 'plugins/background-est/skills/abcd/scripts'))
 MASYM_CUT=0.2; DETA_CUT=1.2
 MLO,MHI=40.,480.
 COLS=['mavg','masym','deta','t21avg','t21max','n2avg','ptavg','HT','MET','j0_msoftdrop','j1_msoftdrop','j0_pt','j1_pt','j0_bosonId','j1_bosonId','j0_bosonDR','j1_bosonDR','w']

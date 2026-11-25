@@ -1,6 +1,7 @@
+import os
 import odlabel
 import sys, glob, json, numpy as np, pandas as pd
-sys.path.insert(0,'/uscms_data/d3/ashrivas/AGENTS-AI/cms/marketplace/plugins/cms/skills/trigger-efficiency/scripts')
+sys.path.insert(0,os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../..', 'plugins/cms/skills/trigger-efficiency/scripts'))
 from turnon import efficiency, find_threshold, plateau
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt, mplhep as hep
 plt.style.use(hep.style.CMS)
@@ -8,7 +9,7 @@ edges=np.array([400,500,600,650,700,750,800,850,900,950,1000,1050,1100,1150,1200
 H=['PFJet260','AK8PFJet260','PFJet450','AK8PFJet450','PFJet500','PFHT900','PFHT800']
 combos={'PFHT900':['PFHT900'],'PFHT900|PFJet450':['PFHT900','PFJet450'],'PFHT900|PFJet450|AK8PFJet450':['PFHT900','PFJet450','AK8PFJet450'],'PFHT800|PFHT900|PFJet450|AK8PFJet450':['PFHT800','PFHT900','PFJet450','AK8PFJet450']}
 refs=['PFJet260','AK8PFJet260']
-acc={}; 
+acc={};
 fired_frac={}
 for fn in sorted(glob.glob('slim/data_*.parquet')):
     d=pd.read_parquet(fn,columns=['HT','j0_pt','j1_pt','j0_jetId','j1_jetId','j0_eta','j1_eta']+['HLT_'+t for t in H])

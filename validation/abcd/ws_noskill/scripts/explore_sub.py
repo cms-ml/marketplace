@@ -29,7 +29,7 @@ fig.savefig("plots/design_substructure_dists.png"); fig.savefig("plots/design_su
 # ROC: signal eff vs QCD mistag for N2<c, tau21<c  (low = signal-like)
 fig,ax=plt.subplots()
 for n,lab in [("n2b1","$N_2$"),("tau21_","$\\tau_{21}$"),("tau32_","$\\tau_{32}$"),("n3b1","$N_3$")]:
-    c=np.quantile(V[n][Vm],np.linspace(0.02,0.98,60)) 
+    c=np.quantile(V[n][Vm],np.linspace(0.02,0.98,60))
     es=[Vw[Vm][V[n][Vm]<x].sum()/Vw[Vm].sum() for x in c]; eb=[Qw[Qm][Q[n][Qm]<x].sum()/Qw[Qm].sum() for x in c]
     ax.plot(es,eb,label=lab); res[n]={"bkg_eff_at_sig50":float(np.interp(0.5,es,eb)),"bkg_eff_at_sig70":float(np.interp(0.7,es,eb))}
 ax.set_yscale("log"); ax.set_xlabel("W/Z jet efficiency"); ax.set_ylabel("QCD jet efficiency"); ax.legend()
