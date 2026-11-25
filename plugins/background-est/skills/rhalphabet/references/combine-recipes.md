@@ -68,13 +68,11 @@ least 200 toys so the mean is known to better than 0.1. Report the mean and widt
 toy that the generated value is the one you set. If the bias is large, raise
 the TF order or narrow the rho range; do not quote the result as is.
 
-
 ## Reading the fit
 
-| MIGRAD status | covQual | Meaning                                              | Action |
-| ------------- | ------- | ---------------------------------------------------- | ------ |
-| 0             | 3       | Converged, accurate covariance                       | OK |
-| 1             | 3       | Covariance forced positive definite                  | Refit with `--cminDefaultMinimizerStrategy 2`; OK only if the same minimum |
-| 3             | any     | EDM above tolerance                                  | Loosen `--cminDefaultMinimizerTolerance` or improve initial values |
-| any           | < 3     | Covariance not trustworthy                           | Do not quote Hesse errors; use likelihood scans |
-
+| MIGRAD status | covQual | Meaning                             | Action                                                                     |
+| ------------- | ------- | ----------------------------------- | -------------------------------------------------------------------------- |
+| 0             | 3       | Converged, accurate covariance      | OK                                                                         |
+| 1             | 3       | Covariance forced positive definite | Refit with `--cminDefaultMinimizerStrategy 2`; OK only if the same minimum |
+| 3             | any     | EDM above tolerance                 | Loosen `--cminDefaultMinimizerTolerance` or improve initial values         |
+| any           | < 3     | Covariance not trustworthy          | Do not quote Hesse errors; use likelihood scans                            |

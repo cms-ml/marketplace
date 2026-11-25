@@ -1,10 +1,14 @@
 """Check independent numerical agreements and preserved stress-test evidence."""
+import argparse
 import json
 import math
 from pathlib import Path
 import sys
 
-base = Path(__file__).resolve().parent
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("directory", type=Path, nargs="?", default=Path(__file__).resolve().parent,
+                    help="directory containing comparison.json and ensembles.json")
+base = parser.parse_args().directory
 try:
     data = json.loads((base / "comparison.json").read_text())
     ensembles = json.loads((base / "ensembles.json").read_text())

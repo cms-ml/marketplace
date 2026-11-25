@@ -7,8 +7,18 @@
       "retrieved_utc": "2026-11-25T02:01:18Z",
       "sha256": "5e8e4ee865744c62f57439d5d3756e47899fc3b4ddc74e0384c9883a56ddf4db",
       "tables": [
-        {"file": "dimuon_mass_distribution.yaml", "doi": "10.17182/hepdata.83971.v1/t4", "figure": "1 right", "sha256": "28923d2584487518e223c807f42e30e37987179077a0444f79b5397634010cef"},
-        {"file": "data_and_estimated_background_yields_in_the_dimuon_channel.yaml", "doi": "10.17182/hepdata.83971.v1/t2", "table": 3, "sha256": "30656c41700a85638aa4b511cbb03a5cca1d4a6bb547997c1528b59c080e7348"}
+        {
+          "file": "dimuon_mass_distribution.yaml",
+          "doi": "10.17182/hepdata.83971.v1/t4",
+          "figure": "1 right",
+          "sha256": "28923d2584487518e223c807f42e30e37987179077a0444f79b5397634010cef"
+        },
+        {
+          "file": "data_and_estimated_background_yields_in_the_dimuon_channel.yaml",
+          "doi": "10.17182/hepdata.83971.v1/t2",
+          "table": 3,
+          "sha256": "30656c41700a85638aa4b511cbb03a5cca1d4a6bb547997c1528b59c080e7348"
+        }
       ]
     },
     {

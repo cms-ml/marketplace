@@ -35,7 +35,7 @@ python scripts/ddt_map.py closure --map n2ddt.json --files skim/qcd_*.parquet --
 - `n2b1 <= 0` or undefined (soft drop failed) jets must be removed or handled
   explicitly; check how many there are inside your rho range.
 - The same function makes a **cut map for a tagger score** (`--direction
-  above`): use it when the flavour tagger itself is correlated with mass.
+above`): use it when the flavour tagger itself is correlated with mass.
 
 ## 2. Flavour-tagger working point (pass/fail split)
 

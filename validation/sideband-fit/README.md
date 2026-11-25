@@ -5,8 +5,24 @@ official CMS Open Data workshop dimuons and the frozen 2016G/H
 high-mass Open Data snapshot. It then tests the inference using separate
 Poisson pseudoexperiments. The [specification](specification.md) and
 [frozen configuration](frozen.json) fix the range, exclusions, candidates,
-selection and toy truths. The independent CMS publication and HEPData
-comparison belongs to the review branch.
+selection and toy truths. The student analysis and independent Astra review
+are packaged together in this branch:
+
+```text
+validation/sideband-fit/
+  plots/                 Sol's Open Data fits and toy diagnostics
+  summary.json           Student results
+  cms-comparison/        Astra's independent CMS/HEPData review
+    COMPARISON.md        Findings and comparability matrix
+    comparison.json      Published-spectrum and independent-fit checks
+    ensembles.json       Independent toy results
+    published_*.pdf/png  CMS spectrum comparison plots
+```
+
+Read the [independent CMS/HEPData comparison](cms-comparison/COMPARISON.md)
+alongside the student results below. It preserves the reviewed student
+commit and the frozen validation plan, including the uncertainty-coverage
+limitations found by the independent tests.
 
 ## Workshop J/psi extraction
 
@@ -139,3 +155,10 @@ full per-bin covariance in `jpsi_fit.json` and `continuum_fit.json`,
 and exact numerical pulls in `toy_pulls.json`. See the
 [generic histogram interface](../../plugins/background-est/skills/sideband-fit/references/histogram-fit.md)
 to run on a published spectrum using a verified integer histogram.
+
+Check both sets of committed results from the repository root:
+
+```bash
+python3 validation/sideband-fit/check_results.py
+python3 validation/sideband-fit/cms-comparison/check_results.py
+```

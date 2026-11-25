@@ -80,11 +80,11 @@ before the estimate, and add them back in A from MC.
 
 ### 3. Closure and validation
 
-| Test                  | How                                                                           |
-| --------------------- | ----------------------------------------------------------------------------- |
-| MC closure            | Run the full method on background MC; compare with MC truth in A              |
-| Data validation       | Shift one boundary so A', B', C', D' all sit inside the control regions       |
-| Signal-injection test | Add signal MC to B, C, D at the expected strength; see the shift in `pred`    |
+| Test                  | How                                                                        |
+| --------------------- | -------------------------------------------------------------------------- |
+| MC closure            | Run the full method on background MC; compare with MC truth in A           |
+| Data validation       | Shift one boundary so A', B', C', D' all sit inside the control regions    |
+| Signal-injection test | Add signal MC to B, C, D at the expected strength; see the shift in `pred` |
 
 ```python
 ratio, pull = closure(obs, pred, err)

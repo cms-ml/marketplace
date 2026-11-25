@@ -11,20 +11,20 @@ or `rl.NuisanceParameter(name, "shape")` for a bin-by-bin effect, attached with
 numbers (1.05, 0.95). For `shape`, pass either relative arrays (up/nominal
 per bin) or histograms of the shifted yields.
 
-| Source | Applies to | Type | How to get it |
-| ------ | ---------- | ---- | ------------- |
-| Luminosity | all MC | lnN | Official value for the data-taking period |
-| Template MC statistics | all MC | `ch.autoMCStats()` | Needs `sumw2` in every template |
-| Tagger efficiency, V/H (true two-prong) | W, Z, H, signal | lnN, anticorrelated pass/fail | Scale factor from a calibration (SF in pass, compensating change in fail so the total is conserved) |
-| Tagger efficiency, top | top | lnN or free parameter | Muon control region ([control-regions.md](control-regions.md)) |
-| Jet mass scale | resonant samples | shape | Shift the jet mass by +-the scale uncertainty, refill the templates |
-| Jet mass resolution | resonant samples | shape | Smear the jet mass by the extra resolution, refill |
-| Jet energy scale / resolution | resonant samples | shape or lnN | Shift or smear jet pT; events migrate between pT bins and across the pT cut |
-| Trigger efficiency | all MC | lnN (or shape in pT) | Data/MC turn-on with an orthogonal reference trigger; size set by the plateau precision and any residual difference |
-| Top normalisation | top | free parameter or lnN | Muon control region |
-| V+jets higher-order corrections | W, Z | shape in pT | NLO QCD and NLO EW k-factors versus boson pT, with their uncertainties; decorrelate W and Z partly |
-| Signal theory | signal | lnN (acceptance) | Renormalisation and factorisation scale variations, PDF replicas, parton-shower ISR/FSR weights |
-| Pileup | all MC | shape or lnN | Vary the minimum-bias cross section |
+| Source                                  | Applies to       | Type                          | How to get it                                                                                                       |
+| --------------------------------------- | ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Luminosity                              | all MC           | lnN                           | Official value for the data-taking period                                                                           |
+| Template MC statistics                  | all MC           | `ch.autoMCStats()`            | Needs `sumw2` in every template                                                                                     |
+| Tagger efficiency, V/H (true two-prong) | W, Z, H, signal  | lnN, anticorrelated pass/fail | Scale factor from a calibration (SF in pass, compensating change in fail so the total is conserved)                 |
+| Tagger efficiency, top                  | top              | lnN or free parameter         | Muon control region ([control-regions.md](control-regions.md))                                                      |
+| Jet mass scale                          | resonant samples | shape                         | Shift the jet mass by +-the scale uncertainty, refill the templates                                                 |
+| Jet mass resolution                     | resonant samples | shape                         | Smear the jet mass by the extra resolution, refill                                                                  |
+| Jet energy scale / resolution           | resonant samples | shape or lnN                  | Shift or smear jet pT; events migrate between pT bins and across the pT cut                                         |
+| Trigger efficiency                      | all MC           | lnN (or shape in pT)          | Data/MC turn-on with an orthogonal reference trigger; size set by the plateau precision and any residual difference |
+| Top normalisation                       | top              | free parameter or lnN         | Muon control region                                                                                                 |
+| V+jets higher-order corrections         | W, Z             | shape in pT                   | NLO QCD and NLO EW k-factors versus boson pT, with their uncertainties; decorrelate W and Z partly                  |
+| Signal theory                           | signal           | lnN (acceptance)              | Renormalisation and factorisation scale variations, PDF replicas, parton-shower ISR/FSR weights                     |
+| Pileup                                  | all MC           | shape or lnN                  | Vary the minimum-bias cross section                                                                                 |
 
 ## Tagger scale factor with a conserved total
 

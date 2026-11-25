@@ -37,7 +37,7 @@
       "selected": {
         "background": {
           "bias": 0.20709660122368614,
-          "pull_mean": 6.245114603094256e-05,
+          "pull_mean": 6.245114603094256e-5,
           "pull_width": 1.1266998145686016,
           "covered": 191,
           "valid": 300,

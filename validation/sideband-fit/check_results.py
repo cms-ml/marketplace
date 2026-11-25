@@ -145,10 +145,12 @@ def nominal_controls(toys):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("summary", type=Path, nargs="?", default=HERE / "summary.json")
+    parser.add_argument("summary", type=Path, nargs="?", default=HERE / "summary.json",
+                        help="summary JSON file or validation directory")
     args = parser.parse_args()
+    summary_path = args.summary / "summary.json" if args.summary.is_dir() else args.summary
     try:
-        summary = json.loads(args.summary.read_text())
+        summary = json.loads(summary_path.read_text())
         raw = (HERE / "frozen.json").read_bytes()
         frozen = json.loads(raw)
         jpsi, continuum, toys = (summary[key] for key in ("jpsi", "continuum", "toys"))
