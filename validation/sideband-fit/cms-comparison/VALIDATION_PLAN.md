@@ -1,0 +1,13 @@
+# Independent sideband validation plan
+
+Freeze these rules before opening student outputs. Archive the handed-off Git commit, record its hash and archive digest, and run its public estimator with hidden counts inaccessible. Recompute its fitted yields with an independent maximizer and quadrature. Change masked observations and repeat model selection as a leakage check.
+
+## Published spectra
+
+Use CMS EXO-16-047, HEPData ins1662926 v1, Figure 1 right, with Table 3 as an independent check on units wherever edges coincide. Take the contiguous bins inside 400–1000 GeV. Hold out the bins whose centers are in [550,650) GeV in one fit and [750,850) GeV in another. Use the full published bin at either edge. Report each separately since the fits share data. For a real scouting comparison, inspect EXO-21-005 Figure 3 and table availability, documenting distinctions between a local signal-plus-background fit and a blind interpolation.
+
+Reconstruct counts only if the published decimal precision, bin width and any error information uniquely identify an integer per bin. Report ambiguous bins explicitly. In that case use the published coarse count table as a direct Poisson benchmark, fitting all finite bins from 200 GeV upward and holding out the middle bin by index (lower middle for even bin count). Evaluate rounded-spectrum residuals separately. Do not sum systematic uncertainties in quadrature without covariance. Compare observed counts, sideband projections and the published background estimate separately. Record publication identifiers, artifact hashes, retrieval dates, bin widths and selections. Compare Open Data only at a supported level of comparability.
+
+## Independent ensembles
+
+Use 40 equal bins on [0,1], a masked interval [0.4,0.6], independent Poisson fluctuations and a total background expectation of 2000. Truth densities are proportional to exp(-2x), exp(-2x+1.3x²), and exp(-2x)(1+0.25 exp(-0.5((x-0.52)/0.075)²)). Normalize and integrate over each bin. Add Gaussian signals centered at 0.5 with width 0.055 and total yields 0 and 50, including sideband leakage. Use PCG64 seeds 657241 through 657246 in truth-major, signal-minor order, with 300 experiments each. Record every attempt, boundary and failure. Estimate the expected-window yield and signed signal, reselecting the model on allowed bins on every trial. Compare fixed-order results to complete selection when available. Check signed pulls, bias, interval coverage and uncertainty on empirical coverage. For nominal 68.27% coverage flag deviations greater than three binomial standard errors and pull means greater than three empirical standard errors from zero. Document stress failures and any unsupported interval or method. Do not tune these rules after unblinding.
