@@ -1,0 +1,2 @@
+${SKIM_BASE}/output_wz_0.parquet
+${SKIM_BASE}/output_wz_1.parquet

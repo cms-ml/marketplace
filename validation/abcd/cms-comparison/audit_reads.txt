@@ -1,0 +1,20 @@
+== ws_noskill: tool calls {'Read': 5, 'Bash': 56, 'Skill': 4}
+   skills invoked: ['cms:trigger-efficiency', 'cms:awkward-array', 'cms:hist', 'af-fnal-lpc:lpc-condor']
+   outside: <REPO>/validation/abcd/ws_noskill (x49)   <-- SKILL/TEST PATH
+   outside: <REPO>/validation/abcd/ws_noskill/condor (x6)   <-- SKILL/TEST PATH
+   outside: <REPO>/plugins/cms/skills/trigger-efficiency/scripts (x2)
+   outside: <REPO>/validation/abcd/ws_noskill/logs/build_base.log (x2)   <-- SKILL/TEST PATH
+   outside: <REPO>/validation/abcd/ws_noskill/INPUTS.md (x1)   <-- SKILL/TEST PATH
+   outside: <REPO>/plugins/af-fnal-lpc/skills/lpc-condor/assets (x1)
+   outside: <REPO>/plugins/af-fnal-lpc/skills/lpc-condor/assets/job.sh (x1)
+   outside: <REPO>/validation/abcd/ws_noskill/plots/trigger_turnon_j0.png (x1)   <-- SKILL/TEST PATH
+   outside: <REPO>/validation/abcd/ws_noskill/plots/design_substructure_dists.png (x1)   <-- SKILL/TEST PATH
+   outside: <REPO>/validation/abcd/ws_noskill/plots/tf_vs_mavg.png (x1)   <-- SKILL/TEST PATH
+   outside: <REPO>/validation/abcd/ws_noskill/plots/mavg_SR_unblinded.png (x1)   <-- SKILL/TEST PATH
+== ws_skill: tool calls {'Read': 7, 'Skill': 5, 'Bash': 29, 'TodoWrite': 1}
+   skills invoked: ['background-est:abcd', 'cms:trigger-efficiency', 'cms:awkward-array', 'cms:hist', 'af-fnal-lpc:lpc-condor']
+   outside: <REPO>/plugins/cms/skills/trigger-efficiency/scripts (x2)
+   outside: <REPO>/plugins/background-est/skills/abcd (x1)   <-- SKILL/TEST PATH
+   outside: <REPO>/plugins/background-est/skills/abcd/scripts/abcd.py (x1)   <-- SKILL/TEST PATH
+   outside: <REPO>/plugins/background-est/skills/abcd/scripts (x1)   <-- SKILL/TEST PATH
+audit exit 1

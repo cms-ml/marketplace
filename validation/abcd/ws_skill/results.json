@@ -1,0 +1,216 @@
+{
+  "trigger": {
+    "paths": ["HLT_PFHT900", "HLT_PFJet450", "HLT_AK8PFJet450"],
+    "offline_threshold": "offline AK4 HT > 1100 GeV (plus both AK8 pT>250); efficiency of the OR vs reference HLT_PFJet260: 0.9957 (CP 68% 0.9956-0.9959), 140442 ref events, target 0.99",
+    "method": "orthogonal reference trigger HLT_PFJet260 (cross-check HLT_AK8PFJet260), Clopper-Pearson; offline selection in denominator; MC: no trigger applied, HT>1100 cut only; PFHT800 not used (absent in era H)"
+  },
+  "preselection": [
+    "golden JSON (data), MET filters",
+    "OR of HLT_PFHT900|HLT_PFJet450|HLT_AK8PFJet450 (data)",
+    "HT(AK4 pT>30,|eta|<2.5) > 1100 GeV",
+    "two leading AK8 jets: pT>250 GeV, |eta|<2.4, jetId>=2",
+    "muon and electron loose veto (pT>10)",
+    "40<=m_avg<480 GeV"
+  ],
+  "abcd_variables": [
+    {
+      "name": "mass_asymmetry",
+      "definition": "|m_SD1-m_SD2|/(m_SD1+m_SD2)",
+      "cut": "0.2 (pass <0.2; fail band 0.2-0.4)",
+      "signal_side": "low"
+    },
+    {
+      "name": "deta_jj",
+      "definition": "|eta_1-eta_2| of two leading AK8 jets",
+      "cut": "1.2 (pass <1.2)",
+      "signal_side": "low"
+    }
+  ],
+  "regions": {
+    "A": "masym<0.2 & deta<1.2 (signal region)",
+    "B": "0.2<=masym<0.4 & deta<1.2",
+    "C": "masym<0.2 & deta>=1.2",
+    "D": "0.2<=masym<0.4 & deta>=1.2"
+  },
+  "mavg_bins": [
+    40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 230.0, 260.0,
+    300.0, 350.0, 400.0, 480.0
+  ],
+  "independence": {
+    "method": "QCD-MC kappa=AD/(BC) scan of boundaries and fail band; TF(deta) vs masym and vs m_avg in MC and data (A blinded); selection pair ranking on QCD MC over 6 variables; shifted-boundary validation regions",
+    "result": "masym x deta not independent at 10% level for the full masym>0.2 range (kappa 1.09, TF slope vs masym); restricting fail band to 0.2-0.4 gives kappa=1.008 (0.93-1.02 vs m_avg); TF(deta) rises strongly with m_avg (1.3->2.2) so TF is a fitted function of m_avg; data TF ~8% below MC TF in level, similar slope"
+  },
+  "tf": {
+    "form": "TF(m_avg)=N_B/N_D (deta<1.2 over deta>=1.2 in 0.2<=masym<0.4), non-QCD subtracted, quadratic polynomial in m_avg (order from F-test), applied to C(m_avg) per bin",
+    "values": [
+      1.3200821143193417, 1.3168716822627817, 1.3190845572197332,
+      1.3267207391901958, 1.33978022817417, 1.3582630241716556,
+      1.3821691271826524, 1.4114985372071607, 1.4557868252255464,
+      1.5201183415629762, 1.610594306609651, 1.7513254289447482,
+      1.9398942280431355, 2.2357076917785363
+    ],
+    "uncertainty": "fit covariance (chi2/ndf of data fit 18.6/11); per-bin TF: in fits/prediction.json"
+  },
+  "other_backgrounds": {
+    "method": "W/Z+jets, ttbar, VV, H from MC (xsec*lumi) subtracted in B,C,D and added in A, 30% normalisation uncertainty varied coherently",
+    "fraction_in": {
+      "A": 0.03650449465598467,
+      "B": 0.032717313180217686,
+      "C": 0.029657166867144796,
+      "D": 0.02667977770872785
+    }
+  },
+  "prediction": {
+    "edges": [
+      40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 230.0, 260.0,
+      300.0, 350.0, 400.0, 480.0
+    ],
+    "edges_note": "m_avg [GeV]",
+    "value": [
+      71478.14641569718, 62979.76583923551, 64255.962083180086,
+      64619.0690911634, 58506.46858928316, 47481.14247163369,
+      34081.166839479345, 22079.58376548778, 17549.155357740445,
+      7503.373511516514, 3558.32047405483, 1344.332184425687,
+      394.19066907939566, 204.54070203289643
+    ],
+    "stat_err": [
+      444.51232991917954, 347.9150189218337, 346.582634192725,
+      359.7439525437058, 348.8148009176362, 313.67402346014575,
+      265.2945550218206, 216.05196332580803, 211.65112343253375,
+      140.07346743402803, 99.80076277614992, 61.22429579423868,
+      32.139488596479914, 24.375917927072265
+    ],
+    "syst_err": [
+      3506.9728349547386, 2408.0934552225535, 2575.015023131461,
+      1772.8113386563261, 1975.009241659656, 2148.2929963122356,
+      2285.579123532812, 1827.7233453677354, 1550.7577992509687,
+      830.9461447396684, 314.5433904845048, 162.50542259560808,
+      80.08277445495293, 34.71445122658624
+    ],
+    "other_bkg_A": [
+      688.9723291267705, 1811.1387747602498, 3594.6142700779587,
+      2783.5965714208824, 1850.0282939662368, 1890.7206060599347,
+      2106.659545544469, 1555.7919283730248, 869.2123605250506, 320.93797883521,
+      176.62738320646957, 78.14182940255057, 26.832499860816824,
+      14.013737501718424
+    ],
+    "total_inclusive": 456035.2179940099,
+    "total_err": 10641.092667557958
+  },
+  "closure_mc": {
+    "ratio": 1.0005794621131445,
+    "pull": 0.15202534258937825,
+    "per_bin_chi2": 45.29477944667793,
+    "ndf": 14
+  },
+  "validation_regions": [
+    {
+      "definition": "MC: x shifted: A=0.2<=masym<0.4,B=0.4-0.6, deta<1.2 / >=1.2",
+      "ratio": 1.0053168609478815,
+      "pull": 1.3506386759727471,
+      "per_bin_chi2": 87.05251364974266,
+      "ndf": 14
+    },
+    {
+      "definition": "MC: y shifted: masym<0.2 / 0.2-0.4, 1.2<=deta<1.8 pass, >=1.8 fail",
+      "ratio": 0.9953915109130083,
+      "pull": -0.7820114737358627,
+      "per_bin_chi2": 25.688217928191637,
+      "ndf": 14
+    },
+    {
+      "definition": "MC: both shifted",
+      "ratio": 1.0033874012092994,
+      "pull": 0.5569699549203487,
+      "per_bin_chi2": 41.128961211125095,
+      "ndf": 14
+    },
+    {
+      "definition": "data: x shifted (A=0.2<=masym<0.4,B=0.4-0.6, deta<1.2/>=1.2)",
+      "ratio": 0.996088533384206,
+      "pull": -1.1017958130760197,
+      "per_bin_chi2": 82.81424933548696,
+      "ndf": 14
+    },
+    {
+      "definition": "data: y shifted (1.2<=deta<1.8 pass, >=1.8 fail)",
+      "ratio": 0.9853208923438823,
+      "pull": -2.862651306632616,
+      "per_bin_chi2": 20.267050797160117,
+      "ndf": 14
+    },
+    {
+      "definition": "data: both shifted",
+      "ratio": 0.9837427126704241,
+      "pull": -3.032818239506611,
+      "per_bin_chi2": 42.80669873745642,
+      "ndf": 14
+    }
+  ],
+  "non_closure_syst": {
+    "correlated_yield_fraction": 0.016257287329575876,
+    "per_bin_uncorrelated_shape_term": [
+      0.046076142302839095, 0.03259954563835244, 0.029333828611580112,
+      0.012434097169421478, 0.025636138202450556, 0.038334296938424856,
+      0.060042130796522195, 0.07617869774192713, 0.08415916783915686,
+      0.10785969555204833, 0.08432217410722592, 0.11766569128365131,
+      0.2007573841240973, 0.1673029572757897
+    ],
+    "basis": "max over MC closure, 3 MC VR, 3 data VR of |1-ratio| (if |pull|>2) else stat; data VR2/VR3 pulls -2.9/-3.0 give 1.6%; shape term = largest per-bin deviation in excess of uncertainty"
+  },
+  "unblinded": {
+    "observed": [
+      72949.0, 66401.0, 67635.0, 66910.0, 60102.0, 48211.0, 35399.0, 23093.0,
+      17964.0, 7472.0, 3530.0, 1448.0, 447.0, 192.0
+    ],
+    "observed_total": 471753.0,
+    "chi2": 2.227355291925044,
+    "ndf": 14,
+    "max_local_deviation_sigma": 0.6580671201525874
+  },
+  "n_events": {
+    "A": 471753,
+    "B": 428852,
+    "C": 348323,
+    "D": 317651,
+    "note": "data counts; A is the unblinded observed"
+  },
+  "checks_done": [
+    "trigger turn-on vs HT and leading pT with 2 references",
+    "variable shape comparison QCD vs ttbar/VV proxies",
+    "pair ranking by kappa and chi2 vs m_avg in QCD MC",
+    "boundary scan",
+    "TF vs masym and m_avg in MC and data (blind)",
+    "MC closure",
+    "3 MC + 3 data validation regions",
+    "non-QCD subtraction and its 30% variation",
+    "unblinding only after final prediction"
+  ],
+  "checks_not_done": [
+    "signal injection (no signal sample)",
+    "inverted-preselection sidebands (e.g. lepton or HT sideband)",
+    "MC trigger emulation",
+    "JES/JER or PU reweighting of MC (MC only used for closure and non-QCD)",
+    "per-HT-bin QCD closure",
+    "combine likelihood fit; no gaussian check of low-count bins beyond 350 GeV"
+  ],
+  "notes": [
+    "m_SD is soft-drop mass, no JMS/JMR correction; no signal sample so efficiency/optimisation is from QCD MC and ttbar/VV proxies only.",
+    "Observed/predicted agree (chi2 small = conservative systematics from shape terms taken from 7 tests).",
+    "Data TF is 8% below MC TF but ABCD is data-driven; MC only used for closure.",
+    "Open Data analysis: not an official CMS result."
+  ],
+  "plots": {
+    "closure_mc_perbin": "MC closure per m_avg bin with stat and frozen syst band",
+    "closure_mc_variations": "MC closure ratio under boundary, fail-band, HT-cut and TF-form variations",
+    "validation_regions_data_perbin": "three data validation regions per bin, obs/pred with bands",
+    "design_2d_masym_deta": "2D masym vs |deta| in QCD MC and blinded data with region lines",
+    "design_boundary_scan": "kappa and proxy efficiencies vs each boundary, chosen values marked",
+    "independence_ratio_vs_deta": "masym pass/fail ratio vs |deta| in MC and data outside A",
+    "substructure_dists": "tau21, tau32, N2 of jets: QCD vs W/Z- and top-matched proxies",
+    "substructure_roc": "ROC of the substructure variables; not used (mass-dependent, untested as axes)",
+    "closure_map_mc": "inclusive kappa-1 and pull over a boundary grid, QCD MC, chosen point marked",
+    "closure_map_data": "same in data, only grid points whose test-A is outside SR A",
+    "nonclosure_map": "obs/pred-1 and pull per test and m_avg bin; boxes mark tests setting the shape term"
+  }
+}

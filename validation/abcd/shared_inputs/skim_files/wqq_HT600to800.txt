@@ -1,0 +1,7 @@
+${SKIM_BASE}/output_wqq_HT600to800_0.parquet
+${SKIM_BASE}/output_wqq_HT600to800_1.parquet
+${SKIM_BASE}/output_wqq_HT600to800_2.parquet
+${SKIM_BASE}/output_wqq_HT600to800_3.parquet
+${SKIM_BASE}/output_wqq_HT600to800_4.parquet
+${SKIM_BASE}/output_wqq_HT600to800_5.parquet
+${SKIM_BASE}/output_wqq_HT600to800_6.parquet

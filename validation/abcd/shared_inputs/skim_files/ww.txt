@@ -1,0 +1,6 @@
+${SKIM_BASE}/output_ww_0.parquet
+${SKIM_BASE}/output_ww_1.parquet
+${SKIM_BASE}/output_ww_2.parquet
+${SKIM_BASE}/output_ww_3.parquet
+${SKIM_BASE}/output_ww_4.parquet
+${SKIM_BASE}/output_ww_5.parquet

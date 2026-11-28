@@ -1,0 +1,17 @@
+{
+  "name": "background-est",
+  "description": "Data-driven background estimation for CMS analyses: ABCD (matrix) estimates with variable ranking, fitted transfer factors, closure and validation tests, non-closure systematics and a likelihood version.",
+  "version": "0.1.0",
+  "homepage": "https://cms-analysis.github.io/HiggsAnalysisCombinedLimit/",
+  "repository": "https://github.com/cms-ml/marketplace",
+  "license": "MIT",
+  "keywords": [
+    "CMS",
+    "background estimation",
+    "data-driven",
+    "ABCD",
+    "transfer factor",
+    "QCD multijet",
+    "Combine"
+  ]
+}

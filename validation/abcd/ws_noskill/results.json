@@ -1,0 +1,330 @@
+{
+  "trigger": {
+    "paths": ["HLT_PFHT900", "HLT_PFJet450", "HLT_AK8PFJet450"],
+    "offline_threshold": "leading AK8 pT > 550 GeV (and pT2>300 GeV); plateau eff target 0.99 (found 0.998)",
+    "method": "Reference-trigger (HLT_PFJet260, cross-checked with HLT_AK8PFJet260 and HLT_PFJet320) turn-on of the signal OR vs leading-jet pT, HT and subleading pT, Clopper-Pearson; paths present in both 2016G and H (HT800 absent in H, mass-trimmed paths deliberately not used to avoid mass bias). Data only; no trigger applied to MC (above plateau)."
+  },
+  "trigger_numbers": {
+    "j0_HLT_PFJet260": {
+      "thr": 550.0,
+      "plateau": 0.9978543618872253,
+      "lo": 0.9977171696874272,
+      "hi": 0.9979835502212437,
+      "n": 128167
+    },
+    "j0_HLT_AK8PFJet260": {
+      "thr": 550.0,
+      "plateau": 0.9978079071363934,
+      "lo": 0.9976693403420744,
+      "hi": 0.9979384746404691,
+      "n": 128188
+    },
+    "j0_HLT_PFJet320": {
+      "thr": 550.0,
+      "plateau": 0.998036941426438,
+      "lo": 0.997963443235108,
+      "hi": 0.9981078372359148,
+      "n": 389698
+    }
+  },
+  "preselection": [
+    "golden JSON (data), MET filters, trigger OR (data)",
+    "both leading AK8 jets tight jetId (>=2), |eta|<2.5",
+    "pT1>550 GeV, pT2>300 GeV",
+    "lepton veto: no loose muon/electron pT>10 GeV",
+    "mass asymmetry |m1-m2|/(m1+m2)<0.2 (equal-mass pair)",
+    "40<m_avg<440 GeV"
+  ],
+  "abcd_variables": [
+    {
+      "name": "N2_jet1",
+      "definition": "N2^(beta=1) of the leading AK8 jet",
+      "cut": "N2<0.30",
+      "signal_side": "pass (N2<0.30, two-prong)"
+    },
+    {
+      "name": "N2_jet2",
+      "definition": "N2^(beta=1) of the subleading AK8 jet",
+      "cut": "N2<0.30",
+      "signal_side": "pass (N2<0.30, two-prong)"
+    }
+  ],
+  "regions": {
+    "A": "SIGNAL REGION: jet1 N2<0.3 and jet2 N2<0.3",
+    "B": "jet1 N2<0.3, jet2 N2>=0.3",
+    "C": "jet1 N2>=0.3, jet2 N2<0.3",
+    "D": "jet1 N2>=0.3, jet2 N2>=0.3 (all with the common preselection)"
+  },
+  "mavg_bins": [
+    40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0,
+    260.0, 280.0, 300.0, 330.0, 360.0, 400.0, 440.0
+  ],
+  "independence": {
+    "method": "MC QCD: weighted Pearson correlation of N2_1 vs N2_2 in 3 m_avg slices; per-bin rho=A*D/(B*C) in QCD MC; same rho in 3 data validation regions (A never used in the SR)",
+    "result": {
+      "pearson": {
+        "40-100": 0.014948623492582988,
+        "100-200": 0.008917785345928951,
+        "200-440": -0.006139328153527349,
+        "inclusive": 0.03466957695285914
+      },
+      "rho_mc_per_bin": [
+        1.0142424151187353, 1.0457804132051358, 1.042513070823231,
+        0.9962545077451471, 1.013527586335146, 0.9771682808318031,
+        0.9638718853014066, 0.9438190083037004, 0.9609644585766355,
+        0.9769050047188312, 0.9443527163608547, 0.9977705848714433,
+        0.8985579126984982, 0.9231357034158726, 0.9805613840507735,
+        1.003669181140628, 1.1054753409773856
+      ],
+      "rho_mc_mean_abs_dev_from_1": 0.03893215063089975,
+      "conclusion": "Variables are uncorrelated to ~1-3% inclusively, but TF depends strongly on m_avg (0.28->2), so the TF is measured per m_avg bin; residual rho deviates from 1 by 0-12%"
+    }
+  },
+  "tf": {
+    "form": "Per-m_avg-bin transfer factor TF(m_avg)=N_C/N_D (probability of jet2 passing N2 given jet1 fails), measured in data after subtracting non-QCD MC, applied to region B: A_pred=TF*B",
+    "values": [
+      0.28318760330290704, 0.306973091155665, 0.3246150251486509,
+      0.38175917231481377, 0.46981670753589744, 0.5627455755637848,
+      0.6590320759004689, 0.7708599442328171, 0.8513437197393089,
+      0.8488543134668831, 1.0104621296628955, 1.0854855699456751,
+      1.050946147965805, 1.043082406364336, 1.5420836777697813,
+      2.039645110806535, 1.4749415080031447
+    ],
+    "uncertainty": [
+      0.002597972420732164, 0.003056248774335242, 0.0033307496604697384,
+      0.0038047493409421153, 0.004693696101034261, 0.006095465256082329,
+      0.008466496473942299, 0.012348704076145954, 0.017713834562849987,
+      0.023866810067527187, 0.039516456385367285, 0.0584147614357044,
+      0.07716208948592555, 0.09046597631746188, 0.2059779303546509,
+      0.40764949181931603, 0.4134873389364208
+    ]
+  },
+  "other_backgrounds": {
+    "method": "W/Z+jets, ttbar, VV, H->bb from MC (xsec*lumi) subtracted from data in B, C, D before the TF; added back to the QCD prediction in A; +-50% normalisation variation in syst",
+    "fraction_in": {
+      "B": 0.0345332618233996,
+      "C": 0.03759757607986031,
+      "D": 0.023408153448966598,
+      "A": 0.04977755957402062
+    },
+    "note": "fraction_in B,C,D = MC non-QCD / data; A = non-QCD/(non-QCD+QCD pred)"
+  },
+  "prediction": {
+    "edges": [
+      40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0,
+      260.0, 280.0, 300.0, 330.0, 360.0, 400.0, 440.0
+    ],
+    "value": [
+      7556.242081241962, 6933.504393970076, 6850.396272548908, 7963.37958299807,
+      9698.042022743837, 10342.21408360923, 9728.85238221727, 7789.870357414524,
+      5441.108303939662, 3150.8981760962506, 2002.911972451963,
+      1063.242554431758, 565.427242872338, 463.88203642501617,
+      332.61672113023405, 258.4194790910589, 60.52688842042743
+    ],
+    "stat_err": [
+      83.44670579574603, 83.40868979007611, 85.47230510803985,
+      97.35758625384268, 118.66413613298323, 136.34058679424467,
+      149.49649498897978, 147.9586036330715, 132.84711073077648,
+      103.14773041194728, 90.82340454435929, 67.06199893651916,
+      48.541669475116514, 46.20730636955836, 50.22777182625681,
+      56.882936050929864, 19.71372407506588
+    ],
+    "syst_err": [
+      414.61350723820794, 517.4936578574375, 585.2483324722006,
+      501.49433947166295, 560.3788839832658, 637.3640751386038,
+      646.2382954068108, 609.9281598487626, 373.8811564783205,
+      205.14020476342293, 171.52672145617643, 76.68224900723547,
+      71.86318564962563, 50.681501783827194, 28.330034892338603,
+      21.908194613571695, 10.160556617422964
+    ],
+    "total_inclusive": 80201.53455160258,
+    "total_err": 5497.439650681288,
+    "note": "stat added in quadrature across bins; syst summed linearly (fully correlated); QCD only; non-QCD expectation in A in fits/prediction.json"
+  },
+  "closure_mc": {
+    "ratio": 0.9909998837333719,
+    "pull": -1.5068703424001395,
+    "per_bin_chi2": 37.19704429325703,
+    "ndf": 17,
+    "ratio_per_bin": [
+      1.0142424151187353, 1.0457804132051358, 1.042513070823231,
+      0.9962545077451471, 1.013527586335146, 0.9771682808318031,
+      0.9638718853014066, 0.9438190083037004, 0.9609644585766355,
+      0.9769050047188312, 0.9443527163608547, 0.9977705848714433,
+      0.8985579126984982, 0.9231357034158726, 0.9805613840507735,
+      1.003669181140628, 1.1054753409773856
+    ],
+    "comment": "stat-only chi2 is large (MC stat is very high): residual non-closure of 0-12% per bin is assigned as systematic"
+  },
+  "validation_regions": [
+    {
+      "name": "VR_asym",
+      "definition": "Same selection and tags but mass asymmetry >0.3 (complement of the SR asymmetry cut); A'=both N2<0.3",
+      "ratio": 1.0094399446848448,
+      "pull": 4.443114858902057,
+      "per_bin_chi2": 1559.4811995310845,
+      "ndf": 17,
+      "per_bin_chi2_incl_syst": 20.653225874881347,
+      "ndf_syst": 17,
+      "ratio_per_bin": [
+        0.8833462761677636, 1.0292093454526516, 1.1030446725660752,
+        1.072703809004398, 1.0116850252173835, 1.0045532165565498,
+        1.0090983559766806, 1.0969792024109124, 1.0225643882562387,
+        1.1678827415247806, 1.1469274084293486, 1.0378313040918759,
+        0.9437474976984499, 1.1979729699801225, 1.3992291643485364,
+        0.7377148526518517, 1.3162356839111633
+      ],
+      "pull_per_bin_incl_syst": [
+        -0.6698323045892525, 0.34510262454235896, 2.0632344197110477,
+        1.2838559988265916, 0.22679568642837944, 0.08081926400476992,
+        0.15798485322414502, 1.6405991034541758, 0.3685849315518304,
+        1.8723982368841834, 1.5767018552996472, 0.30964064326707585,
+        -0.41230591541772776, 1.2386000003847988, 1.6014419515135494,
+        -0.7863079813917975, 0.5432502182134492
+      ]
+    },
+    {
+      "name": "VR_pt1",
+      "definition": "Same as SR but 200<pT2<300 GeV (below the SR pT2 cut)",
+      "ratio": 0.9774847976012561,
+      "pull": -0.47436635159350105,
+      "per_bin_chi2": 15.232782025372025,
+      "ndf": 7,
+      "per_bin_chi2_incl_syst": 3.2239500994847603,
+      "ndf_syst": 7,
+      "ratio_per_bin": [
+        1.308583145108411,
+        1.0234742089121815,
+        0.7895514362695147,
+        0.9804297340080399,
+        1.1086246911271154,
+        0.5391355678676617,
+        0.4579191838873004,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      "pull_per_bin_incl_syst": [
+        1.2725744277783158,
+        0.10801509954058518,
+        -0.942171846773495,
+        -0.10018380792418302,
+        0.24492351901643136,
+        -0.6727644599412698,
+        -0.4272154381228072,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    },
+    {
+      "name": "VR_n2",
+      "definition": "Both jets fail the SR tag (N2>=0.3); shifted tag N2<0.36 defines A',B',C',D' inside it",
+      "ratio": 1.0179060742704948,
+      "pull": 2.263007597234697,
+      "per_bin_chi2": 12.284985488723713,
+      "ndf": 17,
+      "per_bin_chi2_incl_syst": 2.7346859589846777,
+      "ndf_syst": 17,
+      "ratio_per_bin": [
+        1.009134347810221, 1.0458680229649278, 1.0152858936279112,
+        1.0215361705658632, 1.002642911708016, 1.0183531613822336,
+        1.028565890190628, 1.043677126449953, 0.9955982625735943,
+        0.9569427267140966, 1.070339496409035, 0.933941871183724,
+        1.0467575952656953, 0.934261806417032, 0.5441008935806884,
+        0.5779685735148552, 0.3157855641779257
+      ],
+      "pull_per_bin_incl_syst": [
+        0.15473807255800212, 0.793837926908754, 0.25802610490280514,
+        0.37232589855792186, 0.043868371327422974, 0.2693728546301746,
+        0.3965468762872322, 0.5897119324835548, -0.04612547326231959,
+        -0.3140664738232449, 0.3734698326137467, -0.28867313403137396,
+        0.16772180063659092, -0.2027593991000478, -0.7428908070595822,
+        -0.4473263965169242, -0.3886602563979809
+      ]
+    }
+  ],
+  "non_closure_syst": {
+    "recipe": "per bin sqrt((rho_MC-1)^2 + stat_rho^2 + 0.05^2), 0.05 flat added from VR_asym data-vs-MC rho differences; quadrature with +-50% non-QCD normalisation",
+    "relative_per_bin": [
+      0.054523446825055034, 0.07003199929484544, 0.06806291232719157,
+      0.05308113132209852, 0.054569112782421436, 0.05762978128231978,
+      0.06449332641205384, 0.07826774219502645, 0.06870165786554604,
+      0.0642934510881019, 0.08501191430265642, 0.06967468922344927,
+      0.12539353101780917, 0.10534247430126213, 0.08277471316960242,
+      0.08361996620895938, 0.16096967854744992
+    ]
+  },
+  "unblinded": {
+    "observed": [
+      8008.0, 7711.0, 8067.0, 8961.0, 10163.0, 10826.0, 10101.0, 8041.0, 5576.0,
+      3467.0, 2034.0, 1171.0, 691.0, 586.0, 306.0, 186.0, 94.0
+    ],
+    "expected": [
+      7666.2658674228405, 7417.980594736427, 7891.383308420804,
+      8701.166125511996, 10155.199843697463, 10734.612111626468,
+      10065.081043891865, 8025.640760042842, 5581.669024001163,
+      3242.850441551199, 2063.1645747005145, 1101.1679658703058,
+      590.4758442100396, 487.75722679740943, 345.373890709267,
+      268.02149869144176, 65.0950711890514
+    ],
+    "pulls": [
+      0.7905036532876722, 0.5512989955994957, 0.2935279685597605,
+      0.50006611675198, 0.0134107922449987, 0.13845508464185632,
+      0.05353916264636981, 0.024225819203590824, -0.014040661025650764,
+      0.945561986554762, -0.1463578071584396, 0.6497517656858004,
+      1.109213756837339, 1.3505877773970298, -0.653314973400977,
+      -1.313016717327574, 1.1938913363922985
+    ],
+    "observed_total": 85989.0,
+    "expected_total": 84402.90519307108,
+    "chi2": 9.256389345608282,
+    "ndf": 17,
+    "max_local_deviation_sigma": 1.3505877773970298
+  },
+  "n_events": {
+    "A": 85989,
+    "B": 175616,
+    "C": 118381,
+    "D": 277611,
+    "note": "data events in 40<m_avg<440 after full selection"
+  },
+  "checks_done": [
+    "trigger turn-on with 3 independent references, vs j0pT, j1pT, HT, 2D map",
+    "N2 vs tau21 vs tau32/N3 discrimination (W/Z-matched vs QCD)",
+    "independence: correlation, per-bin rho in MC, 3 data VRs",
+    "MC closure (SR selection and 3 VR selections)",
+    "data validation regions (blind of SR)",
+    "smooth-TF and inclusive-TF cross-checks (inclusive TF fails: pred differs by 11%; pol2 fit chi2 poor, per-bin TF kept)",
+    "non-QCD MC subtraction and +-50% variation",
+    "unblinding only after prediction frozen (fits/blind_results.json)"
+  ],
+  "checks_not_done": [
+    "no signal MC: signal efficiency and signal contamination of B and C not evaluated (B,C contain 2eps(1-eps) of signal)",
+    "jet mass scale/resolution and JES/JER systematics on non-QCD MC not evaluated",
+    "MC trigger emulation not used; MC above data plateau only",
+    "no b-tag or flavour split; no pileup reweighting of MC (not needed for data-driven QCD, small for non-QCD)",
+    "VR_asym only passes after including flat 5% syst (derived from it)"
+  ],
+  "notes": [
+    "Open Data study, not official CMS result. Signal acceptance is limited by the high pT thresholds (pT1>550, pT2>300) required for a non-mass-biased trigger.",
+    "Data in A are consistent with prediction: obs/exp total 1.019, chi2/ndf 9.3/17, max local |pull| 1.35.",
+    "QCD MC is only used for design, independence and closure, never for the nominal normalisation.",
+    "m_avg bins have 12-13% resolution proxy (VV MC); highest bins statistically limited (TF error 20-40%).",
+    "VR_asym is a region where independence is intrinsically worse; handled by flat 5%."
+  ]
+}

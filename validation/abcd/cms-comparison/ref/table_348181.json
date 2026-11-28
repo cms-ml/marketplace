@@ -1,0 +1,651 @@
+{
+  "associated_files": [
+    {
+      "alt_location": "/opt/hepdata/var/data/e7/85857/1544090166/submission.tar/submission/Figure_005-a.png",
+      "description": "Image file",
+      "id": 763465,
+      "preview_location": "/record/resource/763466?view=true",
+      "type": "png"
+    }
+  ],
+  "description": "Boosted search average pruned mass distribution for data (black points) and for the total background prediction for the inclusive selection.",
+  "doi": "10.17182/hepdata.85857.v1/t2",
+  "headers": [
+    { "colspan": 1, "name": "Average dijet pruned mass [GeV]" },
+    { "colspan": 1, "name": "Data - boosted inclusive selection [1/GeV]" },
+    {
+      "colspan": 1,
+      "name": "Bkg estimate - boosted inclusive selection [1/GeV]"
+    }
+  ],
+  "keywords": { "observables": ["Average pruned jet mass"] },
+  "location": "Data from Figure 5 (left).",
+  "name": "Average pruned jet mass spectrum (Inclusive analysis)",
+  "qualifier_order": [],
+  "qualifiers": {},
+  "related_tables": [],
+  "related_to_this": [],
+  "resources": [
+    {
+      "description": "Image file",
+      "type": "png",
+      "url": "https://www.hepdata.net/record/resource/763465?landing_page=true"
+    },
+    {
+      "description": "Thumbnail image file",
+      "type": "png",
+      "url": "https://www.hepdata.net/record/resource/763466?landing_page=true"
+    }
+  ],
+  "review": { "messages": false, "review_flag": "passed" },
+  "size": 7646,
+  "size_check": true,
+  "table_license": {
+    "description": "CC0 enables reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.",
+    "name": "CC0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "values": [
+    {
+      "x": [{ "high": "68.0", "low": "64.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "7.22" }],
+          "group": 0,
+          "value": "208.5"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "22.9" }],
+          "group": 1,
+          "value": "229.36"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "72.0", "low": "68.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "8.411" }],
+          "group": 0,
+          "value": "283.0"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "28.65" }],
+          "group": 1,
+          "value": "300.96"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "77.0", "low": "72.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "8.944" }],
+          "group": 0,
+          "value": "400.0"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "37.12" }],
+          "group": 1,
+          "value": "415.64"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "82.0", "low": "77.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "10.534" }],
+          "group": 0,
+          "value": "554.8"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "48.0" }],
+          "group": 1,
+          "value": "590.6"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "88.0", "low": "82.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "10.775" }],
+          "group": 0,
+          "value": "696.67"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "57.59" }],
+          "group": 1,
+          "value": "717.38"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "94.0", "low": "88.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "11.441" }],
+          "group": 0,
+          "value": "785.33"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "71.16" }],
+          "group": 1,
+          "value": "830.13"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "100.0", "low": "94.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "12.337" }],
+          "group": 0,
+          "value": "913.17"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "82.46" }],
+          "group": 1,
+          "value": "911.85"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "106.0", "low": "100.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "12.728" }],
+          "group": 0,
+          "value": "972.0"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "92.96" }],
+          "group": 1,
+          "value": "979.17"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "113.0", "low": "106.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "12.419" }],
+          "group": 0,
+          "value": "1079.6"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "103.71" }],
+          "group": 1,
+          "value": "1071.0"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "121.0", "low": "113.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "12.012" }],
+          "group": 0,
+          "value": "1154.4"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "111.03" }],
+          "group": 1,
+          "value": "1151.2"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "129.0", "low": "121.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "12.185" }],
+          "group": 0,
+          "value": "1187.8"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "116.73" }],
+          "group": 1,
+          "value": "1202.3"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "137.0", "low": "129.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "12.217" }],
+          "group": 0,
+          "value": "1194.0"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "116.67" }],
+          "group": 1,
+          "value": "1193.2"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "146.0", "low": "137.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "11.01" }],
+          "group": 0,
+          "value": "1090.9"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "112.65" }],
+          "group": 1,
+          "value": "1137.6"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "155.0", "low": "146.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "10.514" }],
+          "group": 0,
+          "value": "994.89"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "102.78" }],
+          "group": 1,
+          "value": "1030.8"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "164.0", "low": "155.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "9.917" }],
+          "group": 0,
+          "value": "885.11"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "90.69" }],
+          "group": 1,
+          "value": "894.57"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "174.0", "low": "164.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "8.486" }],
+          "group": 0,
+          "value": "720.1"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "75.84" }],
+          "group": 1,
+          "value": "736.88"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "184.0", "low": "174.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "7.566" }],
+          "group": 0,
+          "value": "572.4"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "59.39" }],
+          "group": 1,
+          "value": "569.06"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "195.0", "low": "184.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "6.044" }],
+          "group": 0,
+          "value": "401.82"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "44.9" }],
+          "group": 1,
+          "value": "420.92"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "206.0", "low": "195.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "5.071" }],
+          "group": 0,
+          "value": "282.82"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "32.9" }],
+          "group": 1,
+          "value": "302.1"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "217.0", "low": "206.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "4.23" }],
+          "group": 0,
+          "value": "196.82"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "23.82" }],
+          "group": 1,
+          "value": "214.9"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "228.0", "low": "217.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "3.645" }],
+          "group": 0,
+          "value": "146.18"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "17.08" }],
+          "group": 1,
+          "value": "153.46"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "240.0", "low": "228.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "2.848" }],
+          "group": 0,
+          "value": "97.333"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "12.06" }],
+          "group": 1,
+          "value": "106.69"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "253.0", "low": "240.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "2.313" }],
+          "group": 0,
+          "value": "69.538"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "8.36" }],
+          "group": 1,
+          "value": "73.07"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "265.0", "low": "253.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "1.917" }],
+          "group": 0,
+          "value": "44.083"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "6.33" }],
+          "group": 1,
+          "value": "54.41"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "278.0", "low": "265.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "1.646" }],
+          "group": 0,
+          "value": "35.231"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "3.93" }],
+          "group": 1,
+          "value": "32.73"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "291.0", "low": "278.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "1.31" }],
+          "group": 0,
+          "value": "22.308"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "3.14" }],
+          "group": 1,
+          "value": "25.75"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "304.0", "low": "291.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "1.131" }],
+          "group": 0,
+          "value": "16.615"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "2.29" }],
+          "group": 1,
+          "value": "17.94"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "318.0", "low": "304.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.854" }],
+          "group": 0,
+          "value": "10.214"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "1.72" }],
+          "group": 1,
+          "value": "12.57"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "332.0", "low": "318.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.821" }],
+          "group": 0,
+          "value": "9.429"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "1.21" }],
+          "group": 1,
+          "value": "8.91"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "346.0", "low": "332.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.623" }],
+          "group": 0,
+          "value": "5.429"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "1.15" }],
+          "group": 1,
+          "value": "7.64"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "360.0", "low": "346.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.52" }],
+          "group": 0,
+          "value": "3.786"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.88" }],
+          "group": 1,
+          "value": "5.34"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "374.0", "low": "360.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.452" }],
+          "group": 0,
+          "value": "2.857"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.64" }],
+          "group": 1,
+          "value": "3.01"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "389.0", "low": "374.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.333" }],
+          "group": 0,
+          "value": "1.667"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.35" }],
+          "group": 1,
+          "value": "1.91"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "404.0", "low": "389.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.327" }],
+          "group": 0,
+          "value": "1.6"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.32" }],
+          "group": 1,
+          "value": "1.66"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "420.0", "low": "404.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.217" }],
+          "group": 0,
+          "value": "0.75"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.28" }],
+          "group": 1,
+          "value": "1.39"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "435.0", "low": "420.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.258" }],
+          "group": 0,
+          "value": "1.0"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.19" }],
+          "group": 1,
+          "value": "0.73"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "451.0", "low": "435.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.217" }],
+          "group": 0,
+          "value": "0.75"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.16" }],
+          "group": 1,
+          "value": "0.57"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "468.0", "low": "451.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.176" }],
+          "group": 0,
+          "value": "0.529"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.14" }],
+          "group": 1,
+          "value": "0.46"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "485.0", "low": "468.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.118" }],
+          "group": 0,
+          "value": "0.235"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.09" }],
+          "group": 1,
+          "value": "0.23"
+        }
+      ]
+    },
+    {
+      "x": [{ "high": "503.0", "low": "485.0" }],
+      "y": [
+        {
+          "errors": [{ "label": "stat. unc.", "symerror": "0.136" }],
+          "group": 0,
+          "value": "0.333"
+        },
+        {
+          "errors": [{ "label": "Total Bkg unc", "symerror": "0.07" }],
+          "group": 1,
+          "value": "0.15"
+        }
+      ]
+    }
+  ],
+  "x_count": 1
+}

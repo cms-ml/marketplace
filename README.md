@@ -182,6 +182,18 @@ Skills for the CMS LPC analysis facility at Fermilab (cmslpc): HTCondor batch jo
 
 ---
 
+### `background-est` (v0.1.0)
+
+Data-driven background estimation for CMS analyses: ABCD (matrix) estimates with variable ranking, fitted transfer factors, closure and validation tests, non-closure systematics and a likelihood version.
+
+**Skills:**
+
+| Skill  | Use when                                                                                            |
+| ------ | --------------------------------------------------------------------------------------------------- |
+| `abcd` | ABCD background estimate (independence and closure tests, uncertainties, Combine rateParam version) |
+
+---
+
 ### `cms` (v0.6.0)
 
 Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), NanoAOD skimming with luminosity and normalisation bookkeeping, analysis specifications, and CMS Combine: answering Combine questions from its docs, paper, code and forum, and running Combine commands (remote servers need the CERN network).

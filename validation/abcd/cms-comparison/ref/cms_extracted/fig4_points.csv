@@ -1,0 +1,15 @@
+# digitised from vector graphics of arXiv:1808.03124 (EXO-17-021), Fig. 4, pdf page 10; axes calibrated on tick marks
+# columns: m_lo_GeV (x-error bar left end), m_hi_GeV, m_GeV (marker centre), TF=B/D (marker), TF_err_lo_end, TF_err_hi_end (nan = error bar hidden inside marker)
+m_lo,m_hi,m,tf,tf_lo,tf_hi
+60.022,80.025,70.028,0.33293,nan,nan
+80.025,100.03,90.021,0.35406,nan,nan
+100.03,125.02,112.52,0.37381,nan,nan
+125.02,150.01,137.52,0.41961,nan,nan
+150.01,175.02,162.52,0.50586,nan,nan
+175.02,200.01,187.51,0.57193,nan,nan
+200.01,250.01,225.01,0.60895,nan,nan
+250.01,300,275.01,0.58545,0.54399,0.62686
+300,350,325,0.46028,0.4035,0.517
+350,399.99,374.99,0.83322,0.64249,1.0239
+399.99,449.99,424.99,0.61894,0.40049,0.83739
+449.99,499.98,474.98,0.39991,0.065258,0.73455

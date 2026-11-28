@@ -1,0 +1,13 @@
+# digitised from vector graphics of arXiv:1808.03124 (EXO-17-021), Fig. 2, pdf page 8; axes calibrated on tick marks
+# columns: bin_lo, bin_hi, data (event fraction, marker centre), qcd (event fraction, blue histogram; nan = not found)
+lo,hi,data,qcd
+0,0.5,0.25975,0.28449
+0.5,1,0.24502,0.25539
+1,1.5,0.20602,0.19437
+1.5,2,0.14542,0.12957
+2,2.5,0.084059,0.076446
+2.5,3,0.040181,0.037863
+3,3.5,0.014305,0.014545
+3.5,4,0.0042551,0.0066329
+4,4.5,0.0010382,0.00071854
+4.5,5,5.9142e-05,7.9154e-05

@@ -47,6 +47,21 @@
       ]
     },
     {
+      "name": "background-est",
+      "description": "Data-driven background estimation for CMS analyses: ABCD (matrix) estimates with variable ranking, fitted transfer factors, closure and validation tests, non-closure systematics and a likelihood version.",
+      "version": "0.1.0",
+      "source": "./plugins/background-est",
+      "keywords": [
+        "CMS",
+        "background estimation",
+        "data-driven",
+        "ABCD",
+        "transfer factor",
+        "QCD multijet",
+        "Combine"
+      ]
+    },
+    {
       "name": "cms",
       "description": "Core CMS analysis plugin: CMSSW releases and architectures, OS containers, EDM modules, cmsRun configuration, EDM file inspection, and the Scikit-HEP stack on NanoAOD (Awkward Array, vector, hist), NanoAOD skimming with luminosity and normalisation bookkeeping, analysis specifications, and CMS Combine: answering Combine questions from its docs, paper, code and forum, and running Combine commands (remote servers need the CERN network).",
       "version": "0.6.0",

@@ -1,0 +1,40 @@
+output_data_JetHT_2016G_0.parquet rows=2117850 sel=9674
+output_data_JetHT_2016G_12.parquet rows=2891345 sel=13680
+output_data_JetHT_2016H_0.parquet rows=2955704 sel=15120
+output_data_JetHT_2016H_12.parquet rows=2784256 sel=14625
+output_qcd_HT1000to1500_0.parquet rows=1100513 sel=23541
+output_qcd_HT1000to1500_2.parquet rows=1935636 sel=41556
+output_qcd_HT1000to1500_4.parquet rows=2180499 sel=46827
+output_qcd_HT1500to2000_0.parquet rows=1868079 sel=56958
+output_qcd_HT1500to2000_3.parquet rows=1441875 sel=43889
+output_qcd_HT2000toInf_0.parquet rows=1816955 sel=65887
+output_qcd_HT500to700_0.parquet rows=2023930 sel=14
+output_qcd_HT500to700_14.parquet rows=1885847 sel=19
+output_qcd_HT500to700_7.parquet rows=1529290 sel=12
+output_qcd_HT700to1000_0.parquet rows=1335082 sel=2909
+output_qcd_HT700to1000_12.parquet rows=2403518 sel=5285
+output_qcd_HT700to1000_4.parquet rows=4389004 sel=9817
+output_qcd_HT700to1000_8.parquet rows=3097061 sel=7066
+	Command being timed: "python3 scripts/cmslike.py"
+	User time (seconds): 7.89
+	System time (seconds): 1.36
+	Percent of CPU this job got: 102%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:09.01
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1365724
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 73
+	Minor (reclaiming a frame) page faults: 142515
+	Voluntary context switches: 8971
+	Involuntary context switches: 1061
+	Swaps: 0
+	File system inputs: 980616
+	File system outputs: 232
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

@@ -22,7 +22,8 @@ repos:
     rev: v2.4.1
     hooks:
       - id: codespell
-        args: ["-L", "hist,gaus,te,nd,iff,ans,fo"]
+        args: ["-L", "hist,gaus,te,nd,iff,ans,fo,ot"]
+        exclude: ^validation/.+/cms-comparison/ref/ # downloaded reference records (HEPData, arXiv) stay as published
 
   - repo: local
     hooks:

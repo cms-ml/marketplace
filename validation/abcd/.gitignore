@@ -1,0 +1,23 @@
+# student workspaces: keep scripts, reports, plots, json; not data
+ws_*/cache/
+ws_*/slim/
+ws_*/skim/
+ws_*/condor/
+*.parquet
+*.npz
+*.pkl
+# headless job outputs
+readme_transcript.jsonl
+ws_*/red/
+ws_*/sel/
+ws_*/tmp/
+# agent run markers, README helper task files and raw transcripts (MB-size jsonl): not committed
+*_DONE
+AGENT_DONE
+README_EXIT
+README_PROMPT.md
+README_TASK.md
+transcript*.jsonl
+ws_*/inputs/
+ws_*/fits/base/
+ws_*/fits/ntuples/

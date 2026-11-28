@@ -1,0 +1,16 @@
+${SKIM_BASE}/output_qcd_HT700to1000_0.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_1.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_2.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_3.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_4.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_5.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_6.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_7.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_8.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_9.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_10.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_11.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_12.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_13.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_14.parquet
+${SKIM_BASE}/output_qcd_HT700to1000_15.parquet

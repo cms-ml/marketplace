@@ -1,0 +1,6 @@
+${SKIM_BASE}/output_qcd_HT1000to1500_0.parquet
+${SKIM_BASE}/output_qcd_HT1000to1500_1.parquet
+${SKIM_BASE}/output_qcd_HT1000to1500_2.parquet
+${SKIM_BASE}/output_qcd_HT1000to1500_3.parquet
+${SKIM_BASE}/output_qcd_HT1000to1500_4.parquet
+${SKIM_BASE}/output_qcd_HT1000to1500_5.parquet
